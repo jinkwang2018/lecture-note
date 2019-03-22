@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			/*
+				Html content attr()
+				setter , getter
+				setter > attr('coler','red'); > 속성을 추가 , 여러개의 속성을 한번에 추가하려면 JSON객체를 사용한다.{color:'red'....}
+				getter > attr('coler') > return value > red
+				
+				ETC
+				css()
+			*/
+			$(function(){
+				$('#btn0').click(function(){
+					alert($('#w3').attr('href')); //getter방식
+				});
+				//jquery 함수가 parameter json 객체를 받도록 설계 되어있다.(다중값 처리할 때)
+				$('#btn1').click(function(){
+					$('#w3s').attr(
+									{
+										"href":"http://www.daum.net",
+										"title":"jquery study"
+									}
+					);
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+		<p>
+			<a href = "http://www.naver.com" id = "w3">naver.com</a>
+		</p>
+		<button id = "btn0">show button</button>
+		<br>
+			<a title = "w3popup" href = "http://www.w3schools.com" id = "w3s">w3schools.com</a>
+		<br>
+			<button id = "btn1">show button</button>
+	</body>
+</html>

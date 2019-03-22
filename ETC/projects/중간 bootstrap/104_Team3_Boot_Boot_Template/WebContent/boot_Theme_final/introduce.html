@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+<title>Mouse hover</title>
+<!--GOOGLE FONT -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css'>
+<!--    BOOTSTRAP MAIN STYLES -->
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+<!--  FONTAWESOME MAIN STYLE -->
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+<!--    CUSTOM STYLE -->
+<link href="assets/css/style.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+<title>Insert title here</title>
+
+<style type="text/css">
+	.center {
+		margin: auto;
+		width: 60%;
+		}
+		
+	.footer-widget ul:not(.sh_adswidget_ul):not(.no-bullet) li a {
+	  	border-bottom: 1px solid rgba(255,255,255,0.25);
+
+	   
+	}
+	.footer-widget ul:not(.sh_adswidget_ul):not(.no-bullet) li a {
+	    border-bottom: 1px solid rgba(255,255,255,0.25);
+
+	   
+	}
+	.footer-widget a, .footer-widget a:visited {
+	    color: #ffffff;
+	  
+	
+	}
+	.footer-widget ul {
+	   list-style:none;
+	}
+	
+	.footer-widget ul:not(.sh-tabs):not(.no-bullet) li a {
+	    padding-bottom: 15px;
+	    margin-bottom: 15px;
+	    display: block;
+	 
+	}
+	.logo{
+		width:  60px;
+		height: 60px;
+	}
+	#col_id{
+		text-align: center;
+	}
+
+
+/* .div0 .div1 .div2 .div3 .div4 .div5 .div6 {
+
+	width: 250px;
+	height:250px;
+	float: left;
+} */
+</style>
+
+
+
+
+<script type="text/javascript">
+	(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://bitcamp-group3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+
+		var data = {//제이슨 데이터 
+				"image":[
+                    "images/sunghoonfront.png",
+                    "images/nayoungfront.gif",
+                    "images/yoongeanfront.png",
+                    "images/bokungfront.png",
+                    "images/jinwonfront.png",
+                    "images/jaeukfront.png",
+                    "images/minsikfront.png",
+                    "images/sunghoonback.png",
+                    "images/nayoungback.png",
+                    "images/yoongeanback.png",
+                    "images/bokungback.png",
+                    "images/jinwonback.png",
+                    "images/jaeukback.png",
+                    "images/minsikback.png"
+                    ],
+			"audio":[
+				"audio/love.mp3",
+			 	"audio/ant.mp3",
+			 	"audio/sexy1.mp3",
+			 	"audio/poket.mp3",
+			 	"audio/jinwon.mp3",
+			 	"audio/human.mp3",
+				"audio/yamg.mp3"
+			 	
+			 		]
+		
+				 	}//JSON데이터를 사용하여 코드를 줄이기위해 사용하였다.
+		$(function () { //div에 아이디 값에다가 이미지 주소와 오디오 주소를 넣어준다
+			for(var index = 0; index<7; index++){
+                //for문을 사용하여 div 마다 append를 시켜준다				
+				$('#div'+index).append('<input type = "image" id="image' + index + '" style="float: left; margin : 1px;" height = "300px" width = "200px" onclick="butt('+index+')" onmouseover="start('+ index +')" onmouseout="stop('+ index +')">');
+				//위와 같이 div 마다 audio 를 넣어준다
+				$('#div'+index).append('<audio id="audio'+index+'" src=""></audio>');
+				//초기 보이는 이미지값을 넣어준다
+				$('#image'+index).attr("src",data.image[index]);
+			}
+			for(index in data.audio){ //audio 주소값을 넣어준다
+				$('#audio'+index).attr("src",data.audio[index]);
+			
+			
+			$('#dialog'+index).dialog({
+				//dialog의 속성정의
+				position:{my: "right",at:"right"},
+				autoOpen: false,
+				show : {effect:'blind',duration:1000},
+				hide : {effect:'explode',duration:1000},
+				buttons: {
+							"확인" : function() {$(this).dialog("close")},
+							"취소" : function() {$(this).dialog("close")}
+						 }, 
+						 
+				resizable: false,
+				modal: false,  //팝업창을 닫기 전까지는 opener(부모창) 작업 불가
+				height: 400,
+				width: 400 
+		
+			})
+			}
+			
+		});
+		var audio;
+		function butt(number){
+			//onclick이벤트를 걸기위한 함수
+			$('.dialogclass').dialog('close');//dialog마다 클래스를 넣어주어 닫아준다
+			$('#dialog'+number).dialog('open');//dialog에 부여된 id값으로 사진에 맞는 dialog를 열어준다
+			
+			
+		}
+	 	function start(number) { //마우스 오버 이벤트 
+			audio = document.getElementById("audio"+number);
+			audio.setAttribute("src", data.audio[number]); //audio의 주소값을 넣어준다
+			audio.play(); //audio 재생
+			var img = document.getElementById("image"+number);
+			img.setAttribute('src',data.image[(number+7)]);//이미지의 주소를 바꿔준다
+		
+			
+			 
+			
+		  
+
+		}
+	
+
+		function stop(number) { //마우스 아웃 이벤트
+			var img = document.getElementById("image"+number);
+			img.setAttribute('src',data.image[number]); //이미지 주소를 원상태로 바꿔준다
+			audio.pause();
+			
+			//$( "#dialog"+number ).dialog("close");
+		} 
+
+	</script>
+</head>
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">♥진원이의 삼조에요 잇힝~♥</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="index.html">HOME</a></li>
+					<li><a href="fileupload.html">fileupload</a></li>
+					<li><a href="drag_drop.html">Drag&Drop</a></li>
+					<li><a href="mousehover.html">MouseHover</a></li>
+					<li><a href="GIFfile.html">GIFfile</a></li>
+					<li><a href="dragGIFupload.html">Combination</a></li>
+					<li><a href="introduce.html">Introduce</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+	<!--END NAV SECTION -->
+	<!-- SERVICES SECTION -->
+	<div class="section">
+		<div class="container">
+			<div class="row main-low-margin">
+				<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+					<h1>3조 구성원을 소개합니다</h1>
+					<h5>사진에 마우스를 올려보세요! 사진이 바뀌고 음악이 흘러 나옵니다<br>
+					사진을 클릭해 보세요! 조원들의 상세 정보가 나옵니다</h5>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="space-bottom"></div>
+
+
+	<div class="container">
+	<fieldset>
+		<legend class ="text-center"><h2><b>Introduce<b></h2></legend>	
+			<div id= "div0"></div>
+			<div id= "div1"></div>
+			<div id= "div2"></div>
+			<div id= "div3"></div>
+			<div id= "div4"></div>
+			<div id= "div5"></div>
+			<div id= "div6"></div>
+	</fieldset>
+	</div>
+
+
+		<div id="dialog0" class ="dialogclass" title="강성훈" hidden="">	
+				<ul>
+					<li>이름 : 강성훈</li>
+					<br>
+					<li>나이 : 31세</li>
+					<br>
+					<li>사는곳 : 울산</li>
+					<br>
+					<li>소감 : 뚱이를 좋아합니다. 많이요 ^^ </li>
+				</ul>
+		</div>
+		<div id="dialog6" class ="dialogclass" title="박민식" hidden="">
+				<ul>
+					<li>이름 : 박민식</li>
+					<br>
+					<li>나이 : 27세 </li>
+					<br>
+					<li>사는곳 : 하남시</li>
+					<br>
+					<li>소감 : 모두 건강하세요. 건강이 최고입니다.</li>
+				</ul>
+		</div>
+
+		<div id="dialog2" class ="dialogclass" title="아윤근" hidden="">
+			<ul>
+				<li>이름 : 아윤근</li>
+				<br>
+				<li>나이 : 28세</li>
+				<br>
+				<li>사는곳 : 부산</li>
+				<br>
+				<li>소감 : 오케이^^ </li>
+			</ul>
+		</div>
+
+
+		<div id="dialog5" class ="dialogclass" title="최재욱" hidden="">
+			<ul>
+				<li>이름 : 최재욱</li>
+				<br>
+				<li>나이 : 26세</li>
+				<br>
+				<li>사는곳 : 화성</li>
+				<br>
+				<li>소감 : 4개월남았다^^ 다들힘내세요ㅎㅎㅎ </li>
+			</ul>
+			
+		
+		</div>
+		<div id="dialog4" class ="dialogclass" title="김진원" hidden="">
+			<ul>
+				<li>이름 : 김진원</li>
+				<br>
+				<li>나이 : 23세</li>
+				<br>
+				<li>사는곳 : 서울</li>
+				<br>
+				<li>소감 : 협업툴로 모튼 파일이 날아가게해서 죄송합니다 (민식이형...) </li>
+			</ul>
+		</div>
+
+		<div id="dialog3" class ="dialogclass" title="김보경" hidden="">
+			<ul>
+				<li>이름 : 김보경</li>
+				<br>
+				<li>나이 : 26세</li>
+				<br>
+				<li>사는곳 : 서울</li>
+				<br>
+				<li>앗 야생의 김보경이 나타났다!!!<br><br>HP ******<br>공격 ****************<br>방어
+				***********<br>특수공격
+				************************* </li>
+			</ul>
+		</div>
+
+		<div id="dialog1" class ="dialogclass" title="전나영" hidden="">
+			<ul>
+				<li>이름 : 전나영</li>
+				<br>
+				<li>나이 : 28세</li>
+				<br>
+				<li>사는곳 : 서울</li>
+				<br>
+				<li>소감 : 다들 야자하느라 힘들텐데 힘냅시다^^ </li>
+			</ul>
+		</div>
+	
+
+
+
+
+
+	<div class="space-bottom"></div>
+	<!--END SERVICES SECTION -->
+	<!--FOOTER SECTION -->
+ <div id="footer">
+        <div class="row">
+        
+	       	<div class="col-md-2">
+	       	
+				      <div id="linkcat-122" class="footer-widget widget_links">
+				      				
+							 <ul class="xoxo blogroll">
+								<h3><b>Links</b></h3>
+								<li><a href="index.html">HOME</a></li>
+								<li><a href="fileupload.html">fileupload</a></li>
+								<li><a href="drag_drop.html">Drag&Drop</a></li>
+								<li><a href="mousehover.html">MouseHover</a></li>
+								<li><a href="GIFfile.html">GIFfile</a></li>
+								<li><a href="dragGIFupload.html">Combination</a></li>
+								<li><a href="introduce.html">Introduce</a></li>
+							</ul>
+						</div>
+	           </div>
+	        
+	        
+	        	<div class="col-md-3" id ="col_id">
+	             	<h3><b>About</b></h3>
+	                   
+				    <div class="tools tools-development">
+				      <h4>{ DEVELOPMENT TOOLS }</h4>
+				      <br>
+				      <img class="logo" alt="html5" src="images/html5.png" >
+				      <img class="logo" src="images/css3.png">
+				      <img class="logo" src="images/js.png">
+				      <img class="logo" src="images/bootstrap3.png">
+				      <img class="logo" src="images/jquery.gif">
+				      <br>
+				    </div>
+				    
+				    <div class="tools tools-collaboration">
+				      <h4>{ COLLABORATION TOOLS }</h4>
+				      <br>
+				      <img class="logo" src="images/trello.png">
+				      <img class="logo" src="images/slack.png">
+				      <img class="logo" src="images/sourcetree.png">
+				      <img class="logo" src="images/github1.png">
+				      <br>
+				    </div>
+	               
+	            </div>
+	        
+	        
+	          <div class="col-md-6">
+	                   <h4><b>Need Help ? Write Us.</b> </h4>
+	                   <div id="disqus_thread"></div>
+	          </div>
+         
+      </div>
+
+
+</div>
+
+	<!--END FOOTER SECTION -->
+	<!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+	<!-- CORE JQUERY LIBRARY -->
+<!-- 	 <script src="assets/js/jquery.js"></script>  -->
+	<!-- CORE BOOTSTRAP LIBRARY -->
+	<script src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

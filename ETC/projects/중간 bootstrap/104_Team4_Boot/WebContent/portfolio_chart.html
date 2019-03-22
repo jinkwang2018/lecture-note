@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+	
+	<style>
+    .a_floatbox{
+    	margin-left: 10px;
+    }
+    .hr_css {
+    	margin: 0px;
+    }
+    #floatMenu {
+		position: absolute;
+		width: 150px;
+		right: 20px;
+		top: 150px;
+		border: 2px solid black;
+		background-color: whitegray;
+		color: #fff;
+	}
+    table {
+        border-collapse: collapse;
+        width: 80%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    
+    th {
+        background-color: rgb(7, 26, 14);
+        color: white;
+    }
+    </style>
+    
+    <script>
+    var data =[];
+    var city=[];
+    var PM10=[];
+    var PM25=[];
+    $(function(){
+    	$('#seoul_chart').load('project/HighChart.html');
+    	
+       	$.ajax({
+          url:"http://openapi.seoul.go.kr:8088/63714f795572616539336b4c767464/json/RealtimeCityAir/1/25/",
+          dataType:"json",
+          beforeSend:function(){
+              http://www.ajaxload.info/cache/E0/E0/E0/00/00/00/35-0.gif
+                 $('#container').append('<img src="https://m.popkey.co/fe4ba7/DYALX.gif"/>');
+             },
+          success:function(result){
+             data=result.RealtimeCityAir.row;          
+             $.each(data, function(index, obj) {
+                 $("#gu").append("<option>"+obj.MSRSTE_NM+"</option>");
+                 city.push(obj.MSRSTE_NM)
+                 PM10.push(obj.PM10);
+                 PM25.push(obj.PM25);
+             })
+                 
+             Highcharts.chart('container', {
+                 chart: { //차트 형식
+                     type: 'line'
+                 },
+                 title: { //차트 제목
+                     text: '실시간 서울 미세먼지 농도'
+                 },
+                 subtitle: {
+                     text: '서울시 공공데이터'
+                 },
+                 xAxis: { //x축 내용
+                    categories:city
+                 },
+                 yAxis: { //y축 내용
+                     title: {
+                         text: '미세먼지 농도'
+                     }
+                 },
+                 
+                 tooltip: { //말풍성 생성
+                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>', //key는 x축 
+                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y} ㎍/㎥</b></td></tr>',
+                     footerFormat: '</table>', //{point.y:f}442543,  {point.y}443 543
+                     shared: true, //true면 같은 X축의 데이터 값이 같이 보임  
+                     useHTML: true  //true면 위의 지정한 html 태그 사용
+               }, 
+                 
+                 plotOptions: { //해당 X축의 블록지정
+                     line: {
+                         dataLabels: {
+                             enabled: true
+                         },
+                         enableMouseTracking: false
+                     }
+                 },
+                 series: [{
+                     name: '미세먼지(단위: ㎍/㎥)',
+                     data:PM10
+                 }, {
+                     name: '초미세먼지(단위: ㎍/㎥)',
+                     data:PM25
+                 }]
+             });
+          }//success 함수 끝
+       });//ajax 함수 끝
+       $('#btn').click(function () {
+           $('#display').empty();
+           var table = "<table border='1'>";
+           table += "<tr><th>측정일시</th><th>권역명</th><th>측정소명</th><th>미세먼지</th><th>초미세먼지농도</th><th>대기환경등급</th></tr>"
+           $.each(data, function(index, obj) {
+               if(obj.MSRSTE_NM == $("select > option:selected").val()){
+                    table += "<tr>";
+                    table += "<td>" + obj.MSRDT + "</td>";
+                    table += "<td>" + obj.MSRRGN_NM + "</td>";
+                    table += "<td>" + obj.MSRSTE_NM + "</td>";
+                    table += "<td>" + obj.PM10 + "</td>";
+                    table += "<td>" + obj.PM25 + "</td>";
+                    table += "<td>" + obj.IDEX_NM + "</td>";
+                    table += "</tr>";
+               }   
+           });
+           table += "</table>";
+           $('#display').html(table);
+       });
+    });
+    
+    function funcThisSize(){
+    	if(window.innerWidth < 1500){
+    		$("#floatMenu").css("display", "none");
+    	}else{
+    		$("#floatMenu").css("display", "block");
+    	}
+    }
+	</script>
+</head>
+
+<body>
+
+	 <nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a class="navbar-brand" href="teammain.html">Team 4OUR Introduce</a>
+	    </div>
+	   <ul class="nav navbar-nav">
+	         <li><a href="introduce_tw.html">김태웅</a></li>
+	         <li><a href="introduce_jinw.html">이진우</a></li>
+	         <li><a href="introduce_hj.html">배현준</a></li>
+	         <li><a href="introduce_ry.html">김래영</a></li>
+	         <li><a href="introduce_jw.html">박주원</a></li>
+	         <li class="dropdown"><a class="dropdown-toggle" 
+	            data-toggle="dropdown" href="#">Portfolio<span class="caret"></span></a> 
+	            <ul class="dropdown-menu"> <!-- 메뉴 스크롤 생성 -->
+	               <li><a href="portfolio_Main_Canvas.html">HTML Canvas</a></li>
+	               <li><a href="portfolio_Main_SVG.html">HTML SVG</a></li>
+	               <li><a href="portfolio_Main_GoogleMap.html">HTML Google Maps</a></li>
+	               <li><a href="portfolio_Jquery_UI.html">Jquery UI</a></li>
+	               <li><a href="portfolio_chart.html">Jquery Chart1</a></li>
+	            </ul>
+	         </li>
+	         <li class="dropdown"><a class="dropdown-toggle"
+	            data-toggle="dropdown" href="#">Other Pages<span class="caret"></span></a>
+	            <ul class="dropdown-menu"> <!-- 메뉴 스크롤 생성 -->
+	               <li><a href="#">FAQ</a></li>
+	               <li><a href="#">404</a></li>
+	            </ul>
+	         </li>
+	      </ul>
+	     </div>
+	</nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Chart1 Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" style="margin-top: 80px;">Chart #1
+                    <small>실시간 서울 도심 미세먼지 농도</small>
+                </h1>
+            </div>
+        </div>
+    	<select id="gu"></select>
+    	<input type="button" value="검색하기" id="btn">
+    	<div id="display"></div>
+ 		
+ 		<div align="center" id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+
+        <hr>
+        
+        
+        <!-- Portfolio Chart2 Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" style="margin-top: 80px;">Chart #2
+                    <small>서울시 강남구 모범음식점 비율</small>
+                </h1>
+            </div>
+            <div id="seoul_chart">
+            	
+        	</div>
+        </div>
+		
+        <!-- Footer -->
+        <footer class="container-fluid text-center">
+  			<p><b>Bootstrap Theme Made By : </b><a href="teammain.html"><b>Team 4OUR</b></a></p>
+		</footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>
+ 

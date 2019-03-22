@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+    .a_floatbox{
+    	margin-left: 10px;
+    }
+    .hr_css {
+    	margin: 0px;
+    }
+    #floatMenu {
+		position: absolute;
+		width: 150px;
+		right: 20px;
+		top: 150px;
+		border: 2px solid black;
+		background-color: whitegray;
+		color: #fff;
+	}
+    </style>
+    
+    <script>
+    function funcThisSize(){
+    	if(window.innerWidth < 1500){
+    		$("#floatMenu").css("display", "none");
+    	}else{
+    		$("#floatMenu").css("display", "block");
+    	}
+    }
+    
+	$(document).ready(function() {
+		funcThisSize();
+		//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		var floatPosition = parseInt($("#floatMenu").css('top'));
+		//250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+	 	
+		$(window).resize(funcThisSize);
+		
+		$("#svg_schedule").load("project/svg_schedule.html");
+		
+		$(window).scroll(function() {
+			//현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			var newPosition = scrollTop + floatPosition + "px";
+	 
+			//애니메이션 없이 바로 따라감
+			//$("#floatMenu").css('top', newPosition);
+
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+	 
+		}).scroll();
+	 
+	});
+	</script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio_1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_4.html">jQuery UI</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_5.html">AJAX Chart</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="#">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">SVG
+                    <small>HTML5</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-9">
+                <h3>SVG Description</h3>
+                <p>&nbsp;SVG W3C의 권장사항인 SVG는 XML에서 2차원 그래픽을 설명하기 위한 언어로 웹 페이지에 표시할 빠르고 가벼운 그래픽을 만들기 위해 사용할 수 있는 매우 효과적인 도구이다.
+					SVG 사용 예로는 데이터 시각화가 이슈화되고 있는 시점에서 SVG는 차트나 다이어그램, 지도 등을 구현하는데 아주 유용하게 쓰일 수 있다.</p>
+                
+                <hr>
+                <h3>D3.js (https://d3js.org/)</h3>
+                <p>&nbsp;D3는 ‘Data Drivened Document’(데이터 기반 문서)의 약자다. <br>
+				D3.js는 데이터에 기반을 둔 문서를 다룰 수 있는 자바스크립트 기반 라이브러리다. <br>
+				D3.js는 HTML, SVG(Scalable Vector Graphics), CSS를 사용해 데이터를 시각적인 결과물로 나타낸다<br><br>
+
+				D3.js를 사용해 시각화를 구현하기 위해 필요한 가장 핵심 기능은 ‘체이닝 메서드’다. <br>
+				체이닝 메서드는 앞 단계에서 수행되는 동작을 온점(.)으로 이어가며 다음 동작으로 넘겨주는 역할을 한다.<br>
+				<img src="http://ncc.phinf.naver.net/20151103_80/1446534719955QLSOd_JPEG/03.jpg?type=w646"><br>
+				예제)D3.js 를 이용해 그래프를 작성(원만들기->위치->크기->색상 설정)<br><br>
+				D3.js는 코딩을 통해 SVG 등의 시각적인 요소를 활용해 직접 그림을 그려 데이터를 시각화하는 방식이다. <br>
+				텍스트 편집기 등을 이용해 코드를 작성해야 하므로 코딩을 전혀 배우지 않은 비전공자가 활용하기는 어렵다.<br>
+				다만 직접 그리는 도구이기 때문에 그래프나 시각화는 활용 수준에 따라 폭넓게 구현할 수 있다.</p>
+                <hr>
+                <h3>구현한 프로젝트</h3>
+                <ul>
+                    <li>SVG PLANNER</li>
+                    <li>참고사이트: codepen.io , d3js.org</li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+            
+            <div id="svg_schedule">
+				<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js'></script>
+			</div>
+
+			
+
+		</div>
+        <!-- /.row -->
+
+        <hr>
+
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p style="text-align: center;">Introduce Our Team Website 2018</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    
+    <!-- Side Floating Menu Box -->
+	<div id="floatMenu">
+		<hr class="hr_css">
+		<a class="a_floatbox" href="index.html"><b>Home</b></a>
+		
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		
+		<a class="a_floatbox" href="index.html#portfolio-us"><b>Portfolio</b></a>
+		<hr class="hr_css">
+		<a class="a_floatbox" href="portfolio_1.html"><small>HTML Canvas</small></a><br>
+		<a class="a_floatbox" href="portfolio_2.html"><small>HTML SVG</small></a><br>
+		<a class="a_floatbox" href="portfolio_3.html"><small>HTML Google Maps</small></a><br>
+		<a class="a_floatbox" href="portfolio_4.html"><small>jQuery UI</small></a><br>
+		<a class="a_floatbox" href="portfolio_5.html"><small>AJAX Chart</small></a><br>
+		<a class="a_floatbox" href="index.html">-</a>
+			
+		
+
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		<a class="a_floatbox" href="index.html#about-us"><b>About</b></a><br>
+		<a class="a_floatbox" href="index.html#contact-us"><b>Contact</b></a>
+		<hr class="hr_css">
+	</div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

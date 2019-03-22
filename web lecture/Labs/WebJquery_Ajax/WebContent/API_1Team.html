@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css">
+ 
+ 
+ 
+ 
+ 
+<script type="text/javascript">
+        $(function(){
+            
+            
+            $('#datepicker').datepicker(  /* 날짜 받아오기 */
+                    {
+                        dateFormat:"yymmdd",
+                        numberOfMonths:1,
+                    }        
+                );
+    
+            $('#btn').click(function(){    /* 출력 버튼 클릭시  */
+                $('#display').empty();
+                $.ajax({
+                    url : 'http://openapi.seoul.go.kr:8088/496c534a506c6b6d37367463494a42/json/CardSubwayStatsNew/1/1000/'+$("#datepicker").val()+'/',
+                    dataType:"json", //서버가 client 응답 형식 : html
+                    success:function(responsedata){
+                        var table = "<table border='1'>";
+                        table += "<tr><th>날짜</th><th>호선명</th><th>역이름</th><th>승차인원</th><th>하차인원</th></tr>"
+                        
+                        $.each(responsedata.CardSubwayStatsNew.row, function(index, obj) {
+                            if(obj.LINE_NUM == $("select > option:selected").val()){
+                                table += "<tr>";
+                                table += "<td>" + obj.USE_DT + "</td>";
+                                table += "<td>" + obj.LINE_NUM + "</td>";
+                                table += "<td>" + obj.SUB_STA_NM + "</td>";
+                                table += "<td>" + obj.RIDE_PASGR_NUM + "명</td>";
+                                table += "<td>" + obj.ALIGHT_PASGR_NUM + "명</td>";
+                                table += "</tr>";
+                            }
+                        });
+                        table += "</table>";
+ 
+                        $('#display').html(table);
+                    }
+                });
+            });
+            
+            
+            
+            
+        });
+   </script>
+</head>
+<body>
+    <h3>지하철 날짜 별 승하차 인원</h3>
+    Date : <input type="text" id="datepicker">
+    <select id="line">
+        <option>중앙선</option>
+        <option>1호선</option>
+        <option>2호선</option>
+        <option>3호선</option>
+        <option>4호선</option>
+        <option>5호선</option>
+    </select>
+    <input type="button" value="확인" id="btn">
+    <div id="display"></div>
+</body>
+</html>

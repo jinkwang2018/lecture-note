@@ -1,0 +1,104 @@
+body {
+	display:none;
+	font-family: Arial;
+	font-size: 11pt;
+}
+
+table {
+	border-spacing: 0px;
+	border: 1px;
+	width: 100%;
+}
+
+td {
+	border: .1em solid #F0F0F0;
+	padding: 5px;
+}
+
+th {
+	border: .1em solid #fff;
+	background-color: #dcfbff;
+	font-weight: bold;
+	font-size: 14pt;
+}
+
+table tr:nth-child(even) {
+	color: #000;
+	background: #dcfbff
+}
+
+table tr:nth-child(odd) {
+	color: #000;
+	background: #FFF
+}
+
+table tr:hover {
+	background-color: #ffffbb;
+}
+
+
+#container {
+	min-width: 310px;
+	height: 400px;
+	margin: 0 auto
+}
+
+button {
+	background: #1AAB8A;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 40px;
+	font-size: 1.6em;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	float: left;
+	margin-bottom: 5px;
+	margin-left: 3px;
+}
+
+button:hover {
+	background: #fff;
+	color: #1AAB8A;
+}
+
+button:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #1AAB8A;
+	transition: 400ms ease all;
+}
+
+button:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+button:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+select {
+	width: 140px;
+	height: 40px;
+	padding-left: 10px;
+	font-size: 14pt;
+	color: #006fff;
+	border: 1px solid #006fff;
+	border-radius: 3px;
+	float: left;
+	margin-left: 3px;
+}
+
+hr {
+	clear: both;
+}

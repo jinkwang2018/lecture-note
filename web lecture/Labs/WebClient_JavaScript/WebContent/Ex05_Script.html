@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>제어문</title>
+		<script type="text/javascript">
+			var a = 8;
+			if(a%2 == 0){
+				document.write("짝수 : " + a + "<br>")
+
+			}else {
+				document.write("홀수 : " + a + "<br>")
+			}
+			
+			var c = 7;
+			if (c % 2 == 0){
+					document.write("2의 배수" + "<br>")
+			}else if (c%3 == 0){
+				document.write("3의 배수" + "<br>")
+			}else{
+				document.write("기타" + "<br>")
+			}
+			//for 문 1~100까지의 합
+			//int sum = 0;
+			//for (int i =0 ; i <=100 ; i++){
+			//	sum+=i
+			//}
+			var sum = 0;
+			for(var i = 0 ; i <= 100 ; i++){
+				sum += i
+			};
+			document.write("1~100까지의 합 : " + sum + "<br>")
+			//구구단
+			for(var i = 2 ; i <= 9 ; i++){
+				for(var j = 1 ; j <= 9 ; j++){
+					document.write(i +"*"+ j +"="+ i*j + "&nbsp;&nbsp;");
+				}
+				document.write("<br>");
+			}
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

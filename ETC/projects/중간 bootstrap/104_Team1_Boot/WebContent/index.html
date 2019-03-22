@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+ <html lang="en" class="no-js"> 
+    <head>
+        <meta charset="UTF-8" />
+        <title>TweetHub</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+   
+						<link rel="stylesheet" type="text/css" href="css/style.css">
+
+							<style>
+			body
+				{
+					background-image: url('img/eiffel_bg.jpg');
+					background-attachment: fixed;
+					background-size: 100% 100%;
+				}
+		</style>
+    </head>
+    <body>
+		<div id="navbar">	
+		</div>
+        <div id="container"><br>
+			    <div id="login-right">
+				<div class="login-margin"></div>
+				
+				<form  method="post" autocomplete="on"> 
+                                <h2>Sign In</h2> 
+                                 <input class="long" name="username" type="text" placeholder="Username" required  autofocus >
+                                    <input class="short-pass" name="password" type="password" placeholder="Password" required >       
+                               <button class="btn-signin" type="submit" name="login">Sign In</button>
+                             
+                            </form>
+				   <form method="post" autocomplete="on"> 
+                                <h2> Sign Up </h2> 
+							
+                                    <input class="long"  name="username" required="required" type="text" placeholder="Username" />                               
+                                    <input class="long"  name="password" required="required" type="password" placeholder="Password"/>                             
+                                    <input  class="name"  name="firstname" required="required" type="text" placeholder="First Name"/>
+                                    <input  class="name"  name="lastname" required="required" type="text" placeholder="Last Name"/>
+                                </p>
+							
+							
+								<select id="passwordsignup"  name="gender" required >
+										<option>Male</option>
+										<option>Female</option>
+								</select>
+                             
+           					<button class="btn-signup" type="submit" name="signup" onclick="signup()">Sign Up</button>
+
+                            </form>
+				
+				
+				
+				
+				</div>
+							
+        		<div id="login-left">
+				<h1>Welcome to TweetHub.</h1>
+					<br>
+					<p>
+					Connect with your friends — and other fascinating <br> people.
+					Get in-the-moment updates on the things <br>
+					that interest you. And watch events unfold, in real <br>time, from every angle.
+					</p>
+			</div>
+			<div class="clear"></div>
+			
+             
+				
+                
+							
+         			<footer>All Rights Reserved TweetHub | Copyright &copy; 2015</footer>
+
+        </div>
+    </body>
+	
+</html>

@@ -1,0 +1,651 @@
+/* 친구 */
+CREATE TABLE friend (
+	friend_list_code VARCHAR2(10) NOT NULL, /* 친구게시판식별코드 */
+	stu_id VARCHAR2(20) NOT NULL, /* 학생 아이디 */
+	friend_id VARCHAR2(20) NOT NULL, /* 친구 아이디 */
+	friend_request_code NUMBER NOT NULL /* 요청식별코드 */
+);
+
+COMMENT ON TABLE friend IS '친구';
+
+COMMENT ON COLUMN friend.friend_list_code IS '친구게시판식별코드';
+
+COMMENT ON COLUMN friend.stu_id IS '학생 아이디';
+
+COMMENT ON COLUMN friend.friend_id IS '친구 아이디';
+
+COMMENT ON COLUMN friend.friend_request_code IS '요청식별코드';
+
+CREATE UNIQUE INDEX PK_friend
+	ON friend (
+		friend_list_code ASC
+	);
+
+ALTER TABLE friend
+	ADD
+		CONSTRAINT PK_friend
+		PRIMARY KEY (
+			friend_list_code
+		);
+
+/* 학생수강강의 */
+CREATE TABLE stu_class (
+	stu_class_name VARCHAR2(100) NOT NULL, /* 강의명 */
+	attend_year NUMBER NOT NULL, /* 수강학년 */
+	attend_semester NUMBER NOT NULL, /* 수강학기 */
+	stu_id VARCHAR2(20) NOT NULL, /* 학생 아이디 */
+	stu_class_t_name VARCHAR2(20), /* 교수명 */
+	stu_class_full_grade NUMBER, /* 과목학점 */
+	stu_class_get_grade NUMBER /* 취득학점 */
+);
+
+COMMENT ON TABLE stu_class IS '학생수강강의';
+
+COMMENT ON COLUMN stu_class.stu_class_name IS '강의명';
+
+COMMENT ON COLUMN stu_class.attend_year IS '수강학년';
+
+COMMENT ON COLUMN stu_class.attend_semester IS '수강학기';
+
+COMMENT ON COLUMN stu_class.stu_id IS '학생 아이디';
+
+COMMENT ON COLUMN stu_class.stu_class_t_name IS '교수명';
+
+COMMENT ON COLUMN stu_class.stu_class_full_grade IS '과목학점';
+
+COMMENT ON COLUMN stu_class.stu_class_get_grade IS '취득학점';
+
+CREATE UNIQUE INDEX PK_stu_class
+	ON stu_class (
+		stu_class_name ASC,
+		attend_year ASC,
+		attend_semester ASC,
+		stu_id ASC
+	);
+
+ALTER TABLE stu_class
+	ADD
+		CONSTRAINT PK_stu_class
+		PRIMARY KEY (
+			stu_class_name,
+			attend_year,
+			attend_semester,
+			stu_id
+		);
+
+/* 강의평가댓글 */
+CREATE TABLE lectureeval_board_reply (
+	contentnum NUMBER NOT NULL, /* 글번호 */
+	lecture_mark NUMBER NOT NULL, /* 평점 */
+	lecture_homework_fre NUMBER NOT NULL, /* 과제비율 */
+	lecture_attendance_criteria NUMBER NOT NULL, /* 출결기준 */
+	lecture_test_fre NUMBER NOT NULL, /* 시험비율 */
+	lecture_test_type NUMBER NOT NULL, /* 시험유형 */
+	stu_class_name VARCHAR2(100) NOT NULL, /* 강의명 */
+	attend_year NUMBER NOT NULL, /* 수강학년 */
+	attend_semester NUMBER NOT NULL, /* 수강학기 */
+	stu_id VARCHAR2(20) NOT NULL, /* 학생 아이디 */
+	lectureeval_board_content_time DATE NOT NULL, /* 작성시간 */
+	lecture_content VARCHAR2(500) NOT NULL, /* 글내용 */
+	lec_code VARCHAR2(10) NOT NULL, /* 강의코드 */
+	uni_code VARCHAR2(10) NOT NULL, /* 학교코드 */
+	lec_t_name VARCHAR2(20) NOT NULL /* 교수명 */
+);
+
+COMMENT ON TABLE lectureeval_board_reply IS '강의평가댓글';
+
+COMMENT ON COLUMN lectureeval_board_reply.contentnum IS '글번호';
+
+COMMENT ON COLUMN lectureeval_board_reply.lecture_mark IS '평점';
+
+COMMENT ON COLUMN lectureeval_board_reply.lecture_homework_fre IS '과제비율';
+
+COMMENT ON COLUMN lectureeval_board_reply.lecture_attendance_criteria IS '출결기준';
+
+COMMENT ON COLUMN lectureeval_board_reply.lecture_test_fre IS '시험비율';
+
+COMMENT ON COLUMN lectureeval_board_reply.lecture_test_type IS '시험유형';
+
+COMMENT ON COLUMN lectureeval_board_reply.stu_class_name IS '강의명';
+
+COMMENT ON COLUMN lectureeval_board_reply.attend_year IS '수강학년';
+
+COMMENT ON COLUMN lectureeval_board_reply.attend_semester IS '수강학기';
+
+COMMENT ON COLUMN lectureeval_board_reply.stu_id IS '학생 아이디';
+
+COMMENT ON COLUMN lectureeval_board_reply.lectureeval_board_content_time IS '작성시간';
+
+COMMENT ON COLUMN lectureeval_board_reply.lecture_content IS '글내용';
+
+COMMENT ON COLUMN lectureeval_board_reply.lec_code IS '강의코드';
+
+COMMENT ON COLUMN lectureeval_board_reply.uni_code IS '학교코드';
+
+COMMENT ON COLUMN lectureeval_board_reply.lec_t_name IS '교수명';
+
+CREATE UNIQUE INDEX PK_lectureeval_board_reply
+	ON lectureeval_board_reply (
+		contentnum ASC
+	);
+
+ALTER TABLE lectureeval_board_reply
+	ADD
+		CONSTRAINT PK_lectureeval_board_reply
+		PRIMARY KEY (
+			contentnum
+		);
+
+/* 책방 */
+CREATE TABLE bookstore_board (
+	board_content_num VARCHAR2(30) NOT NULL, /* 글번호 */
+	book_writer VARCHAR2(30) NOT NULL, /* 저자 */
+	book_name VARCHAR2(30) NOT NULL, /* 책이름 */
+	book_publisher VARCHAR2(30) NOT NULL, /* 새 컬럼 */
+	book_original_price NUMBER NOT NULL, /* 가격정가 */
+	book_sale_price NUMBER NOT NULL, /* 할인가 */
+	book_state NUMBER NOT NULL, /* 책상태정보 */
+	COL VARCHAR2(500) NOT NULL, /* 책판매정보 */
+	book_deal_way NUMBER NOT NULL, /* 거래방식 */
+	book_image VARCHAR2(100) NOT NULL /* 저장사진 */
+);
+
+COMMENT ON TABLE bookstore_board IS '책방';
+
+COMMENT ON COLUMN bookstore_board.board_content_num IS '글번호';
+
+COMMENT ON COLUMN bookstore_board.book_writer IS '저자';
+
+COMMENT ON COLUMN bookstore_board.book_name IS '책이름';
+
+COMMENT ON COLUMN bookstore_board.book_publisher IS '새 컬럼';
+
+COMMENT ON COLUMN bookstore_board.book_original_price IS '가격정가';
+
+COMMENT ON COLUMN bookstore_board.book_sale_price IS '할인가';
+
+COMMENT ON COLUMN bookstore_board.book_state IS '책상태정보';
+
+COMMENT ON COLUMN bookstore_board.COL IS '책판매정보';
+
+COMMENT ON COLUMN bookstore_board.book_deal_way IS '거래방식';
+
+COMMENT ON COLUMN bookstore_board.book_image IS '저장사진';
+
+CREATE UNIQUE INDEX PK_bookstore_board
+	ON bookstore_board (
+		board_content_num ASC
+	);
+
+ALTER TABLE bookstore_board
+	ADD
+		CONSTRAINT PK_bookstore_board
+		PRIMARY KEY (
+			board_content_num
+		);
+
+/* 강의평가게시판 */
+CREATE TABLE lectureeval_board (
+	lectureeval_board_num NUMBER NOT NULL, /* 글번호 */
+	lec_code VARCHAR2(10) NOT NULL, /* 강의코드 */
+	uni_code VARCHAR2(10) NOT NULL, /* 학교코드 */
+	lec_name VARCHAR2(100), /* 강의명 */
+	lec_t_name VARCHAR2(20) /* 교수명 */
+);
+
+COMMENT ON TABLE lectureeval_board IS '강의평가게시판';
+
+COMMENT ON COLUMN lectureeval_board.lectureeval_board_num IS '글번호';
+
+COMMENT ON COLUMN lectureeval_board.lec_code IS '강의코드';
+
+COMMENT ON COLUMN lectureeval_board.uni_code IS '학교코드';
+
+COMMENT ON COLUMN lectureeval_board.lec_name IS '강의명';
+
+COMMENT ON COLUMN lectureeval_board.lec_t_name IS '교수명';
+
+CREATE UNIQUE INDEX PK_lectureeval_board
+	ON lectureeval_board (
+		lectureeval_board_num ASC
+	);
+
+ALTER TABLE lectureeval_board
+	ADD
+		CONSTRAINT PK_lectureeval_board
+		PRIMARY KEY (
+			lectureeval_board_num
+		);
+
+/* 게시판종류 */
+CREATE TABLE boardtype (
+	boardtype_code VARCHAR2(10) NOT NULL, /* 게시판코드 */
+	boardtype_name VARCHAR2(20) /* 게시판이름 */
+);
+
+COMMENT ON TABLE boardtype IS '게시판종류';
+
+COMMENT ON COLUMN boardtype.boardtype_code IS '게시판코드';
+
+COMMENT ON COLUMN boardtype.boardtype_name IS '게시판이름';
+
+CREATE UNIQUE INDEX PK_boardtype
+	ON boardtype (
+		boardtype_code ASC
+	);
+
+ALTER TABLE boardtype
+	ADD
+		CONSTRAINT PK_boardtype
+		PRIMARY KEY (
+			boardtype_code
+		);
+
+/* 강의시간 */
+CREATE TABLE stu_class_time (
+	stu_class_day VARCHAR2(4), /* 강의요일 */
+	stu_class_start NUMBER, /* 강의시작시간 */
+	stu_class_end NUMBER, /* 강의마침시간 */
+	stu_id VARCHAR2(20) NOT NULL, /* 학생 아이디 */
+	stu_class_name VARCHAR2(100) NOT NULL, /* 강의명 */
+	attend_year NUMBER NOT NULL, /* 수강학년 */
+	attend_semester NUMBER NOT NULL /* 수강학기 */
+);
+
+COMMENT ON TABLE stu_class_time IS '강의시간';
+
+COMMENT ON COLUMN stu_class_time.stu_class_day IS '강의요일';
+
+COMMENT ON COLUMN stu_class_time.stu_class_start IS '강의시작시간';
+
+COMMENT ON COLUMN stu_class_time.stu_class_end IS '강의마침시간';
+
+COMMENT ON COLUMN stu_class_time.stu_id IS '학생 아이디';
+
+COMMENT ON COLUMN stu_class_time.stu_class_name IS '강의명';
+
+COMMENT ON COLUMN stu_class_time.attend_year IS '수강학년';
+
+COMMENT ON COLUMN stu_class_time.attend_semester IS '수강학기';
+
+/* 게시판 */
+CREATE TABLE board (
+	board_content_num VARCHAR2(30) NOT NULL, /* 글번호 */
+	writer_id VARCHAR2(20) NOT NULL, /* 작성자 아이디 */
+	board_conetent_name VARCHAR2(100) NOT NULL, /* 글제목 */
+	board_content VARCHAR2(1000), /* 글내용 */
+	board_content_hit NUMBER NOT NULL, /* 조회수 */
+	board_content_click NUMBER NOT NULL, /* 추천수 */
+	board_content_time DATE NOT NULL, /* 작성시간 */
+	boardtype_code VARCHAR2(10) NOT NULL, /* 게시판코드 */
+	uni_code VARCHAR2(10) NOT NULL, /* 학교코드 */
+	board_admin_code NUMBER NOT NULL, /* 관리자식별코드 */
+	board_request_code NUMBER NOT NULL /* 수정삭제요청코드 */
+);
+
+COMMENT ON TABLE board IS '게시판';
+
+COMMENT ON COLUMN board.board_content_num IS '글번호';
+
+COMMENT ON COLUMN board.writer_id IS '작성자 아이디';
+
+COMMENT ON COLUMN board.board_conetent_name IS '글제목';
+
+COMMENT ON COLUMN board.board_content IS '글내용';
+
+COMMENT ON COLUMN board.board_content_hit IS '조회수';
+
+COMMENT ON COLUMN board.board_content_click IS '추천수';
+
+COMMENT ON COLUMN board.board_content_time IS '작성시간';
+
+COMMENT ON COLUMN board.boardtype_code IS '게시판코드';
+
+COMMENT ON COLUMN board.uni_code IS '학교코드';
+
+COMMENT ON COLUMN board.board_admin_code IS '관리자식별코드';
+
+COMMENT ON COLUMN board.board_request_code IS '수정삭제요청코드';
+
+CREATE UNIQUE INDEX PK_board
+	ON board (
+		board_content_num ASC
+	);
+
+ALTER TABLE board
+	ADD
+		CONSTRAINT PK_board
+		PRIMARY KEY (
+			board_content_num
+		);
+
+/* 학교 */
+CREATE TABLE university (
+	uni_name VARCHAR2(50) NOT NULL, /* 학교이름 */
+	uni_code VARCHAR2(10) NOT NULL /* 학교코드 */
+);
+
+COMMENT ON TABLE university IS '학교';
+
+COMMENT ON COLUMN university.uni_name IS '학교이름';
+
+COMMENT ON COLUMN university.uni_code IS '학교코드';
+
+CREATE UNIQUE INDEX PK_university
+	ON university (
+		uni_code ASC
+	);
+
+ALTER TABLE university
+	ADD
+		CONSTRAINT PK_university
+		PRIMARY KEY (
+			uni_code
+		);
+
+/* 댓글 */
+CREATE TABLE board_reply (
+	board_reply_num NUMBER NOT NULL, /* id */
+	board_content_num VARCHAR2(30) NOT NULL, /* 글번호 */
+	reply VARCHAR2(200) NOT NULL, /* 댓글내용 */
+	reply_writer_id VARCHAR2(20) NOT NULL, /* 작성자 아이디 */
+	reply_time DATE NOT NULL /* 작성 시간 */
+);
+
+COMMENT ON TABLE board_reply IS '댓글';
+
+COMMENT ON COLUMN board_reply.board_reply_num IS 'id';
+
+COMMENT ON COLUMN board_reply.board_content_num IS '글번호';
+
+COMMENT ON COLUMN board_reply.reply IS '댓글내용';
+
+COMMENT ON COLUMN board_reply.reply_writer_id IS '작성자 아이디';
+
+COMMENT ON COLUMN board_reply.reply_time IS '작성 시간';
+
+CREATE UNIQUE INDEX PK_board_reply
+	ON board_reply (
+		board_reply_num ASC
+	);
+
+ALTER TABLE board_reply
+	ADD
+		CONSTRAINT PK_board_reply
+		PRIMARY KEY (
+			board_reply_num
+		);
+
+/* 학생(회원) */
+CREATE TABLE student (
+	stu_id VARCHAR2(20) NOT NULL, /* 학생 아이디 */
+	stu_pwd VARCHAR2(20) NOT NULL, /* 비밀번호 */
+	stu_name VARCHAR2(20) NOT NULL, /* 이름 */
+	stu_email VARCHAR2(50) NOT NULL, /* 이메일 */
+	stu_major VARCHAR2(40) NOT NULL, /* 전공 */
+	stu_enteryear NUMBER NOT NULL, /* 입학년도 */
+	uni_code VARCHAR2(10) NOT NULL /* 학교코드 */
+);
+
+COMMENT ON TABLE student IS '학생(회원)';
+
+COMMENT ON COLUMN student.stu_id IS '학생 아이디';
+
+COMMENT ON COLUMN student.stu_pwd IS '비밀번호';
+
+COMMENT ON COLUMN student.stu_name IS '이름';
+
+COMMENT ON COLUMN student.stu_email IS '이메일';
+
+COMMENT ON COLUMN student.stu_major IS '전공';
+
+COMMENT ON COLUMN student.stu_enteryear IS '입학년도';
+
+COMMENT ON COLUMN student.uni_code IS '학교코드';
+
+CREATE UNIQUE INDEX PK_student
+	ON student (
+		stu_id ASC
+	);
+
+ALTER TABLE student
+	ADD
+		CONSTRAINT PK_student
+		PRIMARY KEY (
+			stu_id
+		);
+
+/* 학교개설강의 */
+CREATE TABLE lecture (
+	lec_code VARCHAR2(10) NOT NULL, /* 강의코드 */
+	uni_code VARCHAR2(10) NOT NULL, /* 학교코드 */
+	lec_name VARCHAR2(100) NOT NULL, /* 강의명 */
+	lec_t_name VARCHAR2(20) NOT NULL /* 교수명 */
+);
+
+COMMENT ON TABLE lecture IS '학교개설강의';
+
+COMMENT ON COLUMN lecture.lec_code IS '강의코드';
+
+COMMENT ON COLUMN lecture.uni_code IS '학교코드';
+
+COMMENT ON COLUMN lecture.lec_name IS '강의명';
+
+COMMENT ON COLUMN lecture.lec_t_name IS '교수명';
+
+CREATE UNIQUE INDEX PK_lecture
+	ON lecture (
+		lec_code ASC,
+		uni_code ASC,
+		lec_name ASC,
+		lec_t_name ASC
+	);
+
+ALTER TABLE lecture
+	ADD
+		CONSTRAINT PK_lecture
+		PRIMARY KEY (
+			lec_code,
+			uni_code,
+			lec_name,
+			lec_t_name
+		);
+
+/* 강의평가게시판 */
+CREATE TABLE leceval_board (
+	lec_code VARCHAR2(10) NOT NULL, /* 강의코드 */
+	uni_code VARCHAR2(10) NOT NULL, /* 학교코드 */
+	lec_name VARCHAR2(100) NOT NULL, /* 강의명 */
+	lec_t_name VARCHAR2(20) NOT NULL, /* 교수명 */
+	writer_id VARCHAR2(20) NOT NULL, /* 작성자 */
+	lec_mark NUMBER NOT NULL, /* 평점 */
+	lec_homework_fre NUMBER NOT NULL, /* 과제비율 */
+	lec_attend_criteria NUMBER NOT NULL, /* 출결기준 */
+	lec_test_fre NUMBER NOT NULL, /* 시험비율 */
+	lec_test_type NUMBER NOT NULL, /* 시험유형 */
+	lec_content_time NUMBER NOT NULL /* 작성시간 */
+);
+
+COMMENT ON TABLE leceval_board IS '강의평가게시판';
+
+COMMENT ON COLUMN leceval_board.lec_code IS '강의코드';
+
+COMMENT ON COLUMN leceval_board.uni_code IS '학교코드';
+
+COMMENT ON COLUMN leceval_board.lec_name IS '강의명';
+
+COMMENT ON COLUMN leceval_board.lec_t_name IS '교수명';
+
+COMMENT ON COLUMN leceval_board.writer_id IS '작성자';
+
+COMMENT ON COLUMN leceval_board.lec_mark IS '평점';
+
+COMMENT ON COLUMN leceval_board.lec_homework_fre IS '과제비율';
+
+COMMENT ON COLUMN leceval_board.lec_attend_criteria IS '출결기준';
+
+COMMENT ON COLUMN leceval_board.lec_test_fre IS '시험비율';
+
+COMMENT ON COLUMN leceval_board.lec_test_type IS '시험유형';
+
+COMMENT ON COLUMN leceval_board.lec_content_time IS '작성시간';
+
+ALTER TABLE friend
+	ADD
+		CONSTRAINT FK_student_TO_friend
+		FOREIGN KEY (
+			stu_id
+		)
+		REFERENCES student (
+			stu_id
+		);
+
+ALTER TABLE stu_class
+	ADD
+		CONSTRAINT FK_student_TO_stu_class
+		FOREIGN KEY (
+			stu_id
+		)
+		REFERENCES student (
+			stu_id
+		);
+
+ALTER TABLE lectureeval_board_reply
+	ADD
+		CONSTRAINT FK_stu_class_TO_lectureeval_board_reply
+		FOREIGN KEY (
+			stu_class_name,
+			attend_year,
+			attend_semester,
+			stu_id
+		)
+		REFERENCES stu_class (
+			stu_class_name,
+			attend_year,
+			attend_semester,
+			stu_id
+		);
+
+ALTER TABLE lectureeval_board_reply
+	ADD
+		CONSTRAINT FK_lecture_TO_lectureeval_board_reply
+		FOREIGN KEY (
+			lec_code,
+			uni_code,
+			stu_class_name,
+			lec_t_name
+		)
+		REFERENCES lecture (
+			lec_code,
+			uni_code,
+			lec_name,
+			lec_t_name
+		);
+
+ALTER TABLE bookstore_board
+	ADD
+		CONSTRAINT FK_board_TO_bookstore_board
+		FOREIGN KEY (
+			board_content_num
+		)
+		REFERENCES board (
+			board_content_num
+		);
+
+ALTER TABLE lectureeval_board
+	ADD
+		CONSTRAINT FK_lecture_TO_lctrvl_brd
+		FOREIGN KEY (
+			lec_code,
+			uni_code,
+			lec_name,
+			lec_t_name
+		)
+		REFERENCES lecture (
+			lec_code,
+			uni_code,
+			lec_name,
+			lec_t_name
+		);
+
+ALTER TABLE stu_class_time
+	ADD
+		CONSTRAINT FK_stu_class_TO_stu_class_time
+		FOREIGN KEY (
+			stu_class_name,
+			attend_year,
+			attend_semester,
+			stu_id
+		)
+		REFERENCES stu_class (
+			stu_class_name,
+			attend_year,
+			attend_semester,
+			stu_id
+		);
+
+ALTER TABLE board
+	ADD
+		CONSTRAINT FK_boardtype_TO_board
+		FOREIGN KEY (
+			boardtype_code
+		)
+		REFERENCES boardtype (
+			boardtype_code
+		);
+
+ALTER TABLE board
+	ADD
+		CONSTRAINT FK_university_TO_board
+		FOREIGN KEY (
+			uni_code
+		)
+		REFERENCES university (
+			uni_code
+		);
+
+ALTER TABLE board_reply
+	ADD
+		CONSTRAINT FK_board_TO_board_reply
+		FOREIGN KEY (
+			board_content_num
+		)
+		REFERENCES board (
+			board_content_num
+		);
+
+ALTER TABLE student
+	ADD
+		CONSTRAINT FK_university_TO_student
+		FOREIGN KEY (
+			uni_code
+		)
+		REFERENCES university (
+			uni_code
+		);
+
+ALTER TABLE lecture
+	ADD
+		CONSTRAINT FK_university_TO_lecture
+		FOREIGN KEY (
+			uni_code
+		)
+		REFERENCES university (
+			uni_code
+		);
+
+ALTER TABLE leceval_board
+	ADD
+		CONSTRAINT FK_lecture_TO_leceval_board
+		FOREIGN KEY (
+			lec_code,
+			uni_code,
+			lec_name,
+			lec_t_name
+		)
+		REFERENCES lecture (
+			lec_code,
+			uni_code,
+			lec_name,
+			lec_t_name
+		);

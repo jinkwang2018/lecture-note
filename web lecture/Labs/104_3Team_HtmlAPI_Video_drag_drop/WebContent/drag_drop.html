@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+
+	<!--  안녕하세요-->
+	<style>
+#div1, #div2 {
+    float: left;
+    width: 100px;
+    height: 35px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+</style>
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+function drag(ev) {
+	console.log(ev.target.id);
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+function drop(ev) {
+    ev.preventDefault();
+	console.log(ev.target.id);
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+function playVideo(ev){
+	//console.log(frm.image.value);
+	console.log("if 밖 " + ev.target.value);
+	console.log(document.getElementById("vid"));
+		document.getElementById("vid").src = ev.target.value;
+		console.log(document.getElementById("vid").src);
+
+		document.getElementById("vid").play();
+}
+function stopVid(ev){
+	document.getElementById("vid").src = "";
+}
+</script>
+</head>
+<body>
+
+<h2>Drag and Drop</h2>
+<p>Drag the image back and forth between the two div elements.</p>
+
+<form id = frm>
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+	 <input type = "image" src = "images//image1.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31"  value ="http://www.ithinknext.com/mydata/board/files/F201308021823010.mp4"> 
+
+	</div>
+
+	<div id="div2" ondrop="drop(event)" ondragend="playVideo(event)" ondragleave="stopVid(event)" ondragover="allowDrop(event)" ></div>
+
+	<video id = "vid" width="400" src= "" type="video/mp4" >비디오</video>
+</form>
+
+
+</body>
+</html>

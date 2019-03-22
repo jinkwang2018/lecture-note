@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+   href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+   src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/main.css">  
+<script src="js/tooltip.js"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script>
+$(function(){
+	
+	  $( "#dialog" ).dialog({
+	      autoOpen: false,
+	      width : 1280,
+	      show: {
+	        effect: "blind",
+	        duration: 1000
+	      },
+	      hide: {
+	        effect: "explode",
+	        duration: 1000
+	      }
+	    });
+	
+	$('#opener').click(function(){
+		$( "#dialog" ).dialog( "open" );
+	});
+});
+
+
+
+ var _map;
+
+ function GetMap() {
+     // Create a Bing map
+      _map = new Microsoft.Maps.Map(document.getElementById("map"), { 
+         credentials: "이곳에 Key를 넣습니다." 
+      });
+     
+     // Get the current position from the browser
+     if (!navigator.geolocation)
+         alert("This browser doesn't support geolocation");
+     else                                                                                                                        
+         navigator.geolocation.getCurrentPosition(onPositionReady, onError, { maximumAge: 0, timeout: 30000, enableHighAccuracy: true });
+ };
+
+ function onPositionReady(position) {
+     // Apply the position to the map
+     var location = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
+     _map.setView({ zoom: 18, center: location }); 
+     // Add a pushpin to the map representing the current location
+     var pin = new Microsoft.Maps.Pushpin(location);
+     _map.entities.push(pin);
+ }
+
+ function onError(err) {
+     switch (err.code) {
+         case 0:
+             alert("Unknown error");
+             break;
+         case 1:
+             alert("The user said no!");
+             break;
+         case 2:
+             alert("Location data unavailable");
+             break;
+         case 3:
+             alert("Location request timed out");
+             break;
+     }
+
+}
+
+</script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Main</a></li>
+        <li class="active"><a href="GeoLocation.html">GeoLocation</a></li>
+        <li><a href="Drag_Drop.html">Drag & Drop</a></li>
+        <li><a href="LocalStorage.html">LocalStorage</a></li>
+        <li><a href="SSE.html">SSE</a></li>
+        <li><a href="Web_Worker.html">Web Worker</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+		<li><a href="Member.html"><span class="glyphicon glyphicon glyphicon-user"></span> 4조 조원보기</a></li>
+        <li><a href="Login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+	
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="index.html">Main</a></p>
+      <br/>
+      <p><a href="GeoLocation.html" data-toggle="tooltip" title="위치를 알고싶어요">Geo Location</a></p>
+      <br/>
+      <p><a href="Drag_Drop.html" data-toggle="tooltip2" title="퍼즐을 맞춰볼까요?">Drag & Drop</a></p>
+      <br/>
+      <p><a href="LocalStorage.html" data-toggle="tooltip3" title="자동 저장이 됩니다.">LocalStorage</a></p>
+      <br/>
+      <p><a href="SSE.html" data-toggle="tooltip4" title="서버로부터 자동으로 무언가가 내려와요">SSE</a></p>
+      <br/>
+      <p><a href="Web_Worker.html" data-toggle="tooltip5" title="MyWay 나만의 길을 가는 일꾼">Web Worker</a></p>
+    </div> <!--왼쪽 싸이드 메뉴 디브-->
+   
+    <div class="col-sm-10 mainDiv">
+    
+    	<div class="row">
+    	
+    	
+    	  <div class="col-sm-4"></div>
+           <div class="col-sm-3">
+    			<h1>GeoLocation</h1>
+    	   </div>
+    	
+          <div class="col-sm-2">
+    	 <button type="button" class="btn btn-info"  data-toggle="collapse" data-target="#Sub" style="margin-top:30px;">설명</button>
+    	 <button type="button" class="btn btn-info" style="margin-top:30px;" id="opener">PT 보기</button>
+     	 </div>
+     	 <div class="col-sm-1">
+     	 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#Geo" style="margin-top:30px;">위치 확인하기</button><br>
+      	</div>
+      	
+      	
+          <div class="col-sm-1"></div>
+      	
+      	</div>
+      	
+      <div id= "Sub" name="Subject" class="collapse">
+   	 
+      
+   
+   <div class="alert alert-info">
+        <p>자신의 위치를 찾기위해선
+      자신이 어디 있는지를 알게 해주었습니다 그래서
+      Geolocation 을 사용하였습니다.
+   좋은 위도와 경도를 찾아내어 위치정보를 찾아냅니다.</p>
+   </div>
+      </div>
+
+      
+      <iframe id = "Geo" name="Geolo" src="GeoCation.html" height="600px" width="100%" class="collapse"></iframe>
+   
+      
+    </div>
+    
+  </div> <!--row 관련 div-->
+</div>   <!--센터부분 전체 디브-->
+
+<div id="dialog" title="GeoLocation">
+<div class="w3-content w3-display-container" style="max-width:1920px">
+        <img class="mySlides" src="images/1_geo.jpg" style="width:100%">
+        <img class="mySlides" src="images/2_geo.jpg" style="width:100%">
+        <img class="mySlides" src="images/3_geo.jpg" style="width:100%">
+        <img class="mySlides" src="images/4_geo.jpg" style="width:100%">
+        <img class="mySlides" src="images/5_geo.jpg" style="width:100%">
+        <div class="w3-center w3-section w3-large w3-text-white w3-display-bottomleft" style="width:100%">
+          <div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+          <div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        </div>
+      </div>         
+    
+    
+</div>
+
+
+
+
+   <script>/*슬라이드쇼 */
+      var slideIndex = 1;
+      showDivs(slideIndex);
+         
+      function plusDivs(n) {
+        showDivs(slideIndex += n);
+      }
+      
+      function currentDiv(n) {
+        showDivs(slideIndex = n);
+      }
+         
+      function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+         if (n > x.length) {slideIndex = 1}
+         if (n < 1) {slideIndex = x.length}
+         for (i = 0; i < x.length; i++) {
+              x[i].style.display = "none";
+         }
+          for (i = 0; i < dots.length; i++) {
+             dots[i].className = dots[i].className.replace(" w3-white", "");
+         }
+         x[slideIndex-1].style.display = "block";
+         dots[slideIndex-1].className += " w3-white";
+      }
+   </script>
+        
+
+
+
+
+
+</body>
+</html>

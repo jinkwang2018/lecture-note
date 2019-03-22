@@ -1,0 +1,7 @@
+"jdbc:oracle:thin:@192.168.0.24:1521:XE"
+
+@ip 林家 : 192.168.0.24
+@port 锅龋 : 8090
+@DB id : Team_Project2
+@DB pwd : 1004
+@立加 林家 : http://192.168.0.24:8090/Macgyper_2Team/Login.jsp

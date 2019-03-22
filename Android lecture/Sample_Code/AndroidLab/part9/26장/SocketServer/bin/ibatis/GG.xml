@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="GG">
+	<select id="tableExists" resultClass="int" parameterClass="java.lang.String" >
+		SELECT COUNT(*) FROM $tableName$
+	</select>
+	
+	<select id="selectMain" resultClass="com.multicampus.android.server.ggdhttp.dto.MainDto" parameterClass="java.lang.String" >
+		SELECT id, title, content FROM TB_MAIN
+	</select>
+	
+	<select id="selectData" resultClass="com.multicampus.android.server.ggdhttp.dto.DataDto" parameterClass="java.lang.String" >
+		SELECT id, name, lat, lon, phone, content FROM TB_DATA
+		WHERE id=#id#
+		ORDER BY name
+	</select>
+	
+	<insert id="insertData" parameterClass="java.lang.String">
+		$insert$
+	</insert>
+
+	<statement id="createMainTable">
+		CREATE TABLE TB_MAIN (
+			id CHAR(1) NOT NULL,
+			title VARCHAR(50) NOT NULL,
+			content VARCHAR(1000)
+		)
+	</statement>
+
+	<statement id="createDataTable">
+		CREATE TABLE TB_DATA (
+			id CHAR(1) NOT NULL,
+			name VARCHAR(100) NOT NULL,
+			lat VARCHAR(100),
+			lon VARCHAR(100),
+			phone VARCHAR(50),
+			content VARCHAR(2000)
+		)
+	</statement>
+</sqlMap>

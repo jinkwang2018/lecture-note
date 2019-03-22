@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>자식창에서 부모창으로 데이터 넘기기</title>
+		<script type="text/javascript">s
+			function zipSearch(obj){
+				console.log(obj) //각 button의 value값을 가지고 간다.
+				var zip = obj.substring(0,7);
+				var addr = obj.substr(7);
+				//alert(zip + " /" + addr);
+				//       부모창                         :      자식 창
+				//Ex12_Script_Zipcode : Ex12_popup.html 
+	
+				//자식이 부모에게 접근하는 방법
+				//부모(opener 객체) >> 문서 까지 간 것이다.
+				//window.opener.
+				window.opener.mainform.zipcode.value = zip;
+				opener.mainform.addr.value = addr;
+				window.close; //self close
+			}
+		</script>
+	</head>
+	
+	<body>
+		<h3>DB연결 검색 화면 주소 출력(선택)</h3>
+		<form action ="" name= "zipform">
+			<input type = "button" value = "200-300 서울시 강남구 역삼동" name = "btn" onclick="zipSearch(this.value)"><br>
+			<input type = "button" value = "220-400 경기도 성남시 삼평동" name = "btn" onclick="zipSearch(this.value)"><br>
+			<input type = "button" value = "256-123 안산시 상록구 월피동" name = "btn" onclick="zipSearch(this.value)"><br>
+		</form>
+	</body>
+</html>

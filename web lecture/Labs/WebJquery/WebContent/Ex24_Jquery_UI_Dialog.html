@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+		<script type="text/javascript">
+		$(function(){
+			$('#datepicker').datepicker(
+					{ dataFormat : "yy년 mm월 dd일"
+				
+					}
+			)
+			$('#dialog').dialog(
+					{
+						autoOpen : false,
+						show : {effect : "blind",duration : 2000},
+						hide:{effect : "explode",duration : 1000},
+						resizable: false,
+						buttons :{
+							"확인": function() {
+						      				  	  $( this ).dialog( "close" );
+						        			  },
+						    "취소": function() {
+						      					  $( this ).dialog( "close" );
+											  }
+						},
+						modal : true //팝업창을 닫기 전까지는 opener(부모창) 작업불가 true
+									 //팝업창을 닫기 전까지는 opener(부모창) 작업불가 false
+					}
+			); // div가 팝업으로 뜬다.
+			$('#opener').click(function(){
+				$('#dialog').dialog('open');
+				/*$('#dialog').dialog(
+						{
+							autoOpen:true
+							
+						}
+				);*/
+			});
+		});
+		</script>
+			
+		
+	</head>
+	
+	<body>
+		Date : <input type = "text" id = "datepicker">
+		<hr>
+		<input type= "button" id = "opener" value = "opendialog">
+		<!-- popup div -->
+		<div id = "dialog" title = "basic dialog">
+			<p>
+				하하하하하하하하하하하핳!!
+			</p>
+		</div>
+	</body>
+</html>

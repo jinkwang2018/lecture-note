@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\bitcamp104\\Android\\Sample_Code\\AndroidLab\\part2-7\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ko-rKR\\values-ko-rKR.xml",
+            "map": [
+                {
+                    "source": "D:\\bitcamp104\\Android\\Sample_Code\\AndroidLab\\part2-7\\src\\main\\res\\values-ko-rKR\\strings.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "57,103",
+                        "endColumns": "44,49",
+                        "endOffsets": "97,148"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,100",
+                        "endColumns": "44,49",
+                        "endOffsets": "95,145"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+"jdbc:oracle:thin:@192.168.0.182:1521:XE"
+
+@ip 林家 : 192.168.0.182
+@port 锅龋 : 8090
+@DB id : G2
+@DB pwd : 1004
+@立加 林家 : http://192.168.0.182:8090/G2_Kostime/loginok.LoginJoin

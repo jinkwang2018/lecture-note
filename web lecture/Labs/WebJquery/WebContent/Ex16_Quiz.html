@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<style>
+		.css{
+			border : dotted
+		}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		//추가
+		$(function(){
+			$('#input1').click(function(){
+				$('#div>div[class=css]>input[name=test]:checked').each(function(){
+					$('#div2').append($(this).parent(this));
+					console.log(this);
+				});
+			});
+		//삭제
+			$('#output').click(function(){
+				$('#div2>div[class=css]>input[name=test]:checked').each(function(){
+					$('#div').append($(this).parent(this));
+					console.log(this);
+				});
+			});
+		});
+		
+		
+		</script>
+	</head>
+	
+	<body>
+		<div id="div" style = "border : dotted; width: 20%; height:300px; float: left; position:left ;">
+			<div class = "css">
+			<input type = "checkbox" title="test1" name="test"><a>test1</a>
+			</div>
+			<div class = "css">
+			<input type = "checkbox" title="test1" name="test"><a>test2</a>
+			</div>
+			<div class = "css">
+			<input type = "checkbox" title="test1" name="test"><a>test3</a>
+			</div>
+			<div class = "css">
+			<input type = "checkbox" title="test1" name="test"><a>test4</a>
+			</div>
+			<div class = "css">
+			<input type = "checkbox" title="test1" name="test"><a>test5</a>
+			</div>
+			<div class = "css">
+			<input type = "checkbox" title="test1" name="test"><a>test6</a>
+			</div>
+		</div>
+			<input id = "input1" type = "button" value ="추가" >
+			<input id = "output" type = "button" value ="삭제">
+		<div id="div2" style = "border : dotted; top: 300px; width: 20%; height: 300px; float: right; position:right;">
+		</div>
+	</body>
+</html>

@@ -1,0 +1,95 @@
+/*
+ * BufferConsumer.java February 2007
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+import java.io.IOException;
+
+import org.simpleframework.util.buffer.ArrayBuffer;
+import org.simpleframework.util.buffer.Buffer;
+
+/**
+ * The <code>BufferConsumer</code> is used to create a consumer that
+ * is used to consume data and append that data to a buffer. This is
+ * done so that the buffer can act as a data source for the content
+ * that has been consumed. For example, take the message body, this
+ * can be consumed in such a way that the internal buffer can be 
+ * used acquire an <code>InputStream</code> to read the contents. 
+ * Buffering in such a way provides an efficient means to store the
+ * contents of the message as only one read only copy is created.
+ *
+ * @author Niall Gallagher
+ */ 
+abstract class BufferConsumer implements Consumer {
+   
+   /**
+    * Constructor for the <code>BufferConsumer</code> object. This
+    * will create a consumer that provides methods that can be
+    * used to buffer content consumed from the provided cursor.
+    * Such consumers can accumulate the transport data.
+    */
+   protected BufferConsumer() {
+      super();
+   }
+
+   /** 
+    * This method is used to append the contents of the array to the
+    * internal buffer. The appended bytes can be acquired from the
+    * internal buffer using an <code>InputStream</code>, or the text
+    * of the appended bytes can be acquired by encoding the bytes.
+    *
+    * @param array this is the array of bytes to be appended
+    */ 
+   protected void append(byte[] array) throws IOException {
+      append(array, 0, array.length);
+   }
+
+   /** 
+    * This method is used to append the contents of the array to the
+    * internal buffer. The appended bytes can be acquired from the
+    * internal buffer using an <code>InputStream</code>, or the text
+    * of the appended bytes can be acquired by encoding the bytes.
+    *
+    * @param array this is the array of bytes to be appended
+    * @param off this is the start offset in the array to read from
+    * @param len this is the number of bytes to write to the buffer
+    */
+   protected void append(byte[] array, int off, int len) throws IOException {
+      Buffer buffer = allocate();
+
+      if(buffer != null) {
+         buffer.append(array, off, len);
+      }
+   }
+
+   /** 
+    * This method is used to allocate the internal buffer. If there
+    * has already been a call to this method the previous instance
+    * is returned. If there is any issue allocating the buffer then
+    * this will throw an exception.
+    *
+    * @return this returns the buffer to append the bytes to
+    */ 
+   protected Buffer allocate() throws IOException {
+      return new ArrayBuffer();
+   }
+}
+
+

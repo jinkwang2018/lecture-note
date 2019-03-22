@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/hot-sneaks/jquery-ui.css"> -->
+   <link rel="stylesheet" href="ScriptUI/jquery-ui.css">
+   <style type="text/css">
+     #feedback { font-size: 1.4em; }
+     #selectable .ui-selecting { background: #FECA40; }
+     #selectable .ui-selected { background: #F39814; color: white; }
+     #selectable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+     #selectable li { margin: 3px; padding: 1px; float: left; width: 100px; height: 80px; font-size: 4em; text-align: center; }
+     table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+   }
+   
+   th, td {
+      padding: 5px;
+      text-align: left;
+   }
+   </style>
+   <script type="text/javascript">
+    $( function() {
+       var busarr = [];
+       $( "button, input, a" ).click( function( event ) {
+             event.preventDefault();
+           } );
+       
+       $('#goDate').datepicker(
+                {
+                   dateFormat: "yy-mm-dd"
+                }      
+             );
+       $('#comeDate').datepicker(
+                {
+                   dateFormat: "yy-mm-dd"
+                }   
+            );
+             
+             $( "#goTime" ).selectmenu();
+             $( "#comeTime" ).selectmenu();
+             $( "#number" ).selectmenu();
+
+             $("#popup").dialog(
+                   {
+                      autoOpen: false
+                   }
+             );
+             
+             $('#location').click(function(){
+                $('#popup').dialog('open');
+             });
+             
+             var availableTags = [
+                   "부산",
+                   "마산",
+                   "대구",
+                   "대전",
+                   "광주",
+                   "전주",
+                   "인천",
+                   "군산"
+                 ];
+                 $( "#tags" ).autocomplete({
+                   source: availableTags
+                 });
+             
+             $('#popup_ok').click(function(){
+                if($('#tags').val() == ''){
+                   alert('도착지 입력안됨');
+                   tags.focus();
+                   return false;
+                }
+                var place = $('#tags').val();
+                $('#location').val(place);
+                $('#popup').dialog('close');
+             });
+             
+             $('#bus_ok').click(function(){
+                
+                var startPlace = $('#startPlace').val();
+                var location = $('#location').val();
+                var goDate = $('#goDate').val();
+                var goTime = $('#goTime').val();
+                var comeDate = $('#comeDate').val();
+                var comeTime = $('#comeTime').val();
+                var number = $('#number').val();
+                
+                if(startPlace == ""){
+                   alert('출발지를 입력하시오');
+                   startPlace.focus();
+                    return false;
+                }                
+                if(location == ""){
+                   alert('도착지를 입력하시오');
+                   location.focus();
+                    return false;
+                }              
+                if(goDate == ""){
+                   alert('출발날짜를 입력하시오');
+                   goDate.focus();
+                    return false;
+                }           
+                if(goTime == ""){
+                   alert('출발시간을 입력하시오');
+                   goTime.focus();
+                    return false;
+                }       
+                if(comeDate == ""){
+                   alert('도착날짜를 입력하시오');
+                   comeDate.focus();
+                    return false;
+                }
+                  if($('#comeDate').val() < $('#goDate').val()){
+                  alert('오는 날짜가 가는날짜보다 전입니다');
+                  comeDate.focus();
+                    return false;
+               }      
+                if(comeTime == ""){
+                    alert('도착시간을 입력하시오');
+                    comeTime.focus();
+                  return false;
+                }   
+                if(number == ""){
+                       alert('승차인원을 입력하시오');
+                       number.focus();
+                     return false;
+               }   
+                
+                busarr.push(
+                      {
+                         출발지 : startPlace,
+                         도착지 : location,
+                         출발일 : goDate,
+                         출발시간 : goTime,
+                         오는날 : comeDate,
+                         오는시간 : comeTime,
+                         탑승인원 : number,
+                         좌석번호 : []
+                      }
+                );
+                alert("다음단계 , 좌석을 선택해주세요");
+             });
+             
+             
+       $( "#accordion").accordion({
+         collapsible: true
+       });
+       $( "#selectable" ).selectable({
+            stop: function() {
+              var result = $( "#select-result" ).empty();
+              $( ".ui-selected", this ).each(function() {
+                var index = $( "#selectable li" ).index( this );
+                result.append( " #" + ( index + 1 ) );
+              });
+            }
+          });
+       
+       $('#button_3').click(function(){
+          if($('#select-result').text() == 'none'){
+             alert('좌석선택하시오');
+               return false;
+          }
+          if(busarr == ''){
+             alert('위의 예매부터 하시오');
+               return false;
+          }
+          
+          busarr[0].좌석번호 = $('#select-result').text();
+          console.log(busarr[0]);
+          
+          $('#sear_startDate').text(busarr[0].출발일);
+          $('#sear_startHour').text(busarr[0].출발시간);
+          $('#sear_start').text(busarr[0].출발지);
+          $('#sear_location').text(busarr[0].도착지);
+          $('#sear_number').text(busarr[0].탑승인원);
+          $('#sear_seat').text(busarr[0].좌석번호);
+          alert("예약완료 아래에서 예약정보를 확인하세요");
+       });
+       
+      });
+   </script>
+</head>
+<body>
+<h3>**버스예매**</h3>
+<form id="bus">
+   <div>
+      <ul class="layout">
+         <li>출발지 : <input type="text" id="startPlace" value="동서울" readonly /></li>
+         <li>도착지 : <input type="text" id="location" /></li>
+      </ul>
+   </div>
+   <div>
+      <ul class="layout">
+         <li>가는 날짜 : <input type="text" id="goDate" /></li>
+         <li>
+            <label for="goTime">가는 시간 : </label>
+             <select name="goTime" id="goTime">
+               <option></option>
+               <option value="09:00" selected="selected">09:00</option>
+               <option value="10:00">10:00</option>
+               <option value="11:00">11:00</option>
+               <option value="12:00">12:00</option>
+               <option value="13:00">13:00</option>
+               <option value="14:00">14:00</option>
+               <option value="15:00">15:00</option>
+               <option value="16:00">16:00</option>
+             </select>
+         </li>
+      </ul>
+   </div>
+   <div>
+      <ul class="layout">
+         <li>오는 날짜 : <input type="text" id="comeDate" /></li>
+         <li>            
+            <label for="comeTime">오는 시간 : </label>
+             <select name="comeTime" id="comeTime">
+               <option></option>
+               <option value="09:00" selected="selected">09:00</option>
+               <option value="10:00">10:00</option>
+               <option value="11:00">11:00</option>
+               <option value="12:00">12:00</option>
+               <option value="13:00">13:00</option>
+               <option value="14:00">14:00</option>
+               <option value="15:00">15:00</option>
+               <option value="16:00">16:00</option>
+             </select>
+         </li>
+      </ul>
+   </div>   
+   <div>
+      <ul class="layout">
+         <li>
+            <label for="number">탑승인원 : </label>
+             <select name="number" id="number">
+               <option></option>
+               <option value="1" selected="selected">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+               <option value="4">4</option>
+               <option value="5">5</option>
+               <option value="6">6</option>
+             </select>
+         </li>
+      </ul>
+   </div>
+   
+   <div style=text-align:center>
+      <button class="ui-button ui-widget ui-corner-all" id="bus_ok">확인</button>
+   </div>
+</form>   
+
+   <div>
+      
+   </div>
+   
+   
+   <div id="popup" title="도착지선택">
+      <input type="text" id="tags">   
+      <div style=text-align:center>
+         <button class="ui-button ui-widget ui-corner-all" id="popup_ok" style="margin-top:10px">확인</button>
+      </div>
+   </div>
+<!-- 섹션 -->
+<div id="accordion">
+  
+  <h3>좌석확인</h3>
+  <div>
+  <p id="feedback">
+  <span>선택한 좌석:</span> <span id="select-result">none</span>.
+  </p>
+  <ol id="selectable">
+     <li class="ui-state-default">1</li>
+     <li class="ui-state-default">2</li>
+     <li class="ui-state-default">3</li>
+     <li class="ui-state-default">4</li>
+     <li class="ui-state-default">5</li>
+     <li class="ui-state-default">6</li>
+     <li class="ui-state-default">7</li>
+     <li class="ui-state-default">8</li>
+     <li class="ui-state-default">9</li>
+     <li class="ui-state-default">10</li>
+     <li class="ui-state-default">11</li>
+     <li class="ui-state-default">12</li>
+     <li class="ui-state-default">13</li>
+     <li class="ui-state-default">14</li>
+     <li class="ui-state-default">15</li>
+     <li class="ui-state-default">16</li>
+     <li class="ui-state-default">17</li>
+     <li class="ui-state-default">18</li>
+     <li class="ui-state-default">19</li>
+     <li class="ui-state-default">20</li>
+</ol><br><br>
+  &nbsp;<button id="button_3">예약</button>
+  </div>
+  <h3>예약확인</h3>
+  <div>
+   <table style="width: 100%">
+         <caption>예약조회</caption>
+         <tr>
+            <td colspan="4">출발일 : <span id="sear_startDate"></span> 출발시간 : <span id="sear_startHour"></span></td>
+            
+         </tr>
+         <tr>
+            <td colspan="4">생년월일 : 1980.01.01
+            전화번호 : 010-1010-0101</td>
+            
+         </tr>
+         <tr>
+            <td colspan="4">무인발매기 또는 창구 발권 필요
+            터미널 창구에서 발권하셔야 탑승 가능합니다</td>
+         </tr>
+         <tr>
+            <td colspan="2">출발지 : <span id="sear_start"></span></td>
+            <td colspan="2">도착지 : <span id="sear_location"></span></td>
+         </tr>
+         <tr>
+            <td>소요시간</td>
+            <td>등급 : 1등석</td>
+            <td>승차인원 : <span id="sear_number"></span></td>
+            <td>좌석번호 : <span id="sear_seat"></span></td>
+         </tr>
+         <tr>
+            <td colspan="4">취소를 원하시면 홈페이지나 어플에서 진행해야만 합니다.</td>
+         </tr>
+      </table>
+  </div>
+</div>
+</body>
+</html>

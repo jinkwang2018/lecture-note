@@ -1,0 +1,65 @@
+/*
+ * Controller.java May 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.session;
+
+import org.simpleframework.util.lease.Lease;
+import org.simpleframework.util.lease.LeaseException;
+
+/**
+ * The <code>Controller</code> object is used to manage all life cycle
+ * events for sessions. This is used to start and renew all leases
+ * issued. The start life cycle event is used when the session is first
+ * created, this will lease the new session for some fixed duration. 
+ * The renew event is performed when an existing session is accessed 
+ * again so that the session can be maintained for the default period.
+ * 
+ * @author Niall Gallagher
+ */
+interface Controller<T> {
+   
+   /**
+    * The <code>start</code> method is used when a session is to 
+    * be created for the first time. This will ensure that the key 
+    * specified is used to dispose of the session when its idle
+    * timeout has expired. 
+    * 
+    * @param key this is the unique key identifying the session
+    */
+   public Lease<T> start(T key) throws LeaseException;
+   
+   /**
+    * The <code>renew</code> method is used when a session has been 
+    * accessed for a again. This ensures that the key specified is 
+    * used to dispose of the session when its idle timeout expires. 
+    * 
+    * @param key this is the unique key identifying the session
+    */   
+   public void renew(T key) throws LeaseException; 
+   
+   /**
+    * The <code>cancel</code> method is used when a session is no
+    * longer required and is to be disposed of. This is typically
+    * invoked by a web application to release occupied resources.
+    * 
+    * @param key this is the unique key identifying the session
+    */
+   public void cancel(T key) throws LeaseException;
+}

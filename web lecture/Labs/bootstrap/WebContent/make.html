@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<style>
+		  #visible{
+		  
+		  }
+		  #hide{
+		  float:right;
+		  }
+		  body{
+		  	width:100%;
+		  	height:100%;
+		  }
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	
+	<body>
+		<div id = "photo" style = "width:50%; height:100%">
+			<input type ="button" id = "visible" value = "재생">
+			<input type ="button" id = "hide" value = "광고 건너뛰기" style = display:none >
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript">
+	
+		if(window.Worker){ //웹 워커를 지원하는 브라우져인지 확인
+			alert("이 브라우저는 웹 워커를 지원합니다")
+			var worker; //워커 선언
+				$(document).ready(function(){
+					
+					//이미지 보이기
+					$('#visible').click(function(){
+						$('#photo').prepend("<iframe width='700' height='500' allow='encrypted-media' allowfullscreen></iframe>");
+						$('iframe').attr(
+								{
+								"src":"https://www.youtube.com/embed/wrbsA3eOSxo?autoplay=1&controls=0",
+								
+								
+								 
+									}
+								);
+						 
+						if(worker) {                   //워커가 이미 작동중이라면 종료
+	                         worker.terminate(); 
+	                     };
+	                     worker = new Worker("make.js");//워커 js를 메모리에 올린다.
+	                     worker.onmessage = function(event) {
+	                    	 if(event.data==5){
+	                    		 $('#hide').show();
+	                    	 }
+	                    	 if(event.data=="15"){
+	                    		 worker.terminate();
+	                    		 $('#photo>iframe').remove();
+	                    		 $('#hide').hide();	
+	                    	 }
+	                    	 console.log(event);
+	                    };
+	                     
+						  
+					});
+				   	//이미지 숨김
+					$('#hide').click(function(){
+				    	 //워커를 종료시킨다.
+				    	worker.terminate();
+				    	$('#photo>iframe').remove();
+				    	$('#hide').hide();
+					});	 
+				    
+				});
+		}else{
+			alert("이 브라우저는 웹 워커를 지원하지 않습니다")
+		}
+			
+	</script>
+</html>

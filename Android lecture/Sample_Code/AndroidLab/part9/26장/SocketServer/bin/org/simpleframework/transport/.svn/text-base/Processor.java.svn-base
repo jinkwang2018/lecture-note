@@ -1,0 +1,63 @@
+/*
+ * Processor.java February 2007
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import java.io.IOException;
+
+/**
+ * This is the <code>Processor</code> used to process HTTP requests
+ * from a connected transport. This will process each request from
+ * a provided transport and pass those requests to a container. The
+ * transport provided can be either a direct transport or provide 
+ * some form of secure encoding such as SSL.
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.transport.Transport
+ */
+public interface Processor {
+
+   /**
+    * This is used to process the requests from a provided transport
+    * and deliver a response to those requests. A transport can be
+    * a direct transport or a secure transport providing SSL.  
+    * <p>
+    * Typical usage of this method is to accept multiple transport 
+    * objects, each representing a unique HTTP channel to the client,
+    * and process requests from those transports concurrently.  
+    *      
+    * @param transport the transport to process requests from
+    */
+   public void process(Transport transport) throws IOException;
+   
+   /**
+    * This method is used to stop the <code>Processor</code> such 
+    * that it will accept no more pipelines. Stopping the processor
+    * ensures that all resources occupied will be released. This is 
+    * required so that all threads are stopped and released.
+    * <p>
+    * Typically this method is called once all connections to the
+    * server have been stopped. As a final act of shutting down the
+    * entire server all threads must be stopped, this allows collection
+    * of unused memory and the closing of file and socket resources.
+    */ 
+   public void stop() throws IOException;
+}

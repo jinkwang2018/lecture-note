@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	if (typeof (EventSource) !== "undefined") {
+	var source = new EventSource("InformTime.jsp");
+	source.onmessage = function(event) {
+		var time = event.data;
+				
+		// 테스트 출력
+		alert(time);
+		
+		if (time > 60){
+			alert("접속하신 시간이 " + 60 + "분 지났습니다");
+		}else if (time > 50){
+			alert("접속하신 시간이 " + 50 + "분 지났습니다");
+		}else if (time > 40){
+			alert("접속하신 시간이 " + 40 + "분 지났습니다");
+		}else if (time > 30){
+			alert("접속하신 시간이 " + 30 + "분 지났습니다");
+		}else if (time > 20){
+			alert("접속하신 시간이 " + 20 + "분 지났습니다");
+		}else if (time > 10){
+			alert("접속하신 시간이 " + 1 + "시간 지났습니다");
+		}
+		
+	};
+} else {
+}
+</script>
+</head>
+<body>
+
+
+<h1>테스트 페이지<br></h1>
+성공적으로 로그인 되었다<br>
+</body>
+</html>

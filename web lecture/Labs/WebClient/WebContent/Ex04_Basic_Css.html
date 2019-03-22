@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS 사용하기 2</title>
+<style>
+/*가상 클래스 선택자 : <a href ="" : 의미론적으로만 존재 : link, visited*/
+	a:link {
+		color: green;
+		background-color: transparent;
+		text-decoration: none;
+	}
+	
+	a:visited { /*한번 들어갔던것은*/
+		color: pink;
+		background-color: transparent;
+		text-decoration: none;
+	}
+	
+	a:hover { /*마우스가 올라가면*/
+		color: red;
+		background-color: transparent;
+		text-decoration: underline;
+	}
+	
+	a:active { /*마우스로 누르고 있으면 */
+		color: yellow;
+		background-color: transparent;
+		text-decoration: underline;
+	}
+
+	/*
+	Css 기본 존재하는 태그에만 적용 가능 합니까? 아니요
+	h1{}
+	p{}
+	p,h1 >> 선택자(selector) : 기존 있는 태그
+	선택자를 정의 사용 가능
+	사용자가 정의하는  selector는 (# , .)을 붙여서 만들어야 한다.
+	
+	. >> class>> 여러개 사용
+	# >> id   >> 한개만 사용 , 태그의 식별자로 사용한다.     외우기이이이이잉
+	*/
+	#kglim {
+		color: rgb(200, 248, 220);
+	}
+	
+	.hong {
+		color: rgb(255, 020, 147);
+	}
+	/*다중 선택자 (grouping selector)*/
+	h1,h2,p{
+			text-align : center;
+			color : red
+			}
+</style>
+</head>
+<body>
+	<a href="http://www.lg.co.kr">Lg사이트</a>
+	<P id="kglim">#,ID 라는 속성을 사용해서 적용하기</P>
+	<p class="hong">.,class 라는 속성을 사용해서 적용하기</p>
+	<!-- 
+	사용자 정의 : id,class 속성을 사용하는데
+	CSS ,JavaScript , Jquery에서 모두 활용된다.
+	CSS 문법
+	1.The element selector(일반 HTML 태그)
+	2.The id Selector (#이름 -> id = "이름")
+	3.The class selector (.이름 -> class ="이름")
+	4.Grouping Selectors(p , h1 , h2 , h3 {})
+	
+	
+	 -->
+</body>
+</html>

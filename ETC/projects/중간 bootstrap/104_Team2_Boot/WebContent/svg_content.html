@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>SVG modal</title>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js'></script>
+	<link rel="stylesheet" href="svg-modal/css/style.css">
+ <script type="text/javascript">
+	function view() {
+		$('#1').append("SVG(Scalable Vector Graphics)");
+		$('#2').append("1. 웹에서 아이콘, 로고, 일러스트 이미지를 사용할때 파일 용량을 줄인다");
+		$('#3').append("2. SVG양식은 화면 크기에 상관없이 모든 스크린에서 화질이 선명하다");
+		$('#4').append("3. 이미지 파일을 최소 용량으로 압축하여 웹 성능을 향상시킨다");
+		$('#5').append("4. 이미지 속의 문자를 인식하여 애니메이션 기능을 만들 수 있다");
+	}
+	
+	function view_close(){
+		$('#1').empty();
+		$('#2').empty();
+		$('#3').empty();
+		$('#4').empty();
+		$('#5').empty();
+	}
+  
+  </script>
+</head>
+
+<body>
+<a href="#" class="btn btn--show-overlay"  onclick="view()">What is SVG?</a>
+
+<div id="modal" class="modal">
+    <button id="modal__close" class="modal__close" onclick="view_close()" >Close</button>
+    <div id="svg-wrapper" class="svg-wrapper" data-btn-hovered="M1220.267,723.2c0,0-293.547,0-580.267,0c-333.653,0-584.533,0-584.533,0s0-104.783,0-334.854
+  	c0-188.981,0-334.846,0-334.846s251.733,0,584.533,0c362.667,0,580.267,0,580.267,0s0,116.7,0,344.803
+  	C1220.267,613.127,1220.267,723.2,1220.267,723.2L1220.267,723.2" data-modal-open="M1220.267,723.2c0,0-292.456-47.624-579.176-47.624c-333.653,0-585.624,47.624-585.624,47.624
+  	s83.149-104.783,83.149-334.854c0-188.981-83.149-334.846-83.149-334.846s251.324,49.105,584.124,49.105
+  	c362.667,0,580.676-49.105,580.676-49.105s-72.201,123.987-72.201,352.09C1148.065,620.414,1220.267,723.2,1220.267,723.2
+  	L1220.267,723.2">
+   
+     <svg id="svg" width="100%" height="100%" viewBox="0 0 1280 800"  preserveAspectRatio="none">
+     <path id="svg-path" d="M1220.267,723.2c0,0-293.547,0-580.267,0c-333.653,0-584.533,0-584.533,0s0-3.505,0-11.2
+  	 c0-6.321,0-11.2,0-11.2s251.733,0,584.533,0c362.667,0,580.267,0,580.267,0s0,3.903,0,11.533
+ 	 C1220.267,719.519,1220.267,723.2,1220.267,723.2L1220.267,723.2" />
+		<text>
+		<tspan id="1"  x="100" y="120" font-family=helvetica font-size=35 fill="white"></tspan>
+        <tspan id="2"  x="120" y="160" font-family=helvetica font-size=28 fill="white"></tspan>
+        <tspan id="3"  x="120" y="200" font-family=helvetica font-size=28 fill="white"></tspan>      
+        <tspan id="4"  x="120" y="240" font-family=helvetica font-size=28 fill="white"></tspan>
+        <tspan id="5"  x="120" y="280" font-family=helvetica font-size=28 fill="white"></tspan>
+        </text>
+        </svg>
+    </div>
+</div>
+	<script src="svg-modal/js/index.js"></script>
+
+</body>
+</html>

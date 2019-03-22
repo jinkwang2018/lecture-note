@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Places Search-Box</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+    
+    <style>
+    /* Always set the map height explicitly to define the size of the div
+       element that contains the map. */
+        #map {
+            height: 450px;
+            width: 96%;
+            margin: 20px;
+        }
+        #btmleft {
+            height: 100px;
+            width: 45%;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            float: left;
+        }
+        #btmright {
+            height: 300px;
+            width: 49%;
+            margin-left: 20px;
+            float: left;
+        }
+        @media screen and (max-width: 960px) {
+            #btmleft {width: 95%;}
+            #btmright {width: 95%;}
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        td {
+            border:1px solid black;
+        }
+        .maptable {
+            width: 100%;
+            border-collapse:collapse;
+            border: 2px solid black;
+        }
+        .controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 300px;
+        }
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+        .pac-container {
+            font-family: Roboto;
+        }
+        #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+        #target {
+            width: 345px;
+        }
+        #savebtn {
+            width: 100%;
+            height: 60%;
+            margin-bottom: 5px;
+        }
+        #delbtn {
+            width: 100%;
+            height: 35%;
+            margin-bottom: 20px;
+        }
+        .saveList {
+            height: 30px;
+        }
+    </style>
+    
+</head>
+<body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map">
+    
+    </div>
+ 
+    <div id="btmleft">
+        <input type="button" id="savebtn" value="위치정보 저장"><br>
+        <input type="button" id="delbtn" value="위치정보 삭제">
+    </div>
+ 
+    <div id="btmright">
+        <div>
+            <table class="maptable">
+            <thead>
+                <tr class="saveList">
+                    <th>No.</th><th>지역명</th><th>체크박스</th>
+                </tr>
+            </thead>
+            <tbody style="text-align: center;">
+                
+            </tbody>
+            </table>
+            
+        </div>
+    </div>
+ 
+</body>
+ 
+<script>
+    var map = null;
+    var bounds = null;
+    var markers = [];
+    var input=null;
+    
+    function initAutocomplete() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center : {
+                lat : 37.494805,
+                lng : 127.027585
+            },
+            zoom : 15,
+            mapTypeId : 'roadmap'
+        });
+ 
+        // Create the search box and link it to the UI element.
+        input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+ 
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
+        });
+ 
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+            
+            if (places.length == 0) {
+                return;
+            }
+ 
+            // For each place, get the icon, name and location.
+            bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            
+            map.fitBounds(bounds);
+            console.log(bounds);
+ 
+            if(markers[0] != null) {
+                markers.pop().setVisible(false);
+            }
+            var marker = new google.maps.Marker({
+                position : map.center
+            });
+            marker.setMap(map);
+            markers.push(marker);
+ 
+            google.maps.event.addListener(marker, 'click', function() {
+                map.setZoom(16);
+                map.setCenter(marker.getPosition());
+            });
+        });
+    }
+    
+    $(document).ready(function(){
+        var savedPosList = {};
+        var number = 1;
+          
+        $('#savebtn').click(function(){
+            //$('#textarea').append(input.value);
+            $('tbody').append("<tr class=postext><td>" + number + "</td><td>" 
+                                + input.value + "</td><td><input type=checkbox></td></tr>");
+            savedPosList[number++] = bounds;
+            
+        });
+        
+        $('#delbtn').click(function(){
+            $('input[type=checkbox]').each(function(index, element){
+                if(element.checked){
+                    $(element).parent().parent().remove();
+                }
+            });
+        });
+        
+        $(document).on("dblclick", '.postext', function() {
+            var index = $(this).children().eq(0).text();
+            //console.log(savedPosList[index]);
+            map.fitBounds(savedPosList[index]);
+            
+            
+            markers.pop().setVisible(false);
+            
+            var marker = new google.maps.Marker({
+                position : map.center
+            });
+            marker.setMap(map);
+            markers.push(marker);
+            
+            google.maps.event.addListener(marker, 'click', function() {
+                map.setZoom(16);
+                map.setCenter(marker.getPosition());
+            });
+        });
+        
+    });
+    
+    
+    
+</script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7HQjI0c4S0OJRGV5izR4m7jIo-fB4fHE&libraries=places&callback=initAutocomplete"
+    async defer></script>
+</html>

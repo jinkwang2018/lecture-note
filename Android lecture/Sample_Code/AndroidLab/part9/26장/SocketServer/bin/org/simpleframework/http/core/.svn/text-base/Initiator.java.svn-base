@@ -1,0 +1,53 @@
+/*
+ * Initiator.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+import java.io.IOException;
+
+/**
+ * The <code>Initiator</code> represents an interface in to the main
+ * processor for the server kernel. It is used to read and parse a
+ * new HTTP request from the connected socket and dispatch that
+ * request to the <code>Container</code> when ready. All channels
+ * begin at the initiator, and when a request has finished it is
+ * passed back in to the initiator to further process requests from
+ * the HTTP pipeline. 
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.http.core.Monitor
+ */
+interface Initiator {
+   
+   /**
+    * This is used to initiate the processing of the channel. Once
+    * the channel is passed in to the initiator any bytes ready on
+    * the HTTP pipeline will be processed and parsed in to a HTTP
+    * request. When the request has been built a callback is made
+    * to the <code>Container</code> to process the request. Also
+    * when the request is completed the channel is passed back in
+    * to the initiator so that the next request can be dealt with.
+    * 
+    * @param channel the channel to process the request from
+    */
+   public void start(Channel channel) throws IOException;
+
+}

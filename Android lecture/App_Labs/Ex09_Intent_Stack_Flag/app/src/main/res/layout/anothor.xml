@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    >
+   <Button 
+        android:id="@+id/BackBtn"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Main 액티비티 띄우기" 
+        android:textSize="20dp" />
+   
+     <TextView
+        android:id="@+id/txtMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/BackBtn"
+        android:background="#ff0000cc"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="위 버튼 클릭시 Main 액티비티가 활성화" 
+        android:textSize="20dp"
+        android:textColor="#ffffffff"  
+      />
+</RelativeLayout>

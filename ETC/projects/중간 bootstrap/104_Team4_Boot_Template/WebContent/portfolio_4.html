@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+    .a_floatbox{
+    	margin-left: 10px;
+    }
+    .hr_css {
+    	margin: 0px;
+    }
+    #floatMenu {
+		position: absolute;
+		width: 150px;
+		right: 20px;
+		top: 150px;
+		border: 2px solid black;
+		background-color: whitegray;
+		color: #fff;
+	}
+    </style>
+    
+    <script>
+    function funcThisSize(){
+    	if(window.innerWidth < 1500){
+    		$("#floatMenu").css("display", "none");
+    	}else{
+    		$("#floatMenu").css("display", "block");
+    	}
+    }
+    
+	$(document).ready(function() {
+		funcThisSize();
+		//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		var floatPosition = parseInt($("#floatMenu").css('top'));
+		//250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseI   nt( 값 );
+		
+		$(window).resize(funcThisSize);
+		
+		$(window).scroll(function() {
+			//현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			var newPosition = scrollTop + floatPosition + "px";
+	 
+			//애니메이션 없이 바로 따라감
+			//$("#floatMenu").css('top', newPosition);
+
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+	 
+		}).scroll();
+	 
+	});
+	</script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio_1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_4.html">jQuery UI</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_5.html">AJAX Chart</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="404.html">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" style="margin-top: 80px;">jQuery
+                    <small>UI</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-9">
+                <h3>jQuery</h3>
+                <p>&nbsp;엘리먼트를 선택하는 강력한 방법과 선택된 엘리먼트들을 효율적으로 제어할 수 있는 다양한 수단을 제공하는 자바스크립트 라이브러리입니다.</p>
+                	
+                <h3>사용방법</h3>
+                <p>1.CDN 호스트를 통해 jQuery를 불러오는 방법</p>
+                <p>2.파일을 설치하여 사용하는 방법</p>
+                
+                <h3>구현한 프로젝트</h3>
+                <ul>
+                    <li>jQuery UI Web Site</li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+
+			<div>
+				<a href="project/jQuery_UI.html">
+					<img class="img-responsive img-portfolio img-hover" style="border: 2px solid black;" alt="" src="https://cafeptthumb-phinf.pstatic.net/MjAxODAzMTlfMjEx/MDAxNTIxNDQxMzk3MDk0.YrplttvttRq_-xY91kQ3NHlfWOL-t5F17wafADiwfW8g.P_4scka9IhEX8bYvHqOMUlsmdovBGh5TMnpRJeIyovog.PNG.kid465/1.PNG?type=w740">
+				</a>
+			</div>			
+
+		</div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p style="text-align: center;">Introduce Our Team Website 2018</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    
+    <!-- Side Floating Menu Box -->
+	<div id="floatMenu">
+		<hr class="hr_css">
+		<a class="a_floatbox" href="index.html"><b>Home</b></a>
+		
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		
+		<a class="a_floatbox" href="index.html#portfolio-us"><b>Portfolio</b></a>
+		<hr class="hr_css">
+		<a class="a_floatbox" href="portfolio_1.html"><small>HTML Canvas</small></a><br>
+		<a class="a_floatbox" href="portfolio_2.html"><small>HTML SVG</small></a><br>
+		<a class="a_floatbox" href="portfolio_3.html"><small>HTML Google Maps</small></a><br>
+		<a class="a_floatbox" href="portfolio_4.html"><small>jQuery UI</small></a><br>
+		<a class="a_floatbox" href="portfolio_5.html"><small>AJAX Chart</small></a><br>
+		<a class="a_floatbox" href="index.html">-</a>
+
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		<a class="a_floatbox" href="index.html#about-us"><b>About</b></a><br>
+		<a class="a_floatbox" href="index.html#contact-us"><b>Contact</b></a>
+		<hr class="hr_css">
+	</div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

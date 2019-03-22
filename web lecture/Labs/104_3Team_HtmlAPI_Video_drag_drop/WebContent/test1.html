@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function start(){
+			var img = document.getElementById("image");
+			img.src = "images/라이언2.jpeg"
+			var audio = document.getElementById("audio");
+			audio.play();
+
+		}
+
+		function stop(){
+			var img = document.getElementById("image");
+			img.src = "images/라이언1.jpg"
+			var audio = document.getElementById("audio");
+		    audio.pause();
+		}
+
+	</script>
+	<style type="text/css">
+	.button{
+			border: none;
+			background-color: white;
+			}
+
+	</style>
+</head>
+<body>
+
+	<img id = "image" src="images/라이언1.jpg" width = "200px" height = "200px"
+	     onmouseover="start()" onmouseout="stop()">
+
+	<audio id="audio" src="audio/horse.ogg">
+	</audio>
+
+
+
+
+</body>
+</html>

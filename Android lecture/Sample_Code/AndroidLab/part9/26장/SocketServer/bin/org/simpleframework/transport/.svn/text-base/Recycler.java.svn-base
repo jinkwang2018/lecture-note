@@ -1,0 +1,44 @@
+/*
+ * Recycler.java February 2008
+ *
+ * Copyright (C) 2008, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import java.nio.ByteBuffer;
+
+/**
+ * The <code>Recycler</code> interface is used to represent a pool 
+ * of buffers that accepts used instances for recycling. This allows 
+ * buffers to be passed back in to a pool implementation when the 
+ * buffer has been used. Such occasions are when packets close.
+ * 
+ * @author Niall Gallagher
+ */
+interface Recycler {
+   
+   /**
+    * This method is used to recycle the buffer. Invoking this with
+    * a buffer instance will pass the buffer back in to the pool.
+    * Once passed back in to the pool the buffer should no longer
+    * be used as it may affect future uses of the buffer.
+    *
+    * @param buffer this is the buffer that is to be recycled
+    */
+   public void recycle(ByteBuffer buffer);
+}

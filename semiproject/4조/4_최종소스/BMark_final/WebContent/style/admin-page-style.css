@@ -1,0 +1,31 @@
+
+.pagename{
+	padding-bottom: 15px;
+}
+
+/* 그룹 관리, 회원관리 리스트를 묶는 div */
+.admindiv{
+	background-color: #f0f0f0;  
+	padding-top:15px; 
+	padding-bottom:10px;
+}
+
+/* 그룹관리 page, 회원관리 page 제목 */
+.admintitle{
+	float: left; 
+	width: 80%; 
+	text-align: center; 
+	background-color: #2b90d9;
+}
+
+/* 그룹관리 page, 회원관리 page 제목에서 보여주는 font 색상 */
+.adminfont{
+	color: white; 
+	font-size: 20px;
+}
+
+/* icon을 묶는 div */
+.adminicon{
+	float: left; 
+	width: 15%
+}

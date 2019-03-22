@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		//수정
+		window.onload = function() {
+				var i = 1;
+				var j = 1;
+				document.getElementById("btn").onclick = function(){ //스크린샷 버튼 클릭
+			    	var canvars = document.createElement("canvas"); //캔버스생성
+			    	canvars.setAttribute("id", "myCanvas"+j); //id명 생성
+			    	j++;
+
+			    	var vid = document.getElementById("vid"); //vid 가져오기
+			    	canvars.getContext("2d").drawImage(vid, 10,10,295,160); //스크린샷~~
+
+			    	var btn = document.createElement("input"); //input 생성
+			    	btn.setAttribute("type", "button"); //type은 버튼
+			    	btn.setAttribute("value", "삭제"); //value 값 삭제
+			    	btn.setAttribute("onclick", "del("+i+")"); //type은 버튼
+
+
+			    	var childdiv = document.createElement("div"); //div 생성 (childdiv)
+			    	childdiv.setAttribute("id", "childdiv"+i); //id = childdiv+i
+			    	childdiv.setAttribute("style", "float: left;"); //float로 띄우기
+
+			    	i++;
+
+			    	var parentdiv = document.getElementById("parentdiv"); //parentdiv 가져오기
+
+			    	childdiv.appendChild(canvars); //childdiv의 자식 캔퍼스 생성
+			    	childdiv.appendChild(btn); //캔퍼스와 형제 버튼 생성
+
+			    	parentdiv.appendChild(childdiv); //parentdiv 자식 appendChild넣기
+		    	}
+
+				/*
+				setInterval() -> 여러번
+				setTimeout() -> 한번
+				기본 javascript 자원과 jquery 혼용
+				*/
+
+				var canarr = []; //배열생성
+
+				document.getElementById("btnmove").onclick = function(){ //버튼클릭
+					for(k = 0; k<=canarr.length; k++){ // 움짤만들기 눌렀을 때 배열 값을 pop() 시키고 다시 생성
+						canarr.pop();	// pop()해준다.
+					}
+					// canarr = []; //초기화 간단한 방법
+
+					var number = 0; //배열 인덱스
+					for(k = 1; k <= j; k++){ //배열 push
+						if(document.getElementById("myCanvas"+k) != null){ //만약 스크린샷을 찍고 삭제한게 있을 수 있기 때문
+							canarr.push(document.getElementById("myCanvas"+k)); //스크린샷 찍은 것들을 배열에 push
+						}
+					}
+					setInterval(function() { //0.2초 마다 실행
+						var canvas = document.getElementById("canmove"); //캔버스
+						canvas.getContext("2d").drawImage(canarr[number], 10, 10); //캔버스에 이미지를 그리다
+						number++;
+						if(number >= canarr.length){
+							number = 0; //계속 돌아갈 수 있게
+						}
+					}, 200);
+				}
+		}
+
+		function del(number){
+			var childdiv = document.getElementById("childdiv"+number);
+			var parentdiv = document.getElementById("parentdiv");
+
+			parentdiv.removeChild(childdiv);
+		}
+	</script>
+</head>
+<body>
+	<div style="float:left;">
+		<video id="vid" width="100%" controls style="float:left">
+	  		<source src="videos/mov_bbb.mp4" type="video/mp4">
+		</video>
+		<br>
+		<input type="button" id="btn" value="스크린샷">
+		<input type="button" id="btnmove" value="움짤만들기">
+	</div>
+
+	<div id="movediv" style="float:right;">
+		<canvas id="canmove">
+	</div>
+	<hr style="clear: both;">
+	<p>당신이 고른 사진</p>
+	<div id="parentdiv"></div>
+</body>
+</html>

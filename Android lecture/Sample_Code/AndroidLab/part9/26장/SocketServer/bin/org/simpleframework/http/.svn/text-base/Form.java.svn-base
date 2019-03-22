@@ -1,0 +1,58 @@
+/*
+ * Form.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http;
+
+import java.util.List;
+
+/**
+ * The <code>Form</code> interface is used to represent the details
+ * submitted with a request. Typically this will be parameters given
+ * by a HTML form, however a form can also contain parts. Each part
+ * can represent either a file or a parameter. All parts can be 
+ * acquired as <code>Part</code> objects from this <code>Form</code>.
+ * 
+ * @author Niall Gallagher
+ */
+public interface Form extends Query {
+   
+   /**
+    * This method is used to acquire a <code>Part</code> from the
+    * form using a known name for the part. This is typically used 
+    * when there is a file upload with a multipart POST request.
+    * All parts that are not files are added to the query values
+    * as strings so that they can be used in a convenient way.
+    * 
+    * @param name this is the name of the part to acquire
+    * 
+    * @return the named part or null if the part does not exist
+    */
+   public Part getPart(String name);
+   
+   /**
+    * This method provides all parts for this <code>Form</code>. The
+    * parts for a form can contain text parameters or files. Each file
+    * part can contain headers, which take the form of HTTP headers to
+    * describe the payload. Typically headers describe the content.
+    * 
+    * @return this returns a list of parts for this form
+    */
+   public List<Part> getParts();
+}

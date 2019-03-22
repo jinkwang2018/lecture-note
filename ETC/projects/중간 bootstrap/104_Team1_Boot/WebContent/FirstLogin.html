@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body onload="senddata()">
+<form id="id_pwd" action="Login.jsp" method="post" style="visibility: hidden;">
+<input type="text" id="id" name="localid" value="">
+<input type="text" id="pwd" name="localpwd" value="">
+<input type="submit" value="전송테스트">
+</form>
+
+<script type="text/javascript">
+var id = '';
+var pwd = '';
+
+if (typeof(Storage) !== "undefined") {
+ id = localStorage.getItem("id");
+ pwd = localStorage.getItem("pwd");
+}
+
+document.getElementById("id").value = id;
+document.getElementById("pwd").value = pwd;
+
+function senddata() {
+	document.getElementById("id_pwd").submit();
+}
+
+</script>
+
+</body>
+</html>

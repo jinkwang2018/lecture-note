@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			//java : 정적(배열크기 고정) > int[]arr = {10,20,30}
+			//java : collection 객체 > arraylist list = new arraylist();
+			//list.add("A") , list.get()
+			
+			//java script (Array : 정적, collection)
+			var array = ['포도','사과'];
+			document.write(array.toString() + "<br>");
+			for(var i = 0 ; i < array.length ; i++){
+				document.write(array[i] + "<br>");
+			}
+			
+			//array[0] = 포도 , array[1] = 사과
+			array[2] = "바나나"; //동적으로 데이터 추가
+			document.write(array + "/" + array.length + "<br>");
+			
+			array[10] = "애플망고"; //가능
+			document.write(array + "/" + array.length + "<br>");
+			
+			document.write(array[9] + "/" + array.length + "<br>");
+			array[9] = "배";
+			document.write("초기화 : " + array[9] + "/" + array.length + "<br>");
+			
+			var array2 = ["one","two","three"];
+			document.write(array2.length + "<br>");
+			array2.length = 2;
+			for(var index in array2){
+				document.write(array2[index] + "<br>");
+			}
+			array2.length = 4;
+			document.write(array2.toString()+"<br>");
+			
+			//point
+			array2.push("four");
+			document.write("push : " + array2.toString()+"<br>");
+			document.write("push : " + array2.length+"<br>");
+			
+			document.write(array2.pop()+"<br>");
+			document.write(array2.pop()+"<br>");
+			document.write(array2.pop()+"<br>");
+			document.write(array2.pop()+"<br>");
+		
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

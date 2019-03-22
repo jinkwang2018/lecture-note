@@ -1,0 +1,64 @@
+/*
+ * Delegate.java May 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.session;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.simpleframework.util.lease.Lease;
+
+/**
+ * The <code>LeaseSession</code> object is used to provide a session 
+ * instance that is created from a concurrent hash map. This makes 
+ * use of a <code>Lease</code> to handle all life cycle events such
+ * as canceling and renewing the lease maintaining the session.
+ * 
+ * @author Niall Gallagher
+ */
+class LeaseSession<T> extends ConcurrentHashMap implements Session<T> {
+   
+   /**
+    * This is the key used to uniquely manage the session state.
+    */
+   private final Lease<T> lease;
+   
+   /**
+    * Constructor for the <code>LeaseSession</code> object. This will
+    * create an instance using the provided lease for the session. 
+    * The lease is used to handle all session life cycle events.
+    * 
+    * @param lease this is used to manage all the life cycle events 
+    */
+   public LeaseSession(Lease<T> lease) {
+      this.lease = lease;
+   }
+
+   /**
+    * This is used to acquire the <code>Lease</code> object to control
+    * the session. The lease is responsible for maintaining this map
+    * within the application. Once the lease expires the session will
+    * be removed and its mapped values will be available for recovery.
+    * 
+    * @return this returns the lease used to manage this session
+    */
+   public Lease<T> getLease() {
+      return lease;
+   }
+}

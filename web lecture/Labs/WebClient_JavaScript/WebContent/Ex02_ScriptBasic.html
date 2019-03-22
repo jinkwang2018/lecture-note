@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Java Script</title>
+	<script type = "text/javascript">
+		//system.out.println();
+		//javascript 해석 , 결과 출력(웹 브라우저)
+		//웹 브라우저 (해석기 + script API 지원)
+		//window 객체 (브라우저 객체 가지고 있다)
+		//window.document 객체
+		//document 객체 활용 하면 (화면 출력, 값 처리)
+		window.document.write("출력하기<br>")
+		document.write("window객체 생략가능<br>")
+		
+		//웹브라우저의 console창에 원하는 결과 확인 할 수 있다. 
+		//console.log() 검증 데이터 확인
+		console.log("웹 브라우져 출력창 제공");
+		console.log("디버깅 , 결과 확인, 오류 메세지 확인");
+		console.log(1+1);
+		
+		document.write("<br><b>Hello Woreld</b><br>");
+		document.write("<table border = '1'>");
+		document.write("<tr><td>AA</td><td>BB</td></tr>");
+		document.write("</table>");
+		//[Javascript 순차적으로 실행된다. 순서가 정말 중요하다.] ************
+		
+		
+		//Cannot read property 'elements' of undefined
+		//(form 태그가 read해서 메모이에 올라와 있어야 하는데 아니다)
+		//var element = window.document.forms[0].elements[0];
+		//alert(element);
+		
+		function data(){ //함수는 호출에 의해서만 사용된다. 부르지 않으면 read하지 않는다.
+			var element = window.document.forms[0].elements[0];
+			alert(element);
+			
+		}
+	</script>
+</head>
+<body>
+	<form action = "#" method = "get" name = "myform">
+		ID : <input type = "text" name = "userid" value = "hong"><br>
+		PWD : <input type = "password" name = "pwd"><br>
+		<input type = "submit" value = "전송">
+	</form>
+	<div style = "background-color : gold ; width : 200px ; height : 150px"
+	onmouseover = "this.style.backgroundColor = 'gray'"
+	onmouseout = "this.style.backgroundColor = 'gold'">
+		현재 java script 수업중 (this 자기자신 this를 div 태그가 가지고 있다.)
+	</div>
+	<input type = "button" value = "클릭" onclick = "data()">
+</body>
+	<script>
+		//form 태그를 read한 후에
+		var element = window.document.forms[0].elements[0];
+		console.log(element); //element에 담긴 값은 : <input type = "text" name = "userid" value = "hong">
+						//가 다 들어있다.
+		console.log(element.value);
+		console.log(element.value.length);
+		//웹 브라우져 객체를 가지고 있다.
+		window.alert("정상");
+		alert("window는 defalut로 되어있어 생략 가능하다.")
+		
+		//객체의 계층
+		//form 태그가 이름을 가지고 있다면 (ex>name="myform")
+		//window.document.폼이름.요소이름
+		//window.document.폼이름.요소이름.value
+		var ele = window.document.myform.userid;
+		//ele 변수 안에 inputElement 객체가 있다. >> <input type = "text" name = "userid" value = "hong">
+		var value = window.document.myform.userid.value;
+		
+		console.log("input 태그 : " + ele);
+		console.log("input 태그의 값 : " + value);
+		if(value.langth < 5){
+			alert("다시 입력해");
+			ele.value = "";
+		}
+	</script>
+</html>

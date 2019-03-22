@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSE</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	  .navbar {
+	  	margin-bottom: 0px;
+	  }
+  	</style>
+<script type="text/javascript">
+	$(function(){
+		var answer = 0;
+		if(typeof(EventSource) != "undefined"){
+       		var source = new EventSource ("date.jsp");
+            source.onmessage = function(event){
+            	var data = event.data.split("\n");
+        		var time = data[0];
+        		var question = data[1];
+        		answer = data[2];
+        		var tds = $('table>tbody>tr>td');
+        		//console.log(tds);
+        		tds.children().eq(0).attr("value",time);
+        		tds.children().eq(1).attr("value",question);
+        		//tds.children().eq(2).attr("value", "");
+        		tds.children().eq(2).val("");
+        		$('#answer').focus();
+        		tds.children().eq(3).attr("value", "");
+            	//document.getElementById("result").innerHTML += event.data + "<hr>";
+            	
+           	};
+       	}else{
+       		document.getElementById("result").innerHTML = "Sorry, your browser does not support   server-sent events...";
+        }
+		
+		$('#answer').on("keyup", function(){
+			console.log($(this).val());
+			console.log(answer);
+			if($(this).val() == answer){
+				$('#ox').attr("value", "O");
+			}else {
+				$('#ox').attr("value", "X");
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="main.html">HTML_API</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="main.html">Home</a></li>
+	      <li><a href="Map.html">Geolocation</a></li>
+	      <li><a href="Ex07_Boot.html">Drag/Drop</a></li>
+	      <li><a href="form.html">Web Storage</a></li>
+	      <li><a href="homepage3.html">Web Workers</a></li>
+	      <li><a href="sse.html">SSE</a></li>
+	    </ul>
+	  </div>
+	</nav>
+	<h1>구구단</h1>
+	<table class="table table-hover">
+		<tr>
+    		<th>Time</th>
+    		<th>Question</th>
+    		<th>Answer</th>
+    		<th>OX</th>
+  		</tr>
+  		<tbody>
+	  		<tr>
+	    		<td><input type="text" readonly class="form-control"></td>
+	    		<td><input type="text" readonly class="form-control"></td>
+	    		<td><input type="text" id = "answer" class="form-control"></td>
+	    		<td><input type="text" id = "ox" readonly class="form-control"></td>
+	  		</tr>
+  		</tbody>
+	</table>
+	<div id =result></div> 	
+</body>
+</html>

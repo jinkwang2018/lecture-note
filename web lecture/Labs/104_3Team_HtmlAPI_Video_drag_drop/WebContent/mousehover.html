@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<video width="100%" height="100%"
+	       src = "videos/mov_bbb.mp4" poster="images/main.jpg"
+	       onmouseover="over(this)" onmouseout="out(this)">
+	</video>
+
+	<script type="text/javascript">
+		function over(vid){
+			vid.play(); //시작
+		}
+
+		function out(vid){
+			vid.pause(); //일시정지
+			//vid.load(); //처음값으로
+		}
+	</script>
+</body>
+</html>

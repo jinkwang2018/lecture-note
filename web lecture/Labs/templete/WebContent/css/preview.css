@@ -1,0 +1,47 @@
+ @charset "UTF-8";
+ [draggable=true]{
+	cursor:move;
+	
+}
+ #div1{
+ float: left;
+    width: 85%;
+    height: 300px;
+    margin: 10px;
+    border: 1px solid black;
+
+}
+  
+   
+   #div2 {
+    float: left;
+    width: 160px;
+    height: 170px;
+    margin: 10px;
+   
+    border: 0px solid black;
+}
+  .row.content {height: 1500px}
+    
+   
+    .sidenav {
+     
+      height: 500px;
+      border:0px; "
+    }
+    
+ 
+    img{
+	 border:0 auto;
+	margin:10px ;
+	width: 90px;
+	height:100px;
+    }
+  
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }

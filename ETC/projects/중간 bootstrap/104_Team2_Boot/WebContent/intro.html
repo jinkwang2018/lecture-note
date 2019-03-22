@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitcamp_java 104th Team No.2</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="CSS/hanna.css" rel="stylesheet">
+	<link href="CSS/intro_css.css" rel="stylesheet">
+<style type="text/css">
+	div{
+   		font-family: "hanna";
+	}
+  	
+  	.top {
+   		background-image: url("images/top.svg");
+   		background-repeat: no-repeat;
+   		background-position: center;
+   		background-size: 100% 100%;
+   		float: center; 
+  	}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+   
+   	<div class="top">
+        <h1 class="h1">Bit camp</h1>
+        <h2><p>From No.2 team</p></h2>
+    </div>
+    
+    <blockquote class="blockquote-reverse" >
+        <a class="btn btn-default" data-toggle="tooltip" title="이창훈, 신호용" >Google Map</a>
+        <br><br>   
+        <a class="btn btn-default" data-toggle="tooltip" title="정진수, 정희섭, 이아림">Canvas</a>
+        <br><br>
+        <a class="btn btn-default" data-toggle="tooltip" title="방준석, 정민재">SVG</a>
+        <br><br>
+        <a class="btn btn-default" data-toggle="tooltip" title="신호용">BitNote</a>
+        <br><br>
+        <a class="btn btn-default" data-toggle="tooltip" title="이창훈">Chart</a>
+        <br>
+     </blockquote>
+     
+ <!-- Card -->
+      <div class="row">
+         <div class="col-md-3">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-5.png" onmouseover="this.src='img/junsuck.jpg'" onmouseout="this.src='img/k-5.png'">
+               <div class="card-body">
+                  <h4 class="card-title">방준석</h4>
+                  <p class="card-text">1991-12-07</p>
+                   <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal1" value="상세 프로필">
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+         <div class="col-md-3">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-7.png" onmouseover="this.src='img/hy.jpg'" onmouseout="this.src='img/k-7.png'">
+               <div class="card-body">
+                  <h4 class="card-title">신호용</h4>
+                  <p class="card-text">1991-10-31</p>
+                   <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal2" value="상세 프로필">
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+         <div class="col-md-3">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-1.png" onmouseover="this.src='img/lim.jpg'" onmouseout="this.src='img/k-1.png'">
+               <div class="card-body">
+                  <h4 class="card-title">이아림</h4>
+                  <p class="card-text">1992-06-05</p>
+                  <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal3" value="상세 프로필">
+                 
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+         <div class="col-md-3">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-6.png" onmouseover="this.src='img/ch.jpg'" onmouseout="this.src='img/k-6.png'">
+               <div class="card-body">
+                  <h4 class="card-title">이창훈</h4>
+                  <p class="card-text">1990-06-14</p>
+                   <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal4" value="상세 프로필">
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+         <div class="col-md-3" style="margin-left: 140px">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-8.png" onmouseover="this.src='img/mj.jpg'" onmouseout="this.src='img/k-8.png'">
+               <div class="card-body">
+                  <h4 class="card-title">정민재 </h4>
+                  <p class="card-text">1993-08-01</p>
+                  <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal5" value="상세 프로필">
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+         <div class="col-md-3">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-4.png" onmouseover="this.src='img/js.jpg'" onmouseout="this.src='img/k-4.png'">
+               <div class="card-body">
+                  <h4 class="card-title">정진수</h4>
+                  <p class="card-text">1990-04-29</p>
+                  <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal6" value="상세 프로필">
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+         <div class="col-md-3">
+            <div class="card text-center">
+               <img class="img-circle" src="img/k-3.png"  onmouseover="this.src='img/dh.jpg'" onmouseout="this.src='img/k-3.png'">
+               <div class="card-body">
+                  <h4 class="card-title">정도혁</h4>
+                  <p class="card-text">1991-09-25</p>
+                  <input type="button" class="button button" data-toggle="modal"
+               data-target="#myModal7" value="상세 프로필">
+               </div>
+            </div>&emsp;&emsp;&emsp;
+         </div>
+
+<!-- Modal -->
+         <div class="modal fade" id="myModal1" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">방준석</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>사는곳: 서울시 신림동<br>
+                  취미 및 특기 : 게임 과 세차<br>
+                  콤플렉스 : 살찐 뱃살<br>
+                  담당  파트 : SVG</p>
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+         
+         <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">신호용</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>사는곳 : 고양시 덕양구<br>
+                  취미 및 특기 :  게임 & 배드민턴<br>
+                  콤플렉스 : 뱃살<br>
+                  담당 파트 : Google Map & BitNote</p>
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+         
+         <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">이아림</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>사는곳 : 인천시 연수구<br>
+                  취미 및 특기 : 창훈이놀리기<br> 
+                  콤플렉스 : 눈치없는 웃음<br>
+                  담당 파트 : Bootstrap </p>
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+         
+         <div class="modal fade" id="myModal4" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">이창훈</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>사는곳 : 서울시 동대문구<br>
+                  취미 및 특기 : 농구 and 담소<br>
+                  콤플렉스 : 짧은손가락 발가락<br>
+                  담당 파트 : Chart & Google Map </p>
+                     
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+         
+         <div class="modal fade" id="myModal5" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">정민재</h4>
+                  </div>
+                  <div class="modal-body">
+                        <p>사는곳 : 창원시 의창구/서울시 신림동<br>
+                     취미 및 특기 : 잠 , 혼자 놀기<br>
+                     콤플렉스 : 대표님이 괴롭힌다<br>
+                     담당파트 : 메인 & SVG<p>
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+         
+         <div class="modal fade" id="myModal6" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">정진수</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>사는곳 : 서울시 송파구<br>
+                  취미 및 특기 :  벤치프레스 & 칼퇴근<br>
+                  콤플렉스 : 뭉뚱한 손가락<br>
+                  담당 파트 : Canvas</p>
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+         
+         <div class="modal fade" id="myModal7" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">정도혁</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>사는곳 : 서울시 서초구<br>
+                  취미 및 특기 : 기타, 운동<br>
+                  콤플렉스 : 지각<br>
+                  담당파트 : Bootstrap</p>
+                  </div>
+               </div>&emsp;&emsp;&emsp;
+            </div>
+         </div>
+      </div>
+     
+<script>
+   $(document).ready(function(){
+       $('[data-toggle="tooltip"]').tooltip();   
+   });
+</script>     
+</div>
+
+</body>
+</html> 

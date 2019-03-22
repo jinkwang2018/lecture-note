@@ -1,0 +1,28 @@
+1. kr.or.kosta.action
+   1.1 Action 인터페이스  > execute(request, response)함수
+   1.2 ActionForward  > redirect 여부 와 view 경로 설정
+   
+2. kr.or.kosta.utils  > 필요하다면 Project 전체에 공통으로 사용되는 함수를 가지고 class
+   2.1 class 페이징 처리를 담당하는 함수 가지는 클래스
+   2.2 날짜 포맷 , 숫자 포맷 , 문자 정의 클래스 
+   2.3 함수는  static 함수 ......
+
+
+3. kr.or.kosta.service
+   3.1 표준화된 코드를 위해서 Action 인터페이스를 구현하는 service 클래스 생성
+   ex) class boardwrite implements Action{
+              execute(){
+              
+              }
+       }
+   
+
+4. kr.or.kosta.controller
+   4.1 클라이언트의 요청을 파악 필용한 service 클래스 객체 생성 사용
+   4.2 인터페이스를 통한 표준화된 구현
+
+5. kr.or.kosta.dao
+      기존과 동일
+
+6. kr.or.kosta.dto   
+      기존과 동일

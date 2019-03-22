@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Google Map</title>
+<style>
+#map {
+	height: 400px;
+	width: 100%;
+}
+
+.flex-container {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+	text-align: center;
+}
+
+.flex-container>* {
+	padding: 15px;
+	-webkit-flex: 1 100%;
+	flex: 1 100%;
+}
+
+.article {
+	text-align: left;
+}
+
+header {
+	background: black;
+	color: white;
+}
+
+footer {
+	background: #aaa;
+	color: white;
+}
+
+.nav {
+	background: none;
+}
+
+.nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.nav ul a {
+	text-decoration: none;
+}
+
+@media all and (min-width: 768px) {
+	.nav {
+		-webkit-flex: 1 auto;
+		flex: 1 auto;
+		-webkit-order: 1;
+		order: 1;
+	}
+	.article {
+		-webkit-flex: 5 0px;
+		flex: 5 0px;
+		-webkit-order: 2;
+		order: 2;
+	}
+	footer {
+		-webkit-order: 3;
+		order: 3;
+	}
+}
+
+.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 22px;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+	width: 100%;
+	height: 80px;
+}
+
+.button5 {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+}
+
+.button5:hover {
+	background-color: #555555;
+	color: white;
+}
+</style>
+<script>
+	function initMap() { /*구글맵 실행 함수*/
+		var uluru = { /*맵 초기 경도 위도 값 설정*/
+			lat : 37.464541,
+			lng : 127.02758300000005
+		}; 
+		var map = new google.maps.Map(document.getElementById('map'), { /*구글맵 <div id="map">에 생성*/
+			zoom : 6, /*맵 확대 값 초기화*/
+			center : uluru  /*설정한 위도 경도로 위치 설정*/
+		
+		});
+	}
+	window.onload = function() {
+		var gangbtn = document.getElementById("gang"); /*비트캠프 강남점으로 이동하는 버튼 */
+		var sinbtn = document.getElementById("sin");
+		var jongbtn = document.getElementById("jong");
+		var mybtn = document.getElementById("my");
+		
+		var image = new google.maps.MarkerImage(new google.maps.Size(10, 10)); /*마크 이미지 생성 및 크기 설정*/
+		
+		gangbtn.onclick = function() { /*강남 선택 시*/
+
+			var uluru = {
+				lat : 37.4994553,
+				lng : 127.02924710000002
+			};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 17,
+				center : uluru
+			});		
+			var marker = new google.maps.Marker({/*마커 생성*/
+				position : uluru, /*마커 위치 지정*/
+				map : map, /*구글맵*/
+				icon : image, /*마커 이미지 */
+				title : '강남점' /*마커 title*/
+			});
+			var content = "비트캠프_강남점<br/><br/>Tel: 010-1234-1241";
+			var infowindow = new google.maps.InfoWindow({
+				content : content
+			});
+			google.maps.event.addListener(marker, "click", function() {
+				infowindow.open(map, marker);
+			});
+			/*마커 클릭 시 생성되는 말풍선 실행함수*/
+		}
+		sinbtn.onclick = function() { /*비트캠프 신촌점 선택 시*/
+			var uluru = {
+				lat : 37.5524589,
+				lng : 126.93782620000002
+			};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 17,
+				center : uluru
+			});
+			var marker = new google.maps.Marker({
+				position : uluru,
+				map : map,
+				icon : image,
+				title : '신촌점'
+			});
+			var content = "비트캠프_신촌점<br/><br/>Tel: 010-1235-5123";
+			var infowindow = new google.maps.InfoWindow({
+				content : content
+			});
+			google.maps.event.addListener(marker, "click", function() {
+				infowindow.open(map, marker);
+			});
+		}
+		jongbtn.onclick = function() {  /*비트캠프 종로점 선택 시*/
+			var uluru = {
+				lat : 37.5706042,
+				lng : 126.98529189999999
+			};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 17,
+				center : uluru
+			});
+			var marker = new google.maps.Marker({
+				position : uluru,
+				map : map,
+				icon : image,
+				title : '종로점'
+			});
+			var content = "비트캠프_종로점<br/><br/>Tel: 010-8567-1234";
+			var infowindow = new google.maps.InfoWindow({
+				content : content
+			});
+			google.maps.event.addListener(marker, "click", function() {
+				infowindow.open(map, marker);
+			});
+		}
+		mybtn.onclick = function() { /*내 위치 클릭 시*/
+			if (navigator.geolocation) { 
+				navigator.geolocation.getCurrentPosition(function(position) { 
+					/*네비게이터객체의 지오로케이션으로 현위치 위도 경도 추적*/
+					var uluru = {
+						lat : position.coords.latitude, /*현위치 위도 경도 설정*/
+						lng : position.coords.longitude
+					};
+					var map = new google.maps.Map(document
+							.getElementById('map'), {
+						zoom : 17,
+						center : uluru
+					});
+					var marker = new google.maps.Marker({
+						position : uluru,
+						map : map,
+						icon : image,
+						title : '현위치'
+					});
+					var content = "현재 나의 위치<br/><br/>GPS기준";
+					var infowindow = new google.maps.InfoWindow({
+						content : content
+					});
+					google.maps.event.addListener(marker, "click", function() {
+						infowindow.open(map, marker);
+					});
+				}, function() { //지오로케이션 서비스가 실패했을 경우
+					handleLocationError(true, infoWindow, map.getCenter());
+				});
+			} else {
+				//브라우져가 지오로케이션을 지원하지 않는 경우
+				handleLocationError(false, infoWindow, map.getCenter());
+			}
+		}
+		function handleLocationError(browserHasGeolocation, infoWindow, pos) { /*지오로케이션 에러 메세지 설정 함수*/
+			infoWindow.setPosition(pos);
+			infoWindow
+					.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.'
+							: 'Error: Your browser doesn\'t support geolocation.');
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="flex-container">
+		<header>
+			<h1>Google map</h1>
+		</header>
+		<nav class="nav">
+			<ul>
+				<li><input type="button" class="button button5"
+					value="비트캠프_강남점" id="gang"></li>
+				<li><input type="button" class="button button5"
+					value="비트캠프_신촌점" id="sin"></li>
+				<li><input type="button" class="button button5"
+					value="비트캠프_종로점" id="jong"></li>
+				<li><input type="button" class="button button5" value="현위치"
+					id="my"></li>
+			</ul>
+		</nav>
+		<article class="article">
+			<!-- 구글 맵 출력 태그 -->
+			<div id="map"></div> 
+			<!-- 구글맵 API 키 -->
+			<script async defer 
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEyaAYR4nEZaiSyQkXungKKn1bfI2iZX8&callback=initMap"></script>
+		</article> 
+		
+		<footer>제작자 : 이창훈 , 신호용 </footer>
+	</div>
+</body>
+</html>

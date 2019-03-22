@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+          <head>
+                 <meta charset="utf-8" />
+           <title>Web Worker 예제</title>
+          </head>
+          <body>
+                 <input type="text" id="num">
+                 <button onclick="calculate()">계산</button>
+                 <button onclick="stopCalculate()">중지</button><br/>
+                 <p id="sum">Sum :</p>
+          </body>
+                 <script type="text/javascript">     
+      
+                         var worker;
+
+                         function calculate() {
+
+                             if(worker) {                  
+                                 worker.terminate(); 
+                             };
+
+                             var num = document.getElementById("num").value;
+
+                             worker = new Worker("Web_Worker.js");
+
+                             worker.onmessage = function(event) {
+                                  document.getElementById("sum").innerHTML = "Sum : " + event.data;
+                             };  
+                  
+                             worker.onerror = function(event) {
+                                 alert("Error : " + event.message + " (" + event.filename + ":" + event.lineno + ")");
+                             };
+
+                             worker.postMessage(num);
+
+                         }
+
+                         function stopCalculate() {
+                             if(worker) {
+                            	
+                                      worker.terminate();           
+                             };
+                             alert("Worker is Stopped");
+                         }
+        		 </script>
+</html>

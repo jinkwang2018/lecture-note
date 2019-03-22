@@ -1,0 +1,19 @@
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+
+/* category popup창에서 div style*/
+.popdiv{
+	background-color: #f0f0f0; 
+	padding-top:15px; 
+	padding-bottom:10px;
+}
+
+.popmargin{
+	margin-bottom: 10px;
+}
+
+.popaddbtn{
+	width:25%;
+}

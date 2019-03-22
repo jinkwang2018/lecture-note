@@ -1,0 +1,38 @@
+
+.mycon{
+	width:100%
+}
+
+.mydivmargin{
+	margin-top: 10px;
+}
+
+.mydiv{
+	background-color: #f0f0f0;
+	padding-top:15px; 
+	padding-bottom:10px;
+}
+
+
+.mytitle{
+	float: left;
+	width: 70%; 
+	text-align: center; 
+	background-color: #2b90d9;
+}
+
+.myfont{
+	color: white; 
+	font-size: 20px;
+}
+
+.myicon1{
+	float: left; 
+	width:15%;
+}
+
+.myicon{
+	float: right;
+	width: 10%;
+}
+

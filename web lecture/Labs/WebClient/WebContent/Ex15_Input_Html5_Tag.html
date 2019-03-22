@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML5_TAG</title>
+</head>
+<body>
+<!-- 
+input type의 이름
+color : 색상표
+date
+datetime-local
+email
+month
+number
+range
+search
+tel
+time
+url
+week
+
+HTML5 added the following attributes for <input>:
+
+autocomplete
+autofocus
+form
+formaction
+formenctype
+formmethod
+formnovalidate
+formtarget
+height and width
+list
+min and max
+multiple
+pattern (regexp)
+placeholder
+required
+step
+and the following attributes for <form>:
+
+autocomplete
+novalidate
+ -->
+	<form action="">
+	<fieldset>
+				<legend>박스 자동완성 list와 id가 같으면</legend>
+					<input list="browsers" name="browser">
+						<datalist id="browsers">
+					   	 	<option value="Internet Explorer">
+					   	 	<option value="Firefox">
+					   	 	<option value="Chrome">
+					   	 	<option value="Opera">
+					   	 	<option value="Safari">
+						</datalist>
+		<hr>
+				<legend>색상표</legend>
+					<input type="color" name="favcolor">
+		<hr>
+				<legend>날짜</legend>
+				 	<input type="date" name="bday">
+		<hr>
+				<legend> E-mail: 유효성 검사</legend> 
+		  		<input type="email" name="email">
+		  		<input type="submit">
+  		<hr>
+		  		<legend>숫자의 최대 최소</legend>
+		  		<input type="number" name="quantity" min="1" max="5">
+  		<hr>
+		  		<legend>0~100까지만 10씩 증가 감소하게</legend>
+		  		<input type="number" name="points" min="0" max="100" step="10" value="30">
+  		<hr>
+		  		<legend>가격이 10~20까지만</legend>
+		  		<input type="range" name="points" min="0" max="10">
+  		<hr>
+		  		<legend>autofocus</legend>
+		  		First name:<input type="text" name="fname" autofocus><br>
+		 		Last name: <input type="text" name="lname"><br>
+		  		<input type="submit">
+  		<hr>
+		  		<legend>간단한 유효성 검증(HTML에서도) pattern은 "[A-Za-z]{3}"</legend>
+		  		Country code: <input type="text" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code">
+		  		<input type="submit">
+  		<hr>
+		  		<legend>기본 입력 사항을 알려줄 수 있다.</legend>
+		  		<input type="text" name="fname" placeholder="이름입력"><br>
+		  		<input type="text" name="lname" placeholder="성입력"><br>
+		  		<input type="submit" value="Submit">
+  		<hr>
+  				<legend>입력을 강제할 수 있다.</legend>
+  				<input type="text" name="usrname" required>
+  				<input type="submit">
+
+	</fieldset>
+</form>
+</body>
+</html>

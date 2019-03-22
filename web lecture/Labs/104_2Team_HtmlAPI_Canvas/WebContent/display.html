@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+.flex-container {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+	text-align: center;
+}
+
+.flex-container>* {
+	padding: 15px;
+	-webkit-flex: 1 100%;
+	flex: 1 100%;
+}
+
+.article {
+	text-align: center;
+}
+
+header {
+	background: black;
+	color: white;
+}
+
+footer {
+	background: #aaa;
+	color: white;
+}
+
+@media all and (min-width: 768px) {
+	.article {
+		-webkit-flex: 5 0px;
+		flex: 5 0px;
+		-webkit-order: 2;
+		order: 2;
+	}
+	footer {
+		-webkit-order: 3;
+		order: 3;
+	}
+}
+</style>
+</head>
+<body>
+<div class="flex-container">
+	<header>
+			<h1>HTML5 Graphic Page</h1>
+	</header>
+	<article class="article">
+		<img src ="images/main.jpg" name="frame" width=90% height=80%>
+	</article> 
+	<footer>BIT camp_Java 104th_Team 2  </footer>
+</div>
+</body>
+</html>

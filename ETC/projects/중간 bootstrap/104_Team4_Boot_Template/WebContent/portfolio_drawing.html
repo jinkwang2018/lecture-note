@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="init()">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio_1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="index.html">-</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="404.html">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+       <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">CANVAS
+                    <small>그림판 예제</small>
+                </h1>
+            </div>
+        </div>
+        
+        <div>
+			<canvas id="can" width="400" height="400" style="float:left;position:relative;top:100px;left:100px;border:2px solid;"></canvas>
+	        <div style="position:relative;top:100px;left:200px;">Choose Color</div>
+	        <div style="position:relative;top:110px;left:620px;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
+	        <div style="position:relative;top:100px;left:635px;width:10px;height:10px;background:blue;" id="blue" onclick="color(this)"></div>
+	        <div style="position:relative;top:90px;left:650px;width:10px;height:10px;background:red;" id="red" onclick="color(this)"></div>
+	        <div style="position:relative;top:95px;left:620px;width:10px;height:10px;background:yellow;" id="yellow" onclick="color(this)"></div>
+	        <div style="position:relative;top:85px;left:635px;width:10px;height:10px;background:orange;" id="orange" onclick="color(this)"></div>
+	        <div style="position:relative;top:75px;left:650px;width:10px;height:10px;background:black;" id="black" onclick="color(this)"></div>
+	        <div style="position:relative;top:100px;left:200px;">Eraser</div>
+	        <div style="position:relative;top:110px;left:620px;width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
+	        <img id="canvasimg" style="position:relative;top:100px;left:700px;" style="display:none;">
+	        <input type="file" id="canvas_file" value="캔버스" style="display:none;" onchange="loadCanvas(this)"/>
+	        <button type="button" style="position:relative;top:150px;left:190px;" onclick="loadCanvasClicked(event)">불러오기</button>
+	        <button type="button" style="position:relative;top:190px;left:115px;" class="controls" onclick="saveCanvas()">  저장  </button>
+	        <button type="button" style="position:relative;top:230px;left:65px;" value="clear" id="clr" onclick="erase()">전체지우기</button>
+    	</div>
+		
+       
+        <!-- /.row -->
+
+        <!-- Footer -->
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+	<script type="text/javascript">
+	var canvas = document.getElementById("can");
+	var ctx = canvas.getContext("2d");
+    var flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
+
+    var x = "black",
+        y = 2;
+    
+    function init() {
+        w = canvas.width;
+        h = canvas.height;
+    
+        canvas.addEventListener("mousemove", function (e) {
+            findxy('move', e)
+        }, false);
+        canvas.addEventListener("mousedown", function (e) {
+            findxy('down', e)
+        }, false);
+        canvas.addEventListener("mouseup", function (e) {
+            findxy('up', e)
+        }, false);
+        canvas.addEventListener("mouseout", function (e) {
+            findxy('out', e)
+        }, false);
+    }
+    
+    function color(obj) {
+        switch (obj.id) {
+            case "green":
+                x = "green";
+                break;
+            case "blue":
+                x = "blue";
+                break;
+            case "red":
+                x = "red";
+                break;
+            case "yellow":
+                x = "yellow";
+                break;
+            case "orange":
+                x = "orange";
+                break;
+            case "black":
+                x = "black";
+                break;
+            case "white":
+                x = "white";
+                break;
+        }
+        if (x == "white") y = 14;
+        else y = 2;
+    
+    }
+    
+    function draw() {
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(currX, currY);
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+        ctx.stroke();
+        ctx.closePath();
+    }
+    
+    function erase() {
+        var m = confirm("지우시겠습니까?");
+        if (m) {
+            ctx.clearRect(0, 0, w, h);
+            document.getElementById("canvasimg").style.display = "none";
+        }
+    }
+    
+    
+    function findxy(res, e) {
+        if (res == 'down') {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+    
+            flag = true;
+            dot_flag = true;
+            if (dot_flag) {
+                ctx.beginPath();
+                ctx.fillStyle = x;
+                ctx.fillRect(currX, currY, 2, 2);
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up' || res == "out") {
+            flag = false;
+        }
+        if (res == 'move') {
+            if (flag) {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+                draw();
+            }
+        }
+    }
+    function loadCanvasClicked(event)
+    {
+      event.preventDefault();
+      document.getElementById("canvas_file").click();
+    }
+    function loadCanvas(file_btn)
+    {
+      var file = file_btn.files[0];
+      var imageObj = new Image();
+      imageObj.src = window.URL.createObjectURL(file);
+      imageObj.onload = function(){
+        ctx.drawImage(imageObj, 0, 0);
+      }
+    }
+    function saveCanvas()
+    {
+      var link = document.createElement('a');
+      link.download = "canvas.png";
+      link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+      link.click();
+    }
+    </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

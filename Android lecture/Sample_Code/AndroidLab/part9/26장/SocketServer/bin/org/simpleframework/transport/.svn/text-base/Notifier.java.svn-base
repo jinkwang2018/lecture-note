@@ -1,0 +1,42 @@
+/*
+ * Notifier.java February 2009
+ *
+ * Copyright (C) 2009, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import org.simpleframework.transport.reactor.Operation;
+
+/**
+ * The <code>Notifier</code> object is a special type of operation
+ * that is used to notify the kernel that there is an initialized
+ * connection ready for processing. Typically an initialized socket
+ * is one that has undergone the SSL handshake or is a raw byte
+ * stream that does not require the SSL handshake.
+ * 
+ * @author Niall Gallagher
+ */
+interface Notifier extends Operation {
+   
+   /**
+    * This method is executed when the operation is in a state
+    * that is ready for execution. Typically for a notifier this 
+    * is executed when there is data ready to read from the socket.
+    */
+   public void run();
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fffff9c9"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn01"
+        android:layout_width="310dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="right"
+        android:text="Table Layout"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn02"
+        android:layout_width="221dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="left"
+        android:onClick="OnTableClick"
+        android:text="Table Layout2"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/OnTClick"
+        android:layout_width="442dp"
+        android:layout_height="145dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="OnTClick"
+        android:text="TABLEOUT3"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+</LinearLayout>

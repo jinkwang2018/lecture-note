@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+		//DOM (성능 낮고 개발자 접근성 높다) <-> SAX (성능 높고 접근성 낮다)
+			window.onload = function(){
+				var menode;
+				menode = document.getElementById("me");
+				menode.style.backgroundColor = "yellow";
+				
+				var parentnode = menode.parentNode; //body
+				parentnode.style.backgroundColor = "skyblue";
+				
+				var grandnode;
+				grandnode = parentnode.parentNode; //html
+				grandnode.style.backgroundColor = "green";
+				
+				var my = document.getElementById("mychild");
+				console.log(my);
+				console.log(my.firstChild.nodeName); //요소 이름
+				console.log(my.firstChild.innerText);//list계열은 value 속성이 없다
+				console.log(my.firstChild.nextSibling.innerText); //형제 Text
+				console.log(my.childNodes.length); //모든 LI 요소 개수
+				console.log(my.lastChild.innerText);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<div>A</div>
+		<div>B</div>
+		<div id="me">C</div>
+		<div>D</div>
+		<div>E</div>
+		
+		<ul id="mychild">
+			<li>AA</li>
+			<li>BB</li>
+			<li>CC</li>
+		</ul>
+	</body>
+</html>

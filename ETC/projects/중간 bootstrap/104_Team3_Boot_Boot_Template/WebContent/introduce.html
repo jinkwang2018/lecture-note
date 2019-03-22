@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+		var data = {//제이슨 데이터
+				"image":[
+					"images/minsikfront.png",
+					"images/sunghoonfront.png",
+					"images/yoongeanfront.png",
+					"images/jaeukfront.png",
+					"images/jinwonfront.png",
+					"images/bokungfront.png",
+					"images/nayoungfront.gif",
+					"images/minsikback.png",
+				    "images/sunghoonback.png",
+				    "images/yoongeanback.png",
+				    "images/jaeukback.png",
+					"images/jinwonback.png",
+				    "images/bokungback.png",
+					"images/nayoungback.png"
+					],
+				"audio":[
+					"audio/yamg.mp3",
+					"audio/love.mp3",
+				 	"audio/sexy1.mp3",
+				 	"audio/human.mp3",
+				 	"audio/jinwon.mp3",
+				 	"audio/poket.mp3",
+				 	"audio/ant.mp3"
+				 	
+				 		]
+				}//JSON데이터를 사용하여 코드를 줄이기위해 사용하였다.
+		$(function () { //div에 아이디 값에다가 이미지 주소와 오디오 주소를 넣어준다
+			for(var index = 0; index<7; index++){
+                //for문을 사용하여 div 마다 append를 시켜준다				
+				$('#div'+index).append('<input type = "image" id="image' + index + '" style="margin : 10px;" height = "100%" width = "100%" onclick="butt('+index+')" onmouseover="start('+ index +')" onmouseout="stop('+ index +')">');
+				//위와 같이 div 마다 audio 를 넣어준다
+				$('#div'+index).append('<audio id="audio'+index+'" src=""></audio>');
+				//초기 보이는 이미지값을 넣어준다
+				$('#image'+index).attr("src",data.image[index]);
+			}
+			for(index in data.audio){ //audio 주소값을 넣어준다
+				$('#audio'+index).attr("src",data.audio[index]);
+			
+			
+			$('#dialog'+index).dialog({
+				//dialog의 속성정의
+				position:{my: "right top",at:"right top"},
+				autoOpen: false,
+				show : {effect:'blind',duration:1000},
+				hide : {effect:'explode',duration:1000},
+				buttons: {
+							"확인" : function() {$(this).dialog("close")},
+							"취소" : function() {$(this).dialog("close")}
+						 }, 
+						 
+				resizable: false,
+				modal: false,  //팝업창을 닫기 전까지는 opener(부모창) 작업 불가
+				height: 400,
+				width: 400 
+		
+			})
+			}
+			
+		});
+		var audio;
+		function butt(number){
+			//onclick이벤트를 걸기위한 함수
+			$('.dialogclass').dialog('close');//dialog마다 클래스를 넣어주어 닫아준다
+			$('#dialog'+number).dialog('open');//dialog에 부여된 id값으로 사진에 맞는 dialog를 열어준다
+			
+			
+		}
+	 	function start(number) { //마우스 오버 이벤트 
+			audio = document.getElementById("audio"+number);
+			audio.setAttribute("src", data.audio[number]); //audio의 주소값을 넣어준다
+			audio.play(); //audio 재생
+			var img = document.getElementById("image"+number);
+			img.setAttribute('src',data.image[(number+7)]);//이미지의 주소를 바꿔준다
+		}
+	
+
+		function stop(number) { //마우스 아웃 이벤트
+			var img = document.getElementById("image"+number);
+			img.setAttribute('src',data.image[number]); //이미지 주소를 원상태로 바꿔준다
+			audio.pause();
+			
+		} 
+
+	</script>
+	<style type="text/css">
+		.img {
+			width: 280px;
+			height: 280px;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div class="contaniner-fluid">
+		<div class="row">
+			<div class="img" id="div0"></div>
+			<div class="img" id="div1"></div>
+			<div class="img" id="div2"></div>
+		</div>
+		<div class="row">
+			<div class="img" id="div3"></div>
+			<div class="img" id="div4"></div>
+			<div class="img" id="div5"></div>
+			<div class="img" id="div6"></div>
+		</div>
+	</div>
+	
+	<div class="dialogclass" id="dialog0" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 박민식 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 27세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 하남시 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;모두 건강하세요. 건강이 최고입니다.
+		  	  &nbsp;&nbsp;&nbsp;
+		  	  &nbsp;&nbsp;&nbsp;
+		  </p>
+		</div>
+ 
+ <div class="dialogclass" id="dialog1" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 강성훈 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 31세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 울산 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;뚱이를 좋아합니다.
+		  	  &nbsp;&nbsp;&nbsp;많이요^^
+		  	  &nbsp;&nbsp;&nbsp;
+		  </p>
+		</div>
+ 
+ <div class="dialogclass" id="dialog2" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 아윤근 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 28세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 부산 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;오케이^^
+		  	  &nbsp;&nbsp;&nbsp;
+		  	  &nbsp;&nbsp;&nbsp;
+		  </p>
+		</div>
+ 
+	
+	<div class="dialogclass" id="dialog3" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 최재욱 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 26세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 화성 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;4개월남았다^^ 다들힘내세요ㅎㅎㅎ
+		  	  &nbsp;&nbsp;&nbsp;
+		  	  &nbsp;&nbsp;&nbsp;
+		  </p>
+		</div>
+		<div class="dialogclass" id="dialog4" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 김진원 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 23세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 서울 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;협업 툴로 모든 파일이<br> 
+		  	  &nbsp;&nbsp;&nbsp;날아가게 해서 죄송합니다 (민식이형...)
+		  </p>
+		</div>
+ 
+ <div class="dialogclass" id="dialog5" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 김보경 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 26세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 서울 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;앗!! 야생의 김보경이 나타났다!!!!★☆<br>
+			 &nbsp;&nbsp;&nbsp;HP   ******<br>
+			 &nbsp;&nbsp;&nbsp;공격       ****************<br>
+			 &nbsp;&nbsp;&nbsp;방어       ***********<br>
+			 &nbsp;&nbsp;&nbsp;특수공격 *************************<br>
+		
+					  	  
+		  </p>
+		</div>
+ 
+ <div class="dialogclass" id="dialog6" title="Introduce" >
+		  <p>
+		  	
+		  	  &nbsp;&nbsp;&nbsp;이름     : 전나영 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;나이     : 28세  <br><br>
+		  	  &nbsp;&nbsp;&nbsp;사는곳  : 서울 <br><br>
+		  	  &nbsp;&nbsp;&nbsp;소감<br>
+		  	  &nbsp;&nbsp;&nbsp;다들 야자하느라 힘들텐데 힘 냅시다^^
+		  	  &nbsp;&nbsp;&nbsp;
+		  	  &nbsp;&nbsp;&nbsp;
+		  </p>
+		</div>
+
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

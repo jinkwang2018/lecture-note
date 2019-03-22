@@ -1,0 +1,50 @@
+/*
+ * Session.java May 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.session;
+
+import java.util.Map;
+
+import org.simpleframework.util.lease.Lease;
+
+/**
+ * The <code>Session</code> object is a simple leased container for
+ * state within a web application. This is essentially a map of key
+ * value pairs leased on a fixed duration to ensure it remains active
+ * between we requests. If the session remains idle for sufficiently
+ * long then it is disposed of by the <code>SessionProvider</code> 
+ * so that resources occupied can be released.   
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.util.lease.Lease
+ */
+public interface Session<T> extends Map {  
+   
+  /**
+   * This is used to acquire the <code>Lease</code> object to control
+   * the session. The lease is responsible for maintaining this map
+   * within the application. Once the lease expires the session will
+   * be removed and its mapped values will be available for recovery.
+   * 
+   * @return this returns the lease used to manage this session
+   */
+  public Lease<T> getLease();  
+}

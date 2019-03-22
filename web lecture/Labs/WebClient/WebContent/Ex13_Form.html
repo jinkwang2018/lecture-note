@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>개발자 필수 태그 (암기)</title>
+	
+	</head>
+	<body>
+	
+		<form action = "Ex13_login.jsp" method = "post">
+			<input type= "text" name = "userid">
+			<input type= "text" name = "username">
+			<!-- <input type = "submit" value = "전송하기"> -->
+			<input type = "image" src = "images/tomcat.png">
+			<input type = "reset" value = "취소하기">
+		</form>
+		<!-- 
+		form 태그는 웹 서버로 전송을 담당하는 태그이다 (ex : Tomcat)
+		네이버 사이트에 접속하고 회원가입 버튼을 누르면 회원가입 페이지가 보인다.
+		페이지에 원하는 정보를 입력한다. 완료 버튼을 누른다. 여기까지 html태그이고
+		이후 입력된 데이터를 가지고 서버로 가야하는데 서버로 가려면 운송수단이 필요하다.
+		이 때 필요한 운송수단은 form태그이다.
+		form태그 : 배 (method = get),비행기 (method = post) 보안이 적용되는지 아닌지의 차이이다. 
+		>> 차이점은 get : login.jsp ? userid=fajk123 & username=hong (데이터가 노출된다.)
+				 	 (action : 목적지 주소 = login.jsp)
+				 post : login.jsp (http프로토콜 내부에 (header)에 정보를 숨겨서 전송한다.)
+				 이다.
+		 >>결론 : post가 좋다. get을 왜 만들었을까?
+		 	원칙적으로 보내는 데이터는 form태그안에 존재해야한다.
+		 	form태그가 아닌 데이터도 서버로 전송할 수 있는데 그 방식이 link방식이다.
+		 	<a href="login.jsp?boardnum=100">글상세</a>
+		운송수단을 타고 서버(jsp),DB,insert를 통해서 완료된다. 
+		
+		운송수단 기장 : submit
+		1. input type = "submit" 전송담당
+		2. input type = "image"  내부적으로 (submit)
+		3. input type = "button" >> javascript를 사용해서 기능을 부여할 수 있다.
+		 -->
+		 
+		
+	</body>
+</html>

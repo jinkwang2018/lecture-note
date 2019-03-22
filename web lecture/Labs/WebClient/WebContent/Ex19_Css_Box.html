@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CSS Box 모델</title>
+	<style>
+		div{
+			border:1px solid blue;
+			width: 100px;
+			height: 100px;
+			padding: 50px;
+			margin: 100px;
+		}
+		
+		div.box1{
+			background-color: red;
+			top:100px;
+			left:100px;
+			position: absolute;/* 브라우져 기준 */
+			/* position: relative; 현재 위치에서 ...
+			   position: static; default	
+			*/
+		}
+		
+		div.box2{
+			background-color: blue;
+			top:100px;
+			left:300px;
+			position: relative;
+			/* position: relative; */
+		}
+	</style>
+</head>
+<body>
+	<div>일반DIV</div>
+	<div class="box1">BOX1</div>
+	<div class="box2">BOX2</div>
+</body>
+</html>

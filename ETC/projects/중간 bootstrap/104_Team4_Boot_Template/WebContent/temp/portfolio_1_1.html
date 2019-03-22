@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+    table {
+        width:100%;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+    table#t01 tr:nth-child(even) {
+        background-color: #eee;
+    }
+    table#t01 tr:nth-child(odd) {
+       background-color: #fff;
+    }
+    table#t01 th {
+        background-color: black;
+        color: white;
+    }
+	@keyframes fadeIn {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+	 
+	@keyframes chill {
+	    from {opacity: 1;}
+	    to {opacity: 1;}
+	}
+	 
+	@keyframes fadeOut {
+	    from {opacity: 1;}
+	    to {opacity: 0;}
+	}
+	 
+	p {
+	  position: absolute;
+	  top: 10px;
+	  left: 12px;
+	  color: white;
+	  opacity: 0;
+	  font-family: "Source Sans Pro";
+	  animation: fadeIn 2s ease-out, chill 2s 2s, fadeOut 2s 4s;
+	}
+	#canvas{
+		background: #212121;
+ 		margin: 0;
+  		overflow: hidden;
+		width : 1000px;
+		height: 500px; 
+	}
+	#floatMenu {
+		position: absolute;
+		width: 150px;
+		height: 200px;
+		right: 20px;
+		top: 100px;
+		background-color: #606060;
+		color: #fff;
+	}
+    </style>
+    
+    <script>
+    function funcThisSize(){
+    	if(window.innerWidth < 1250){
+    		console.log(window.innerWidth);
+    		$("#floatMenu").css("display", "none");
+    	}else{
+    		console.log("big"+window.innerWidth);
+    		$("#floatMenu").css("display", "block");
+    	}
+    }
+    
+	$(document).ready(function() {
+	 
+		//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		var floatPosition = parseInt($("#floatMenu").css('top'));
+		//250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+	 	
+		$(window).resize(funcThisSize);
+		
+		$(window).scroll(function() {
+			//현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			var newPosition = scrollTop + floatPosition + "px";
+	 
+			//애니메이션 없이 바로 따라감
+			//$("#floatMenu").css('top', newPosition);
+
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+	 
+		}).scroll();
+	 
+	});
+	</script>
+</head>
+	
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio_1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="index.html">-</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="404.html">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	
+	
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Canvas Examples</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Row -->
+        <center>
+        <div class="row">
+			<canvas id="canvas"></canvas>
+        </div>
+        </center>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Details</h3>
+            </div>
+
+			<div>
+				<h3>Colors, Styles, and Shadows</h3>
+				<table id="t01">
+					<tr>
+						<th>Property / Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>fillStyle</td>
+						<td>도형 안쪽을 가득 채우는 색깔</td>
+					</tr>
+					<tr>
+						<td>shadowColor</td>
+						<td>도형 뒤쪽에 나타나는 그림자 색깔</td>
+					</tr>
+					<tr>
+						<td>shadowBlur</td>
+						<td>도형 뒤 그림자 분사되는 모습</td>
+					</tr>
+					<tr>
+						<td>shadowOffsetX</td>
+						<td>도형과 그림자 사이의 수평 거리</td>
+					</tr>
+					<tr>
+						<td>shadowOffsetY</td>
+						<td>도형과 그림자 사이의 수직 거리</td>
+					</tr>
+					<tr>
+						<td>createLinearGradient(x1, y1, x2, y2)</td>
+						<td>시작점에서 끝점 방향으로 색상이 점점 변하는데 두 점의 위치에 따라 무늬의 방향이 결정</td>
+					</tr>
+					<tr>
+						<td>createPattern(image,"repeat|repeat-x|repeat-y|no-repeat")</td>
+						<td>도형 안에 이미지 삽입 및 반복 여부 결정하는 함수</td>
+					</tr>
+					<tr>
+						<td>createRadialGradient(x0,y0,r0,x1,y1,r1);</td>
+						<td>방사형 / 원형 그라데이션 개체 생성하는 함수</td>
+					</tr>
+					<tr>
+						<td>addColorStop(offset, color)</td>
+						<td>필요한만큼 색상을 지정(최소한 시작점과 끝점 두 개의 색상은 지정)하는 함수</td>
+					</tr>
+				</table>
+				<h3>Line Styles</h3>
+				<table id="t01">
+					<tr>
+						<th>Property</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>lineCap</td>
+						<td>끝이 둥근 모자와 선 그리기</td>
+					</tr>
+					<tr>
+						<td>lineJoin</td>
+						<td>두 선이 만날 때 둥근 모서리 생성</td>
+					</tr>
+					<tr>
+						<td>lineWidth</td>
+						<td>선의 폭</td>
+					</tr>
+					<tr>
+						<td>miterLimit</td>
+						<td>이음 길이 제한(1~255범위로 사용 가능)</td>
+					</tr>
+				</table>
+				<h3>Rectangles</h3>
+				<table id="t01">
+					<tr>
+						<th>Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>rect(x, y, width, height);</td>
+						<td>도형의 위치 및 크기 조정하는 함수</td>
+					</tr>
+					<tr>
+						<td>fillRect(x, y, width, height)</td>
+						<td>'색깔로 채워진' 도형의 위치 및 크기(x, y값이 0일 경우 왼쪽 최상단 위치)를 조정하는 함수</td>
+					</tr>
+					<tr>
+						<td>strokeRect(x, y, width, height)</td>
+						<td>색깔로 채워져 있지 않은 도형 그리는 함수</td>
+					</tr>
+					<tr>
+						<td>clearRect(x, y, width, height)</td>
+						<td>지정된 도형의 범위를 clear하는 함수</td>
+					</tr>
+				</table>
+				<table id="t01">
+					<tr>
+						<h3>Paths</h3>
+						<th>Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>fill()</td>
+						<td>fillStyle로 색깔 지정 후 위 함수를 사용하여 도형의 경로를 색칠하는 함수</td>
+					</tr>
+					<tr>
+						<td>stroke()</td>
+						<td>moveTo(), lineTo()로 정의한 경로를 그리는 함수(해당 함수가 없을 경우 경로가 그려지지
+							않는다)</td>
+					</tr>
+					<tr>
+						<td>beginPath()</td>
+						<td>경로를 시작하거나 이전 경로를 reset하는 함수</td>
+					</tr>
+					<tr>
+						<td>moveTo(x, y)</td>
+						<td>지정된 지점의 경로를 이동</td>
+					</tr>
+					<tr>
+						<td>closePath()</td>
+						<td>시작점에서 현재 경로까지 선으로 이어주는 함수</td>
+					</tr>
+					<tr>
+						<td>lineTo(x, y)</td>
+						<td>좌표에 맞추어 선을 생성하는 함수</td>
+					</tr>
+					<tr>
+						<td>clip()</td>
+						<td>임의의 크기의 영역(도형안에서만 존재)</td>
+					</tr>
+					<tr>
+						<td>quadraticCurveTo(cpx,cpy,x,y)</td>
+						<td>곡선을 나타내는 함수로서 매개변수로 곡선의 휘어짐을 조절</td>
+					</tr>
+					<tr>
+						<td>bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y)</td>
+						<td>3차원 곡선을 만들 수 있는 함수 -> 베지에 곡선 (n개 이상 가능하며 위 함수는 포인터가 3개)</td>
+					</tr>
+					<tr>
+						<td>arc(x,y,r,sAngle,eAngle,counterclockwise)</td>
+						<td>원의 크기 및 위치를 조정하는 함수</td>
+					</tr>
+					<tr>
+						<td>arcTo(x1, x2, y1, y2, r1)</td>
+						<td>두 접선 사이의 호를 생성하는 함수</td>
+					</tr>
+					<tr>
+						<td>isPointInPath(x, y)</td>
+						<td>지정된 경로에 존재하는 점인 경우 true, 그렇지 않은 경우 false로 반환하는 함수</td>
+					</tr>
+				</table>
+				<table id="t01">
+					<tr>
+						<h3>Transformations</h3>
+						<th>Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>scale(scalewidth,scaleheight)</td>
+						<td>도형의 크기를 확대하는 함수</td>
+					</tr>
+					<tr>
+						<td>rotate(angle)</td>
+						<td>도형을 매개변수의 각도에 맞춰 회전하는 함수</td>
+					</tr>
+					<tr>
+						<td>translate(x, y)</td>
+						<td>매개변수에 있는 좌표값에 맞추어 위치를 조정하는 함수</td>
+					</tr>
+					<tr>
+						<td>transform(a, b, c, d, e, f)</td>
+						<td>해당 도형을 회전, 확장, 이동하는 함(a:수평으로 확대/축소, b:수직방향 경사율, c:수평방향
+							경사율, d:수직방향 확대/축소율, e:수평방향 이동거리, f:수직방향 이동거리)수</td>
+					</tr>
+					<tr>
+						<td>setTransform(a, b, c, d, e, f)</td>
+						<td>변환함수를 그리기 위해 호출해야 하는 함수</td>
+					</tr>
+				</table>
+				<table id="t01">
+					<tr>
+						<h3>Text</h3>
+						<th>Property / Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>font</td>
+						<td>글자크기 및 글꼴</td>
+					</tr>
+					<tr>
+						<td>textAlign</td>
+						<td>글자 정렬(center, start, end left, right)</td>
+					</tr>
+					<tr>
+						<td>textBaseline</td>
+						<td>글자 위치 (top, middle, bottom)</td>
+					</tr>
+					<tr>
+						<td>fillText(text, x, y)</td>
+						<td>도형에 삽입될 텍스트 및 해당 텍스트 좌표값(텍스트 값이 채워져있음)</td>
+					</tr>
+					<tr>
+						<td>strokeText(text, x, y, maxWidth)</td>
+						<td>도형에 삽입될 텍스트 및 해당 텍스트 좌표값(텍스트 값이 채워져 있지 않음)</td>
+					</tr>
+					<tr>
+						<td>measureText(text)</td>
+						<td>해당 텍스트의 폭 반환</td>
+					</tr>
+				</table>
+				<table id="t01">
+					<tr>
+						<h3>Image Drawing</h3>
+						<th>Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>drawImage(img,x,y)</td>
+						<td>캔버스에 해당 이미지 담는 함수</td>
+					</tr>
+
+				</table>
+
+				<h3>Compositing & Others</h3>
+				<table id="t01">
+					<tr>
+						<th>Property / Method</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>globalAlpha</td>
+						<td>특정 도형의 투명도값을 반환한다.</td>
+					</tr>
+					<tr>
+						<td>globalCompositeOperation="나타낼 형태";</td>
+						<td>이미 존재하는 이미지 위에 새로운 이미지를 그린다 대신 겹친 부분을 어떻게 표현할지는 따로 "나타날
+							형태"에 집어넣어준다(단 초기값은 위로겹치기)</td>
+					</tr>
+					<tr>
+						<td>save()</td>
+						<td>현재 context의 상태를 저장한다.</td>
+					</tr>
+					<tr>
+						<td>restore()</td>
+						<td>이전에 저장한 경로 환경과 특성을 반환한다.</td>
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+        <!-- /.row -->
+
+        <hr>
+<script type="text/javascript">
+var canvas = document.querySelector('#canvas');
+var c = canvas.getContext("2d");
+ 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ 
+var mouse = {
+  x: window.innerWidth / 2,
+  y: window.innerHeight / 2
+};
+ 
+var isMouseDown = false;
+ 
+window.addEventListener("mousemove", function(event) {
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
+});
+ 
+window.addEventListener("resize", function() {
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+ 
+  initializeVariables();
+});
+ 
+ 
+window.addEventListener("mousedown", function() {
+  isMouseDown = true;
+});
+ 
+window.addEventListener("mouseup", function() {
+  isMouseDown = false;
+});
+ 
+canvas.addEventListener("touchstart", function() {
+  isMouseDown = true;
+});
+ 
+canvas.addEventListener("touchmove", function(event) {
+  event.preventDefault();
+  mouse.x = event.touches[0].pageX;
+  mouse.y = event.touches[0].pageY;
+});
+ 
+canvas.addEventListener("touchend", function() {
+  isMouseDown = false;
+});
+ 
+ 
+function Cannon(x, y, width, height, color) {
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+  this.angle = 0;
+  this.color = color;
+ 
+  this.update = function() {
+    desiredAngle = Math.atan2(mouse.y - this.y, mouse.x - this.x);
+    this.angle = desiredAngle;
+    this.draw();    
+  };
+ 
+  this.draw = function() {
+    c.save();
+    c.translate(this.x, this.y);
+    c.rotate(this.angle);
+    c.beginPath();
+    c.fillStyle = this.color;
+    c.shadowColor = this.color;
+    c.shadowBlur = 3;
+    c.shadowOffsetX = 0;
+    c.shadowOffsetY = 0;
+    c.fillRect(0, -this.height / 2, this.width, height);
+    c.closePath();
+    c.restore();
+  };
+}
+ 
+function Cannonball(x, y, dx, dy, radius, color, cannon, particleColors) {
+  this.x = x;
+  this.y = y;
+  this.dx = dx;
+  this.dy = -dy;
+  this.radius = radius;
+  this.color = color;
+  this.particleColors = particleColors;
+  this.source = cannon;
+  this.timeToLive = canvas.height / (canvas.height + 800);
+ 
+  this.init = function() {
+    // Initialize the cannonballs start coordinates (from muzzle of cannon)
+    this.x = Math.cos(this.source.angle) * this.source.width;
+    this.y = Math.sin(this.source.angle) * this.source.width;
+ 
+    // Translate relative to canvas positioning
+    this.x = this.x + (canvas.width / 2);
+    this.y = this.y + (canvas.height);    
+ 
+    // Determine whether the cannonball should be 
+    // fired to the left or right of the cannon
+    if (mouse.x - canvas.width / 2 < 0) {
+      this.dx = -this.dx;
+    }
+ 
+    this.dy = Math.sin(this.source.angle) * 8;
+    this.dx = Math.cos(this.source.angle) * 8;
+  };
+ 
+  this.update = function() {
+    if (this.y + this.radius + this.dy > canvas.height) {
+      this.dy = -this.dy;
+    } else {
+      this.dy += gravity;
+    }
+ 
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();    
+ 
+    this.timeToLive -= 0.01;
+  };
+ 
+  this.draw = function() {
+    c.save();
+    c.beginPath();
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    c.shadowColor = this.color;
+    c.shadowBlur = 5;
+    c.shadowOffsetX = 0;
+    c.shadowOffsetY = 0;
+    c.fillStyle = this.color;
+    c.fill();
+    c.closePath();
+    c.restore();
+  };
+ 
+  this.init();
+}
+ 
+function Particle(x, y, dx, dy, radius, color) {
+  this.x = x;
+  this.y = y;
+  this.dx = dx;
+  this.dy = -dy;
+  this.radius = 5;
+  this.color = color;
+  this.timeToLive = 1;
+  // this.mass = 0.2;
+ 
+  this.update = function() {
+    if (this.y + this.radius + this.dy > canvas.height) {
+      this.dy = -this.dy;
+    }
+ 
+    if (this.x + this.radius + this.dx > canvas.width || this.x - this.radius + this.dx < 0) {
+      this.dx = -this.dx;
+    }
+    // this.dy += gravity * this.mass;
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();
+ 
+    this.timeToLive -= 0.01;
+  };
+ 
+  this.draw = function() {
+    c.save();
+    c.beginPath();
+    c.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+    c.shadowColor = this.color;
+    c.shadowBlur = 10;
+    c.shadowOffsetX = 0;
+    c.shadowOffsetY = 0;
+    c.fillStyle = this.color;
+    c.fill();
+ 
+    c.closePath();
+ 
+    c.restore();
+  };
+}
+ 
+ 
+function Explosion(cannonball) {
+  this.particles = [];    
+  this.rings = [];
+  this.source = cannonball;
+ 
+  this.init = function() {
+    for (var i = 0; i < 10; i++) {
+ 
+      var dx = (Math.random() * 6) - 3;
+      var dy = (Math.random() * 6) - 3;
+ 
+      // var hue = (255 / 5) * i;
+      // var color = "hsl(" + hue + ", 100%, 50%)";
+      var randomColorIndex = Math.floor(Math.random() * this.source.particleColors.length);
+      var randomParticleColor = this.source.particleColors[randomColorIndex];
+ 
+ 
+        this.particles.push(new Particle(this.source.x, this.source.y, dx, dy, 1, randomParticleColor));
+    }
+ 
+    // Create ring once explosion is instantiated
+      // this.rings.push(new Ring(this.source, "blue"));
+  };
+ 
+  this.init();
+ 
+  this.update = function() {
+    for (var i = 0; i < this.particles.length; i++) {
+        this.particles[i].update();
+ 
+        // Remove particles from scene one time to live is up
+        if (this.particles[i].timeToLive < 0) {
+          this.particles.splice(i, 1);
+        }
+    }
+ 
+    // Render rings
+    for (var j = 0; j < this.rings.length; j++) {
+      this.rings[j].update();
+ 
+      // Remove rings from scene one time to live is up
+        if (this.rings[j].timeToLive < 0) {
+          this.rings.splice(i, 1);
+        }
+    }
+  };
+}
+ 
+var gravity = 0.08;
+var desiredAngle = 0;
+var cannon, cannonballs, explosions, colors;
+ 
+function initializeVariables() {
+  cannon = new Cannon(canvas.width / 2, canvas.height, 20, 10, "white");
+  cannonballs = [];
+  explosions = [];
+  colors = [
+ 
+ 
+    // Red / Orange
+    {
+      cannonballColor: "#fff",
+      particleColors: [
+        "#ff4747",
+        "#00ceed",
+        "#fff",
+      ]
+    }
+ 
+  ];
+ 
+}
+ 
+initializeVariables();
+ 
+var timer = 0;
+var isIntroComplete = false;
+var introTimer = 0;
+ 
+ 
+function animate() {
+  window.requestAnimationFrame(animate);
+ 
+  c.fillStyle = "rgba(18, 18, 18, 0.2)";
+  c.fillRect(0, 0, canvas.width, canvas.height);            
+  cannon.update();
+ 
+  if (isIntroComplete === false) {
+    introTimer += 1;
+ 
+    if (introTimer % 3 === 0) {
+      var randomColor = Math.floor(Math.random() * colors.length);
+      var color = colors[randomColor];
+ 
+      cannonballs.push(new Cannonball(canvas.width / 2, canvas.height / 2, 2, 2, 4, color.cannonballColor, cannon, color.particleColors));
+    }
+ 
+    if (introTimer > 30) {
+      isIntroComplete = true;
+    }
+ 
+  }
+ 
+ 
+  // Render cannonballs
+  for (var i = 0; i < cannonballs.length; i++) {
+      cannonballs[i].update();
+ 
+      if (cannonballs[i].timeToLive <= 0) {
+ 
+        // Create particle explosion after time to live expires
+        explosions.push(new Explosion(cannonballs[i]));
+ 
+        cannonballs.splice(i, 1);
+ 
+      }
+  }
+ 
+  // Render explosions
+  for (var j = 0; j < explosions.length; j++) {
+        //Do something
+        explosions[j].update();
+ 
+      // Remove explosions from scene once all associated particles are removed
+      if (explosions[j].particles.length <= 0) {
+        explosions.splice(j, 1);
+      }
+  }    
+ 
+ 
+  if (isMouseDown === true) {
+    timer += 1;
+    if (timer % 3 === 0) {
+      var randomParticleColorIndex = Math.floor(Math.random() * colors.length);
+      var randomColors = colors[randomParticleColorIndex];
+ 
+      cannonballs.push(new Cannonball(mouse.x, mouse.y, 2, 2, 4, randomColors.cannonballColor, cannon, randomColors.particleColors));
+    }
+  }
+}
+ 
+animate();
+</script>
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    
+    <!-- Side Floating Menu Box -->
+	<div id="floatMenu">
+		플로팅 메뉴
+	</div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

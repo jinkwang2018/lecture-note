@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		.img_wrap {
+			width: 600px;
+			margin-top: 50px;
+		}
+		.img_wrap img {
+			max-width: 100%;
+		}
+
+	</style>
+	<script type="text/javascript">
+		var files_selected;
+		$(document).ready(function () {
+			$("#input_img").on("change",selectFile);
+		});
+
+
+
+		function selectFile(e) {
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+		 	filesArr.forEach(function(f) {
+
+
+				files_selected= f;
+
+				var reader = new FileReader();
+				reader.onload = function(e){
+
+				$("#img").attr("src",e.target.result);
+				$("video").attr("src",e.target.result);
+
+				}
+				reader.readAsDataURL(f);
+			});
+
+		}
+
+	</script>
+
+</head>
+<body>
+	<div>
+		<h2> 이미지 업로드 </h2>
+		<input type ="file" id ="input_img" />
+
+	</div>
+	<div>
+		<div class = "img_wrap">
+            <img id ="img" src="" onerror="this.src='no_img.jpg'" alt="">
+			<video id="video" src="" autoplay="autoplay"></video>
+		</div>
+	</div>
+
+</body>
+</html>

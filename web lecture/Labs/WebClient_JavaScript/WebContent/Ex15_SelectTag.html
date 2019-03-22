@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function evtproductor(frm) {
+			console.log(frm);
+			console.log(frm.productor.value); //select 태그 value값 :A000 , A001
+			console.log("index : " + frm.productor.selectedIndex);
+			//select 태그의 안에 option 는 내부적으로 배열로 관리 
+			//배열이기 때문에 첨자(index) >> selectedIndex
+			//console.log(frm.productor.options[0].value);
+			//console.log(frm.productor.options[0].text);
+			
+			console.log(frm.productor.options[frm.productor.selectedIndex].value);
+			console.log(frm.productor.options[frm.productor.selectedIndex].text);
+		
+			var index = frm.productor.selectedIndex;
+			var text = frm.productor.options[index].text;
+			var val = frm.productor.options[index].value;
+			
+			if(index == 0){
+				frm.valProductor.value="";
+				frm.txtProductor.value="";
+			}else{
+				frm.valProductor.value=val;
+				frm.txtProductor.value=text;
+			}
+			
+			
+		}
+		
+		function evtBrand(){
+			//parameter 없어요
+			//위와 같은 동작을 하도록 작성하세요
+			
+			//var frm =document.frmdata; 
+			
+			var index = document.frmdata.brand.selectedIndex;
+			var text = document.frmdata.brand.options[index].text;
+			var val = document.frmdata.brand.options[index].value;
+			
+			if(index == 0){
+				 document.frmdata.valBrand.value="";
+				 document.frmdata.txtBrand.value="";
+			}else{
+				 document.frmdata.valBrand.value=val;
+				 document.frmdata.txtBrand.value=text;
+			}
+		}
+	</script>
+</head>
+<body>
+모델별 최저가 검색<br>
+	<form name="frmdata">
+			<select  style="width: 200px" name="productor"  onchange="evtproductor(this.form)">
+				<option value="A000" selected>제조사</option>
+				<option value="A001">삼성전자</option>
+				<option value="A002">LG전자</option>
+				<option value="A003">Apple</option>
+				<option value="A004">Dell</option>
+			</select>
+		    <input type="text" name="valProductor" size="10">
+		    <input type="text" name="txtProductor" size="10">
+		    <br>
+	      
+		    <select style="width: 200px"  name="brand"  onchange="evtBrand()">
+		        <option value="B000" SELECTED>브랜드</option>
+		        <option value="B001">센스</option>
+		        <option value="B002">X-Note</option>
+		        <option value="B003">MAC</option>
+		        <option value="B004">VAIO</option>
+		    </select>
+			    <input type="text" name="valBrand" size="10">
+			    <input type="text" name="txtBrand" size="10">
+	</form>
+
+</body>
+</html>

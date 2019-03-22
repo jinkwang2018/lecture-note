@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Bootstrap Mutipager Template - Maxop</title>
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--CUSTOM STYLE -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <script src="assets/js/jquery.js"></script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/Slides-SlidesJS-3/examples/playing/js/jquery.slides.min.js"></script>
+	<title>Insert title here</title>
+	<!--  안녕하세요-->
+	<style>
+	.stylediv {
+	    float: left;
+	    width: 100%;
+	    height: 200px;
+	    border-radius: 5px;
+	    border: 1px dotted #f2f2f2;
+	    background-color: #f2f2f2
+	    
+	}
+	.footer-widget ul:not(.sh_adswidget_ul):not(.no-bullet) li a {
+	    border-bottom: 1px solid rgba(255,255,255,0.25);
+
+	   
+	}
+	.footer-widget a, .footer-widget a:visited {
+	    color: #ffffff;
+	  
+	
+	}
+	.footer-widget ul {
+	   list-style:none;
+	}
+	
+	.footer-widget ul:not(.sh-tabs):not(.no-bullet) li a {
+	    padding-bottom: 15px;
+	    margin-bottom: 15px;
+	    display: block;
+	 
+	}
+	.logo{
+		width:  60px;
+		height: 60px;
+	}
+	#col_id{
+		text-align: center;
+	}
+	#list{
+			float:left;
+			width: 100%;		
+			height: 400px;
+			overflow: scroll;
+			border: 2px solid #6699ff;
+			background-color: #f2f2f2;
+			border-radius: 3px
+	}
+		
+	#vidurl{
+		float: left;
+		width:80%;
+		margin-bottom:1em;
+		
+	}	
+	
+	#addurl {
+		float : left;
+		margin-bottom:1em;
+		margin-right: 0.7em;
+	}
+	
+	#input_img{
+		width:100%;
+		margin-bottom:1em
+	}
+		
+	#play{
+		float:left;
+		width: 500px;		
+		height: 300px;
+		border: 2px solid black;
+	}
+
+	#btn{
+		margin-bottom:1em
+	
+	}
+	video{
+		width: 100%;
+	}
+	
+	#main_upload{
+		border: 2px solid white;
+		border-right-color: #d9d9d9;
+		padding: 1em
+	}	
+	
+	#main_screenshot{
+		height: 835px;
+		overflow: scroll;
+		padding: 1em;
+		border: 2px solid white;
+		border-right-color: #d9d9d9; 
+	
+	}
+	
+	#btnmove{
+		margin : 1em;
+	}
+	
+	#resultdiv{
+		background-color: #f2f2f2; 
+		width: 100%;
+		margin : 1em;
+	}
+	
+	#canmove{
+		width: 100%
+	}
+	
+	.delscrn{
+		/* float:right; */
+		 background-color: white; 
+		
+	}
+
+	</style>
+	
+	<script>
+	
+/* 스크린샷 움짤 */
+	window.onload = function() {
+		var i = 1;
+		var j = 1;
+		document.getElementById("btn").onclick = function(){ //스크린샷 버튼 클릭
+		   	var canvars = document.createElement("canvas"); //캔버스생성
+		   	canvars.setAttribute("id", "myCanvas"+j); //id명 생성
+		   	j++;
+		   	
+		   	var vid = document.getElementById($("#screendiv > video").attr('id')); //vid 가져오기
+		   	canvars.getContext("2d").drawImage(vid, 10,10,295,160); //스크린샷~~
+		   	
+		   	var btn = document.createElement("button"); //input 생성
+		 
+		   	$(btn).attr({
+		   				"value":"del",
+		   				"onclick": "del("+i+")",
+		   				"class":"btn delscrn glyphicon glyphicon-remove"
+		   	
+		   				});
+		   	
+		   	var childdiv = document.createElement("div"); //div 생성 (childdiv)
+		   	childdiv.setAttribute("id", "childdiv"+i); //id = childdiv+i
+		   	childdiv.setAttribute("style", "float: left;"); //float로 띄우기
+		   	
+		   	i++; //생성 될 때마다 id번호 ++
+		   	
+		   	var parentdiv = document.getElementById("parentdiv"); //parentdiv 가져오기
+		   	
+		   	childdiv.appendChild(canvars); //childdiv의 자식 캔퍼스 생성
+		   	childdiv.appendChild(btn); //캔퍼스와 형제 버튼 생성
+		   	
+		   	parentdiv.appendChild(childdiv); //parentdiv 자식 appendChild넣기
+	    }
+		
+		/*
+		setInterval() -> 여러번
+		setTimeout() -> 한번
+		기본 javascript 자원과 jquery 혼용
+		*/
+		var canarr = []; //배열생성
+		var myVar;
+		document.getElementById("btnmove").onclick = function(){ //버튼클릭
+			
+			clearInterval(myVar); //setInterval 스탑
+			
+			for(k = 0; k<=canarr.length; k++){ // 움짤만들기 눌렀을 때 배열 값을 pop() 시키고 다시 생성
+				canarr.pop();	// pop()해준다.
+			}
+			// canarr = []; //초기화 간단한 방법
+			
+			var number = 0; //배열 인덱스
+			for(k = 1; k <= j; k++){ //배열 push
+				if(document.getElementById("myCanvas"+k) != null){ //만약 스크린샷을 찍고 삭제한게 있을 수 있기 때문
+					canarr.push(document.getElementById("myCanvas"+k)); //스크린샷 찍은 것들을 배열에 push
+				}
+			}
+			
+			if(canarr.length == 0){ //스크린샷 찍은 것이 없다면
+				alert("스크린샷이 없습니다.");
+			}else{
+				myVar = setInterval(function() { //0.2초 마다 실행
+					var canvas = document.getElementById("canmove"); //캔버스
+					canvas.getContext("2d").drawImage(canarr[number], 10, 10); //캔버스에 이미지를 그리다
+					number++;
+					if(number >= canarr.length){
+						number = 0; //계속 돌아갈 수 있게
+					}
+				}, $("#speed > option:selected").val());
+			}
+		}
+	}
+	
+	function del(number){ //삭제
+		var childdiv = document.getElementById("childdiv"+number); //자식div
+		var parentdiv = document.getElementById("parentdiv"); //부모div
+		
+		parentdiv.removeChild(childdiv); //부모div의 자식 자식div를 삭제한다
+	}
+/* 드래그앤 드랍 */
+	function allowDrop(ev) {
+	    ev.preventDefault();
+	}
+	
+	function drag(ev) {
+	    ev.dataTransfer.setData("text", ev.target.id);
+	}
+	
+	function drop(ev) {
+		if( $("#screendiv > video").is('video') == false){ //스크린div 안에 video 가 없을때만 넣을 수 있다.
+		    ev.preventDefault();
+		    var data = ev.dataTransfer.getData("text");
+		    ev.target.appendChild(document.getElementById(data));
+		} 
+	}
+	
+	function playVideo(ev){
+		document.getElementById("screendiv").appendChild(ev.target);
+		ev.target.setAttribute("controls", "controls");
+	}
+	
+	
+	function stopVid(ev){
+		$("#screendiv > video").appendTo('#list').removeAttr("controls"); //스크린div 안에 video 를 list에 복사한다. 컨트롤속성 제거
+	}
+	
+/* 업로드 */
+	 (function() { // DON'T EDIT BELOW THIS LINE
+	    var d = document, s = d.createElement('script');
+	    s.src = 'https://bitcamp-group3.disqus.com/embed.js';
+	    s.setAttribute('data-timestamp', + new Date());
+	    (d.head || d.body).appendChild(s);
+	    })();
+	
+	
+	var files_selected;	
+		
+	var index =0;
+	$(document).ready(function () {
+		$("#input_img").on("change",selectFile);
+		
+		
+		
+/* url로 업로드 하기 */
+		$('#addurl').click(function(){
+	 		//console.log("url"+$('#vidurl').val()); url잘 찍히는지 확인
+	 		
+	 		if($('#vidurl').val()==""){
+	 			alert("주소를 입력해 주세요!");
+	 			
+	 		}else{
+	 			
+		 		var vid = document.createElement("video");
+		 		vid.setAttribute("id", "vid" + index);
+		 		/* vid.setAttribute("width", "300");
+			 	vid.setAttribute("draggable", "true");
+			 	vid.setAttribute("ondragstart", "drag(event)"); */
+			 	$(vid).attr({
+					 		"id":"vid" + index,
+					 		"width": "300",
+					 		"draggable": "true",
+					 		"ondragstart": "drag(event)",
+					 		"src":$('#vidurl').val()
+			 				});
+		 		index++;
+			 	
+			 	$('#list').append(vid);
+	 			
+	 		}
+	 		
+	 	});
+	});
+	
+/* 파일로 업로드 하기 */
+	function selectFile(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);	
+		
+	 	filesArr.forEach(function(f) {
+			files_selected= f;
+			var reader = new FileReader();
+			
+		reader.onload = function(e){
+		 	var div = document.getElementById("list"); //list div
+		 	var vid = document.createElement("video"); //업로드했을 시 video 생성
+		 	$(vid).attr({
+				 		"id":"vid" + index,
+				 		"width": "300",
+				 		"draggable": "true",
+				 		"ondragstart": "drag(event)",
+				 		"src": e.target.result
+		 				});
+		 	index ++;
+			$('#list').append(vid);
+		}
+		reader.readAsDataURL(f);
+			
+		});
+	}
+ 
+</script>
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">♥진원이의 삼조에요 잇힝~♥</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="fileupload.html">fileupload</a></li>
+                    <li><a href="drag_drop.html">Drag&Drop</a></li>
+                    <li><a href="mousehover.html">MouseHover</a></li>
+                    <li><a href="GIFfile.html">GIFfile</a></li>
+                    <li><a href="dragGIFupload.html">Combination</a></li>
+                    <li><a href="introduce.html">Introduce</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+	<div>	
+		<div class="section">
+	        <div class="container">
+	            <div class="row main-low-margin">
+	                <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+	                    <h1>Combination </h1>
+	                    <h5>1. 동영상을 업로드 해보세요<br>
+	                    2. 업로드된 동영상 목록에서 영상을 드래그해 재생해 보세요<br>
+	                    3. 원하는 장면을 캡쳐해 보세요<br>
+	                    4. 캡쳐된 이미지를 활용해 움짤을 만들어 보세요</h5>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+
+  	<div class="space-bottom"></div>
+  	
+  	
+  <div class= "container">
+  	
+  	<!-- upload  & play Area -->
+  	<div id ="main_upload" class ="col-md-4 col-sm-4" >
+  		<fieldset >
+  			<legend class ="text-center">Add Video</legend>
+			<input class = "btn btn-primary btn-xs" type = "button" id ="addurl" value="URL추가">		  			
+			<input class ="text-center" type= "text" id = "vidurl" placeholder="URL을 입력하세요">
+  			<input type ="file" id ="input_img" class = "btn btn-default btn-sm"/>		  					
+  			<legend class ="text-center">Drag Video</legend>
+  			<div class="stylediv" id="screendiv" ondrop="drop(event)" ondragend="playVideo(event)" ondragleave="stopVid(event)" ondragover="allowDrop(event)" >
+  			</div>
+  			<input type="button" class = "btn btn-primary btn-block" id="btn" value="스크린샷">
+  			<legend class ="text-center">Video List</legend>
+  			<div id = "list"></div>
+					
+				
+  		</fieldset>
+  	
+  	
+  	</div>
+  	
+  	<!-- Screen Shot Area -->
+  	<div class ="col-md-4 col-sm-4" id="main_screenshot">
+  		<fieldset id = "parentdiv">
+  			<legend class ="text-center" >ScreenShots</legend>
+  		</fieldset>
+  	
+  	</div>
+  		
+  	<!-- Result Area -->
+  	<div class ="col-md-4 col-sm-4">
+	 
+	  	<fieldset>
+	  		<legend class ="text-center">Result</legend>
+			<input type="button" class = "btn btn-primary btn-block" id="btnmove" value="움짤 생성">
+			<select id="speed" class="dropdown">
+				<option value="50">초고속</option>
+				<option value="200" selected="selected">고속</option>
+				<option value="800">저속</option>
+				<option value="2000">거북이</option>
+			</select>
+			<canvas id="canmove"></canvas>				
+	  	</fieldset>
+  	
+  	</div>
+  </div>	
+  	
+  	
+  	
+
+		  	
+
+ <div class="space-bottom"></div>
+
+
+    <!--END SERVICES SECTION -->
+    <!--FOOTER SECTION -->
+
+     <div id="footer">
+        <div class="row">
+        
+	       	<div class="col-md-2">
+	       	
+				      <div id="linkcat-122" class="footer-widget widget_links">
+				      				
+							 <ul class="xoxo blogroll">
+								<h3><b>Links</b></h3>
+								<li><a href="index.html">HOME</a></li>
+								<li><a href="fileupload.html">fileupload</a></li>
+								<li><a href="drag_drop.html">Drag&Drop</a></li>
+								<li><a href="mousehover.html">MouseHover</a></li>
+								<li><a href="GIFfile.html">GIFfile</a></li>
+								<li><a href="dragGIFupload.html">Combination</a></li>
+								<li><a href="introduce.html">Introduce</a></li>
+		
+							</ul>
+						</div>
+	           </div>
+	        
+	        
+	        	<div class="col-md-3" id ="col_id">
+	             	<h3><b>About</b></h3>
+	                   
+				    <div class="tools tools-development">
+				      <h4>{ DEVELOPMENT TOOLS }</h4>
+				      <br>
+				      <img class="logo" alt="html5" src="images/html5.png" >
+				      <img class="logo" src="images/css3.png">
+				      <img class="logo" src="images/js.png">
+				      <img class="logo" src="images/bootstrap3.png">
+				      <img class="logo" src="images/jquery.gif">
+				      <br>
+				    </div>
+				    
+				    <div class="tools tools-collaboration">
+				      <h4>{ COLLABORATION TOOLS }</h4>
+				      <br>
+				      <img class="logo" src="images/trello.png">
+				      <img class="logo" src="images/slack.png">
+				      <img class="logo" src="images/sourcetree.png">
+				      <img class="logo" src="images/github1.png">
+				      <br>
+				    </div>
+	               
+	            </div>
+	        
+	        
+	          <div class="col-md-6">
+	                   <h4><b>Need Help ? Write Us.</b> </h4>
+	                   <div id="disqus_thread"></div>
+	          </div>
+         
+      </div>
+
+
+</div>
+
+    <!--END FOOTER SECTION -->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY LIBRARY -->
+    <script src="assets/js/jquery.js"></script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

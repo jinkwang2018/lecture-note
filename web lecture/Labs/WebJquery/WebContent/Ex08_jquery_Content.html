@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		/*
+			태그가 가지는 값을 (text) setter , getter 하는 함수 3가지
+			
+			text() getter , text('hell') setter >> p,span,div >> 태그 적용 안된다.
+			html() >> setter 할 때 html 태그 사용한다. 
+			val()  >> input 
+			
+			text() - Sets or returns the text content of selected elements
+			html() - Sets or returns the content of selected elements (including HTML markup)
+			val() - Sets or returns the value of form fields
+		
+		*/
+		$(function(){
+			$('#btn1').click(function(){
+				alert("text : " + $('#test').text()); //텍스트만 가져온다.(getter)
+			});
+			$('#btn2').click(function(){
+				alert("html : " + $('#test').html()); //태그 정보도 가지고온다.(getter)
+			});
+			$('#btn3').click(function(){
+				//$('#test').text("<div>AAAAAA</div>");
+				$('#test').html("<div>AAAAAA</div>");
+			});
+			$('#btn4').click(function(){
+				alert($('#test2').val());
+			});
+		});
+	</script>
+</head>
+<body>
+	<p id="test">안녕하세요<b>정말</b>방가방가</p>
+	<button id="btn1">show text</button>
+	<button id="btn2">show html</button>
+	<button id="btn3">html</button>
+	<button id="btn4">input tag</button>
+	<input type="text" id="test2" value="helloworld">
+</body>
+</html>

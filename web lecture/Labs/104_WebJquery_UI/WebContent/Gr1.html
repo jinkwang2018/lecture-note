@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Selectmenu - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+    fieldset {
+      border: 0;
+    }
+    label {
+      display: block;
+      margin: 30px 0 0 0;
+    }
+    .overflow {
+      height: 200px;
+    }
+    
+    img{
+      width : 250px;
+  
+    }
+    
+    #newdivst {
+      margin : 5px;
+      border : 1px solid #0000FF;
+      width : 300px;
+    }
+
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+
+  var team = [
+
+	  {name:'김정권', age:'30', gender:'남', food:'한식'},
+	  {name:'황진국', age:'32', gender:'남', food:'한식'},
+	  {name:'전형준', age:'30', gender:'남', food:'한식'},
+	  {name:'김명수', age:'25', gender:'여', food:'양식'},
+	  {name:'김준수', age:'28', gender:'남', food:'일식'},
+	  {name:'김희준', age:'25', gender:'남', food:'중식'},
+	  {name:'강진광', age:'28', gender:'남', food:'중식'}
+
+  ];
+
+  $( function() {
+    $( "#age" ).selectmenu();
+    $( "#gender" ).selectmenu();
+    $( "#food" ).selectmenu();
+
+   	$('#submitbtn').click(function () {
+   	$('#target').empty();
+      
+   	var name = [];
+   		
+   	var selected_data = {
+   					age:$('#age').val(),
+   					gender:$('#gender').val(),
+   					food:$('#food').val()
+          }
+
+            $(team).each(function (index, element) {
+                if(selected_data.age == element.age){
+                  if(selected_data.gender == element.gender){
+                    if(selected_data.food == element.food){
+                                          name.push(element.name);
+                    }
+                  }
+              }
+          });
+
+
+    $(team).each(function (index, element) {
+    var newdiv = document.createElement("div");
+
+    	$(name).each(function (index, ele){
+
+    	if(ele == element.name) {
+	    var img = document.createElement("img");
+        $(img).attr('src', 'images/' + ele + '.png');
+        $(newdiv).append(img);
+        $(newdiv).append('<br>');
+                
+        var temp = element.name + '/' + element.age + '/' + element.gender + '/' + element.food + '<br>';
+        $(newdiv).append(temp);
+
+        $(newdiv).attr('id','newdivst');
+        
+        
+        
+        $('#target').append(newdiv);
+    		 }
+    	});
+    	});
+
+    }); // end - click()
+  });
+  </script>
+</head>
+<body>
+
+<div id = 'menu'>
+ <form>
+
+  <fieldset>
+
+    <label for="age">나이</label>
+    <select name="age" id="age">
+      <option>25</option>
+      <option>26</option>
+      <option selected="selected">27</option>
+      <option>28</option>
+      <option>29</option>
+      <option>30</option>
+      <option>31</option>
+      <option>32</option>
+    </select>
+
+    <label for="gender">성별</label>
+    <select name="gender" id="gender">
+        <option>남</option>
+        <option>여</option>
+    </select>
+
+    <label for="food">음식 기호</label>
+    <select name="food" id="food">
+      <option>한식</option>
+      <option>중식</option>
+      <option>일식</option>
+      <option>양식</option>
+
+    </select>
+
+  </fieldset>
+
+	<input type="button" id="submitbtn" value="검색" />
+</form>
+
+ </div>
+
+<div id='target'>
+</div>
+
+
+</body>
+</html>

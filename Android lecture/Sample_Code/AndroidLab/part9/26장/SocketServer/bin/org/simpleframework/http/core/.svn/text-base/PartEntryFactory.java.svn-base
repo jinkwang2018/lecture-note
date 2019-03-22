@@ -1,0 +1,79 @@
+/*
+ * PartEntryFactory.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+import org.simpleframework.util.buffer.Allocator;
+
+/**
+ * This <code>PartEntryFactory</code> object provides a factory for
+ * creating part entry consumers. The part entry consumers created
+ * read individual entries from a list of parts within a stream. 
+ * This is basically a convenience factory for the list consumer.
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.http.core.PartListConsumer
+ */
+class PartEntryFactory {
+   
+   /**
+    * This is used to allocate the buffers used by the entry.
+    */ 
+   private Allocator allocator;
+
+   /**
+    * This is used to accumulate all the parts of the upload.
+    */ 
+   private PartList list;
+   
+   /**
+    * This is the terminal token used to delimiter the upload.
+    */ 
+   private byte[] terminal;
+   
+   /**
+    * Constructor for the <code>PartEntryFactory</code> object.
+    * This is used to create a factory for entry consumers that
+    * can be used to read an entry from a part list.
+    * 
+    * @param allocator this is the allocator used for buffers
+    * @param list this is the list of parts that are extracted
+    * @param terminal this is the terminal buffer to be used
+    */
+   public PartEntryFactory(Allocator allocator, PartList list, byte[] terminal) {
+      this.allocator = allocator;
+      this.terminal = terminal;
+      this.list = list;
+   }
+   
+   
+   /**
+    * This creates a new part entry consumer that can be used to
+    * read the next part from the list. The consumer instantiated
+    * by this factory acquires the allocator, list and boundary 
+    * from the enclosing part list consumer instance.
+    * 
+    * @return a part entry consumer for this part list consumer 
+    */
+   public PartEntryConsumer getInstance() {
+      return new PartEntryConsumer(allocator, list, terminal);
+   }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('body > div > *').css('color','gold'); //자식 선택자 : >
+				
+				
+				$('input[type = text]').css('color','green');
+				console.log($('input[type=text]').val()); //val 함수(getter parameter없으면,setter parameter있으면)
+				//getter는 페이지에 input[type=text]가 3개 있지만 계층 트리 이므로 하나만 뽑힌다.
+				//일반 적으로는 id 속성을 부여해서 사용한다.
+				$('input[type=text]').val("hong"); //setter 모든 요소에 적용.
+				console.log($('input[type=text]').val());
+				
+				//input type password인 것의 태그 값을 1111로 설정
+				$('input[type=password]').val("1111");
+				console.log($('input[type=password]').val());
+				
+				$('tr:odd').css('background','hotpink');
+				$('tr:even').css('background','pink');
+				/*
+				기본 javascript 자원과 jquery 혼용 가능
+				setTimeout(function() {
+					var value = $('select > option:selected').val();
+					alert("select tag value " + value);
+				},3000);
+				*/
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div>
+			<ul>
+				<li>사과</li>
+				<li>배</li>
+				<li>수박</li>
+			</ul>
+		</div>
+		<div>
+			<ul>
+				<li>사과2</li>
+				<li>배2</li>
+				<li>수박2</li>
+			</ul>
+		</div>
+		<input type = "text" value = "input type1">
+		<input type = "text" value = "input type2">
+		<input type = "text" value = "input type3">
+		<input type = "password">
+		<input type = "radio">
+		<input type = "file">
+		<hr>
+		<table>
+			<tr>
+				<td>이름</td>
+				<td>나이</td>
+				<td>취미</td>
+			</tr>
+			<tr>
+				<td>홍길동</td>
+				<td>50</td>
+				<td>훔치기</td>
+			</tr>
+			<tr>
+				<td>이순신</td>
+				<td>10</td>
+				<td>싸움</td>
+			</tr>
+			<tr>
+				<td>여러분</td>
+				<td>20</td>
+				<td>잠자기</td>
+			</tr>
+		</table>
+		<hr>
+		<select>
+			<option>농구</option>
+			<option>축구</option>
+			<option>야구</option>
+			<option>배구</option>
+		</select>
+		
+	</body>
+</html>

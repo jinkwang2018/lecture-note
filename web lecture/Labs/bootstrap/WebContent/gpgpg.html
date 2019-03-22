@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>menu</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/dark-hive/jquery-ui.css">
+		<style>
+			  .ui-tabs-vertical { width: 55em; }
+			  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+			  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+			  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+			  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+			  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+  		</style>
+		
+		<script type="text/javascript">
+		$( function() {
+				
+		    $( "#tabs" ).tabs({event: "mouseover"});
+		        
+		    $( "#tabs-1" ).tabs({event: "mouseover"}).addClass( "ui-tabs-vertical ui-helper-clearfix" );
+		    $( "#tabs-1 li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		    $( "#tabs-2" ).tabs({event: "mouseover"}).addClass( "ui-tabs-vertical ui-helper-clearfix" );
+		    $( "#tabs-2 li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		    $( "#tabs-3" ).tabs({event: "mouseover"}).addClass( "ui-tabs-vertical ui-helper-clearfix" );
+		    $( "#tabs-3 li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		    $( "#tabs-4" ).tabs({event: "mouseover"}).addClass( "ui-tabs-vertical ui-helper-clearfix" );
+		    $( "#tabs-4 li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		    
+		   
+		  } );
+		
+		 	
+		</script>
+	</head>
+	
+	<body>
+		
+	
+		<div id="tabs">
+		  <ul>
+		    <li id = 'list1'><a href="#tabs-1">메뉴</a></li>
+		    <li id = 'list2'><a href="#tabs-2">조원소개</a></li>
+		    <li id = 'list3'><a href="#tabs-3">과제</a></li>
+		    <li id = 'list4'><a href="#tabs-4">과제</a></li>
+		  </ul>
+		
+		<div id="tabs-1">
+		  <ul>
+		    <li><a href="#text-1">1</a></li>
+		    <li><a href="#text-2">2</a></li>
+		    <li><a href="#text-3">3</a></li>
+		    <li><a href="#text-4">4</a></li>
+		  </ul>
+		  <div id="text-1">
+		    <h2>a</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-2">
+		    <h2>b</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-3">
+		    <h2>c</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-4">
+		    <h2>d</h2>
+		    <p></p>
+		  </div>
+		</div>
+		  
+	    <div id="tabs-2">
+		  <ul>
+		    <li><a href="#text-1">조장>김정권</a></li>
+		    <li><a href="#text-2">부조장>김희준</a></li>
+		    <li><a href="#text-3">조원>황진국</a></li>
+		    <li><a href="#text-4">조원>전형준</a></li>
+		    <li><a href="#text-5">조원>김준수</a></li>
+		    <li><a href="#text-6">조원>강진광</a></li>
+		    <li><a href="#text-7">조원>김명수</a></li>
+		  </ul>
+		  <div id="text-1">
+		    <h2></h2>
+		    <p> </p>
+		  </div>
+		  <div id="text-2">
+		    <h2></h2>
+		    <p></p>
+		  </div>
+		  <div id="text-3">
+		    <h2></h2>
+		    <p></p>
+		  </div>
+		  <div id="text-4">
+		    <h2></h2>
+		    <p></p>
+		  </div>
+		  <div id="text-5">
+		    <h2></h2>
+		    <p>
+		     </p>
+		  </div>
+		  <div id="text-6">
+		    <h2></h2>
+		    <p></p>
+		  </div>
+		  <div id="text-7">
+		    <h2></h2>
+		    <p></p>
+		  </div>
+		</div>
+		  
+		<div id="tabs-3">
+		  <ul>
+		    <li><a href="#text-1">1</a></li>
+		    <li><a href="#text-2">2</a></li>
+		    <li><a href="#text-3">3</a></li>
+		    <li><a href="#text-4">4</a></li>
+		  </ul>
+		  <div id="text-1">
+		    <h2>ㄱ</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-2">
+		    <h2>ㄴ</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-3">
+		    <h2>ㄷ</h2>
+		    <p></p>
+		    <p></p>
+		  </div>
+		  <div id="text-4">
+		    <h2>ㄹ</h2>
+		    <p></p>
+		  </div>
+		</div>
+		  
+		<div id="tabs-4">
+		   <ul>
+		    <li><a href="#text-1">1</a></li>
+		    <li><a href="#text-2">2</a></li>
+		    <li><a href="#text-3">3</a></li>
+		    <li><a href="#text-4">4</a></li>
+		  </ul>
+		  <div id="text-1">
+		    <h2>1</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-2">
+		    <h2>2</h2>
+		    <p></p>
+		  </div>
+		  <div id="text-3">
+		    <h2>3</h2>
+		    <p></p>
+		    
+		  </div>
+		  <div id="text-4">
+		    <h2>4</h2>
+		    <p></p>
+		  </div>
+		</div>
+		
+		
+		
+		</div>  
+		  
+		
+		
+		
+	</body>
+</html>

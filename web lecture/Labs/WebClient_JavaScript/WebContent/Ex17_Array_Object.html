@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		
+		//while
+		var i = 1;
+		var sum = 0;
+		while(i <= 10){
+			sum += i;
+			i++;
+		}
+		document.write("sum : " + sum + "<br>");
+		
+		var sum2 = 0;
+		
+		
+		
+		//for
+		for(var i = 0 ; i <= 10 ; i++){
+			if(i%3 == 0){
+				console.log("i : "+i);
+				console.log(0%3);
+				//continue; //3의 배수는 누적하지 않겠다
+				break;
+			}
+			sum2 += i;
+		}
+		document.write("sum2 : " + sum2 + "<br>");
+		
+		
+		
+		//do-while
+		var a = 1;
+		do{
+			document.write(a+ "<br>");
+			a++;
+		}while(a < 11);
+		
+		
+		
+		//array *********(암기)
+		/*
+		int [] arr = new int[10];
+		int [] arr = new int[]{10,20,30};
+		int [] arr = new int{10,20,30};
+		*/
+		
+		var arr = [10,20,30]; // =int [] arr = new int{10,20,30};
+		for(var i = 0 ; i < 3 ; i++){
+			document.write(arr[i] + "<br>");
+		}
+		//javascript에서 배열을 만드는 기본 방법
+		var eng = new Array(3); // =int [] arr = new int[10];
+		
+		eng[0] = 100;
+		eng[1] = 200;
+		eng[2] = 300;
+		for(var i = 0 ; i < eng.length ; i++){
+			document.write(eng[i] + "<br>");
+		}
+		
+		//배열구조가  stack이다.
+		eng.push();
+		eng.pop();
+		
+		
+		//1. javascript 배열 기본 형식 (Array()) / int [] arr = new int[10];
+		var arr = new Array(5);
+		
+		//2. int [] arr = new int[]{10,20,30};
+		var arr2 = new Array(10,20,30);
+		
+		//3. int [] arr = new int{10,20,30};
+		var arr3 = [101,210,310];
+	</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

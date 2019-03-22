@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			/*  
+				$.ajax() 함수를 사용해서 id 값 pwd 값 비동기로 전송하고
+				그 결과에 따라서 : success , fail
+				$('#message').html('<p>로그인 성공</p>')
+				$('#message').html('<p>로그인 실패</p>')
+				Jquery effect 효과 적용 (슬라이드 효과)
+				
+			*/
+			$(function(){
+				$('#login').click(function(){
+					var actionurl= $('#form1').attr('action');
+					//actionurl > Ex08_Ajax_loginok.jsp
+					//attr() , val() , text() , html()  
+					var form_data = {
+								      user_id:$('#user_id').val(),
+								      user_pw:$('#user_pw').val()
+						            }	
+					$.ajax(
+						{
+							type:"POST", //전송 타입
+							url:actionurl, //전송 주소
+							data:form_data, //jsp?user_id=hong&user_pw=1003
+							dataType:"html", // 서버가 클라이언트 전달하는 문서의 타입
+							success:function(responsedata){
+								console.log(">" + responsedata + "<");
+								//서버가 응답한 데이터가 : text, html 빈 문자열 
+								var result = responsedata.trim();//javascript 공백 제거 함수
+								console.log(">"+result+"<");
+								
+								if(result == 'success'){
+									$('#message').html("<p style='color:green;font-weight:bold'>로그인 성공</p>");
+								    $('#form1').slideUp();
+								}else{
+									$('#message').html("<p style='color:red;font-weight:bold'>로그인 실패</p>");
+								}
+								
+							},
+							error:function(xhr){
+								alert('error :' + xhr.status + "/" + xhr.statusText);
+							}
+						}		
+					);
+					
+					
+				});
+			});
+		  
+		</script>
+</head>
+<body>
+	<form id="form1" name="form1" action="Ex08_Ajax_loginok_JSTL.jsp" method="post">
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td><input type='text' id='user_id' name='user_id' tabindex='1' /></td>
+				<td rowspan='2'>
+					<input type='button' id='login' tabindex='3' value='로그인' style='height: 50px' /></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type='password' id='user_pw' name='user_pw' tabindex='2' /></td>
+			</tr>
+		</table>
+	</form>
+	<div id="message"></div>
+</body>
+</html>

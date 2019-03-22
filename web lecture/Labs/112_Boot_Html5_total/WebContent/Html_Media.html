@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">		
+    function vidplay() {
+       var video = document.getElementById("Video");
+       var button = document.getElementById("play");
+       if (video.paused) {
+    	   video.play();    	  
+    	   button.textContent = "Pause";        
+       } else {
+    	   video.pause();
+    	   button.textContent = "Play";
+       }
+    }
+
+    function restart() {
+    	var video = document.getElementById("Video");
+        video.currentTime = 0;
+    }
+
+    function skip(value) {
+        var video = document.getElementById("Video");
+        video.currentTime += value;
+    }
+    
+    function makeBig() {    	
+        Video.width = 1000; 
+    } 
+
+    function makeSmall() {    	
+        Video.width = 600; 
+    } 
+    
+    function makeNormal() {    	
+        Video.width = 800; 
+    }
+    function mute() { 
+    	Video.muted = true;
+    } 
+    function disableMute() { 
+    	Video.muted = false;
+    }
+    function changeVolume(v) {
+        var new_v = Video.volume + v;
+        if (0 <= new_v && new_v <= 1.0) {
+           Video.volume = new_v;
+        }
+    }
+    function getPlaySpeed() { 
+        alert(Video.playbackRate);
+    } 
+
+    function setPlaySpeed() { 
+        Video.playbackRate = 0.5;
+    }
+    
+    function setPlaySpeed2() { 
+        Video.playbackRate = 1;
+    }    
+</script>
+</head>
+<body>
+<video id="Video" width="800" controls>
+	 <!-- <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></source> -->	 
+     <!-- <source src="images/infinite.mp4" type="video/mp4"></source> -->
+     <source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4"></source>
+</video>
+
+<div id="buttonbar">
+    <button onclick="restart();">Restart</button> 
+    <button onclick="skip(-10)">REW</button>
+    <button onclick="vidplay()">Play</button>
+    <button onclick="skip(10)">FF</button>
+    <button onclick="changeVolume(0.2)">Vol_UP</button>
+  	<button onclick="changeVolume(-0.2)">Vol_DN</button>
+  	<button onclick="mute()">Mute</button>
+  	<button onclick="disableMute()">Sound</button> 
+    <br>
+    <button onclick="makeBig()">Big</button>
+  	<button onclick="makeSmall()">Small</button>
+  	<button onclick="makeNormal()">Normal</button>  	
+  	<button onclick="getPlaySpeed()" type="button">CurrentSpeed</button>
+	<button onclick="setPlaySpeed()" type="button">SlowMotion</button>
+	<button onclick="setPlaySpeed2()" type="button">OriginalSpeed</button>	
+</div>
+</body>
+</html>

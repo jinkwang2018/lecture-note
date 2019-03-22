@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+	<script type="text/javascript">
+		$(function(){
+			
+			$('#event_date').datepicker(
+					{
+						dateFormat: "yy년mm월dd일"
+					}
+			);
+			
+			
+			
+			$('#dialog').dialog(
+				{
+				   autoOpen: false,
+				   show:{effect:"blind",duration: 2000},
+				   hide:{effect:"explode",duration: 1000},
+				   /*  
+				    submit : 팝업창에 값을 read 해서 부모창에 전달
+				    reset  : 팝업창에 입력값을 초기화(빈문자열)
+					cancel : 팝업창 닫기 (초기화)				   
+				   */
+				   
+				   buttons:{
+					          "submit":function(){
+					        	  var eventname = $('#event_name').val();
+					        	  var eventdate = $('#event_date').val();
+					        	  
+					        	  //$('p').html('aaa'); <p>aaa</p>
+					        	  //$('<h3></h3>').html('aaa') > <h3>aaa</h3>
+					        	  //선택자 부분에 태그를 기술하면 <h3></h3> > createElement 같은 효과
+					        	  $('<h3></h3>').html(eventname + ":"+eventdate).appendTo('#output');
+					        	  $('#dialog').dialog('close');
+					          },
+					          "reset":function(){
+					        	  $('#event_name').val('');
+					        	  $('#event_date').val('');
+					          },
+					          "cancel":function(){
+					        	  $('#event_name').val('');
+					        	  $('#event_date').val('');
+					        	  $('#dialog').dialog('close');
+					          }
+				           },
+				   //resizable: false,
+				   modal:true  //팝업 창을 닫기 전까지는  opener(부모창) 작업 불가
+				}		
+			);
+			
+			$('#open_button').click(function(){
+				$('#dialog').dialog('open');
+			
+			});
+			
+		});
+	
+	</script>
+</head>
+<body>
+	<h3 id="open_button">일정생성</h3>
+	<hr>
+	<div id="output"></div>
+	<!-- POPUP DIV -->
+	<div id="dialog" title="팝업창">
+		<h3>일정만들기</h3>
+		<label for="event_name">일정이름</label>
+		<input type="text" id="event_name"><br>
+		<label for="event_date">일정날짜</label>
+		<input type="text" id="event_date" readonly><br>
+	</div>
+</body>
+</html>
+
+
+
+
+

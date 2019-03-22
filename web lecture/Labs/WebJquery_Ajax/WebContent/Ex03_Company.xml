@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Companys>
+	<Company CompanyType="private">
+		<CompanyName>kosta</CompanyName>
+		<CompanyNumber>2017</CompanyNumber>
+		<CompanyAddress>경기도 판교</CompanyAddress>
+		<Name></Name>
+	</Company>
+	<Company CompanyType="crop">
+		<CompanyName>kakaT</CompanyName>
+		<CompanyNumber>2016</CompanyNumber>
+		<CompanyAddress>제주 서귀포시</CompanyAddress>
+		<Name></Name>
+	</Company>
+</Companys>

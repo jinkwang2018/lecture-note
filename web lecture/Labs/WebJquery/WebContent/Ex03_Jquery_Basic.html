@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			/*
+			선택자(selector)
+			$("*")	Selects all elements	
+			$(this)	Selects the current HTML element	
+			$("p.intro")	Selects all <p> elements with class="intro"	
+			$("p:first")	Selects the first <p> element	
+			$("ul li:first")	Selects the first <li> element of the first <ul>	
+			$("ul li:first-child")	Selects the first <li> element of every <ul>	
+			$("[href]")	Selects all elements with an href attribute	
+			$("a[target='_blank']")	Selects all <a> elements with a target attribute value equal to "_blank"	
+			$("a[target!='_blank']")	Selects all <a> elements with a target attribute value NOT equal to "_blank"	
+			$(":button")	Selects all <button> elements and <input> elements of type="button"	
+			$("tr:even")	Selects all even <tr> elements	
+			$("tr:odd")	Selects all odd <tr> elements
+			
+			https://www.w3schools.com/jquery/jquery_selectors.asp
+			*/
+			
+			$(document).ready(function(){
+				$('button').click(function(){
+					//$(this).hide();
+					$("ul li:first-child").hide();
+					$('tr:odd').css('color','red'); //1,3,5
+					$('tr:even').css('color','blue'); //0,2,4
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+				<p>List 1:</p>
+		<ul>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Tea</li>
+		</ul>
+		
+		<p>List 2:</p>
+		<ul>
+		  <li>Coffee</li>
+		  <li>Milk</li>
+		  <li>Tea</li>
+		</ul>
+		<button>Click me</button>
+
+		<h1>Welcome to My Web Page</h1>
+		<table border="1">
+		  <tr>
+		    <th>Company</th>
+		    <th>Country</th>
+		  </tr>
+		  <tr>
+		    <td>Alfreds Futterkiste</td>
+		    <td>Germany</td>
+		  </tr>
+		  <tr>
+		    <td>Berglunds snabbköp</td>
+		    <td>Sweden</td>
+		  </tr>
+		  <tr>
+		    <td>Centro comercial Moctezuma</td>
+		    <td>Mexico</td>
+		  </tr>
+		  <tr>
+		    <td>Ernst Handel</td>
+		    <td>Austria</td>
+		  </tr>
+		  <tr>
+		    <td>Island Trading</td>
+		    <td>UK</td>
+		  </tr>
+		</table>
+	</body>
+</html>

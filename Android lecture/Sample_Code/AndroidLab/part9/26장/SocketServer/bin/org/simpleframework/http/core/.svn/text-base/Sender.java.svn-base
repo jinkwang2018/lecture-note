@@ -1,0 +1,101 @@
+/*
+ * Sender.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+/**
+ * The <code>Sender</code> object is used to send data over the TCP
+ * transport. This provides direct contact with the connected socket.
+ * Delivery over a sender implementation can be either SSL based or
+ * direct as with plain HTTP connections. It is the responsibility 
+ * of the implementation to provide such behavior as required.
+ *
+ * @author Niall Gallagher
+ */ 
+interface Sender {
+  
+   /**
+    * This method is used to deliver the provided array of bytes to
+    * the underlying transport. Depending on the connection type the
+    * array may be encoded for SSL transport or send directly. Any
+    * implementation may choose to buffer the bytes for performance.
+    *
+    * @param array this is the array of bytes to send to the client
+    */             
+   public void send(byte[] array) throws IOException;
+   
+   /**
+    * This method is used to deliver the provided array of bytes to
+    * the underlying transport. Depending on the connection type the
+    * array may be encoded for SSL transport or send directly. Any
+    * implementation may choose to buffer the bytes for performance.
+    *
+    * @param array this is the array of bytes to send to the client
+    * @param off this is the offset within the array to send from
+    * @param len this is the number of bytes that are to be sent
+    */    
+   public void send(byte[] array, int off, int len) throws IOException;
+   
+   /**
+    * This method is used to deliver the provided buffer of bytes to
+    * the underlying transport. Depending on the connection type the
+    * array may be encoded for SSL transport or send directly. Any
+    * implementation may choose to buffer the bytes for performance.
+    *
+    * @param buffer this is the buffer of bytes to send to the client
+    */             
+   public void send(ByteBuffer buffer) throws IOException;
+   
+   /**
+    * This method is used to deliver the provided buffer of bytes to
+    * the underlying transport. Depending on the connection type the
+    * array may be encoded for SSL transport or send directly. Any
+    * implementation may choose to buffer the bytes for performance.
+    *
+    * @param buffer this is the buffer of bytes to send to the client
+    * @param off this is the offset within the buffer to send from
+    * @param len this is the number of bytes that are to be sent
+    */    
+   public void send(ByteBuffer buffer, int off, int len) throws IOException;
+   
+   /**
+    * This method is used to flush the contents of the buffer to 
+    * the client. This method will block until such time as all of
+    * the data has been sent to the client. If at any point there
+    * is an error sending the content an exception is thrown.    
+    */    
+   public void flush() throws IOException;
+   
+   /**
+    * This is used to close the sender and the underlying transport.
+    * If a close is performed on the sender then no more bytes can
+    * be read from or written to the transport and the client will
+    * received a connection close on their side.
+    */      
+   public void close() throws IOException;
+
+}
+
+
+
+

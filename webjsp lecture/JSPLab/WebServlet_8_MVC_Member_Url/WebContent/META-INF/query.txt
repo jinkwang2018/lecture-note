@@ -1,0 +1,26 @@
+--회원가입 테이블
+create table mvcregister(
+ id number constraint pk_mvcregister_id primary key,
+ pwd varchar2(20) not null,
+ email varchar2(20) not null
+);
+
+Model2 기반 MVC
+MODEL
+--DTO :  mvcregister 테이블 같은 구조의 클래스 (getter , setter )구현
+--DAO : CRUD 함수 (DB 연동 connection pool (DBCP))
+--SERVICE 현재 생략
+
+VIEW
+--jsp (EL & JSTL)
+--보안상 > WEB-INF > Register 폴더  관리
+
+CONTROLLER
+-- frontcontroller 역활  servlet (하나의 servlet 모든 요청 받고 처리)
+
+
+1. 연결 테스트 (context.xml , jsp)
+
+2. package 구조 설정
+
+

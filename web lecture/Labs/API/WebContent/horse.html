@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+
+<html>
+
+<head>
+
+<title>Web Worker</title>
+
+ 
+
+<style>
+
+.divBorder {
+
+  width: 100px;
+
+  text-align: right;
+
+  //border: 1px solid black;
+
+}
+
+</style>
+
+ 
+
+<script>
+
+//worker 사용 가능 여부
+
+var enabledWorker = false;
+
+ 
+
+//worker
+
+var worker;
+
+ 
+
+//초기화
+
+function init() {
+
+ 
+
+  var runningDiv = document.getElementById("runningDiv");
+
+ 
+
+  if(typeof(Worker) != "undefined") {
+
+    //worker를 사용할 수 있으면
+
+ 
+
+    //worker 사용 가능 여부에 true
+
+    enabledWorker = true;
+
+ 
+
+    //CSS 스타일 지정
+
+    runningDiv.className = "divBorder";
+
+    //말 그림 표시
+
+    runningDiv.innerHTML = "<img src='tomcat.png'/>";
+
+  } else {
+
+ 
+
+    //worker 사용 가능 여부에 false
+
+    enabledWorker = false;
+
+ 
+
+    //worker 사용 불가 문구 표시
+
+    runningDiv.innerHTML = "Sorry, your browser does not support Web Workers...";
+
+  }
+
+}
+
+ 
+
+//worker 시작
+
+function startWorker() {
+
+ 
+
+  //worker 사용할 수 없으면 리턴
+
+  if(!enabledWorker)
+
+    return;
+
+ 
+
+  //자바스크립트 파일로부터 worker 생성
+
+  worker = new Worker("horse.js");
+
+  //worker가 메시지를 받았을 때(위의 자바스크립트 파일 내용에서 postMessage 함수 호출 시)
+
+  worker.onmessage = function (event) {
+
+    //말이 그려질 DIV의 크기 증가
+
+    var runningDiv = document.getElementById("runningDiv");
+
+    runningDiv.style.width = event.data + "px";
+
+  };
+
+}
+
+ 
+
+//worker 중지
+
+function stopWorker() {
+
+ 
+
+  //worker 사용할 수 없으면 리턴
+
+  if(!enabledWorker)
+
+    return;
+
+ 
+
+  //worker 중지
+
+  worker.terminate();
+
+}
+
+ 
+
+</script>
+
+</head>
+
+<body>
+
+ 
+
+<input type="button" value="START" onclick="startWorker()"/>
+
+<input type="button" value="STOP" onclick="stopWorker()"/>
+
+<br><br>
+
+ 
+
+<div id="runningDiv">
+
+</div>
+
+ 
+
+<script>
+
+  init();
+
+</script>
+
+ 
+
+</body>
+
+</html>

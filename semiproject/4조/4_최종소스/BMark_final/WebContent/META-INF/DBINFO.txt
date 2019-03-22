@@ -1,0 +1,321 @@
+/* 사이트정보 게시판2 */
+CREATE TABLE SITEINFOBOARD (
+	MNBID NUMBER NOT NULL, /* 메인게시판번호 */
+	CCODE NUMBER NOT NULL, /* 카테고리코드 */
+	NAME VARCHAR2(50) NOT NULL, /* 사이트명 */
+	ADDR VARCHAR2(255) NOT NULL, /* 주소 */
+	CONTENT VARCHAR2(200), /* 설명 */
+	HIT NUMBER DEFAULT 0, /* 조회수 */
+	GOOD NUMBER DEFAULT 0, /* 추천 */
+	BAD NUMBER DEFAULT 0, /* 비추천 */
+	TYPE VARCHAR2(10), /* 분류 */
+	WRITER VARCHAR2(30), /* 등록자 */
+	WRITEDAY DATE /* 등록일 */
+);
+
+
+/* 사이트 카테고리 */
+CREATE TABLE SCATEGORY (
+	CCODE NUMBER NOT NULL, /* 카테고리코드 */
+	CNAME VARCHAR2(30) /* 카테고리명 */
+);
+
+
+/* 회원 */
+CREATE TABLE MEMBER (
+	USERID VARCHAR2(30) NOT NULL, /* 회원아이디 */
+	PW VARCHAR2(20) NOT NULL, /* 비밀번호 */
+	NAME VARCHAR2(30) NOT NULL, /* 이름 */
+	EMAIL VARCHAR2(50) NOT NULL, /* 이메일 */
+	PHONE VARCHAR2(15), /* 핸드폰번호 */
+	ZONECODE CHAR(5), /* 우편번호 */
+	ADDR1 VARCHAR2(300), /* 주소1 */
+	ADDR2 VARCHAR2(200), /* 주소2 */
+	REGDAY DATE, /* 가입일 */
+	GID NUMBER /* 그룹ID */
+);
+
+
+/* 그룹 */
+CREATE TABLE TEAM (
+	GID NUMBER NOT NULL, /* 그룹ID */
+	NAME VARCHAR2(50), /* 새 컬럼 */
+	PW VARCHAR2(20), /* 비밀번호 */
+	CONTENT VARCHAR2(200), /* 설명 */
+	REGISTER VARCHAR2(30), /* 등록자 */
+	REGDAY DATE /* 등록일 */
+);
+
+
+/* 마이 북마크 */
+CREATE TABLE MYBOARD (
+	MNBID NUMBER NOT NULL, /* 메인게시판번호 */
+	USERID VARCHAR2(30) NOT NULL /* 회원아이디 */
+);
+
+
+/* 그룹 북마크 */
+CREATE TABLE TEAMBOARD (
+	MNBID NUMBER NOT NULL, /* 메인게시판번호 */
+	GID NUMBER NOT NULL /* 그룹ID */
+);
+
+
+/* 회원 추천 */
+CREATE TABLE SEVAL (
+	MNBID NUMBER NOT NULL, /* 메인게시판번호 */
+	USERID VARCHAR2(30) NOT NULL, /* 회원아이디 */
+	EVAL VARCHAR2(10) NOT NULL, /* 평가 */
+	EVALDAY DATE /* 날짜 */
+);
+
+
+
+
+CREATE UNIQUE INDEX PK_SITEINFOBOARD
+	ON SITEINFOBOARD (
+		MNBID ASC
+	);
+
+ALTER TABLE SITEINFOBOARD
+	ADD
+		CONSTRAINT PK_SITEINFOBOARD
+		PRIMARY KEY (
+			MNBID
+		);
+
+CREATE UNIQUE INDEX PK_SCATEGORY
+	ON SCATEGORY (
+		CCODE ASC
+	);
+
+ALTER TABLE SCATEGORY
+	ADD
+		CONSTRAINT PK_SCATEGORY
+		PRIMARY KEY (
+			CCODE
+		);
+    
+ALTER TABLE SITEINFOBOARD
+	ADD
+		CONSTRAINT FK_SCATEGORY_TO_SITEINFOBOARD
+		FOREIGN KEY (
+			CCODE
+		)
+		REFERENCES SCATEGORY (
+			CCODE
+		);
+
+CREATE UNIQUE INDEX PK_MEMBER
+	ON MEMBER (
+		USERID ASC
+	);
+
+ALTER TABLE MEMBER
+	ADD
+		CONSTRAINT PK_MEMBER
+		PRIMARY KEY (
+			USERID
+		);
+
+CREATE UNIQUE INDEX PK_TEAM
+	ON TEAM (
+		GID ASC
+	);
+
+ALTER TABLE TEAM
+	ADD
+		CONSTRAINT PK_TEAM
+		PRIMARY KEY (
+			GID
+		);
+    
+ALTER TABLE MEMBER
+	ADD
+		CONSTRAINT FK_TEAM_TO_MEMBER
+		FOREIGN KEY (
+			GID
+		)
+		REFERENCES TEAM (
+			GID
+		);
+
+CREATE UNIQUE INDEX PK_MYBOARD
+	ON MYBOARD (
+		MNBID ASC,
+		USERID ASC
+	);
+
+ALTER TABLE MYBOARD
+	ADD
+		CONSTRAINT PK_MYBOARD
+		PRIMARY KEY (
+			MNBID,
+			USERID
+		);
+
+ALTER TABLE MYBOARD
+	ADD
+		CONSTRAINT FK_MEMBER_TO_MYBOARD
+		FOREIGN KEY (
+			USERID
+		)
+		REFERENCES MEMBER (
+			USERID
+		);
+
+ALTER TABLE MYBOARD
+	ADD
+		CONSTRAINT FK_SITEINFOBOARD_TO_MYBOARD
+		FOREIGN KEY (
+			MNBID
+		)
+		REFERENCES SITEINFOBOARD (
+			MNBID
+		);
+
+
+
+CREATE UNIQUE INDEX PK_TEAMBOARD
+	ON TEAMBOARD (
+		MNBID ASC,
+		GID ASC
+	);
+
+ALTER TABLE TEAMBOARD
+	ADD
+		CONSTRAINT PK_TEAMBOARD
+		PRIMARY KEY (
+			MNBID,
+			GID
+		);
+
+ALTER TABLE TEAMBOARD
+	ADD
+		CONSTRAINT FK_SITEINFOBOARD_TO_TEAMBOARD
+		FOREIGN KEY (
+			MNBID
+		)
+		REFERENCES SITEINFOBOARD (
+			MNBID
+		);
+
+ALTER TABLE TEAMBOARD
+	ADD
+		CONSTRAINT FK_TEAM_TO_TEAMBOARD
+		FOREIGN KEY (
+			GID
+		)
+		REFERENCES TEAM (
+			GID
+		);
+
+
+CREATE UNIQUE INDEX PK_SEVAL
+	ON SEVAL (
+		MNBID ASC,
+		USERID ASC
+	);
+
+
+ALTER TABLE SEVAL
+	ADD
+		CONSTRAINT PK_SEVAL
+		PRIMARY KEY (
+			MNBID,
+			USERID
+		);
+
+
+ALTER TABLE SEVAL
+	ADD
+		CONSTRAINT FK_MEMBER_TO_SEVAL
+		FOREIGN KEY (
+			USERID
+		)
+		REFERENCES MEMBER (
+			USERID
+		);
+
+ALTER TABLE SEVAL
+	ADD
+		CONSTRAINT FK_SITEINFOBOARD_TO_SEVAL
+		FOREIGN KEY (
+			MNBID
+		)
+		REFERENCES SITEINFOBOARD (
+			MNBID
+		);
+
+
+--기존디비 시퀀스 생성
+CREATE SEQUENCE SNUM;
+CREATE SEQUENCE GNUM;
+
+--기존디비 카테고리 정보 insert
+insert into scategory values (10, 'study');
+insert into scategory values (11, 'team');
+insert into scategory values (12, 'algo');
+insert into scategory values (13, 'uml');
+insert into scategory values (14, 'design');
+insert into scategory values (15, 'css');
+insert into scategory values (16, 'bootsrtap');
+insert into scategory values (17, 'UI_UX');
+insert into scategory values (18, 'chart');
+insert into scategory values (19, 'jQuery');
+
+--기존디비 사이트정보 insert
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '생활코딩', 'https://opentutorials.org/', '웹사이트 제작 A부터 Z까지', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '코드카데미', 'https://www.codecademy.com/',	'따라하면서 배우는 웹프로그래밍', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '코드닷오아르지', 'https://code.org/', '어린이용 코딩에서 아이폰 앱 개발 연습까지', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '런어블', 'http://runnable.com/', '검색한 코드를 웹에서 테스트한다', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '스택오버플로우',	'https://stackoverflow.com/', '코드계의 지식iN', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '해커미터', 'http://www.hackermeter.com/', '프로그래밍 실력을 측정해 보자', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '유다시티', 'https://www.udacity.com/', '프로그래밍 전문 온라인 강의', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, '코세라', 'https://www.coursera.org/', '컴퓨터과학,비즈니스, 언어, 경영, 인문학 등의 다양한 강의 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, 'w3schools', 'https://www.w3schools.com/', '웹 프로그래밍 언어 러닝 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 10, 'Javatpoint', 'https://www.javatpoint.com/', '자바 튜토리얼, 안드로이드, 자바 프레임 워크, 자바 스크립트, 아약스, 코어 자바, SQL, 파이썬, PHP, C와 같은 모든 기술의 인터뷰 질문을 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 11, '구글 드라이브', 'https://www.google.com/intl/ko_ALL/drive/', '팀원 간 또는 고객과 문서를 공유하거나 공동 작업을 할 수 있는 온라인 도구', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 11, '깃허브', 'https://github.com/', '여러 프로그래머가 공동으로 프로그래밍을 하는 경우 버전 관리를 도와줌', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 11, '에버노트', 'https://evernote.com/intl/ko/',	'팀원들과 중요한 아이디어를 공유할 수도 있고, 업무와 관련 있는 기사를 스크랩해서 공유하기에도 유용', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 11, '레드 펜', 'https://redpen.io/', '다수의 프로젝트 관리 및 디자인별 버전 관리가 가능', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 11, '인비전', 'https://www.invisionapp.com/', '프로그래머나 웹 디자인 전문가들이 많이 사용하는 온라인 프로토타이핑 도구', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 12, 'University of San Francisco', 'https://www.cs.usfca.edu/~galles/visualization/Algorithms.html', '데이터 구조와 알고리즘에 대한 시각화 기능을 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 12, 'Toptal', 'https://www.toptal.com/developers/sorting-algorithms/', '최고의 개발자, 엔지니어, 프로그래머, 코더, 건축가 및 컨설턴트를위한 마켓 플레이스', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 13, 'websequencediagrams', 'https://www.websequencediagrams.com/', '온라인으로 UML 시퀀스 다이어그램 그리기', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 13, 'draw.io', 'https://www.draw.io/', '플로우 차트, 프로세스 다이어그램, 조직도, UML, ER 및 네트워크 다이어그램을 만들기위한 무료 온라인 다이어그램 소프트웨어', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 13, 'StarUML', 'http://staruml.io/', '정교한 소프트웨어 모델러.', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 14, '코드펜', 'https://codepen.io/', 'HTML , CSS , ?JS 를 코딩해서?결과물을 놓고 자랑하는 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 14, 'pixlr', 'https://pixlr.com/editor/', '무료 웹 포토샵 프로그램', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 15, 'CSSMate', 'http://cssmate.com/csseditor.html', '온라인 CSS 편집기', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 15, 'CSSCreator', 'https://csscreator.com/', '타일 시트 웹 개발자와 디자이너를위한 학습 자료', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'getbootstrap', 'http://getbootstrap.com/', '부트스트랩의 개요, 다운받아 사용하는법, 기본 템플릿과 예제를 볼 수 있는 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'bootstrapk', 'http://bootstrapk.com/', '부트스트랩의 개요, 다운받아 사용하는법, 기본 템플릿과 예제를 볼 수 있는 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'jetstrap',	'https://jetstrap.com/', 'Jetstrap은 Bootstrap 3을위한 최고의 인터페이스 작성 도구입니다.', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'bootswatch', 'https://bootswatch.com/', '부트 스트랩에 대한 무료 테마', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'wrapbootstrap', 'https://wrapbootstrap.com/', 'WrapBootstrap은 프리미엄 부트 스트랩 템플릿과 테마의 마켓 플레이스입니다.', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'builtwithbootsrap', 'http://builtwithbootstrap.com/', '부트스트랩 무료/유료 템플릿 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'Wix', 'https://ko.wix.com/', 'Bootstrap 유료/무료 템플릿 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 16, 'bootstraptor', 'http://bootstraptor.com/',	'창의적인 제품을 만들고, 새로운 아이디어에 투자하며, 회사 성장을 돕습니다.', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 17, '카카오 오븐', 'https://ovenapp.io/', 'APP 개발을 위한 가장 편한 목업 서비스 기획 기능을 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 18, 'Chart.js : Charting Library with HTML5 Canvas', 'http://www.chartjs.org/',	'Jquery Chart 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 18, 'Sigma.js : Draw Graphs Using HTML5 Canvas Element', 'http://sigmajs.org/',	'Jquery Chart 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 18, 'HighCharts', 'http://www.highcharts.com/',	'Jquery Chart 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 18, 'Fusion Charts', 'https://www.fusioncharts.com/', 'Jquery Chart 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 18, 'JS Charts : Free JavaScript Charts', 'http://www.jscharts.com/', 'Jquery Chart 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 18, 'Google Charts', 'https://developers.google.com/chart/', 'Jquery Chart 제공 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 19, 'The jQuery Plugin Registry', 'http://plugins.jquery.com/',	'jQuery 플러그인 관련된 모든 API, UI documents를 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) VALUES (snum.nextval, 19, 'jQWidgets', 'https://www.jqwidgets.com/',	'javascript / jQuery 기준의 UI Widgets 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 10, '프로그래밍', 'https://programmers.co.kr/', '다양한 언어들을 쉽게 시작하는 프로그래밍', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 10, 'treehouse', 'https://teamtreehouse.com/start', '(유료) 웹, 앱개발 관련 비디오, 퀴즈 및 쌍방향 코딩연습이 가능', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 10, '인프런', 'https://www.inflearn.com/', '각종 프로그래밍 강좌를 입문자용부터 중급자 이상까지 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 10, '백준 알고리즘', 'https://www.acmicpc.net/', '다양한 알고리즘 문제를 풀고 채점까지 가능한 사이트', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 12, '사이냅', 'http://euler.synap.co.kr/', '프로그래밍 정보사이트, ACM ICPC 대회 문제풀잉, 소스자료 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 12, '알고스팟', 'https://algospot.com/', '프로그래밍 정보사이트, ACM ICPC 대회 문제풀이, 소스자료 제공', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 12, '정올', 'http://jungol.co.kr/', '프로그래밍과 자료구조 및 알고리즘 문제풀이', 'main', 'admin', sysdate);
+insert into siteinfoboard (mnbid, ccode, name, addr, content, type, writer, writeday) values (SNUM.NEXTVAL, 12, '코이스터디', 'http://www.koistudy.net/', '프로그래밍과 알고리즘 설계', 'main', 'admin', sysdate);
+
+--기존디비 멤버 정보 insert
+insert into member (userid, pw, name, email, regday) values ('admin', '1004', '관리자', 'admin@gmail.com', sysdate);
+
+commit;

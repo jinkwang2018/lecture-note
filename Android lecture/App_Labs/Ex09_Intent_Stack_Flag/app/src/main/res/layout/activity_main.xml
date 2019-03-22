@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/ShowBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New액티비티 띄우기"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/txtMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ShowBtn"
+        android:background="#ff0000cc"
+        android:text="버튼 클릭시 액티비티가 활성화"
+        android:textSize="20dp"
+        android:textColor="#ffffffff"
+        />
+</RelativeLayout>

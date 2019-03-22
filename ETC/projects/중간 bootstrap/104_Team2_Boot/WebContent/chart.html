@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bitcamp_java 104th Team No.2 Chart</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css">
+
+<style type="text/css">
+#container {
+   height: 750px;
+   width: 750px;
+   margin-left: 600px;
+   
+}
+#main{
+   font-size: 50px;
+   text-align: center;
+   margin: 20px;
+   }
+</style>
+
+<script type="text/javascript">
+        $(function(){
+            
+            $('#btn').click(function(){ 
+                $('#display').empty();
+                $.ajax({
+                    url : 'http://openapi.seoul.go.kr:8088/4f7a68634f7573653934414c4a6559/json/octastatapi419/1/1000/',
+                    dataType:"json",
+                    success:function(responsedata){
+                        var table = "<table border='1' class='table'>";
+                        table += "<tr><th>자치구</th><th>인구총합</th><th>남자총인구</th><th>여자총인구</th><th>내국인남/여총합</th><th>남자내국인총합</th><th>여자내국인총합</th><th>외국인남/여총합</th><th>남자외국인총합</th><th>여자외국인총합</th></tr>"
+                        
+                        $.each(responsedata.octastatapi419.row, function(index, obj) {
+                            if(obj.JACHIGU == $('#JACHIGUname').val()){
+                               console.log(obj.GYE_2);
+                                table += "<tr>";
+                                table += "<td>" + obj.JACHIGU + "</td>";
+                                table += "<td>" + obj.GYE_1 + " 명</td>";
+                                table += "<td>" + obj.NAMJA_1 + " 명</td>";
+                                table += "<td>" + obj.YEOJA_1 + " 명</td>";
+                                table += "<td>" + obj.GYE_2 + " 명</td>";
+                                table += "<td>" + obj.NAMJA_2 + " 명</td>";
+                                table += "<td>" + obj.YEOJA_2 + " 명</td>";
+                                table += "<td>" + obj.GYE_3 + " 명</td>";
+                                table += "<td>" + obj.NAMJA_3 + " 명</td>";
+                                table += "<td>" + obj.YEOJA_3 + " 명</td>";
+                                table += "</tr>";
+                                Highcharts.chart('container', {
+                                    title: {
+                                        text: '서울시 지역구 인구표'
+                                    },
+                                    xAxis: {
+                                        categories: ['남자내국인', '여자내국인', '남자외국인', '여자외국인']
+                                    },
+                                    labels: {
+                                        items: [{
+                                            html: '총합분포표',
+                                            style: {
+                                                left: '50px',
+                                                //top: '18px',
+                                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                                            }
+                                        }]
+                                    },
+                                    series: [{},{},{
+                                        type: 'column',
+                                        name: '인구수',
+                                        data: [parseInt(obj.NAMJA_2),parseInt(obj.YEOJA_2),parseInt(obj.NAMJA_3),parseInt(obj.YEOJA_3)]
+                                    },{
+                                        type: 'spline',
+                                        name: '인구수',
+                                        data: [parseInt(obj.NAMJA_2), parseInt(obj.YEOJA_2) ,parseInt(obj.NAMJA_3), parseInt(obj.YEOJA_3)],
+                                        marker: {
+                                            lineWidth: 2,
+                                            lineColor: Highcharts.getOptions().colors[5],
+                                            fillColor: 'white'
+                                        }
+                                    }, {
+                                        type: 'pie',
+                                        name: '남/여 비율',
+                                        data: [{
+                                            name: '남자',
+                                            y: (parseInt(obj.NAMJA_1)/parseInt(obj.GYE_1))*100,
+                                            color: Highcharts.getOptions().colors[9] // Jane's color
+                                        }, {
+                                            name: '여자',
+                                            y:(parseInt(obj.YEOJA_1)/parseInt(obj.GYE_1))*100,
+                                            color: Highcharts.getOptions().colors[8] // Joe's color
+                                        }],
+                                        center: [450, 150],
+                                        size: 150
+                                    },{
+                                        type: 'pie',
+                                        name: '내/외국인수',
+                                        data: [{
+                                            name: '남자내국인',
+                                            y: parseInt(obj.NAMJA_2),
+                                            color: Highcharts.getOptions().colors[4] // Jane's color
+                                        }, {
+                                            name: '여자내국인',
+                                            y: parseInt(obj.YEOJA_2),
+                                            color: Highcharts.getOptions().colors[5] // John's color
+                                        }, {
+                                            name: '남자외국인',
+                                            y: parseInt(obj.NAMJA_3),
+                                            color: Highcharts.getOptions().colors[6] // John's color
+                                        },{
+                                            name: '여자외국인',
+                                            y: parseInt(obj.YEOJA_3),
+                                            color: Highcharts.getOptions().colors[7] // Joe's color
+                                        }],
+                                        center: [450, 350],
+                                        size: 150
+                                    }]
+                                });
+
+                            }
+                        });
+                        table += "</table>";
+ 
+                        $('#display').html(table);
+                    }
+                });
+            });
+              
+        });
+   </script>
+</head>
+<body>
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">서울시 인구 통계 (구별)</a>
+    </div>
+    <ul class="nav navbar-nav">
+    </ul>
+   <!--  <form class="navbar-form navbar-left" action="#"> -->
+   <div class="navbar-form navbar-left">
+      <div class="form-group">
+        <input type="text" id="JACHIGUname" class="form-control" placeholder="Search" name="search">
+      </div>
+      <button id="btn" type="submit" class="btn btn-default">Submit</button>
+    </div>
+    <!-- </form> -->
+  </div>
+</nav>
+
+    <center>
+    <div id="display" style="margin-bottom:20px"></div>
+    </center>
+    <div style="width:10%">
+    	<div id="container" ></div>
+    </div>
+     
+</body>
+</html>

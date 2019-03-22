@@ -1,0 +1,67 @@
+/*
+ * Allocator.java February 2001
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.util.buffer;
+
+import java.io.Closeable;
+import java.io.IOException;
+
+/**
+ * The <code>Allocator</code> interface is used to describe a resource
+ * that can allocate a buffer. This is used so that memory allocation
+ * can be implemented as a strategy allowing many different sources of
+ * memory. Typically memory will be allocated as an array of bytes but
+ * can be a mapped region of shared memory or a file.
+ *
+ * @author Niall Gallagher
+ */ 
+public interface Allocator extends Closeable {
+ 
+   /**
+    * This method is used to allocate a default buffer. Typically this
+    * will allocate a buffer of predetermined size, allowing it to 
+    * grow to an upper limit to accommodate extra data. If the buffer
+    * can not be allocated for some reason this throws an exception.
+    *
+    * @return this returns an allocated buffer with a default size
+    */         
+   public Buffer allocate() throws IOException;
+
+   /**
+    * This method is used to allocate a default buffer. This is used
+    * to allocate a buffer of the specified size, allowing it to 
+    * grow to an upper limit to accommodate extra data. If the buffer
+    * can not be allocated for some reason this throws an exception.
+    *
+    * @param size this is the initial capacity the buffer should have
+    *
+    * @return this returns an allocated buffer with a specified size
+    */
+   public Buffer allocate(int size) throws IOException;
+   
+   /**
+    * This method is used to close the allocator so that resources
+    * that are occupied by the allocator can be freed. This will
+    * allow the allocator to be created and closed repeatedly in
+    * a single process without holding on to resources such as
+    * mapped file buffers or threads.
+    */
+   public void close() throws IOException;
+}

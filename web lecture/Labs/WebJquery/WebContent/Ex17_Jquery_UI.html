@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Jquery UI</title>
+		<!--Jquery 필수 요소 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!--Jquery UI 필수 요소 : css , js -->
+		<!--UI js 파일 부터 링크 (동적인 작업) -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!--UI css 파일 링크 (기본적으로 테마가 적용된 CSS)
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+		<!-- 사용자 정의 css -->
+		<style type="text/css">
+			#draggable{width:150px ; height:150px ; padding:0.5em;}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$('#draggable').draggable();
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div id="draggable" class = "ui-widget-content">
+			나를 움직여봐
+		</div>
+	</body>
+</html>

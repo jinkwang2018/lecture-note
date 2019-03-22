@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/hot-sneaks/jquery-ui.css">
+	<style type="text/css">
+		body {   font-family: Arial, Helvetica, sans-serif;}
+		table {   font-size: 1em;   }
+		#droppable { width: 400px; height: 350px; padding: 0.5em; 
+		            float: left; margin: 10px; border: 1px solid red;}
+		.toggler { width: 500px; height: 200px; position: relative; }
+		#button { padding: .5em 1em; text-decoration: none; }
+		#effect { width: 240px; height: 170px; padding: 0.4em; position: relative; background: #fff; }
+		#effect h3 { margin: 0; padding: 0.4em; text-align: center; }
+   </style>
+<script type="text/javascript">
+	$(function() {
+		
+		var location = "";
+        var startdate = "";
+        var enddate = "";
+        var number = "";
+		
+		
+		 var autocompletetag = ["서울", "부산"];
+         $('#location').autocomplete({source : autocompletetag});
+         
+         $('#draggable').draggable(
+               {opacity: "0.5"}
+            );
+
+         $('#droppable').droppable(
+            {
+            accept:"#draggable",
+            drop : function(){
+               $("#dialog").dialog('open');
+               $(this).hide();
+            }
+         });
+
+         $('#dialog').dialog(
+                 {
+                    autoOpen : false,   //자동으로 열리지 않는다, 버튼이 눌려야 열리게!
+                    show:{effect : "blind", duration: 2000},  //나타날때 블라인드로 올라오면서 2초걸림
+                    hide:{effect : "blind", duration: 1000},
+                    buttons:{
+                       //3개  각각의 버튼마다 기능을 준것
+                       //검색 : 팝업창에 값을 read 해서 부모창에 전달
+                       //초기화 : 팝업창에 입력값을 초기화(빈문자열)
+                       //닫기 : 팝업창 닫기 (초기화)
+                       "SEARCH" : function(){
+                                   location = $('#location').val();
+                                   startdate = $('#startdate').val();
+                                   enddate = $('#enddate').val();
+                                   number = $('#number').val();
+                                   
+                                   $('#dialog').dialog('close');
+                                   $(function() {
+       								var dialogid = "";
+       								if(location == '서울'){
+       									dialogid = "#dialog1";
+       								}else{
+       									dialogid = "#dialog2";
+       								}
+       							      $( dialogid ).dialog( "open" );
+       							    });
+                                },
+                       "RESET" : function(){
+                          $('#location').val('');
+                          $('#startdate').val('');
+                          $('#enddate').val('');
+                          $('#number').val('');
+                       },
+                       "CLOSE" : function(){
+                          alert("취소하시겠습니까?");
+                          $('#location').val('');
+                          $('#startdate').val('');
+                          $('#enddate').val('');
+                          $('#number').val('');
+                          $('#dialog').dialog('close');
+                       }
+                 }
+              });
+              $('#startdate').datepicker(
+                 {dateFormat:"yy-mm-dd"}      
+              );
+              $('#enddate').datepicker(
+                 {dateFormat:"yy-mm-dd"}      
+              );
+		
+		$('#dialog1, #dialog2').dialog({
+			autoOpen : false,
+			resizable : false, 
+			width : 1000,
+			show : {
+				effect : "blind",
+				duration : 1000
+			},
+			hide : {
+				effect : "explode",
+				duration : 1000
+			},
+			buttons : {
+				"예약하기" : function(){
+					var hotelName = $('input:radio[name=searchht]:checked').val();
+					 $('<h4></h4>').html('호텔위치 : '+location+'<br> Check in : '
+                             +startdate +'<br> Check out : '+enddate+'<br> 인원  : '+number + '<br> 호텔이름 : ' + hotelName)
+                             .appendTo("#output");
+					$(this).dialog('close');
+					$('#button').show();
+				}
+			}
+		});
+		function runEffect() {
+		      // Run the effect
+		      console.log($('#effectTypes').val())
+		      $( "#effect" ).show($('#effectTypes').val(), {}, 1);
+		};
+		$( "#button" ).on( "click", function() {
+		      runEffect();
+		});
+		 $( "#effect, #effectTypes, #button" ).hide();
+	});
+</script>
+</head>
+<body>
+	<!-- <label for="loc">지역</label>
+	<input type="text" id="loc">
+	<button id="call">지역호출</button> -->
+	<img src="images/호텔예약.png" width="200px" height="85px" id="draggable">
+   	<div id="droppable" style="text-align: center">
+       Drag Hotel
+   </div>
+   
+   
+<!--    <div id="output"></div> -->
+	<div id="dialog" title="호텔 검색">
+      <h2>호텔 예약하기</h2>
+      <label for="location">호텔위치 </label>
+      <input type="text" id="location"><br>
+      <label for="startdate">Check in </label>
+      <input type="text" id="startdate"><br>
+      <label for="enddate">Check out </label>
+      <input type="text" id="enddate"><br>
+            <label for="number">인원</label> 
+         <select name="number" id="number">
+         <option>1</option>
+         <option>2</option>
+         <option>3</option>
+         <option>4</option>
+         <option>5</option>
+         <option>6</option>
+         <option>7</option>
+      </select> <br>
+   </div>
+	
+	<!-- POPUP -->
+	<div id="dialog1" title="hotel list">
+		<input type="radio" name="searchht" value="신라스테이호텔">
+		<img src="images/서울호텔1.PNG" id="simage"><br> 
+		<input type="radio" name="searchht" value="티마크그랜드호텔"> 
+		<img src="images/서울호텔2.PNG" id="simage"><br>
+		<input type="radio" name="searchht" value="글래드호텔"> 
+		<img src="images/서울호텔3.PNG" id="simage"><br>
+	</div>
+	<div id="dialog2" title="hotel list">
+		<input type="radio" name="searchht" value="씨엘드메르호텔"> 
+		<img src="images/부산호텔1.PNG" id="bimage"><br> 
+		<input type="radio" name="searchht" value="베스트웨스턴호텔"> 
+		<img src="images/부산호텔2.PNG" id="bimage"><br>
+		<input type="radio" name="searchht" value="토요코인호텔"> 
+		<img src="images/부산호텔3.PNG" id="bimage"><br>
+		<input type="radio" name="searchht" value="베니키아호텔"> 
+		<img src="images/부산호텔4.PNG" id="bimage"><br>
+	</div>
+	
+	<div style="width:300px;margin:0 auto 0 auto ">
+	<div class="toggler">
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<h3 class="ui-widget-header ui-corner-all">예약완료</h3>
+			<p id="output"></p>
+		</div>
+	</div>
+	<select name="effects" id="effectTypes">
+	 <option value="bounce">Bounce</option></select>
+	<button id="button" class="ui-state-default ui-corner-all">완료된 예약 확인하기</button>
+	</div>
+</body>
+</html>

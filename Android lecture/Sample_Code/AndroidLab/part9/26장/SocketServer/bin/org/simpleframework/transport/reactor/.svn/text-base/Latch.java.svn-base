@@ -1,0 +1,73 @@
+/*
+ * Latch.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport.reactor;
+
+import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * The <code>Latch</code> is used to provide a simple latch that will
+ * allow a thread to block until it is signaled that it is ready.
+ * The latch will block on the <code>close</code> method and when the
+ * latch is signaled the close method will release all threads.
+ * 
+ * @author Niall Gallagher
+ */
+class Latch extends CountDownLatch {
+   
+   /**
+    * Constructor for the <code>Latch</code> object. This will 
+    * create a count down latch that will block when it is
+    * closed. Any blocked threads will be released when the
+    * latch is signaled that it is ready.
+    */
+   public Latch() {
+      super(1);
+   }
+   
+   /**
+    * This is used to signal that the latch is ready. Invoking
+    * this method will release all threads that are blocking on
+    * the close method. This method is used when the distributor
+    * is closed and all operations have been purged.
+    */
+   public void signal() throws IOException {
+      try {
+         countDown();
+      } catch(Exception e) {
+         throw new IOException("Thread interrupted");
+      }
+   }
+   
+   /**
+    * This will block all threads attempting to close the latch.
+    * All threads will be release when the latch is signaled. This
+    * is used to ensure the distributor blocks until it has fully
+    * purged all registered operations that are registered.
+    */
+   public void close() throws IOException {
+      try {
+         await();
+      } catch(Exception e){
+         throw new IOException("Thread interrupted");
+      }
+   }
+}

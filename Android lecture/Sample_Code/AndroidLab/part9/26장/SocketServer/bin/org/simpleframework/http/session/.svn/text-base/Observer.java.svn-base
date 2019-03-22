@@ -1,0 +1,56 @@
+/*
+ * Observer.java May 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.session;
+
+/**
+ * The <code>Observer</code> interface is used to observe the session
+ * activity within the session manager. This enables tracking of all
+ * sessions created and destroyed by the session manager. Once the
+ * session is created the observer <code>start</code> method is 
+ * invoked and when the session is canceled the <code>cancel</code>
+ * method is invoked. Observations allow specialized monitoring.
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.http.session.SessionManager
+ */
+public interface Observer<T> {
+   
+   /**
+    * This method is called after the session has been created but
+    * before it is used. Listening to invocations of this method will
+    * allow the user to establish any data structures required or 
+    * add any attributes to the session that are needed.
+    * 
+    * @param session this is the session instance that was created
+    */
+   public void create(Session<T> session);
+   
+   /**
+    * This method is called after the session has been canceled or
+    * expired. It allows the listener to clean up session resources
+    * and attributes in a specialized manner. When finished the
+    * session will no longer exist within the application.
+    * 
+    * @param session this is the session object that is canceled
+    */
+   public void cancel(Session<T> session);
+}

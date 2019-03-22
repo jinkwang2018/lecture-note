@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		/*
+			JAVA : for(String s : 배열(collection)){}
+			JAVA SCRIPT : for(var s in 배열(Array)){}
+			Jquery : each()
+			
+			Jquery	: 핵심(Ajax 비동기 처리)
+			1. $(selector).each(function(){this})
+			2. $(selector).each(function(index){this})
+			3. $(selector).each(function(index,element){element})
+			
+			selector 없는 each문 
+			1. $.each(selector , function(){this})
+			2. $.each(selector , function(index){this})
+			3. $.each(selector , function(index,element){element})
+		*/
+		$(function(){
+			//1. $(selector).each(function(){this})
+			$('p').each(function(){
+				console.log("this : " + $(this).text());	
+				//this=p태그
+			});
+			//2. $(selector).each(function(index){this})
+			$('p').each(function(index){ //p개수만큼 함수 호출
+				console.log("index : " + index); //방번호나온다.
+				console.log("this : " + $(this).text());
+				
+				//$(this).attr("id","param-" + index); //속성을 1개만
+				//여러개의 속성을 한번에 JSON{}
+				$(this).attr(
+					{"id" : "param-"+index,
+					 "style" : "color:red" //style=color:red
+											
+					}		
+				);
+			});
+			//3. $.each(selector , function(index,element){element})
+			$('p').each(function(index,element){
+				console.log("index : " + index);
+				console.log("element : " + element + "/" + $(element).text());
+			});
+			
+			$('#btn').click(function(){
+				alert($('#param-1').text());
+			});
+			
+			//응용학습
+			//javascript 배열
+			//var arr = ['사과','배','수박']
+			//json object > var obj = {};
+			//객체 배열
+			//var arrobj = [{},{},{}];
+			
+			var array = [
+				{"name":"naver","link":"www.naver.com"},
+				{"name":"daum","link":"www.daum.net"},
+				{"name":"bit","link":"www.bit.com"}
+				];
+			//문제
+			//name 값 , link 값을 출력
+			//$(selector).each(function(index,element){element})
+			$(array).each(function(index,element){
+				console.log("index : " + index);
+				console.log("obj : " + element + "obj.name : " + element.name + "obj.link" + element.link);
+			});
+			
+			$.each(array,function(index,element){
+				console.log("index : " + index);
+				console.log("obj : " + element + "obj.name : " + element.name + "obj.link" + element.link);
+			});
+			
+			/*
+			$(selector).each(function(){this}) : body안에 있는 태그 정보
+			$.each(selector , function(){this}) : script 내부에 있는 자원(배열 ,객체)
+			*/
+			var board = {
+							values:[
+									{no:1,title:'hello'},
+									{no:2,title:'world'},
+									{no:3,title:'korea'},
+								
+   								   ],
+   							search : "검색"
+						}
+			//$.each()을 사용해서 no값, search값을 출력
+			var obj;
+			$.each(board,function(key,value){
+				if(typeof(value)=="object"){
+				$.each(value,function(index,element){
+					$.each(element,function(key,value){
+						console.log(key + "/" + value);
+					});
+					
+				});
+				}else{
+				console.log(key + "/" + value);
+				}
+			});
+			
+		});
+		</script>
+	</head>
+	
+	<body>
+		<p>java</p>
+		<p>jsp</p>
+		<p>oracle</p>
+		<input type = "button" value = "click" id = "btn">
+	</body>
+</html>

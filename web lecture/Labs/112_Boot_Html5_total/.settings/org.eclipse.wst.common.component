@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="112_Boot_Html5_total">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="java-output-path" value="/112_Boot_Html5_total/build/classes"/>
+        <property name="context-root" value="112_Boot_Html5_total"/>
+    </wb-module>
+</project-modules>

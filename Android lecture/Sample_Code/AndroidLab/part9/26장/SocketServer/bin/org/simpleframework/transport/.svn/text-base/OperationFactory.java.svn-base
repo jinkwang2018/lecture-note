@@ -1,0 +1,101 @@
+/*
+ * OperationFactory.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import java.io.IOException;
+
+import javax.net.ssl.SSLEngine;
+
+import org.simpleframework.transport.reactor.Operation;
+
+/**
+ * The <code>OperationFactory</code> is used to create operations
+ * for the transport processor. Depending on the configuration of the
+ * pipeline object this will create different operations. Typically
+ * this will create an SSL handshake operation if the pipeline has 
+ * an <code>SSLEngine</code> instance. This allows the transport
+ * processor to complete the handshake before handing the transport
+ * to the transporter for processing.
+ *  
+ * @author Niall Gallagher
+ */
+class OperationFactory {
+   
+   /**
+    * This is the negotiator used to process the created transport.
+    */
+   private final Negotiator negotiator;
+   
+   /**
+    * This is the threshold for the asynchronous buffers to use.
+    */
+   private final int limit;
+   
+   /**
+    * Constructor for the <code>OperationFactory</code> object. This
+    * uses the negotiator provided to hand off the created transport
+    * when it has been created. All operations created typically
+    * execute in an asynchronous thread.
+    * 
+    * @param negotiator the negotiator used to process transports 
+    * @param limit this is the threshold for asynchronous buffers
+    */
+   public OperationFactory(Negotiator negotiator, int limit) {
+      this.negotiator = negotiator;
+      this.limit = limit;
+   }
+   
+   /**
+    * This method is used to create <code>Operation</code> object to
+    * process the next phase of the negotiation. The operations that
+    * are created using this factory ensure the processing can be
+    * done asynchronously, which reduces the overhead the connection
+    * thread has when handing the pipelines over for processing.
+    * 
+    * @param socket this is the pipeline that is to be processed
+    * 
+    * @return this returns the operation used for processing
+    */
+   public Operation getInstance(Socket socket) throws IOException {
+      return getInstance(socket, socket.getEngine());
+   }
+   
+   /**
+    * This method is used to create <code>Operation</code> object to
+    * process the next phase of the negotiation. The operations that
+    * are created using this factory ensure the processing can be
+    * done asynchronously, which reduces the overhead the connection
+    * thread has when handing the pipelines over for processing.
+    * 
+    * @param socket this is the pipeline that is to be processed
+    * @param engine this is the engine used for SSL negotiations 
+    * 
+    * @return this returns the operation used for processing
+    */
+   private Operation getInstance(Socket socket, SSLEngine engine) throws IOException {
+      Transport transport = new SocketTransport(socket, negotiator, limit);
+   
+      if(engine != null) {
+         return new Handshake(transport, negotiator);
+      } 
+      return new Dispatcher(transport, negotiator);
+   }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		/* 
+		 1. XMLHttpRequest 객체 얻기
+  		 2. onreadystatechange 이벤트 핸들러 구현 (함수 (callback))
+  		 3. 요청 정보 ( open() )
+  	     4. 요청 보내기 (send() )
+         5. 응답 처리 (Text(JSON), xml )
+		
+		*/
+		var httpReq = null;
+		
+		function getInstance(){
+		   if(window.XMLHttpRequest){
+			   httpReq = new XMLHttpRequest(); //모든 브라우져 > XMLHttpRequest
+		   }else if(window.ActiveXObject){
+			   httpReq = new ActiveXObject("Msxml2.XMLHTTP");
+		   }else{
+		    throw new Error("AJAX 지원하지 않습니다");
+		   }
+		   return httpReq;
+		}
+		
+		function HandlerStateChange(){
+			//alert(httpReq.readyState)
+			if(httpReq.readyState == 4){ 
+				if(httpReq.status >= 200 && httpReq.status < 300){
+					//UI구성
+					document.getElementById("txthint").innerHTML= httpReq.responseText;
+				}
+			}
+		}
+		
+		function sendData(str){
+			httpReq = getInstance();
+			httpReq.onreadystatechange = HandlerStateChange; //(x)
+			//key > 0 , 1 , 2
+			httpReq.open("POST","Ex04_word_Search.jsp?word="+str);  //준비
+			httpReq.send(); //땅 
+		}
+	</script>
+</head>
+<body>
+	<h3>단어 검색하기</h3>
+	<form action="">
+		word:<input type="text" id="txt1" onkeyup="sendData(this.value)">
+	</form>
+	<fieldset>
+		<legend>검색단어</legend>
+		<span id="txthint"></span>
+	</fieldset>
+</body>
+</html>
+
+
+
+

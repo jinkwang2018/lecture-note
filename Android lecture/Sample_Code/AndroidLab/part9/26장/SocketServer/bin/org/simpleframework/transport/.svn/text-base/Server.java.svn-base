@@ -1,0 +1,74 @@
+/*
+ * Server.java February 2001
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+ 
+package org.simpleframework.transport;
+
+import java.io.IOException;
+
+/**
+ * The <code>Server</code> interface represents a handler that is
+ * used to process <code>Socket</code> objects. Implementations of
+ * this object will read HTTP requests for the provided sockets and
+ * dispatch the requests for processing by the core protocol handler.
+ * <p>
+ * The intended use of a <code>Server</code> is that it be used in
+ * conjunction with a <code>Container</code> object, which acts as the
+ * primary protocol handler for a server. Typically the server will
+ * deliver callbacks to a container with both <code>Request</code> and
+ * <code>Response</code> objects encapsulating the transaction.
+ * <p>
+ * Core responsibilities of the server are to manage connections, 
+ * to ensure that all HTTP requests are collected, and to dispatch the
+ * collected requests to an appropriate handler. It is also required
+ * to manage multiplexing such that many connections can be processed
+ * concurrently without a high latency period.
+ *
+ * @author Niall Gallagher
+ */ 
+public interface Server {
+   
+   /**
+    * Used to process the <code>Socket</code> which is a full duplex 
+    * communication link that may contain several HTTP requests. This 
+    * will be used to read the requests from the <code>Socket</code> 
+    * and to pass these requests to a <code>Container</code> for 
+    * processing.
+    * <p>
+    * Typical usage of this method is to accept multiple sockets
+    * objects, each representing a unique HTTP channel to the client,
+    * and process requests from those sockets concurrently.  
+    *
+    * @param socket this is the connected HTTP socket to process
+    */ 
+   public void process(Socket socket) throws IOException;
+
+   /**
+    * This method is used to stop the <code>Server</code> such that
+    * it will accept no more sockets. Stopping the server ensures
+    * that all resources occupied will be released. This is required
+    * so that all threads are stopped, and all memory is released.
+    * <p>
+    * Typically this method is called once all connections to the
+    * server have been stopped. As a final act of shutting down the
+    * entire server all threads must be stopped, this allows collection
+    * of unused memory and the closing of file and socket resources.
+    */ 
+   public void stop() throws IOException;
+}

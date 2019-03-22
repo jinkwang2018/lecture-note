@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		/*  
+			java : for(String s : 배열(collection){})
+			javascript : for(var s in 배열){}
+			
+			juery : $(Array).each(function(){this 활용})
+			juery : $(selector).each(function(index){this 활용})
+			juery : $(selector).each(function(index , element){element})
+		
+			내부자원(배열)
+			jquery : $.each(Array,function(){this})
+			jquery : $.each(selector,function(index){this})
+			jquery : $.each(selector,function(index, element){this})
+			
+			추가(JSTL forEach()) 완성
+			$.get() 
+			jQuery.get(url [,data] [,success] [,dataType]) 
+			
+			> httpReq.open("GET","Ex01_Ajax_resource.html"); 
+		*/
+	
+		$(function(){ 
+			$('#btn').click(function(){
+				$.get('Ex03_Company.xml',function(data){ //success
+					//console.log(data);
+					//데이터 가공 (화면에 출력 , 팝업 ....)
+					$('#display').empty(); //자식요소 제거
+					//console.log($(data).find('Company'));
+					//find 함수 결과 : 배열객체 [Company , Company] > Array
+					//배열을 제어문을 통해서 원하는 것 출력
+					var companyarr = $(data).find('Company');
+					$.each(companyarr,function(index, obj){
+						
+						"<div>" + $('#display').append(companyarr[index])+"</div>";
+						
+					});
+					
+					/*
+					$(data).find('Company').each(function(){
+						//console.log(this);
+						var entry = $(this);
+						//console.log(entry);
+						var html = "<div>" + entry.attr('CompanyType') + "</div>";
+						console.log(html);
+						html+="<div>" + entry.find('CompanyName').text() + "</div><br>";
+						html+="<div>" + entry.find('CompanyNumber').text() + "</div><br>";
+						html+="<div>" + entry.find('CompanyAddress').text() + "</div><br>";
+						html+="<div>" + entry.find('Name').text() + "</div><br>";
+						$('#display').append(html);
+						
+						//실제 사용 아래 코드 
+						//var companyarr = $(data).find('Company');
+						//$.each(companyarr,function(index, obj){})
+					});
+					*/
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="button" id="btn" value="회사소개">
+	<div id="display" style="background-color: gray">DATA</div> 
+</body>
+</html>
+
+
+
+
+
+

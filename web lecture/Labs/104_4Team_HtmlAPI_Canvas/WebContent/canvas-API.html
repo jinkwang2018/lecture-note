@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+    table {
+        width:100%;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+    table#t01 tr:nth-child(even) {
+        background-color: #eee;
+    }
+    table#t01 tr:nth-child(odd) {
+       background-color: #fff;
+    }
+    table#t01 th {
+        background-color: black;
+        color: white;
+    }
+</style>
+</head>
+<body>
+<h3>Colors, Styles, and Shadows</h3>
+    <table id="t01">
+        <tr>
+            <th>Property / Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>fillStyle</td>
+            <td>도형 안쪽을 가득 채우는 색깔</td>
+        </tr>
+        <tr>
+            <td>shadowColor</td>
+            <td>도형 뒤쪽에 나타나는 그림자  색깔</td>
+        </tr>
+        <tr>
+            <td>shadowBlur</td>
+            <td>도형 뒤 그림자 분사되는 모습</td>
+        </tr>
+        <tr>
+            <td>shadowOffsetX</td>
+            <td>도형과 그림자 사이의 수평 거리</td>
+        </tr>
+        <tr>
+            <td>shadowOffsetY</td>
+            <td>도형과 그림자 사이의 수직 거리</td>
+        </tr>
+        <tr>
+            <td>createLinearGradient(x1, y1, x2, y2)</td>
+            <td>시작점에서 끝점 방향으로 색상이 점점 변하는데 두 점의 위치에 따라 무늬의 방향이 결정</td>
+        </tr>
+        <tr>
+            <td>createPattern(image,"repeat|repeat-x|repeat-y|no-repeat")</td>
+            <td>도형 안에 이미지 삽입 및 반복 여부 결정하는 함수 </td>
+        </tr>
+        <tr>
+            <td>createRadialGradient(x0,y0,r0,x1,y1,r1);</td>
+            <td>방사형 / 원형 그라데이션 개체 생성하는 함수</td>
+        </tr>
+        <tr>
+            <td>addColorStop(offset, color)</td>
+            <td>필요한만큼 색상을 지정(최소한 시작점과 끝점 두 개의 색상은 지정)하는 함수</td>
+        </tr>
+    </table>
+    <h3>Line Styles</h3>
+    <table id="t01">
+    <tr>
+        <th>Property</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>lineCap</td>
+            <td>끝이 둥근 모자와 선 그리기</td>
+        </tr>
+        <tr>
+            <td>lineJoin</td>
+            <td>두 선이 만날 때 둥근 모서리 생성</td>
+        </tr>
+        <tr>
+            <td>lineWidth</td>
+            <td>선의 폭</td>
+        </tr>
+        <tr>
+            <td>miterLimit</td>
+            <td>이음 길이 제한(1~255범위로 사용 가능)</td>
+        </tr>
+    </table>
+    <h3>Rectangles</h3>
+    <table id="t01">
+    <tr>
+        <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>rect(x, y, width, height);</td>
+            <td>도형의 위치 및  크기 조정하는 함수</td>
+        </tr>
+        <tr>
+            <td>fillRect(x, y, width, height)</td>
+            <td>'색깔로 채워진' 도형의 위치 및 크기(x, y값이 0일 경우 왼쪽 최상단 위치)를 조정하는 함수</td>
+        </tr>
+        <tr>
+            <td>strokeRect(x, y, width, height)</td>
+            <td>색깔로 채워져 있지 않은 도형 그리는 함수</td>
+        </tr>
+        <tr>
+            <td>clearRect(x, y, width, height)</td>
+            <td>지정된 도형의 범위를 clear하는 함수</td>
+        </tr>
+    </table>
+    <table id="t01">
+    <tr>
+    <h3>Paths</h3>
+        <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>fill()</td>
+            <td>fillStyle로 색깔 지정 후 위 함수를 사용하여 도형의 경로를 색칠하는 함수</td>
+        </tr>
+        <tr>
+            <td>stroke()</td>
+            <td>moveTo(), lineTo()로 정의한 경로를 그리는 함수(해당 함수가 없을 경우 경로가 그려지지 않는다)</td>
+        </tr>
+        <tr>
+            <td>beginPath()</td>
+            <td>경로를 시작하거나  이전 경로를 reset하는 함수</td>
+        </tr>
+        <tr>
+            <td>moveTo(x, y)</td>
+            <td>지정된 지점의 경로를 이동</td>
+        </tr>
+        <tr>
+            <td>closePath()</td>
+            <td>시작점에서 현재 경로까지 선으로 이어주는 함수</td>
+        </tr>
+        <tr>
+            <td>lineTo(x, y)</td>
+            <td>좌표에 맞추어 선을 생성하는 함수</td>
+        </tr>
+        <tr>
+            <td>clip()</td>
+            <td>임의의 크기의 영역(도형안에서만 존재)</td>
+        </tr>
+        <tr>
+            <td>quadraticCurveTo(cpx,cpy,x,y)</td>
+            <td>곡선을 나타내는 함수로서 매개변수로 곡선의 휘어짐을 조절</td>
+        </tr>
+        <tr>
+            <td>bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y)</td>
+            <td>3차원 곡선을 만들 수 있는 함수 -> 베지에 곡선 (n개 이상 가능하며 위 함수는 포인터가 3개)</td>
+        </tr>
+        <tr>
+            <td>arc(x,y,r,sAngle,eAngle,counterclockwise)</td>
+            <td>원의 크기 및 위치를 조정하는 함수</td>
+        </tr>
+        <tr>
+            <td>arcTo(x1, x2, y1, y2, r1)</td>
+            <td>두 접선 사이의 호를 생성하는 함수</td>
+        </tr>
+        <tr>
+            <td>isPointInPath(x, y)</td>
+            <td>지정된 경로에 존재하는 점인 경우 true, 그렇지 않은 경우 false로 반환하는 함수</td>
+        </tr>        
+    </table>
+    <table id="t01">
+    <tr>
+    <h3>Transformations</h3>
+        <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>scale(scalewidth,scaleheight)</td>
+            <td>도형의 크기를 확대하는 함수</td>
+        </tr>
+        <tr>
+            <td>rotate(angle)</td>
+            <td>도형을 매개변수의 각도에 맞춰 회전하는 함수</td>
+        </tr>
+        <tr>
+            <td>translate(x, y)</td>
+            <td>매개변수에 있는 좌표값에 맞추어 위치를 조정하는 함수 </td>
+        </tr>
+        <tr>
+            <td>transform(a, b, c, d, e, f)</td>
+            <td>해당 도형을 회전, 확장, 이동하는 함(a:수평으로 확대/축소, b:수직방향 경사율, c:수평방향 경사율, d:수직방향 확대/축소율, e:수평방향 이동거리, f:수직방향 이동거리)수</td>
+        </tr>
+        <tr>
+            <td>setTransform(a, b, c, d, e, f)</td>
+            <td>변환함수를 그리기 위해 호출해야 하는 함수</td>
+        </tr>
+    </table>
+    <table id="t01">
+    <tr>
+    <h3>Text</h3>
+        <th>Property / Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>font</td>
+            <td>글자크기 및 글꼴</td>
+        </tr>
+        <tr>
+            <td>textAlign</td>
+            <td>글자 정렬(center, start, end left, right)</td>
+        </tr>    
+        <tr>
+            <td>textBaseline</td>
+            <td>글자  위치 (top, middle, bottom)</td>
+        </tr>
+        <tr>
+            <td>fillText(text, x, y)</td>
+            <td>도형에 삽입될 텍스트 및 해당 텍스트 좌표값(텍스트 값이 채워져있음)</td>
+        </tr>
+        <tr>
+            <td>strokeText(text, x, y, maxWidth)</td>
+            <td>도형에 삽입될 텍스트 및 해당 텍스트 좌표값(텍스트 값이 채워져 있지 않음)</td>
+        </tr>
+        <tr>
+            <td>measureText(text)</td>
+            <td>해당 텍스트의 폭 반환</td>
+        </tr>
+    </table>
+    <table id="t01">
+    <tr>
+    <h3>Image Drawing</h3>
+        <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>drawImage(img,x,y)</td>
+            <td>캔버스에 해당 이미지 담는 함수</td>
+        </tr>
+ 
+    </table>
+    
+<h3>Compositing & Others</h3>
+   <table id="t01">
+      <tr>
+         <th>Property / Method</th>
+         <th>Description</th>
+      </tr>
+       <tr>
+         <td>globalAlpha</td>
+         <td>특정 도형의 투명도값을 반환한다.</td>
+      </tr>
+      <tr>
+         <td>globalCompositeOperation="나타낼 형태";</td>
+         <td>이미 존재하는 이미지 위에 새로운 이미지를 그린다 대신 겹친 부분을 어떻게 표현할지는 따로 "나타날 형태"에 집어넣어준다(단 초기값은 위로겹치기)</td>
+      </tr>
+      <tr>
+         <td>save()</td>
+         <td>현재 context의 상태를 저장한다.</td>
+      </tr>
+      <tr>
+         <td>restore()</td>
+         <td>이전에 저장한 경로 환경과 특성을 반환한다.</td>
+      </tr>
+   
+   </table>    
+</body>
+</html>

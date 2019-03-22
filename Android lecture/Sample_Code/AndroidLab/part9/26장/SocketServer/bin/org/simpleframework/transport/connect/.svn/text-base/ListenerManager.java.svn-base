@@ -1,0 +1,114 @@
+/*
+ * ListenerManager.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport.connect;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.net.SocketAddress;
+import java.util.HashSet;
+
+import javax.net.ssl.SSLContext;
+
+import org.simpleframework.transport.Server;
+
+/**
+ * The <code>ListenerManager</code> contains the set of all listeners
+ * that have been created for a connection. This set is used to hold
+ * and manage the listeners that have been created for a connection.
+ * All listeners will be closed if the listener manager is closed.
+ * This ensures all resources held by the manager can be released.
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.transport.connect.SocketConnection
+ */
+class ListenerManager extends HashSet<Listener> implements Closeable {
+   
+   /**
+    * This is the server that listeners will dispatch sockets to.
+    */
+   private final Server server;
+   
+   /**
+    * Constructor for the <code>ListenerManager</code> object. This
+    * is used to create a manager that will enable listeners to be
+    * created to listen to specified sockets for incoming TCP
+    * connections, which will be converted to socket objects.
+    * 
+    * @param server this is the server that sockets are handed to
+    */
+   public ListenerManager(Server server) {
+      this.server = server;
+   }
+   
+   /**
+    * This creates a new background task that will listen to the 
+    * specified <code>ServerAddress</code> for incoming TCP connect
+    * requests. When an connection is accepted it is handed to the
+    * internal <code>Server</code> implementation as a pipeline. The
+    * background task is a non daemon task to ensure the server is
+    * kept active, to terminate the connection this can be closed.
+    * 
+    * @param address this is the address used to accept connections
+    * 
+    * @return this returns the actual local address that is used
+    */ 
+   public SocketAddress listen(SocketAddress address) throws IOException {
+      return listen(address, null);
+   }
+   
+   /**
+    * This creates a new background task that will listen to the 
+    * specified <code>ServerAddress</code> for incoming TCP connect
+    * requests. When an connection is accepted it is handed to the
+    * internal <code>Server</code> implementation as a pipeline. The
+    * background task is a non daemon task to ensure the server is
+    * kept active, to terminate the connection this can be closed.
+    * 
+    * @param address this is the address used to accept connections
+    * @param context this is used for secure SSL connections
+    * 
+    * @return this returns the actual local address that is used
+    */ 
+   public SocketAddress listen(SocketAddress address, SSLContext context) throws IOException {
+      Listener listener = new Listener(address, context, server);
+      
+      if(server != null) {
+         add(listener); 
+      }
+      return listener.getAddress();   
+   }
+   
+   /**
+    * This is used to close all the listeners that have been
+    * added to the connection. Closing all the listeners in the
+    * set ensures that there are no lingering threads or sockets
+    * consumed by the connection after the connection is closed.
+    * 
+    * @throws IOException thrown if there is an error closing
+    */
+   public void close() throws IOException {
+      for(Closeable listener : this) {
+         listener.close();
+      }
+      clear();
+   }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		/*  
+			http://api.jquery.com/category/selectors/form-selectors/
+		*/
+		$(function(){
+			$('#txtname').val("hong");
+			
+			//1.radio에 기본 값을 설정하고 싶다. (checked)
+			//$('input[type=radio]')
+			$('input:radio').val(['F']); // radio가 배열로 저장 되어있으므로 checked할 수 있다.
+			
+			console.log($('input:radio').val());//순서대로 첫번째 것을 뽑아온다.
+			console.log($('input:checked').val());//체크된 것이 뽑힌다.
+			//위 실습은 radio가 여러개 있으면 안된다.(id를 부여하는 것이 편하다.)
+			console.log($('input:radio[name=gender]:checked').val());
+			
+			//select 태그 multiple=true 아닌 이상
+			// 단일값이다.
+			//$('#isF').val() >> getter
+			//$('#isF').val('oracle') >> setter
+			
+			//현재의 아래 코드는 다중값 처리를 하도록 걸어놓았다.
+			//페이지가 로드되면 java , oracle이 선택 되어있기를 원한다.
+			$('#isF').val(['java','oracle']); //다중값 선택 되게한다.
+			
+			$('#btnok').click(function(){
+				var msg="";
+				msg += $('#txtname').val() + ' / ';
+				msg += $('input:radio[name=gender]:checked').val();
+				console.log("선택값 : " + msg);
+				//위 코드는 단일값
+				//문제는 select가 다중값
+				var selecttag = "";
+				selecttag = $('#isF').val(); //다중값 return Array
+				//console.log("selecttag : " + selecttag);
+				for(var index in selecttag){
+					console.log("value : " + selecttag[index]);
+				}
+			});
+			
+			//submit
+			//$('input:submit')
+			//$('input[type=submit]')
+			if($('#myform').children().is('input:submit')){
+				//너의 자식요소로 submit 이 있니?
+				alert("true");		
+			}else{
+				alert("false");
+			}
+		});
+	</script>
+</head>
+<body>
+	<p id="demo"></p>
+	
+	Textbox : <input type="text" id="txtname">
+	<br>
+	
+	RadioButton : Checked 속성
+	<input type="radio" name="gender" value="M">남
+	<input type="radio" name="gender" value="F">여
+	<br>
+	
+	Dropdownlist(select 태그)
+	<select id="isF" multiple="multiple" size="3">
+		<option value="java">자바</option>
+		<option value="jsp">웹</option>
+		<option value="oracle">오라클</option>
+	</select>
+	<br>
+	
+	<input type="button" value="확인" id="btnok">
+	<br>
+	<div id="myform">
+		submit button : <input type="submit" value="전송">
+	</div>
+
+</body>
+</html>

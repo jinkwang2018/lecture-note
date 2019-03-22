@@ -1,0 +1,112 @@
+/*
+ * PacketAllocator.java February 2008
+ *
+ * Copyright (C) 2008, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
+
+/**
+ * The <code>PacketAllocator</code> object is used to create packets 
+ * that contain increasing sequence numbers. This acts as a pool for
+ * buffers which can be recycled by closing the <code>Packet</code>
+ * objects created by this allocator. As well as creating buffers
+ * from a pool of byte buffers this can wrap an existing buffer
+ * within a packet so it can be used uniformly.
+ * 
+ * @author Niall Gallagher
+ */
+class PacketAllocator {
+   
+   /**
+    * This is the memory manager used to recycle the buffers.
+    */
+   private final PacketManager manager;
+   
+   /**
+    * This is the counter used to generate the sequence numbers.
+    */
+   private final AtomicLong count;
+   
+   /**
+    * Constructor for the <code>PacketAllocator</code> object. This 
+    * is provided the size of the buffers that will be allocated and
+    * the number of buffers that can be lazily created before it
+    * will block waiting for the next buffer to be returned.
+    */
+   public PacketAllocator() {
+      this(3);
+   }
+   /**
+    * Constructor for the <code>PacketAllocator</code> object. This 
+    * is provided the size of the buffers that will be allocated and
+    * the number of buffers that can be lazily created before it
+    * will block waiting for the next buffer to be returned.
+    * 
+    * @param allow this is the queue size for asynchronous writes
+    */
+   public PacketAllocator(int allow) {
+      this(allow, 4096);
+   }
+   
+   /**
+    * Constructor for the <code>PacketAllocator</code> object. This 
+    * is provided the size of the buffers that will be allocated and
+    * the number of buffers that can be lazily created before it
+    * will block waiting for the next buffer to be returned.
+    * 
+    * @param allow this is the queue size for asynchronous writes
+    * @param size this is the size of the buffers to be allocated
+    */
+   public PacketAllocator(int allow, int size) { 
+      this.manager = new PacketManager(allow, size);
+      this.count = new AtomicLong();
+   }
+
+   /**
+    * This creates a <code>Packet</code> from a buffer within the
+    * pool of buffers. The buffer provided can be modified up until
+    * such point as it is recycled. To recycle the buffer the packet
+    * must be closed, when closed the buffer can be reused.
+    * 
+    * @return this returns a packet backed by a pooled buffer
+    */
+   public Packet allocate() throws PacketException {
+      long sequence = count.getAndIncrement();
+      ByteBuffer buffer = manager.allocate();
+      
+      return new Appender(buffer, manager, sequence);
+   }
+
+   /**
+    * This creates a <code>Packet</code> by wrapping the provided
+    * buffer within the packet interface. The buffer provided will
+    * be read only such that the buffer it wraps is not modified.
+    * 
+    * @param buffer this is the buffer that has been wrapped
+    * 
+    * @return this returns a packet backed by a pooled buffer
+    */
+   public Packet allocate(ByteBuffer buffer) throws PacketException {
+      long sequence = count.getAndIncrement();
+
+      return new Wrapper(buffer, sequence);
+   }
+}

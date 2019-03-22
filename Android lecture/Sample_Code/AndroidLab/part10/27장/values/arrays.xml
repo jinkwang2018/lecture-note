@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_list">
+        <item>bluetooth 지원여부 확인</item>
+        <item>bluetooth 활성화</item>
+        <item>자신 디바이스 검색 허용</item>
+        <item>페어링 디바이스 검색</item>
+        <item>서버로 동작</item>
+        <item>클라이언트로 동작</item>
+    </string-array>
+</resources>

@@ -1,0 +1,94 @@
+package kr.or.kosta.dto;
+
+import java.sql.Date;
+
+public class reply {
+/*	  no NUMBER PRIMARY KEY ,
+	  writer VARCHAR2(30),
+	  userid VARCHAR2(30),
+	  pwd VARCHAR2(30),
+	  content VARCHAR2(100),
+	  writedate DATE DEFAULT SYSDATE ,
+	  idx_fk  REFERENCES jspboard(idx)*/
+	private int no;
+	private String writer;
+	private String userid;
+	private String pwd;
+	private String content;
+	private Date writedate;
+	private int idx_fk;
+	
+	public reply() {}
+
+	
+	
+	public reply(int no, String writer, String userid, String pwd, String content, Date writedate, int idx_fk) {
+	
+		this.no = no;
+		this.writer = writer;
+		this.userid = userid;
+		this.pwd = pwd;
+		this.content = content;
+		this.writedate = writedate;
+		this.idx_fk = idx_fk;
+	}
+
+
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getWritedate() {
+		return writedate;
+	}
+
+	public void setWritedate(Date writedate) {
+		this.writedate = writedate;
+	}
+
+	public int getIdx_fk() {
+		return idx_fk;
+	}
+
+	public void setIdx_fk(int idx_fk) {
+		this.idx_fk = idx_fk;
+	}
+	
+}

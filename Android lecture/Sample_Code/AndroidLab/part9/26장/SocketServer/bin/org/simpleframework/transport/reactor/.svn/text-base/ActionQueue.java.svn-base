@@ -1,0 +1,46 @@
+/*
+ * ActionQueue.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport.reactor;
+
+import java.util.concurrent.LinkedBlockingQueue;
+
+/**
+ * The <code>ActionQueue</code> object is used to queue actions for
+ * selection. This is used by the reactor to queue actions that are 
+ * to be executed on a given I/O event. It allows actions to be
+ * queued in such a way that the caller does not block.
+ *
+ * @author Niall Gallagher
+ */ 
+class ActionQueue extends LinkedBlockingQueue<Action> {
+
+   /**
+    * Constructor for the <code>ActionQueue</code> object. This is 
+    * used to create a non-blocking queue to schedule actions for
+    * execution. This allows any number of actions to be inserted
+    * for selection so the associated channels can be registered.
+    */
+   public ActionQueue() {
+      super();          
+   }        
+}
+
+

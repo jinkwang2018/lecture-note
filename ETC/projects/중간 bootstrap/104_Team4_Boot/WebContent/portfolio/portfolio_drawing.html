@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+
+
+</head>
+
+<body onload="init()">
+
+ <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Team 4OUR Introduce</a>
+    </div>
+   <ul class="nav navbar-nav">
+         <li><a href="#">김태웅</a></li>
+         <li><a href="#">이진우</a></li>
+         <li><a href="#">배현준</a></li>
+         <li><a href="#">김래영</a></li>
+         <li><a href="#">박주원</a></li>
+         <li class="dropdown"><a class="dropdown-toggle" 
+            data-toggle="dropdown" href="#">Protfolio<span class="caret"></span></a> 
+            <ul class="dropdown-menu"> <!-- 메뉴 스크롤 생성 -->
+               <li><a href="#">HTML Canvas</a></li>
+               <li><a href="#">HTML SVG</a></li>
+               <li><a href="#">HTML Google Maps</a></li>
+            </ul>
+         </li>
+         <li class="dropdown"><a class="dropdown-toggle"
+            data-toggle="dropdown" href="#">Other Pages<span class="caret"></span></a>
+            <ul class="dropdown-menu"> <!-- 메뉴 스크롤 생성 -->
+               <li><a href="#">FAQ</a></li>
+               <li><a href="#">404</a></li>
+            </ul>
+         </li>
+      </ul>
+     </div>
+</nav>
+    <!-- Page Content -->
+    <div class="container">
+
+    <div class="container" style="margin-bottom: 0px;height: 700px;">
+       <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">CANVAS
+                    <small>그림판 예제</small>
+                </h1>
+            </div>
+        </div>
+        
+        <div>
+			<canvas id="can" width="400" height="400" style="float:left;position:relative;top:100px;left:100px;border:2px solid;"></canvas>
+	        <div style="position:relative;top:100px;left:200px;"id="choose" >Choose Color</div>
+	        <div style="position:relative;top:110px;left:620px;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
+	        <div style="position:relative;top:100px;left:635px;width:10px;height:10px;background:blue;" id="blue" onclick="color(this)"></div>
+	        <div style="position:relative;top:90px;left:650px;width:10px;height:10px;background:red;" id="red" onclick="color(this)"></div>
+	        <div style="position:relative;top:95px;left:620px;width:10px;height:10px;background:yellow;" id="yellow" onclick="color(this)"></div>
+	        <div style="position:relative;top:85px;left:635px;width:10px;height:10px;background:orange;" id="orange" onclick="color(this)"></div>
+	        <div style="position:relative;top:75px;left:650px;width:10px;height:10px;background:black;" id="black" onclick="color(this)"></div>
+	        <div style="position:relative;top:100px;left:200px;" id="eraser" >Eraser</div>
+	        <div style="position:relative;top:110px;left:620px;width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
+	        <img id="canvasimg" style="position:relative;top:100px;left:700px;" style="display:none;">
+	        <input type="file" id="canvas_file" value="캔버스" style="display:none;" onchange="loadCanvas(this)"/>
+	        <button type="button" style="position:relative;top:150px;left:190px;" onclick="loadCanvasClicked(event)">불러오기</button>
+	        <button type="button" style="position:relative;top:190px;left:115px;" class="controls" onclick="saveCanvas()">  저장  </button>
+	        <button type="button" style="position:relative;top:230px;left:65px;" value="clear" id="clr" onclick="erase()">전체지우기</button>
+    	</div>
+		
+       
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+	<script type="text/javascript">
+	var canvas = document.getElementById("can");
+	var ctx = canvas.getContext("2d");
+    var flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
+
+    var x = "black",
+        y = 2;
+    
+    function init() {
+        w = canvas.width;
+        h = canvas.height;
+    
+        canvas.addEventListener("mousemove", function (e) {
+            findxy('move', e)
+        }, false);
+        canvas.addEventListener("mousedown", function (e) {
+            findxy('down', e)
+        }, false);
+        canvas.addEventListener("mouseup", function (e) {
+            findxy('up', e)
+        }, false);
+        canvas.addEventListener("mouseout", function (e) {
+            findxy('out', e)
+        }, false);
+    }
+    
+    function color(obj) {
+        switch (obj.id) {
+            case "green":
+                x = "green";
+                break;
+            case "blue":
+                x = "blue";
+                break;
+            case "red":
+                x = "red";
+                break;
+            case "yellow":
+                x = "yellow";
+                break;
+            case "orange":
+                x = "orange";
+                break;
+            case "black":
+                x = "black";
+                break;
+            case "white":
+                x = "white";
+                break;
+        }
+        if (x == "white") y = 14;
+        else y = 2;
+    
+    }
+    
+    function draw() {
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(currX, currY);
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+        ctx.stroke();
+        ctx.closePath();
+    }
+    
+    function erase() {
+        var m = confirm("지우시겠습니까?");
+        if (m) {
+            ctx.clearRect(0, 0, w, h);
+            document.getElementById("canvasimg").style.display = "none";
+        }
+    }
+    
+    
+    function findxy(res, e) {
+        if (res == 'down') {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+    
+            flag = true;
+            dot_flag = true;
+            if (dot_flag) {
+                ctx.beginPath();
+                ctx.fillStyle = x;
+                ctx.fillRect(currX, currY, 2, 2);
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up' || res == "out") {
+            flag = false;
+        }
+        if (res == 'move') {
+            if (flag) {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+                draw();
+            }
+        }
+    }
+    function loadCanvasClicked(event)
+    {
+      event.preventDefault();
+      document.getElementById("canvas_file").click();
+    }
+    function loadCanvas(file_btn)
+    {
+      var file = file_btn.files[0];
+      var imageObj = new Image();
+      imageObj.src = window.URL.createObjectURL(file);
+      imageObj.onload = function(){
+        ctx.drawImage(imageObj, 0, 0);
+      }
+    }
+    function saveCanvas()
+    {
+      var link = document.createElement('a');
+      link.download = "canvas.png";
+      link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+      link.click();
+    }
+    </script>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_API.html">
+                    <img class="img-responsive portfolio-item" src="http://static1.squarespace.com/static/58d9355ef5e231abb45e225a/t/58d9a8811b10e3174ee2c63b/1521482727658/" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_drawing.html">
+                    <img class="img-responsive portfolio-item" src="https://www.software.kr/thumbnail/1/gq4WeovPh1psKvtOVg3EfagJHgd9GcDC3M7Lg9Oap6eAMHoy8LHYwMkR1hFgIAzd.do" alt="">
+                </a>
+            </div>
+
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_Loading_Bar.html">
+                    <img class="img-responsive portfolio-item" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SZsu7JDqliztt1ct9/videoblocks-loading-bar-modern-concept-sign-progress-screen-download-idea-animation-design-load-alpha-channel-4k_swkumfvxw_thumbnail-full01.png" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_Firework.html">
+                    <img class="img-responsive portfolio-item" src="https://cbmpress.com/toronto/wp-content/uploads/sites/3/2017/07/0701_1.png" alt="">
+                </a>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

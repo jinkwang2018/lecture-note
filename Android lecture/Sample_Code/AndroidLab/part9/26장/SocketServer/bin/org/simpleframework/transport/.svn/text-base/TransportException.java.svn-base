@@ -1,0 +1,57 @@
+/*
+ * TransportException.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import java.io.IOException;
+
+/**
+ * The <code>TransportException</code> object is thrown when there 
+ * is a problem with the transport. Typically this is done thrown if
+ * there is a problem reading or writing to the transport.
+ * 
+ * @author Niall Gallagher
+ */
+public class TransportException extends IOException {
+   
+   /**
+    * Constructor for the <code>TransportException</code> object. If
+    * there is a problem sending or reading from a transport then it
+    * will throw a transport exception to report the error.
+    * 
+    * @param message this is the message associated with the error
+    */
+   public TransportException(String message) {
+      super(message);
+   }
+   
+   /**
+    * Constructor for the <code>TransportException</code> object. If
+    * there is a problem sending or reading from a transport then it
+    * will throw a transport exception to report the error.
+    * 
+    * @param message this is the message associated with the error
+    * @param cause this is the cause of the producer exception
+    */
+   public TransportException(String message, Throwable cause) {
+      super(message);
+      initCause(cause);
+   }
+}

@@ -1,0 +1,95 @@
+/*
+ * LeaseManager.java May 2004
+ *
+ * Copyright (C) 2004, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.util.lease;
+
+import java.util.concurrent.TimeUnit;
+
+/**
+ * The <code>LeaseManager</code> is used to issue a lease for a
+ * named resource. This is effectively used to issue a request
+ * for a keyed resource to be released when a lease has expired.
+ * The use of a <code>Lease</code> simplifies the interface to
+ * the notification and also enables other objects to manage the
+ * lease without any knowledge of the resource it represents.
+ *
+ * @author Niall Gallagher
+ */
+public class LeaseManager<T> implements LeaseProvider<T> {
+   
+   /**
+    * This is the controller used to handle lease operations.
+    */
+   private Controller<T> handler;
+   
+   /**
+    * Constructor for the <code>LeaseManager</code> object. This
+    * instance is created using a specified notification handler.
+    * The specified <code>Cleaner</code> will be notified when
+    * the lease for a named resource expires, which will allow
+    * the cleaner object to perform a clean up for that resource.
+    *
+    * @param cleaner the cleaner object receiving notifications
+    */
+   public LeaseManager(Cleaner<T> cleaner) {
+      this.handler = new Maintainer<T>(cleaner);
+   }
+   
+   /**
+    * This method will issue a <code>Lease</code> object that
+    * can be used to manage the release of a keyed resource. If
+    * the lease duration expires before it is renewed then the 
+    * notification is sent, typically to a <code>Cleaner</code>
+    * implementation, to signify that the resource should be
+    * recovered. The issued lease can also be canceled.
+    * 
+    * @param key this is the key for the leased resource 
+    * @param duration this is the duration of the issued lease
+    * @param unit this is the time unit to issue the lease with
+    *
+    * @return a lease that can be used to manage notification
+    */
+   public Lease<T> lease(T key, long duration, TimeUnit unit) {
+      Contract<T> contract = new Entry<T>(key, duration, unit);
+      
+      try {
+         handler.issue(contract);
+      } catch(Exception e) {        
+         return null;
+      }
+      return new ContractLease<T>(handler, contract);
+   }
+
+   /**
+    * This is used to close the lease provider such that all of
+    * the outstanding leases are canceled. This also ensures the
+    * provider can no longer be used to issue new leases, such 
+    * that further invocations of the <code>lease</code> method
+    * will result in null leases. Once the provider has been 
+    * closes all threads and other such resources are released.
+    */ 
+   public void close() {
+      try {
+        handler.close();              
+      } catch(Exception e) {
+        return;                
+      }           
+   }
+}

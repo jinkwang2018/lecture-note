@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+   >
+	<Button 
+	    android:id="@+id/backBtn"
+	    android:layout_width="180dp"
+    	android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:text="돌아가기"
+	    android:textSize="25dp"
+	   
+	    />
+   	<TextView 
+   	    android:id="@+id/txtMsg"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+   	    android:layout_below="@id/backBtn"
+   	    android:layout_marginTop="20dp"
+   	    android:gravity="center_horizontal"
+   	    android:text="위 버튼 클릭시 메인 액티비티 전환"
+   	    android:textSize="15dp"
+   	    />	
+</RelativeLayout>

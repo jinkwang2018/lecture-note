@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>4조 조원소개</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/member.js"></script>
+  
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Main</a></li>
+        <li><a href="GeoLocation.html">GeoLocation</a></li>
+        <li><a href="Drag_Drop.html">Drag & Drop</a></li>
+        <li><a href="LocalStorage.html">LocalStorage</a></li>
+        <li><a href="SSE.html">SSE</a></li>
+        <li><a href="Web_Worker.html">Web Worker</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="Member.html"><span class="glyphicon glyphicon glyphicon-user"></span> 4조 조원보기</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>	
+
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h3>4조 조원소개</h3>
+    <hr/>
+    <p><span class="glyphicon glyphicon-search"></span> 얼굴 좀 보고 갈까요?  </p>
+  </div>
+</div>
+	
+
+<div class="container text-center">
+  
+  <div class="row">  
+    <div class="col-sm-4">
+      <img src="images/myungchul.jpg" alt="Random Name" width="255" height="255" class="myung">
+      <br><br/>
+      <p><strong class="myung">이명철</strong></p><br>
+    </div>
+    <div class="col-sm-4">
+      <img src="images/ha.jpg" alt="Random Name" width="255" height="255" class="park">
+      <br><br/>
+      <p><strong class="park">박성준</strong></p><br>
+    </div>
+    <div class="col-sm-4">
+      <img src="images/myungjae.jpg" alt="Random Name" width="255" height="255" class="woo">
+      <br><br/>
+      <p><strong class="woo">우명제</strong></p><br>
+    </div>
+  </div>
+  
+  <div class="row">
+  	<div class="col-sm-4">
+      <img src="images/Ju.jpg" alt="Random Name" width="255" height="255" class="kim">
+      <br><br/>
+      <p><strong class="kim">김주희</strong></p><br>  
+    </div>
+    
+    <div class="col-sm-4">
+      <img src="images/JaeHyun.jpg" alt="Random Name" width="255" height="255" class="ha">
+      <br><br/>
+      <p><strong class="ha">하재현</strong></p><br>  
+    </div>
+    
+    <div class="col-sm-4">
+      <img src="images/maknae.jpg" alt="Random Name" width="255" height="255" class="mak">
+      <br><br/>
+      <p><strong class="mak">이승훈</strong></p><br>
+    </div>
+  </div>
+</div>
+
+
+
+<!--명철이 다이어로그-->
+<div id="dialog" title="이명철">
+
+	<div class="container-fluid">
+		<table class="table">
+			<tr class="info">
+				<th>이름</th>
+			</tr>
+			<tr>
+				<td class="mn">이명철</td>
+			</tr>
+			
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>전화번호</th>
+			</tr>
+			<tr>
+				<td class="mp">010-9086-1028</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>생일</th>
+			</tr>
+			<tr>
+				<td>10월 28일</td>
+			</tr>
+		</table>
+		
+		
+		<button class="btn btn-primary" id="addF">친구추가</button>
+		<button class="btn btn-primary" id="sendM">쪽지보내기</button>
+		
+	</div>
+	
+</div>
+
+<!---------------------------------------------------------------------------------->
+
+<!--성준-->
+<div id="seungdialog" title="박성준">
+
+	<div class="container-fluid">
+		<table class="table">
+			<tr class="info2">
+				<th>이름</th>
+			</tr>
+			<tr>
+				<td class="mn2">박성준</td>
+			</tr>
+			
+		</table>
+		
+		<table class="table">
+			<tr class="info2">
+				<th>전화번호</th>
+			</tr>
+			<tr>
+				<td class="mp2">010-9590-3710</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>생일</th>
+			</tr>
+			<tr>
+				<td>04월 25일</td>
+			</tr>
+		</table>
+		
+		
+		<button class="btn btn-primary" id="addF2">친구추가</button>
+		<button class="btn btn-primary" id="sendM">쪽지보내기</button>
+		
+	</div>
+	
+</div>
+<!------------------------------------------------------->
+
+
+<!--명제-->
+<div id="myungdialog" title="우명제">
+
+	<div class="container-fluid">
+		<table class="table">
+			<tr class="info2">
+				<th>이름</th>
+			</tr>
+			<tr>
+				<td class="mn3">우명제</td>
+			</tr>
+			
+		</table>
+		
+		<table class="table">
+			<tr class="info2">
+				<th>전화번호</th>
+			</tr>
+			<tr>
+				<td class="mp3">010-4734-3756</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>생일</th>
+			</tr>
+			<tr>
+				<td>01월 25일</td>
+			</tr>
+		</table>
+		
+		
+		<button class="btn btn-primary" id="addF3">친구추가</button>
+		<button class="btn btn-primary" id="sendM">쪽지보내기</button>
+		
+	</div>
+	
+</div>
+
+<!--------------------------------------------------------------------------------->
+
+<!--주희-->
+<div id="Judialog" title="김주희">
+
+	<div class="container-fluid">
+		<table class="table">
+			<tr class="info2">
+				<th>이름</th>
+			</tr>
+			<tr>
+				<td class="mn4">김주희</td>
+			</tr>
+			
+		</table>
+		
+		<table class="table">
+			<tr class="info2">
+				<th>전화번호</th>
+			</tr>
+			<tr>
+				<td class="mp4">010-2076-8626</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>생일</th>
+			</tr>
+			<tr>
+				<td>11월 11일</td>
+			</tr>
+		</table>
+		
+		
+		<button class="btn btn-primary" id="addF4">친구추가</button>
+		<button class="btn btn-primary" id="sendM">쪽지보내기</button>
+		
+	</div>
+	
+</div>
+
+
+<!-------------------------------------------------------------------------->
+
+<div id="Hadialog" title="하재현">
+
+	<div class="container-fluid">
+		<table class="table">
+			<tr class="info2">
+				<th>이름</th>
+			</tr>
+			<tr>
+				<td class="mn5">하재현</td>
+			</tr>
+			
+		</table>
+		
+		<table class="table">
+			<tr class="info2">
+				<th>전화번호</th>
+			</tr>
+			<tr>
+				<td class="mp5">010-8081-3730</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>생일</th>
+			</tr>
+			<tr>
+				<td>12월 10일</td>
+			</tr>
+		</table>
+		
+		
+		<button class="btn btn-primary" id="addF5">친구추가</button>
+		<button class="btn btn-primary" id="sendM">쪽지보내기</button>
+		
+	</div>
+	
+</div>
+
+<!---------------------------------------------------------------------------->
+
+<div id="Makdialog" title="이승훈">
+
+	<div class="container-fluid">
+		<table class="table">
+			<tr class="info2">
+				<th>이름</th>
+			</tr>
+			<tr>
+				<td class="mn6">이승훈</td>
+			</tr>
+			
+		</table>
+		
+		<table class="table">
+			<tr class="info2">
+				<th>전화번호</th>
+			</tr>
+			<tr>
+				<td class="mp6">010-8616-8117</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr class="info">
+				<th>생일</th>
+			</tr>
+			<tr>
+				<td>1월 24일</td>
+			</tr>
+		</table>
+		
+		
+		<button class="btn btn-primary" id="addF6">친구추가</button>
+		<button class="btn btn-primary" id="sendM">쪽지보내기</button>
+		
+	</div>
+	
+</div>
+
+
+
+
+
+<!--작은 팝업-->
+<div id="info" title="친구 정보">
+	
+	<div class="container-fluid">
+	<table class="table">
+		
+		<tr>
+			<th>친추할 친구 이름</th>
+		</tr>
+		<tr>
+			<td id="fname">
+		
+			</td>
+		</tr>
+	</table>
+	
+	
+	<table class="table">
+		
+		<tr>
+			<th>전화번호</th>
+		</tr>
+		<tr>
+			<td id="fphone">
+		
+			</td>
+		</tr>
+	</table>
+	
+	
+	</div>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				
+	<button class="btn btn-info" id="okbtn">확인</button>	
+
+</div>
+
+
+</body>
+</html>

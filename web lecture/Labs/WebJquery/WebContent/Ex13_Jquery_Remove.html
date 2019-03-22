@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		table, tr, th ,td{
+			border: 1px  solid blue;
+			border-collapse: collapse;
+		}
+	</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		//테이블 생성
+		$(document).ready(function(){
+			$('#btncreate').click(function(){
+				var row = $('#row').val();
+				var col = $('#col').val();
+				
+				var strtable = "<table>";
+					for(var i = 0 ; i < row ; i++){
+						strtable+="<tr>"
+						for(var j = 0 ; j < col ; j++){
+							strtable+="<td>(" + i + ")행(" + j + ")열</td>";
+						}
+						strtable+="</tr>"
+					}
+				strtable += "<table>";
+				console.log(strtable);
+				$('#divtable').append(strtable);
+			});
+			//remove() - Removes the selected element (and its child elements)>> 자신까지 제거
+			//empty() - Removes the child elements from the selected element  >> 자식만 제거
+			$('#btndelete').click(function(){
+				$('#divtable').empty();
+				//$('#divtable').remove();
+			});
+			
+			$('#btnmenu').click(function(){
+				//$('#menu').clone().appendTo('#submenu'); target을 나중에 지정한다.
+				$('#menu').clone().prependTo('#submenu'); 
+			});
+		});
+		</script>
+</head>
+<body>
+	<span id="lbldisplay">Table Create</span>
+	<input type="text" id="row">행
+	<input type="text" id="col">열
+	<input type="button" value="테이블 동적 생성" id="btncreate">
+	<input type="button" value="테이블 동적 제거" id="btndelete">
+	<div id = "divtable">
+	</div>
+	<hr>
+	<input type = "button" id="btnmenu" value= "변경">
+	<div id ="menu">HOME</div>
+	<div id ="content">CONTENT</div>
+	<div id ="submenu">SUBMENU</div>
+</body>
+</html>

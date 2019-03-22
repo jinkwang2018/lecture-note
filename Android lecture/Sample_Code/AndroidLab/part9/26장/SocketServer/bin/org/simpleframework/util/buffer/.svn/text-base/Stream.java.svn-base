@@ -1,0 +1,48 @@
+/*
+ * Stream.java February 2001
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.util.buffer;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * The <code>Stream</code> interface is used to represent anything that
+ * can be streamed. Typically this is used to represent a region of
+ * memory that can be read through an <code>InputStream</code> object.
+ * Representing an object as a stream ensures it can each time the 
+ * input stream is acquired it reads from the start of the buffer.
+ *
+ * @author Niall Gallagher
+ *
+ * @see org.simpleframework.util.buffer.Buffer
+ */ 
+public interface Stream {
+
+   /**
+    * This method is used so that a buffer can be represented as a
+    * stream of bytes. This provides a quick means to access the data
+    * that has been written to the buffer. It wraps the buffer within
+    * an input stream so that it can be read directly.
+    *
+    * @return a stream that can be used to read the buffered bytes
+    */   
+  public InputStream getInputStream() throws IOException;        
+}

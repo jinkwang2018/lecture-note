@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>API chart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+	<script type="text/javascript">
+		function myFunction(all, korea, china, japan, etc) {
+			Highcharts.chart('container_food', {
+			    chart: {
+			        plotBackgroundColor: null,
+			        plotBorderWidth: null,
+			        plotShadow: false,
+			        type: 'pie'
+			    },
+			    title: {
+			        text: '서울시 강남구 모범음식점 종류 비율'
+			    },
+			    tooltip: {
+			        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			    },
+			    plotOptions: {
+			        pie: {
+			            allowPointSelect: true,
+			            cursor: 'pointer',
+			            dataLabels: {
+			                enabled: true,
+			                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                style: {
+			                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                }
+			            }
+			        }
+			    },
+			    series: [{
+			        name: '총 ' + all + ' 곳 중',
+			        colorByPoint: true,
+			        data: [{
+			            name: '한식당 ' + korea + ' 곳',
+			            y: (korea/all) * 100,
+			            sliced: true,
+			            selected: true
+			        }, {
+			            name: '중식당 ' + china + ' 곳',
+			            y: (china/all) * 100
+			        }, {
+			            name: '일식당 ' + japan + ' 곳',
+			            y: (japan/all) * 100
+			        }, {
+			            name: '기타 식당 ' + etc + ' 곳',
+			            y: (etc/all) * 100
+			        }]
+			    }]
+			});
+		}
+		
+		$(function() {
+			$('#btn_food').click(function(){
+                $.ajax({
+                    url : 'http://openapi.gangnam.go.kr:8088/7842674c6b6a696e35336f50735752/json/GnModelRestaurantDesignate/1/500/',
+                    dataType:"json",
+                    beforeSend: function(){
+        				$("#container_food").html("<p style='text-align:center;'><img src='project/images/LoaderIcon.gif'></p>");
+        			},
+                    success:function(data){
+                        var cnt = 0;
+                        var koreafood = 0;
+                        var chinafood = 0;
+                        var japanfood = 0;
+                        var etcfood = 0;
+                        var table = "<table class='table'>";
+                        table += "<tr><th>등록일</th><th>업소명</th><th>업소주소</th><th>업태</th><th>주된음식</th><th>행정동명</th><th>전화번호</th></tr>";
+                        $.each(data.GnModelRestaurantDesignate.row, function(index, obj) {
+                        	if((++cnt % 2) == 0) {
+                                table += "<tr>";
+                            }else {
+                                table += "<tr class='info'>";
+                            }
+                            table += "<td>" + obj.ASGN_YMD + "</td>";
+                            table += "<td>" + obj.UPSO_NM + "</td>";
+                            table += "<td>" + obj.SITE_ADDR_RD + "</td>";
+                            table += "<td>" + obj.SNT_UPTAE_NM + "</td>";
+                            table += "<td>" + obj.MAIN_EDF + "</td>";
+                            table += "<td>" + obj.ADMDNG_NM + "</td>";
+                            table += "<td>" + obj.UPSO_SITE_TELNO + "</td>";
+                            table += "</tr>";
+                        	
+                        	if(obj.ADMDNG_NM == $("#dong option:selected").val()){
+                                cnt++;
+                                var kind = obj.SNT_UPTAE_NM;
+                                if(kind == "한식") {
+                                	koreafood++;
+                                }else if(kind == "중국식"){
+                                	chinafood++;
+                                }else if(kind == "일식"){
+                                	japanfood++;
+                                }else{
+                                	etcfood++;
+                                }
+                            };
+                        });
+                        table += "</table>";
+                        $('#display_food').html(table);
+                        //console.log("c:" + cnt + "/ k:" + koreafood + "/ c:" + chinafood + "/ j:" + japanfood + "/ e:" + etcfood);
+                        myFunction(cnt, koreafood, chinafood, japanfood, etcfood);
+                    }
+                });
+            });
+		});
+	</script>
+</head>
+<body>
+    <label>동 선택</label>
+    <select id="dong">
+        <option>삼성1동</option>
+        <option>일원1동</option>
+        <option>논현1동</option>
+        <option>역삼1동</option>
+        <option>대치1동</option>
+        <option>도곡1동</option>
+        <option>청담동</option>
+    </select>
+    
+    <input type="button" id="btn_food" value="검색하기">
+    <hr>
+	<div id="container_food" style="min-width: 310px; height: 400px; margin: 0 auto">
+	
+	</div>
+	
+	<div id="display_food">
+    	
+    </div>
+	
+	<table ></table>
+</body>
+</html>

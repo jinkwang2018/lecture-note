@@ -1,0 +1,78 @@
+/*
+ * Socket.java February 2001
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+ 
+package org.simpleframework.transport;
+
+import java.nio.channels.SocketChannel;
+import java.util.Map;
+
+import javax.net.ssl.SSLEngine;
+
+/**
+ * This is a <code>Socket</code> interface that is used to represent 
+ * a socket. This has a map that allows attributes to be associated 
+ * with the client connection. Attributes such as security details
+ * or other transport related details can be exposed by placing them
+ * in the socket map. The <code>Processor</code> can then use these
+ * attributes as required.
+ * <p>
+ * This provides the connected <code>SocketChannel</code> that can 
+ * be used to read and write data asynchronously. The socket channel 
+ * must be selectable and in non-blocking mode. If the socket is not
+ * in a non-blocking state the connection will not be processed.
+ *
+ * @author Niall Gallagher
+ */ 
+public interface Socket {
+
+   /**
+    * This is used to acquire the SSL engine used for security. If 
+    * the socket is connected to an SSL transport this returns an 
+    * SSL engine which can be used to establish the secure connection
+    * and send and receive content over that connection. If this is
+    * null then the socket represents a normal transport. 
+    *  
+    * @return the SSL engine used to establish a secure transport
+    */
+   public SSLEngine getEngine();
+   
+   /**
+    * This method is used to acquire the <code>SocketChannel</code>
+    * for the connection. This allows the server to acquire the input
+    * and output streams with which to communicate. It can also be 
+    * used to configure the connection and perform various network 
+    * operations that could otherwise not be performed.
+    *
+    * @return this returns the socket used by this socket
+    */         
+   public SocketChannel getChannel();
+
+   /**
+    * This method is used to get the <code>Map</code> of attributes 
+    * for this socket. The attributes map is used to maintain details
+    * about the connection. Information such as security credentials
+    * to client details can be placed within the attribute map.
+    *
+    * @return this returns the map of attributes for this socket
+    */
+   public Map getAttributes();
+}
+
+

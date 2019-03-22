@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>Insert title here</title>
+  <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#message').click(function(){
+          if($('#id').val() == ""){
+           alert("ID입력");
+            $("#id").focus();
+          }else{
+      $.ajax(
+         {
+          //url:"http://192.168.0.102:8090/Web_Servlet_3_memo_view_dao/MemoId"
+          url:"MemoId", // url_pettern 
+          data:{id:$('#id').val()},
+          dataType:"html",//서버에서 응답하는 데이터 타입(xml,json,script,html)
+          success:function(responsedata){ 
+           console.log(">"+responsedata+"<");
+           if(responsedata == "true"){
+            alert("사용가능")
+            $('#email').focus();
+           }else{
+            alert("사용불가능");
+            $('#id').val("");
+            $('#id').focus();
+            
+           }
+          }
+         }
+      
+          ); 
+            }
+     });
+        
+         
+            $("#btnsumbit").click(function(){
+                if($("#id").val()==""){
+                    alert("ID입력");
+                    $("#id").focus();
+                    return false;
+                }else if($("#email").val() ==""){
+                    alert("email입력");
+                    $("#email").focus();
+                    return false;
+                }else if($("#memo").val() ==""){
+                        alert("memo입력");
+                        $("#memo").focus();
+                        return false;
+                }else{
+                    $('#f').submit();
+                } 
+                
+            });
+        });
+   </script>
+</head>
+<body>
+<div style="margin-top:70px;"></div> 
+<form name="f" action="MemoServlet" method="post" id="f"> 
+ <div align="center"> 
+    <table width="600" border="0" cellpadding="7"> 
+        <tr align="center" bgcolor="gold" height="50"> 
+            <td colspan="2"> 
+                <font size="4" color="#0033CC" face="굴림체"> 
+                <b> 
+                   Servlet Memo
+                </b> 
+                </font> 
+            </td> 
+        </tr> 
+        <tr> 
+            <td width="25%" align="center" > 
+                <b>ID</b> 
+            </td> 
+            <td> 
+                <input type="text" size="40" name="id"  id="id" maxlength="10" >
+                <input type="button" value="ID확인" id="message"> 
+            </td> 
+        </tr>     
+        <tr> 
+            <td width="25%" align="center"> 
+                <b>EMAIL</b> 
+            </td> 
+            <td> 
+                <input type="text" size="40" name="email" id="email" maxlength="60" > 
+            </td> 
+        </tr> 
+        <tr> 
+            <td width="25%" align="center"> 
+                <b>MEMO</b> 
+            </td> 
+            <td> 
+                <textarea name="memo" cols="50" class="box2" id="memo"></textarea> 
+            </td> 
+        </tr> 
+        <tr bgcolor="gold"> 
+            <td colspan="2" align="center" class="c2"> 
+                <input type="button" value="전송" id="btnsumbit" >
+                <input type="reset" value="취소"> 
+            </td> 
+        </tr> 
+     
+    </table> 
+ </div> 
+ <hr>
+ <a href="MemoList">목록보기</a>
+</form> 
+</body>
+</html>

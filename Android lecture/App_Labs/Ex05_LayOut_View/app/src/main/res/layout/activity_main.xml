@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <HorizontalScrollView
+        android:id="@+id/scrollView01"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:id="@+id/imageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                />
+        </ScrollView>
+    </HorizontalScrollView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/button01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="up"
+                android:textSize="18dp"
+                />
+            <Button
+                android:id="@+id/button02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="down"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <HorizontalScrollView
+        android:id="@+id/scrollView02"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        >
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <ImageView
+                android:id="@+id/imageView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                />
+        </ScrollView>
+    </HorizontalScrollView>
+</RelativeLayout>
+    <!--
+       속성값
+       java
+       설명
+       matrix
+       setScaleType(ImageView.ScaleType.MATRIX)
+       원본 크기 그대로 보여줌 (왼쪽 상단 정렬)
+       Center
+       setScaleType(ImageView.ScaleType.CENTER)
+       원본 크기 그대로 보여줌 (가운데 정렬)
+       centerCrop
+       setScaleType(ImageView.ScaleType.CENTER_CROP)
+       View 영역에 공백이 있으면 채워서 보여줌(비율유지)
+       centerInside
+       setScaleType(ImageView.ScaleType.CENTER_INSIDE)
+       View 영역을 벗어나면 맞춰서 보여줌(비율유지)
+       fitStart
+       setScaleType(ImageView.ScaleType.FIT_START)
+       View 영역에 맞게 보여줌 (왼쪽 상단 정렬, 비율유지)
+       fitCenter
+       setScaleType(ImageView.ScaleType.FIT_CENTER)
+       View 영역에 맞게 보여줌 (가운데 정렬, 비율유지)
+       fitEnd
+       setScaleType(ImageView.ScaleType.FIT_END)
+       View 영역에 맞게 보여줌 (왼쪽 하단 정렬, 비율유지)
+       fitXY
+       setScaleType(ImageView.ScaleType.FIT_XY)
+       View 영역을 가득 채워서 보여줌 (비율유지 안함)
+
+
+        -->

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<style>
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img{
+width: 90%;
+margin: auto;
+}
+
+.navbar-nav {
+    	float: right;
+    }
+    .navbar-default {
+    	margin-bottom: 0px;
+    }
+
+	.jumbotron {
+	    margin-bottom: 0;
+		background-image: url('Images/tree.jpg');
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+	}
+	.jumbotron > h1, p {
+		color: white;
+	}
+
+footer {
+		background-color: #555;
+		color: white;
+		padding: 15px;
+	}
+
+</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-default">
+  		<div class="container-fluid">
+  			<div class="navbar-header">
+  		    	<a class="navbar-brand" href="#">Bitcamp104 1조</a>
+  		    </div>
+  		    <ul class="nav navbar-nav">
+  		      <li><a href="#">Home</a></li>
+  		      <li><a href="FirstLogin.html">Login</a></li>
+  		      <li><a href="SignUp.jsp">Sign Up</a></li>
+  		      <li><a href="Logout.jsp">로그아웃</a></li>
+  			</ul>
+  		</div>
+  	</nav>
+  	<div id = "header" class="jumbotron text-center">
+  		<h1>HTML5_API</h1>
+  		<p>Geoloaction</p>
+  </div>
+
+
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="Images\m1.jpg" alt="Los Angeles">
+      </div>
+
+      <div class="item">
+        <img src="Images\m2.jpg" alt="Chicago">
+      </div>
+
+      <div class="item">
+        <img src="Images\m3.jpg" alt="New York">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+<br />
+<br />
+
+<button id='btn' name='btn' style="visibility: hidden;">영화 누적 관객수 조회</button>
+<canvas id="myChart" width="200px" height="100px"></canvas>
+
+<script type="text/javascript">
+	
+	var now = new Date();
+	var year = now.getFullYear();
+	var month = now.getMonth()+1;
+	var date = now.getDate();
+
+	//어제 날짜로 계산
+	date -= 1;
+
+	if (month < 10) {
+		month = '0'+ month;
+	}
+
+	if (date < 10) {
+		date = '0'+ date;
+	}
+
+	var time = year + month + date;
+
+$('#btn').click(function () {
+		// 비동기 처리로 외부 api 연결
+		$.ajax(
+			  {
+				url:"http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=298e75980f1f73603201595749e027d9&targetDt=" + time,
+				dataType:"json",
+				success:function(data){
+					var audiAcc = [];
+					var moviename = [];
+					$(data.boxOfficeResult.dailyBoxOfficeList).each(function () {
+
+						audiAcc.push(this.audiAcc);
+						moviename.push(this.movieNm);
+					});
+
+					// 아래부터는 차트
+					var ctx = document.getElementById("myChart");
+
+					var myChart = new Chart(ctx, {
+
+					    type: 'horizontalBar',
+
+					    data: {
+
+					        labels: [moviename[0], moviename[1], moviename[2], moviename[3], moviename[4], moviename[5], moviename[6], moviename[7], moviename[8], moviename[9]],
+
+					        datasets: [{
+
+					            label: '영화별 누적 관객수',
+
+					            data: [audiAcc[0], audiAcc[1], audiAcc[2], audiAcc[3], audiAcc[4], audiAcc[5], audiAcc[6], audiAcc[7], audiAcc[8], audiAcc[9]],
+
+					            backgroundColor: [
+
+					                'rgba(255, 99, 132, 0.2)',
+
+					                'rgba(54, 162, 235, 0.2)',
+
+					                'rgba(255, 206, 86, 0.2)',
+
+					                'rgba(75, 192, 192, 0.2)',
+
+					                'rgba(0, 255, 0, 0.2)',
+
+					                'rgba(255, 102, 0, 0.2)',
+
+					                'rgba(102, 0, 52, 0.2)',
+
+					                'rgba(102, 51, 0, 0.2)',
+
+					                'rgba(153, 102, 255, 0.2)',
+
+					                'rgba(255, 159, 64, 0.2)'
+
+					            ],
+
+					            borderColor: [
+
+					                'rgba(255,99,132,1)',
+
+					                'rgba(54, 162, 235, 1)',
+
+					                'rgba(255, 206, 86, 1)',
+
+					                'rgba(75, 192, 192, 1)',
+
+					                'rgba(0, 255, 0, 1)',
+
+					                'rgba(255, 102, 0, 1)',
+
+					                'rgba(102, 0, 52, 1)',
+
+					                'rgba(102, 51, 0, 1)',
+
+					                'rgba(153, 102, 255, 1)',
+
+					                'rgba(255, 159, 64, 1)'
+
+					            ],
+
+					            borderWidth: 0.5
+
+					        }]
+
+					    },
+
+					    options: {
+
+					        scales: {
+
+					            yAxes: [{
+
+					                ticks: {
+
+					                    beginAtZero:true
+
+					                }
+
+					            }]
+
+					        }
+
+					    }
+
+					});
+
+				} // end - success function
+			}
+		); // end - .ajax
+		
+	}); // end - click
+	
+	$("#btn").trigger("click");
+
+</script>
+	
+
+</body>
+<footer class="container-fluid bg-4 text-center">
+		<p>ⓒ 2018 Copyright: bit.or.kr</p>
+</footer>
+</html>

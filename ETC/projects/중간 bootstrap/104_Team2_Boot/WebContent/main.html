@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bitcamp_java 104th Team No.2</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+  <script src="//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="CSS/hanna.css" > 
+  <link rel="stylesheet" href="svg_icon/boot2.css">
+  
+<style>
+body {
+    font-family: "hanna",  "Lato", sans-serif;
+}
+</style>
+</head>
+<body>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  
+  	 <span class="svg-icon flat-filled" id="filled-home" style="margin:0px ; padding: 0px ; width: 100% ">
+  	 <a href="intro.html" target="frame">MAIN
+     <svg class='flat_icon' xmlns='http://www.w3.org/2000/svg' width='35px' height='35px' viewBox='0 0 100 100' >
+     <path class='circle' d='M50,2.125c26.441,0,47.875,21.434,47.875,47.875c0,26.441-21.434,47.875-47.875,47.875C17.857,97.875,2.125,
+     76.441,2.125,50C2.125,23.559,23.559,2.125,50,2.125z'/><g class='icon'><path class='base' d='M50,29.753l23.293,17.47v26.011c0,2.572-2.086,
+     4.659-4.66,4.659H31.366c-2.574,0-4.658-2.086-4.658-4.659V47.223L50,29.753z'/><path class='hole' d='M50,50.427c5.145,0,9.316,4.172,9.316,
+     9.316c0,5.144-4.172,9.317-9.316,9.317c-5.146,0-9.316-4.174-9.316-9.317C40.684,54.599,44.854,50.427,50,50.427z'/>
+     <path class='roof' d='M50,35.188L22.826,55.374V38.295L50,18.107l27.174,20.188v17.08L50,35.188z'/></g></svg></span></a>
+  
+  	 <span class="svg-icon flat-filled" id="filled-location" style="margin:0px ; padding: 0px ; width: 100% ">
+     <a href="googlemap.html" target="frame">Google Map
+     <svg class="flat_icon" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 100 100">
+     <path class="circle" d="M50,2.125c26.441,0,47.875,21.434,47.875,47.875c0,26.441-21.434,47.875-47.875,
+     47.875C17.857,97.875,2.125,76.441,2.125,50C2.125,23.559,23.559,2.125,50,2.125z"/>
+     <g class="icon"><path class="base" d="M50,19.53c13.945,0,25.248,11.213,25.248,25.045C75.248,60.437,
+     54.207,80.47,50,80.47c-4.208,0-25.248-20.033-25.248-35.895C24.752,30.743,36.056,19.53,50,19.53z"/>
+     <path class="inner" d="M50,30.488c8.174,0,14.8,6.625,14.8,14.799c0,8.173-6.626,14.8-14.8,14.8s-14.8-6.626-14.8-14.799C35.2,
+     37.114,41.826,30.488,50,30.488z"/></g></svg></span></a>
+        
+        
+     <span class="svg-icon flat-filled" id="filled-brush" style="margin:0px ; padding: 0px ; width: 100% ">
+     <a href="canvas.html" target="frame">Canvas
+     <svg class="flat_icon" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 100 100" style = "margin-top: 0px">
+     <path class="circle" d="M50,2.125c26.441,0,47.875,21.434,47.875,47.875S76.441,97.875,50,97.875C17.857,
+     97.875,2.125,76.441,2.125,50S23.559,2.125,50,2.125z"/>
+     <g class="icon"><path class="brush_base" d="M74.264,24.224c0.863-0.864,2.264-0.864,3.128,
+     0l1.042,1.042c0.863,0.864,0.863,2.265,0,3.129L56.055,57.027L45.628,46.602L74.264,24.224z"/>
+     <path class="brush_highlight" d="M74.264,24.224c0.863-0.864,2.264-0.864,3.128,0l1.042,
+     1.042c-1.225,1.133-26.979,27.164-26.979,27.164L45.628,46.6L74.264,24.224z"/>
+     <path class="brush_silver" d="M45.662,46.434l10.427,10.425c0.863,0.864,0.863,2.265,
+     0,3.129l-3.128,3.128c-0.863,0.863-2.265,0.863-3.129,0L39.406,52.69c-0.863-0.864-0.863-2.265,
+     0-3.129l3.128-3.127C43.399,45.571,44.799,45.571,45.662,46.434z"/>
+     <path class="brush_tip" d="M39.677,53.031l10.229,10.228c-8.683,20.973-28.987,10.601-28.987,
+     10.601s10.482,0.427,10.021-9.586C30.561,56.009,37.24,53.623,39.677,53.031z"/></g></svg></span></a>
+        
+        
+     <span class="svg-icon flat-filled" id="filled-picture" style="margin:0px ; padding: 0px ; width: 100% ">
+     <a href="svg_content.html" target="frame" >SVG
+     <svg class="flat_icon"  xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 100 100">
+     <path class="circle" d="M50,2.125c26.441,0,47.875,21.434,47.875,47.875S76.441,97.875,50,
+     97.875C17.857,97.875,2.125,76.441,2.125,50S23.559,2.125,50,2.125z"/>
+     <g class="icon"><path class="back" d="M23.236,32.68l41.281-11.062c1.221-0.327,2.477,0.397,
+     2.804,1.618l11.062,41.279c0.327,1.223-0.397,2.478-1.618,2.805L35.483,78.382c-1.221,
+     0.327-2.477-0.397-2.804-1.618L21.618,35.484C21.29,34.262,22.015,33.007,23.236,32.68z"/>
+     <path class="front" d="M28.631,26.343h42.736c1.264,0,2.29,1.024,2.29,2.289v42.736c0,1.265-1.025,
+     2.289-2.29,2.289H28.631c-1.264,0-2.29-1.024-2.29-2.289V28.632C26.342,27.367,27.367,26.343,28.631,
+     26.343z"/><path class="sky" d="M30.158,29.395h39.684c0.422,0,0.764,0.342,0.764,0.765v39.684c0,
+     0.423-0.342,0.765-0.764,0.765H30.158c-0.421,0-0.763-0.342-0.763-0.765V30.159C29.395,29.736,29.736,
+     29.395,30.158,29.395z"/><path class="sun" d="M39.062,35.342c2.529,0,4.579,2.051,4.579,4.579c0,
+     2.529-2.05,4.579-4.579,4.579s-4.579-2.05-4.579-4.579C34.483,37.393,36.534,35.342,39.062,35.342z"/>
+     <path class="mountain" d="M29.395,70.033l10.59-16.188c0.535-0.834,1.402-0.834,1.937,0l3.549,
+     5.536l9.875-15.399c0.763-1.192,2.003-1.192,2.766,0c0,0,11.314,23.861,12.494,25.789c-0.003,0.388,
+     0.046,0.834-0.443,0.834C67.2,70.672,35.549,70.6,30.036,70.593C29.526,70.593,29.395,70.033,29.395,
+     70.033z"/></g></svg></span></a>
+  
+  	<span class="svg-icon flat-filled" id="filled-graph" style="margin:0px ; padding: 0px ; width: 100% ">
+  	<a href="chart.html" target="frame" >HighChart
+  	<svg class='flat_icon' xmlns='http://www.w3.org/2000/svg' width="35px" height="35px" viewBox='0 0 100 100' >
+  	<path class='circle' d='M50,2.125c26.441,0,47.875,21.434,47.875,47.875c0,26.441-21.434,47.875-47.875,
+  	47.875C17.857,97.875,2.125,76.441,2.125,50C2.125,23.559,23.559,2.125,50,2.125z'/>
+  	<g class='icon'><path class='bar_left' d='M42.401,35.96l15.197,11.053v25.563H42.401V35.96z'/>
+  	<path class='bar_middle' d='M27.201,42.178l15.199-6.22v36.616c0,0-8.186,0-11.294,0c-1.785,
+  	0-3.986-1.842-3.906-3.397C27.518,63.139,27.201,42.178,27.201,42.178z'/>
+  	<path class='bar_right' d='M72.8,69.178c0.08,1.556-2.121,3.398-3.907,3.398c-3.107,0-11.294,0-11.294,0V47.013l15.199-17.271C72.8,29.741,
+  	72.483,63.139,72.8,69.178z'/><path class='dot_4' d='M42.401,33.642c1.524,0,2.763,1.237,2.763,2.764s-1.238,2.764-2.763,2.764c-1.527,
+  	0-2.764-1.237-2.764-2.764S40.875,33.642,42.401,33.642z'/><path class='dot_3' d='M57.599,42.623c1.526,0,2.763,1.237,
+  	2.763,2.763c0,1.527-1.236,2.765-2.763,2.765c-1.525,0-2.763-1.237-2.763-2.765C54.836,43.86,56.073,42.623,57.599,42.623z'/>
+  	<path class='dot_2' d='M72.8,27.424c1.524,0,2.762,1.238,2.762,2.764c0,1.527-1.237,2.765-2.762,2.765c-1.527,
+  	0-2.764-1.237-2.764-2.765C70.034,28.661,71.271,27.424,72.8,27.424z'/><path class='dot_1' d='M27.201,38.479c1.525,0,2.764,
+  	1.237,2.764,2.764s-1.238,2.765-2.764,2.765c-1.526,0-2.763-1.238-2.763-2.765C24.438,39.715,25.675,38.479,27.201,38.479z'/>
+  	</g></svg></span></a>
+        	
+    <span class="svg-icon flat-filled" id="filled-paper" style="margin:0px ; padding: 0px ; width: 100% ">
+    <a href="bitnote.html" target="frame">BitNote
+    <svg class='flat_icon' xmlns='http://www.w3.org/2000/svg' width="35px" height="35px" viewBox='0 0 100 100' >
+    <path class='circle' d='M50,2.125c26.441,0,47.875,21.434,47.875,47.875S76.441,97.875,50,97.875C17.857,97.875,2.125,
+    76.441,2.125,50S23.559,2.125,50,2.125z'/><g class='icon'><path class='base' d='M33.174,76.947V28.366h37.955v48.581H33.174z'/>
+    <path class='front' d='M28.872,71.634V23.053h27.328L66.826,33.68v37.954H28.872z'/>
+    <path class='corner' d='M56.199,23.053L66.826,33.68H56.199V23.053z'/><path class='text' d='M36.432,39.247h22.014c0.209,0,
+    0.381-0.169,0.381-0.379c0-0.211-0.17-0.381-0.381-0.381H36.432c-0.21,0-0.38,0.17-0.38,0.381C36.052,39.077,36.222,
+    39.247,36.432,39.247z M58.443,46.079H36.431c-0.21,0-0.38,0.169-0.38,0.379c0,0.211,0.17,0.381,0.38,0.381h22.013c0.211,0,
+    0.381-0.169,0.381-0.381C58.824,46.249,58.654,46.079,58.443,46.079z M58.443,53.67H36.431c-0.21,0-0.38,0.169-0.38,
+    0.379c0,0.211,0.17,0.381,0.38,0.381h22.013c0.211,0,0.381-0.17,0.381-0.381C58.824,53.839,58.654,53.67,58.443,
+    53.67z M58.443,61.261H36.431c-0.21,0-0.38,0.17-0.38,0.379c0,0.211,0.17,0.381,0.38,0.381h22.013c0.211,0,0.381-0.17,
+    0.381-0.381C58.824,61.431,58.654,61.261,58.443,61.261z'/></g></svg></span></a>
+  
+</div>
+
+<div id="main">
+	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; MENU</span>
+	 <iframe src="intro.html" name="frame" width=100% height="1500px" style ="border-width:0px"></iframe>
+</div>
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+     
+</body>
+</html>

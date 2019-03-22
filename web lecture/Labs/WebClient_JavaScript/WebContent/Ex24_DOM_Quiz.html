@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			window.onload = function(){ //function handler
+				var myphotos = Array("images/1.jpg",
+									 "images/2.jpg",
+									 "images/3.jpg",
+									 "images/4.jpg"
+									 );
+				var index = 0;
+				// img id ="imgs" 의 src 의 속성값을  myphotos 배열의 값으로 
+				var img = document.getElementById("imgs");
+				
+				//이전 구현
+				var prvele = document.getElementById("prv");
+				prvele.onclick = function(){
+				if(index == 0){
+						img.src = myphotos[myphotos.length-1];
+						index = myphotos.length-1;
+					}else{
+						img.src = myphotos[index-1];
+						index = index-1;
+					}
+				}	
+				
+				//다음 구현
+				var nextele = document.getElementById("next");
+				nextele.onclick = function(){ 
+					if(index == myphotos.length-1){
+						img.src = myphotos[0];
+						index = 0;
+					}else{
+						img.src = myphotos[index+1];
+						index = index+1;
+					}
+				}	
+				
+			
+			
+			}
+		</script>
+	</head>
+	
+	<body>
+		<h3>DOM 슬라이드</h3>
+		<img src = "images/1.jpg" id = "imgs" width = "200" height = "200" alt = "이미지">
+		<hr>
+		<a href = "#" id = "prv">이전</a> || <a href = "#" id = "next">다음</a>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var pele = document.createElement("p");
+				var hrele = document.createElement("hr");
+				var h3ele = document.createElement("h3");
+				var textnode = document.createTextNode("hello world");
+				var divele = document.createElement("div");
+				var textnode2 = document.createTextNode("hi hi hi");
+				
+				hrele.setAttribute("title","수평선");
+				//<hr title = "수평선">
+				
+				h3ele.appendChild(textnode);
+				//<h3>hello world</h3>
+				
+				divele.appendChild(textnode2);
+				//<div>hi hi hi</div>
+				
+				document.body.appendChild(pele).appendChild(divele);
+				//<body><p><div>hi hi hi</div></p></body>
+				//body 요소에 추가
+				
+				document.body.appendChild(hrele);
+				//<body><p><div>hi hi hi</div></p><hr title = "수평선"></body>
+				
+				document.body.appendChild(h3ele);
+				////<body><p><div>hi hi hi</div></p><hr title = "수평선"><h3>hello world</h3></body>
+			}
+		
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

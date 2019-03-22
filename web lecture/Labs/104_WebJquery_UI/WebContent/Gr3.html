@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Droppable - Simple photo manager</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  #gallery { float: left; width: 65%; min-height: 12em; }
+  .gallery.custom-state-active { background: #eee; }
+  .gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+  .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+  .gallery li a { float: right; }
+  .gallery li a.ui-icon-zoomin { float: left; }
+  .gallery li img { width: 100%; cursor: move; }
+ 
+  #trash { float: right; width: 32%; min-height: 18em; padding: 1%; }
+  #trash h4 { line-height: 16px; margin: 0 0 0.4em; }
+  #trash h4 .ui-icon { float: left; }
+  #trash .gallery h5 { display: none; }
+  #location{ float: left; width: 32%; min-height: 18em; padding: 1%;}
+  #location>ifram {
+      diplay: none;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+ 
+    // There's the gallery and the trash
+    var $gallery = $( "#gallery" ),
+      $trash = $( "#trash" );
+ 
+    // Let the gallery items be draggable
+    $( "li", $gallery ).draggable({
+      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+      revert: "invalid", // when not dropped, the item will revert back to its initial position
+      containment: "document",
+      helper: "clone",
+      cursor: "move"
+    });
+ 
+    // Let the trash be droppable, accepting the gallery items
+    $trash.droppable({
+      accept: "#gallery > li",
+      classes: {
+        "ui-droppable-active": "ui-state-highlight"
+      },
+      drop: function( event, ui ) {
+        deleteImage( ui.draggable );
+      }
+    });
+ 
+    // Let the gallery be droppable as well, accepting items from the trash
+    $gallery.droppable({
+      accept: "#trash li",
+      classes: {
+        "ui-droppable-active": "custom-state-active"
+      },
+      drop: function( event, ui ) {
+        recycleImage( ui.draggable );
+      }
+    });
+ 
+    // Image deletion function
+    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
+    function deleteImage( $item ) {
+      $item.fadeOut(function() {
+        var $list = $( "ul", $trash ).length ?
+          $( "ul", $trash ) :
+          $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $trash );
+ 
+        $item.find( "a.ui-icon-trash" ).remove();
+        $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
+          $item
+            .animate({ width: "48px" })
+            .find( "img" )
+              .animate({ height: "36px" });
+        });
+      });
+    }
+ 
+    // Image recycle function
+    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
+    function recycleImage( $item ) {
+      $item.fadeOut(function() {
+        $item
+          .find( "a.ui-icon-refresh" )
+            .remove()
+          .end()
+          .css( "width", "96px")
+          .append( trash_icon )
+          .find( "img" )
+            .css( "height", "72px" )
+          .end()
+          .appendTo( $gallery )
+          .fadeIn();
+      });
+    }
+ 
+    // Image preview function, demonstrating the ui.dialog used as a modal window
+    function viewLargerImage( $link ) {
+      var src = $link.attr( "href" ),
+        title = $link.siblings( "img" ).attr( "alt" ),
+        $modal = $( "img[src$='" + src + "']" );
+ 
+      if ( $modal.length ) {
+        $modal.dialog( "open" );
+      } else {
+        var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
+          .attr( "src", src ).appendTo( "body" );
+        setTimeout(function() {
+          img.dialog({
+            title: title,
+            width: 400,
+            modal: true
+          });
+        }, 1 );
+      }
+    }
+    
+    $('#버거킹').mouseover(function(){
+        $('#location>iframe').attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.5173198351317!2d127.02708341560606!3d37.495715235938036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a75b8a2b9%3A0x195d3e90f7a04d6!2z67KE6rGw7YK5IOqwleuCqOynhOyGlOygkA!5e0!3m2!1sko!2skr!4v1521429408075");
+    });
+    $('#kfc').mouseover(function(){
+        $('#location>iframe').attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7529.03076386195!2d127.02388247129073!3d37.494531609532274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca1454ca56113%3A0x3991e37c348005!2zS0ZDIOyEnOy0iOyasOyEseygkA!5e0!3m2!1sko!2skr!4v1521429568347");
+    }); 
+    $('#오니기리').mouseover(function(){
+        
+        $('#location>iframe').attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12662.26656545964!2d127.02388247088149!3d37.49455162712911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a40414c03%3A0x783c1f10b0c04710!2z7Jik64uI6riw66as7JmA7J206rec64-ZIOqwleuCqOyXreyUqOuEiOyKpOygkA!5e0!3m2!1sko!2skr!4v1521429968206");
+    });
+    $('#이삭').mouseover(function(){
+        
+        $('#location>iframe').attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.520850689877!2d127.02505581560598!3d37.495631935942725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a56501fc5%3A0xb0756ec95856b85f!2z7J207IKt7Yag7Iqk7Yq46rCV64Ko7KCQ!5e0!3m2!1sko!2skr!4v1521430038944");
+    }); 
+  } );
+  </script>
+</head>
+<body>
+ 
+<div class="ui-widget ui-helper-clearfix">
+ 
+<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header"><a href="https://www.google.co.kr/maps/place/%EB%B2%84%EA%B1%B0%ED%82%B9+%EA%B0%95%EB%82%A8%EC%A7%84%EC%86%94%EC%A0%90/@37.495711,127.0270834,17z/data=!3m1!4b1!4m5!3m4!1s0x357ca15a75b8a2b9:0x195d3e90f7a04d6!8m2!3d37.495711!4d127.0292721"></a>버거킹</h5>
+    <img id="버거킹" src="images/버거킹.png" alt="버거킹" width="96" height="72">
+  </li>
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">오니기리</h5>
+    <img id="오니기리" src="images/오니기리.jpg" alt="오니기리" width="96" height="72">
+    <a href="images/high_tatras2.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">KFC</h5>
+    <img id="kfc" src="images/kfc.png" alt="KFC" width="96" height="72">
+    <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">이삭토스트</h5>
+    <img id="이삭" src="images/이삭.png" alt="이삭토스트" width="96" height="72">
+    <a href="images/high_tatras4.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+</ul>
+ 
+<div id="trash" class="ui-widget-content ui-state-default">
+  <h4 class="ui-widget-header">저녁메뉴</h4>
+</div>
+<div id="location">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.566912259925!2d127.02539431560604!3d37.49454523600493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15aee9ab0cb%3A0x31793fc63e0cf9d3!2z67mE7Yq47Lqg7ZSE!5e0!3m2!1sko!2skr!4v1521429089486" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+</div>
+ 
+ 
+</body>
+</html>

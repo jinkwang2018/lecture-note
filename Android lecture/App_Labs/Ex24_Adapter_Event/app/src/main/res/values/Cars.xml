@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array name="cars">
+         <item>포니</item>         
+         <item>포니2</item>
+         <item>포니3</item>
+         <item>포니4</item>
+         <item>포니5</item>
+         <item>포니6</item>
+         <item>포니7</item>
+         <item>포니8</item>
+         <item>포니9</item>
+         <item>포니10</item>
+         <item>포니11</item>
+     </string-array>
+</resources>

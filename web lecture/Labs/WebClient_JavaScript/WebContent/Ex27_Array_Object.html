@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			//1. 배열 > []  > var arr = [10,20,30];
+			//2. JSON객체  > {} > var obj = {};
+			
+			//배열과 객체를 혼용
+			var students = [];
+			console.log(students);
+			
+			//배열에 객체를 추가
+			//javascript array는 push() , pop() 을 사용한다. 내부적으로 stack 구조이므로 LIFO
+			students.push({이름 : "홍길동" , 국어 : 80 , 영어 : 60});
+			students.push({이름 : "아무개" , 국어 : 100 , 영어 : 50});
+			students.push({이름 : "이순신" , 국어 : 50 , 영어 : 100});
+			
+			//기존 객체에 함수 추가
+			for(var index in students){
+				students[index].getSum = function(){
+					return this.국어 + this.영어;
+				};
+				students[index].getAvg = function(){
+					return this.getSum()/2;
+				};
+				
+			}
+			console.log(students);
+			//문제
+			//students 배열에 담겨있는 학생의 이름 , 총정 , 평균을 출력하세요.
+			for(var index in students){
+				document.write(students[index].이름+" / "+students[index].getSum()+ " / "+students[index].getAvg()+"<br>");
+			}
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

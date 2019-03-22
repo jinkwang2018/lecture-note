@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		/*
+		$(document).ready(function(){
+			
+		});
+		*/
+		//일반 자바스크립트 함수 
+		function javascriptFunc(){
+			var arrayobj=[];
+			
+				//1. arrayobj 배열(Array)에 아래 처럼 객체 추가하세요
+			    //아래 테이블에 있는 데이터 
+			    //101th , 홍길동 , 10
+			    //102th , 김유신  , 20
+			    //103th , 유관순  , 30
+			    //위 데이터를 추출해서 
+			    //arrayobj 배열에 [{} , {} , {} ] 형식으로 추가하세요
+			    //추가되는 객체는 ex) {grade:101th , name:홍길동 , age:10} 형식으로
+			    
+			    //최종결과는 : console.log(arrayobj)
+		    	$('table>tbody>tr').each(function(){
+		    		
+		    		arrayobj.push(
+		    				{ grade:$(this).children().eq(0).text(),
+		    				  name:$(this).children().eq(1).text(),
+		    				  age:$(this).children().eq(2).text(),
+		    				}
+		    		); 
+		    	});
+		    	console.log(arrayobj);
+		    	 //2.javascript 구문(for) 으로 arrayobj [ {} , {} , {} ] 값을 출력하세요
+			    // 출력한 결과를  id=display 인 div 태그 안에  append 하세요
+			     var output="";
+			    for(var i = 0 ; i < arrayobj.length ; i++){
+			    	output+= arrayobj[i].grade + "," + 
+			    	        arrayobj[i].name + "," +
+			    	        arrayobj[i].number + "<br>";  
+			    }
+			    $('#display').append(output); 
+			    //3.$.each() jquery 구문으로 출력하세요
+			    //<div id="display2"></div> 여기 안에 append 하세요
+			    $.each(arrayobj,function(index,obj){
+			    	$('#display').append("<input typ='text' value='" + 
+			    			obj.grade + " " + obj.name + " " + obj.number + "'>");
+			    }); 
+		   
+		    	
+		    
+		}
+	</script>
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<tr><td>기수</td><td>이름</td><td>번호</td></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>101th</td><td>홍길동</td><td>10</td>
+			</tr>
+			<tr>
+				<td>102th</td><td>김유신</td><td>20</td>
+			</tr>
+			<tr>
+				<td>103th</td><td>유관순</td><td>30</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		<button onclick="javascriptFunc()">함수호출</button>
+	</p>
+	<div id="display"></div>
+	<div id="display2"></div>
+</body>
+</html>

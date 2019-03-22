@@ -1,0 +1,18 @@
+파일 업로드 와 다운로드
+
+I/O : inputstream / outputstream
+
+별도의 lib) 유료 , 무료 :cos.jar
+
+http://www.servlets.com/cos/ 사이트 에서 다운로드
+cos.jar 파일 lib 폴더에 붙여넣기
+
+cos 제공 : MultipartRequest 라는 class 파일 업로드 사용
+
+*파일 업로드
+<form action="" method="" enctype="multipart/form-data">
+
+*서버 일반적으로 : request 객체  > cos 제공 : MultipartRequest 통해서 ...
+
+
+1. 폴더 업로드 : upload

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<!-- NOTICE !!! Please din't edit this file -->
+<sqlMapConfig>
+	<settings
+		cacheModelsEnabled		= "true"
+		enhancementEnabled	= "true"
+		lazyLoadingEnabled 	= "true"
+		maxRequests		= "128"
+		maxSessions		= "10"
+		maxTransactions		= "5" 
+		useStatementNamespaces	= "true" />
+
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE" >
+			<property name="JDBC.Driver"			value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="JDBC.ConnectionURL"		value="jdbc:derby:ANDROID;create=true" />
+			<property name="JDBC.Username"			value="" />
+			<property name="JDBC.Password"			value="" />
+			<property name="JDBC.DefaultAutoCommit"		value="false" />
+			<property name="Pool.MaximumActiveConnections"	value="20" />
+			<property name="Pool.MaximumIdleConnections"	value="5" />
+			<property name="Pool.MaximumCheckoutTime"	value="120000" />
+			<property name="Pool.TimeToWait"		value="10000" />
+		</dataSource>
+	</transactionManager>
+	
+	<!-- sql map files -->
+	<sqlMap resource="ibatis/GG.xml" />
+</sqlMapConfig> 

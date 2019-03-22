@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- w3 temp 추가해야함 끝-->
+    <style type="text/css">
+        h3{
+            margin-top: 0;
+        }
+        ul {
+            list-style:none;
+            margin:0;
+            padding:0;
+        }
+        
+        li {
+            margin-right: 20px;
+            padding: 0 0 0 0;
+            border : 0;
+            float: left;
+        }
+        .box {
+            margin:0 auto; 
+            margin-bottom: 20px;
+            width:100%; 
+            height:35px;
+            
+        }
+        .listbox {
+            text-align: center;
+            background-color: LightGray; 
+        }
+        .hotelimg {
+            width: 300px;
+            height: 250px;
+            margin: 10px;
+            margin-right:40px;
+            float: left;
+        }
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+        .carousel-inner img {
+            width: 100%; /* Set width to 100% */
+            margin: auto;
+            min-height:200px;
+        }
+        .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        * html .ui-autocomplete {
+            height: 100px;
+        }
+        @media (max-width: 600px) {
+            .carousel-caption {
+                display: none; 
+            }
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        table {
+            font-size: 60%;
+        }
+        }
+        #top {
+            float: left;
+            background-color: #FFFFC8;
+            width: 100%;
+            height: 340px;
+        }
+        #left {
+            float: left;
+            /*background-color: #FFFFC8;*/
+            width: 600px;
+            height: 600px;
+        }
+        #tabs {
+            float: left;
+            /*background-color: #E6FFFF;*/    
+            width: auto;
+            height: auto;
+        }
+        #progressbar {
+		    margin-top: 20px;
+		}
+		.progress_re {
+		    font-weight: bold;
+		    text-shadow: 1px 1px 0 #fff;
+		}
+		.ui-dialog-titlebar-close {
+		    display: none;
+		}	
+    </style>
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $( function() {
+            var availableTags = [
+              "Seoul","Jeju","Osaka","Sapporo","Tokyo","Paris","Nice","Lyon",
+              "Brussel","Liege","Gent","London","Manchester","Malaga","Madrid",
+              "Munchen","Frankfrut","Hamburg","Vienna","Salzburg","Firenze","Roma","Napoli"
+            ];
+            
+            $( "#tags" ).autocomplete({
+              source: availableTags
+            });
+            
+            $( "#adult" ).selectmenu();
+            $( "#children" ).selectmenu();
+        });
+        
+        $('.hotellist').hover(function() {
+            $(this).css("color", "#f6931f");
+        }, function() {
+            $(this).css("color", "black");
+        });
+        
+        $('.hotellist').click(function() {
+            $('.hotelimg').remove();
+            if(this.id == 'Seoul'){
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/서울1.jpg' class='hotelimg'>");
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/서울2.jpg' class='hotelimg'>");
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/서울3.jpg' class='hotelimg'>");
+            }else if(this.id == 'Gyeonggi'){
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/경기1.jpg' class='hotelimg'>");
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/경기2.jpg' class='hotelimg'>");
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/경기3.jpg' class='hotelimg'>");
+            }else {
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/부산1.jpg' class='hotelimg'>");
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/부산2.jpg' class='hotelimg'>");
+                $('#imagebox').append("<img alt='Error' src='images_Jquery_UI/부산3.jpg' class='hotelimg'>");
+            }
+        });
+        
+        
+        
+        $("#slider-range").slider({
+            range : true,
+            min : 0,
+            max : 1000000,
+            step : 10000,
+            values : [ 0, 340000 ],
+            slide : function(event, ui) {
+                   $("#amount").val("KRW" + ui.values[0] + " - KRW" + ui.values[1]);
+            }
+        });
+        $("#amount").val("KRW" + $("#slider-range").slider("values", 0) + " - KRW"+ $("#slider-range").slider("values", 1));
+    });
+    
+    //달력 화면
+    $(function(){
+        var monthNames =[];
+        for(var i = 1 ; i <=12 ; i++){
+            monthNames.push(i + "월")
+        }
+        
+        $("#start_date , #end_date").datepicker(
+            {
+               dateFormat : "yy-mm-dd",
+               showOn: "button",
+               buttonImage:"images_Jquery_UI/calendar.gif",
+               buttonImageOnly: true,
+               buttonText: "Select date"
+            }    
+        );
+        $("#dates").datepicker(
+                {
+                   dateFormat : "yy-mm-dd",
+                   closeText: '종료',
+                   prevText: "이전", 
+                   nextText: "다음", 
+                   currentText: '오늘',
+                   monthNames : monthNames,//['1월','2월'] //각 월표현
+                   dayNames : ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
+                   dayNamesMin:['일','월','화','수','목','금','토'] ,
+                   yearSuffix:'년',
+                   numberOfMonths:2
+                }    
+            );
+        $('#start_date').datepicker("option","onClose",function(selectedDate){
+            //selectedDate 선택한 날짜를 받는 변수
+            //console.log(selectedDate);
+            //div 달력
+            $('#dates').datepicker("option","minDate",selectedDate);
+            $('#totaldates').text(calcDates());
+        });
+        $('#end_date').datepicker("option", "onClose", function(selectedDate){
+            //selectedDate 선택한 날짜를 받는 변수
+            //console.log(selectedDate);
+            //div 달력
+            $('#dates').datepicker("option", "maxDate", selectedDate);
+            $('#totaldates').text(calcDates());
+        });
+    });
+    
+    function calcDates()
+    {
+        var minDate = new Date($("#dates").datepicker("option","minDate"));
+        var maxDate = new Date($("#dates").datepicker("option","maxDate"));
+                
+        var totDate = 0;
+        if(maxDate >= minDate){
+            console.log(maxDate.getTime()+"/"+minDate.getTime()); 
+            console.log(maxDate.getTime()-minDate.getTime() + "/" + (24*60*60*1000))
+            console.log((maxDate.getTime()-minDate.getTime())/(24*60*60*1000));
+            totDate = (maxDate.getTime()-minDate.getTime())/(24*60*60*1000) + 1;
+        } 
+        return totDate;
+    }
+    $( function() {
+            $( "#tabs" ).tabs();
+          
+    });
+    
+    $(function() {
+        var progressTimer,
+          progressbar = $( "#progressbar" ),
+          progressLabel = $( ".progress" ),
+          dialogButtons = [{
+            text: "Cancel Reservation",
+            click: closeReservation
+          }],
+          dialog = $( "#dialog_re" ).dialog({
+            autoOpen: false,
+            closeOnEscape: false,
+            resizable: false,
+            buttons: dialogButtons,
+            open: function() {
+              progressTimer = setTimeout( progress, 2000 );
+            },
+            beforeClose: function() {
+              downloadButton.button( "option", {
+                disabled: false,
+                label: "Start Reservation"
+              });
+            }
+          }),
+          downloadButton = $( "#reservation" )
+            .button()
+            .on( "click", function() {
+              $( this ).button( "option", {
+                disabled: true,
+                label: "Reservating..."
+              });
+              dialog.dialog( "open" );
+            });
+     
+        progressbar.progressbar({
+          value: false,
+          change: function() {
+            progressLabel.text( "Current Progress: " + progressbar.progressbar( "value" ) + "%" );
+          },
+          complete: function() {
+            progressLabel.text( "Complete!" );
+            dialog.dialog( "option", "buttons", [{
+              text: "Close",
+              click: closeReservation
+            }]);
+            $(".ui-dialog button").last().trigger( "focus" );
+          }
+        });
+     
+        function progress() {
+          var val = progressbar.progressbar( "value" ) || 0;
+     
+          progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+     
+          if ( val <= 99 ) {
+            progressTimer = setTimeout( progress, 10 );
+          }
+        }
+     
+        function closeReservation() {
+          clearTimeout( progressTimer );
+          dialog
+            .dialog( "option", "buttons", dialogButtons )
+            .dialog( "close" );
+          progressbar.progressbar( "value", false );
+          progressLabel
+            .text( "Starting reservation..." );
+          reservation.trigger( "focus" );
+        }
+      });
+    </script>
+    
+</head>
+<body>
+
+    <!-- Navigation -->
+ <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="teammain.html">Team 4OUR Introduce</a>
+    </div>
+   <ul class="nav navbar-nav">
+         <li><a href="introduce_tw.html">김태웅</a></li>
+         <li><a href="introduce_jinw.html">이진우</a></li>
+         <li><a href="introduce_hj.html">배현준</a></li>
+         <li><a href="introduce_ry.html">김래영</a></li>
+         <li><a href="introduce_jw.html">박주원</a></li>
+         <li class="dropdown"><a class="dropdown-toggle"
+            data-toggle="dropdown" href="#">Portfolio<span class="caret"></span></a> 
+            <ul class="dropdown-menu"> <!-- 메뉴 스크롤 생성 -->
+               <li><a href="portfolio_Main_Canvas.html">HTML Canvas</a></li>
+               <li><a href="portfolio_Main_SVG.html">HTML SVG</a></li>
+               <li><a href="portfolio_Main_GoogleMap.html">HTML Google Maps</a></li>
+               <li><a href="portfolio_Jquery_UI.html">Jquery UI</a></li>
+               <li><a href="portfolio_chart.html">Jquery Chart1</a></li>
+            </ul>
+         </li>
+         <li class="dropdown"><a class="dropdown-toggle"
+            data-toggle="dropdown" href="#">Other Pages<span class="caret"></span></a>
+            <ul class="dropdown-menu"> <!-- 메뉴 스크롤 생성 -->
+               <li><a href="#">FAQ</a></li>
+               <li><a href="#">404</a></li>
+            </ul>
+         </li>
+      </ul>
+     </div>
+</nav>
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+ 
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+ 
+            <div class="item active">
+                <img src="images_Jquery_UI/bg.jpg"
+                     alt="Image" style="width: 100%; height: 500px;">
+                <div class="carousel-caption"></div>
+            </div>
+ 
+            <div class="item">
+                <img src="images_Jquery_UI/bg2.jpg"
+                     alt="Image" style="width: 100%; height: 500px;">
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+ 
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button"
+            data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
+            aria-hidden="true"></span> <span class="sr-only">Previous</span>
+        </a> <a class="right carousel-control" href="#myCarousel" role="button"
+            data-slide="next"> <span
+            class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <br>
+
+	<div class="container text-center">
+		<div style="margin-bottom: 30px;">
+			<h1 style="text-align: center;">Bootstrap Tutorial</h1>
+			<p style="text-align: center;">Team Four가 추천해주는 갓성비 호텔 리스트 같이
+				살펴보아요!!</p>
+		</div>
+
+		<!-- 도시 검색 자동완성 -->
+		<div class="ui-widget">
+			<center>
+				<input type="text" id="tags" class="form-control"
+					placeholder="도시 검색" style="width: 400px;">
+			</center>
+		</div>
+		<br>
+
+		<!-- 어른 or 어린이 사람수 선택 -->
+		<div class="demo">
+			<form action="#">
+				<fieldset style="border: 0;">
+					<label for="adult">성인</label> <select name="adult" id="adult">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+					</select> <label for="children">어린이</label> <select name="children"
+						id="children">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+					</select>
+				</fieldset>
+			</form>
+		</div>
+		<br>
+
+		<h3 id="open_button">숙박 기간</h3>
+
+
+
+		<div id="dialog" title="팝업창">
+			<input type="text" placeholder="체크인" id="start_date" readonly>&nbsp;&nbsp;&nbsp;
+			<input type="text" placeholder="체크아웃" id="end_date" readonly><br>
+		</div>
+		<center>
+			<div id="dates">
+				<p>
+					총 숙박기간 : <span id="totaldates">0</span>
+				</p>
+			</div>
+
+			<div class="box">
+				<p style="margin-top: 20px; margin-bottom: 0px;">
+					<label for="amount">요금범위: </label> <input type="text" id="amount"
+						readonly="" style="border: 0; color: #f6931f; font-weight: bold;">
+				</p>
+
+				<div id="slider-range" style="width: 400px;"></div>
+			</div>
+
+		</center>
+		<div id="imagebox"></div>
+
+
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">전체</a></li>
+				<li><a href="#tabs-2">서울</a></li>
+				<li><a href="#tabs-3">경기</a></li>
+				<li><a href="#tabs-4">인천</a></li>
+
+			</ul>
+			<div id="tabs-1">
+				<div class="w3-row w3-grayscale">
+					<div class="w3-col l3 s6">
+						<div class="w3-container">
+							<div class="w3-display-container">
+								<img src="http://gdimg.gmarket.co.kr/208671303/still/160"
+									style="width: 100%">
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black">
+										Buy now <i class="fa fa-shopping-cart"></i>
+									</button>
+								</div>
+								<p>
+									서울 호텔1<br>
+									<b>98000원</b>
+								</p>
+							</div>
+						</div>
+						<div class="w3-container">
+							<div class="w3-display-container">
+								<img src="http://gdimg.gmarket.co.kr/134507414/still/280"
+									style="width: 100%">
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black">
+										Buy now <i class="fa fa-shopping-cart"></i>
+									</button>
+								</div>
+								<p>
+									진우호텔<br>
+									<b>$19.99</b>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="w3-col l3 s6">
+						<div class="w3-container">
+							<div class="w3-display-container">
+								<img src="http://gdimg.gmarket.co.kr/333242564/still/280"
+									style="width: 100%">
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black">
+										Buy now <i class="fa fa-shopping-cart"></i>
+									</button>
+								</div>
+							</div>
+							<p>
+								서울 호텔2<br>
+								<b>77000원</b>
+							</p>
+						</div>
+						<div class="w3-container">
+							<img src="http://gdimg.gmarket.co.kr/405671358/still/280"
+								style="width: 100%">
+
+							<p>
+								신라 호텔<br>
+								<b>65000원</b>
+							</p>
+						</div>
+					</div>
+
+					<div class="w3-col l3 s6">
+						<div class="w3-container">
+							<img src="http://gdimg.gmarket.co.kr/405673275/still/280"
+								style="width: 100%">
+							<p>
+								서울호텔3<br>
+								<b>45000원</b>
+							</p>
+						</div>
+						<div class="w3-container">
+							<div class="w3-display-container">
+								<img src="http://gdimg.gmarket.co.kr/405933295/still/280"
+									style="width: 100%"> <span
+									class="w3-tag w3-display-topleft">Sale</span>
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black">
+										Buy now <i class="fa fa-shopping-cart"></i>
+									</button>
+								</div>
+							</div>
+							<p>
+								래영호텔<br>
+								<b class="w3-text-red">$14.99</b>
+							</p>
+						</div>
+					</div>
+
+					<div class="w3-col l3 s6">
+						<div class="w3-container">
+							<img src="http://gdimg.gmarket.co.kr/134515343/still/280"
+								style="width: 100%">
+							<p>
+								태웅호텔<br>
+								<b>$14.99</b>
+							</p>
+						</div>
+						<div class="w3-container">
+							<img src="http://gdimg.gmarket.co.kr/196940362/still/280"
+								style="width: 100%">
+							<p>
+								주원호텔<br>
+								<b>$24.99</b>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="tabs-2">
+				<div class="w3-container">
+					<div class="w3-display-container">
+						<img src="http://gdimg.gmarket.co.kr/208671303/still/160"
+							style="width: 100%">
+						<div class="w3-display-middle w3-display-hover">
+							<button class="w3-button w3-black">
+								Buy now <i class="fa fa-shopping-cart"></i>
+							</button>
+						</div>
+						<p>
+							서울 호텔1<br> <b>98000원</b>
+						</p>
+					</div>
+				</div>
+				<div class="w3-container">
+					<img src="http://gdimg.gmarket.co.kr/405673275/still/280"
+						style="width: 100%">
+					<p>
+						서울호텔3<br> <b>45000원</b>
+					</p>
+				</div>
+			</div>
+			<div id="tabs-3">
+				<div class="w3-container">
+					<img src="http://gdimg.gmarket.co.kr/134515343/still/280"
+						style="width: 100%">
+					<p>
+						태웅호텔<br> <b>$14.99</b>
+					</p>
+				</div>
+				<div class="w3-container">
+					<img src="http://gdimg.gmarket.co.kr/196940362/still/280"
+						style="width: 100%">
+					<p>
+						주원호텔<br> <b>$24.99</b>
+					</p>
+				</div>
+
+			</div>
+			<div id="tabs-4">
+				<div class="w3-container">
+					<img src="http://gdimg.gmarket.co.kr/405671358/still/280"
+						style="width: 100%">
+
+					<p>
+						신라 호텔<br> <b>65000원</b>
+					</p>
+				</div>
+				<div class="w3-display-container">
+					<img src="http://gdimg.gmarket.co.kr/134507414/still/280"
+						style="width: 100%">
+					<div class="w3-display-middle w3-display-hover">
+						<button class="w3-button w3-black">
+							Buy now <i class="fa fa-shopping-cart"></i>
+						</button>
+					</div>
+					<p>
+						진우호텔<br> <b>$19.99</b>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="dialog_re" title="Reservation">
+			<div class="progress">예약 진행중...</div>
+			<div id="progressbar"></div>
+		</div>
+
+		<button id="reservation"
+			style="margin: 30px; width: 300px; height: 50px;">
+			<b>예약</b>
+		</button>
+	</div>
+	
+       <!-- Footer -->
+		<footer class="container-fluid text-center">
+  			<p><b>Bootstrap Theme Made By : </b><a href="teammain.html"><b>Team 4OUR</b></a></p>
+		</footer>	
+</body>
+</html>

@@ -1,0 +1,49 @@
+/*
+ * Negotiator.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.transport;
+
+import java.io.IOException;
+
+import org.simpleframework.transport.reactor.Reactor;
+
+/**
+ * The <code>Negotiator</code> interface represents a special kind
+ * of reactor which is used to perform negotiations. Negotiations
+ * are performed on <code>Pipeline</code> objects as a means to
+ * exchange data between the client and server that does not form
+ * part of a HTTP request entity.
+ * 
+ * @author Niall Gallagher
+ * 
+ * @see org.simpleframework.transport.Negotiation
+ */
+interface Negotiator extends Reactor {
+   
+   /**
+    * Once the negotiation has completed this is used to perform
+    * processing of the provided transport. Processing of the
+    * transport is done only after the negotiation has completed.
+    * The given transport is used to read and write to the socket.
+    * 
+    * @param transport this is the transport for the pipeline
+    */
+   public void process(Transport transport) throws IOException;         
+}

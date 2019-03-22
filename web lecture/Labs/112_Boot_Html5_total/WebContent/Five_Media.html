@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+화면의 전체적인 구성은 이렇습니다.
+<div>
+    <button>큰화면버튼</button>
+    <button>작은화면버튼</button>
+    <button>기본화면버튼</button>
+    <vedio>
+    컨트롤바를 가지고 재생 전 'ye.png'이미지로 대기상태인 영상
+    </vedio>
+</div>
+<div>
+    <button> 스위치버튼(재생/일시정지) </button>
+    <vedio>
+    호출시 자동재생되며 재생 / 정지 버튼을 가진 영상
+    </vedio>
+</div>
+-->
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>HTML5 Example</title>
+   <script type="text/javascript">
+/*
+    .addEventListener(event, function, useCapture)
+   대상.addEventListener("종류",실행하려는 함수,true and false)
+          ㄴ> [ window.onload = function(){} ]
+   차이점 : onload 이벤트 핸들러의 경우에는 여러번 중복해서 사용하게 되면
+            앞의 것은 무시되고 맨 나중에 사용된 onload 만 유효하게 되는 특징.
+   그것을 보완하기 위한 하나의 방법 : addEventListener(), attachEvent()
+*/
+window.addEventListener('load', function()
+{
+    /* HTMLVideoElement : video관련 명령요소를 모아놓은 객체 */
+    if(window.HTMLVideoElement)
+    {
+         /* 처음동영상의 아이디로 태그전체를 가져온다. */
+         var player   = document.getElementById('player');
+         /* 일차원 배열로 동영상 4개를 넣는다. */    
+         var playlist = ["su.mp4", "su_init.mp4", "su1.mp4", "su2.mp4"];
+         var index    = 1;    /* 처음 영상시작시 playlist배열의 0번째 값으로 
+                                 설정되어있기 때문에 생략하고 다음 영상을 재생하기위해서 */
+
+         /* 동영상이 끝났을경(ended 이벤트 이용) 핸들러함수 */
+         player.addEventListener('ended', function()
+         {
+              /* 만약 재생중인 동영상의 인덱스가 배열 인덱스(동영상리스트의 갯수보다)보다 작을때
+                   ㄴ>다음 재생할 영상이 있을때.. */
+              if(index < playlist.length)
+              {
+                  player.src = playlist[index];
+                  player.play();
+                  index++;
+              }
+              else /* 마지막 동영상일 경우 -> 다음 재생할 영상이 없을때 다시 처음 동영상을 재생 시킵니다. */
+              {
+                  player.src = playlist[0];
+                  player.play();
+                  index=1;
+              }
+        });// player.addEventListener('ended', function()
+    }// if(window.HTMLVideoElement)
+});// window.addEventListener('load', function()
+ 
+      //영상1(player) 크기조절(큰사이즈)
+      function makeBig()
+      {
+         player.width = 1024;
+         player.height=960;
+      }
+      //영상1(player) 크기조절(작은사이즈)
+      function makeSmall()
+      {
+         player.width = 480;
+         player.height=320;
+      }
+      //영상1(player) 크기조절(기본사이즈)
+      function makeNormal()
+      {
+         player.width = 720;
+         player.height=560;
+      }
+      //영상2(player2) 재생 / 정지 버튼(스위치)
+      function play()
+      {
+         if (player2.paused)
+            player2.play();
+         else
+            player2.pause();
+      }
+</script>
+</head>
+<body>
+   <div style="text-align: left">
+      <h1><b>컨트롤바, 재생전 이미지로 대기상태, 영상이 끝날 시 다음 영상 재생(총4개의 영상) </b></h1>
+      <h1><b>만약, 마지막 영상일 경우 다시 처음 영상으로 재생 </b></h1>
+      <button onclick="makeBig()">Big</button>
+      <button onclick="makeSmall()">Small</button>
+      <button onclick="makeNormal()">Normal</button>
+      <br><br>
+ 
+      <!-- 컨트롤바를 가지고 재생 전 'ye.png'이미지로 대기상태인 영상 -->
+      <video id="player" width="720" height="560" controls poster="Ye.PNG">
+          <source src="su.mp4" type="video/mp4">
+      </video>
+   </div>
+ 
+   <br><br>
+   <hr>
+   <br><br>
+ 
+   <div style="text-align: left">
+      <h1><b>자동재생, 정지, 재생 버튼</b></h1>
+      <button onclick="play()">재생 / 일시정지</button>
+ 
+      <br><br>
+ 
+      <!-- 호출시 자동재생되며 재생 / 정지 버튼을 가진 영상 -->
+      <video id="player2" width="540" autoplay loop>
+         <source src="mudo.mp4" type="video/mp4">
+      </video>
+   </div>
+</body>
+</html>

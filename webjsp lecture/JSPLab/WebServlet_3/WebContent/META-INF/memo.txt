@@ -1,0 +1,21 @@
+
+원칙) Model2 기반의 MVC 패턴 사용 프로젝트
+Model  (DTO , DAO)
+View (JSP)
+Controller(Servlet)
+
+지금 servlet 연습
+JSP 파일 사용하지 않고 DB작업 (servlet 가지고 웹 서비스 )
+
+create table memo(
+id varchar2(15) not null,
+email varchar2(20) not null,
+content varchar2(100)
+);
+
+DB 작업 : ojdbc6.jar 파일 
+
+html은 주소 앞에 /를 붙이지 않는다. 
+[html] <a href="/MemoList">목록보기</a>  >> localhost:8090/MemoList
+[html] <a href="MemoList">목록보기</a>  >> localhost:8090/WebServlet_3/MemoList
+

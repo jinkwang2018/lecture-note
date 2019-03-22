@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--
+	파일명: papagoHTML.html
+	작성일시: 2018-03-25
+	작성내용: 네이버 Papago NMT API활용 번역 페이지 작성
+	작성자: 강성훈
+	-->
+	<meta charset="UTF-8">
+	<title>PAPAGO</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<style type="text/css">
+  		textarea {
+  			font-family: 'consolas';
+  			font-weight: bold;
+  			font-size: 17px;
+  		}
+        /* 말풍선 reference: http://www.ilikepixels.co.uk/drop/bubbler/ */
+        .bubble 
+        {
+            position: relative;
+            width: 400px;
+            height: 220px;
+            padding: 0px;
+            background: #FFFFFF;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            border: #003366 solid 4px;
+        }
+
+        .bubble:after 
+        {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 20px 0 20px 15px;
+            border-color: transparent #FFFFFF;
+            display: block;
+            width: 0;
+            z-index: 1;
+            margin-top: -20px;
+            right: -15px;
+            top: 50%;
+        }
+
+        .bubble:before 
+        {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 23px 0 23px 18px;
+            border-color: transparent #003366;
+            display: block;
+            width: 0;
+            z-index: 0;
+            margin-top: -23px;
+            right: -22px;
+            top: 50%;
+        }
+  	</style>
+  	<script type="text/javascript">
+  		$(function() {
+  			$('#submit').click(function() {  //번역 버튼 클릭 시
+  				$.ajax({ //jQuery ajax 비동기 처리
+  					url: "papagoJSP.jsp",
+  					type: "POST", //POST전달 방식 사용
+  					dataType: "text", //data는 String값이므로 text
+  					data: {
+  							"inputText": $('#inputText').val(), //번역할 내용 (1회 호출시 최대 5,000자까지 가능)
+  							"source": $('#source').val(), //번역 대상 언어 코드
+  							"target": $('#target').val() //번역 결과 언어 코드
+  					},
+  					error: function() { //접속실패시 (stauts: 400 ~ 500대)
+  						alert("통신실패!");
+  					},
+  					success: function(data) { //접속성공시 (status: 200~299)
+  						console.log(data); //확인용 콘솔 코드
+  						$('#translatedResult').val(data); // .html(data) 사용시 지우기 기능 되지 않으므로 .val(data) 사용
+  					}
+  				}); //end - ajax
+  			}); //end - click '#submit'
+  			
+  			$('#clear').click(function() { //지우기 버튼 클릭시 >> textarea value값 초기화
+  				$('#inputText, #translatedResult').val("");
+  			}); //end - click '#clear'
+  		}) //end - jquery
+  	</script>
+</head>
+<body>
+	<h2>한/영 번역 - 네이버 파파고 API</h2>
+	<!-- 번역 대상 -->
+	<div class="input">
+		<select id="source" name="source">
+			<option value="ko">한국어</option>
+			<option value="en" selected>영어</option>
+			<option value="ja">일본어</option>
+			<option value="zh-CN">중국어 간체</option>
+			<option value="zh-TW">중국어 번체</option>
+			<option value="es">스페인어</option>
+			<option value="fr">프랑스어</option>
+			<option value="vi">베트남어</option>
+			<option value="th">태국어</option>
+			<option value="id">인도네시아어</option>
+		</select>
+		<button type="button" class="btn btn-default btn-xs" id="submit" name="submit">번역</button>
+		<button type="button" class="btn btn-default btn-xs" id="clear" name="clear">지우기</button>
+		<br>
+		<textarea class="bubble" id="inputText" name="inputText" rows="10" cols="40"></textarea>
+	</div>
+    <hr>
+    <!-- 번역 결과 -->
+    <div class="output">
+	    <select id="target" name="target">
+	    	<option value="ko" selected>한국어</option>
+			<option value="en">영어</option>
+			<option value="ja">일본어</option>
+			<option value="zh-CN">중국어 간체</option>
+			<option value="zh-TW">중국어 번체</option>
+			<option value="es">스페인어</option>
+			<option value="fr">프랑스어</option>
+			<option value="vi">베트남어</option>
+			<option value="th">태국어</option>
+			<option value="id">인도네시아어</option>
+		</select>
+		<br>
+		<textarea class="bubble" id="translatedResult" name="translatedResult" rows="10" cols="40"></textarea>
+    </div>
+    <br>
+    <p>*Reference: 네이버 Papago NMT API (https://developers.naver.com/docs/nmt/reference/)</p>
+</body>
+</html>

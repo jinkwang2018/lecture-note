@@ -1,0 +1,160 @@
+/* 회원가입 */
+CREATE TABLE JOIN (
+	id VARCHAR2(50) NOT NULL, /* 아이디 */
+	name VARCHAR2(20) NOT NULL, /* 이름 */
+	pwd VARCHAR2(20) NOT NULL, /* 비밀번호 */
+	pwdcheck VARCHAR2(20), /* 비밀번호체크 */
+	pno NUMBER NOT NULL, /* 핸드폰번호 */
+	email VARCHAR2(20) /* 전자메일 */
+);
+
+CREATE UNIQUE INDEX PK_JOIN
+	ON JOIN (
+		id ASC
+	);
+
+ALTER TABLE JOIN
+	ADD
+		CONSTRAINT PK_JOIN
+		PRIMARY KEY (
+			id
+		);
+
+/* 일정 */
+CREATE TABLE EVENT (
+	event_id NUMBER NOT NULL, /* 일정번호 */
+	event_title VARCHAR2(50) NOT NULL, /* 일정제목 */
+	event_content VARCHAR2(100), /* 일정내용 */
+	event_color VARCHAR2(20) NOT NULL, /* 일정색상 */
+	event_startdate DATE NOT NULL, /* 일정날짜_시작 */
+	event_enddate DATE NOT NULL, /* 일정날짜_종료 */
+	id VARCHAR2(50) NOT NULL /* 아이디 */
+);
+
+CREATE UNIQUE INDEX PK_EVENT
+	ON EVENT (
+		event_id ASC
+	);
+
+ALTER TABLE EVENT
+	ADD
+		CONSTRAINT PK_EVENT
+		PRIMARY KEY (
+			event_id
+		);
+
+/* 공유게시판 */
+CREATE TABLE SHAREBOARD (
+	idx NUMBER NOT NULL, /* 게시판순서 */
+	board_title VARCHAR2(50) NOT NULL, /* 게시판글제목 */
+	board_content VARCHAR2(3000), /* 게시판글내용 */
+	board_date DATE DEFAULT SYSDATE NOT NULL, /* 게시판날짜 */
+	board_count NUMBER NOT NULL, /* 게시판글조회수 */
+	board_filename VARCHAR2(100), /* 게시판글파일 */
+	refer NUMBER DEFAULT 0  NOT NULL, /* 참조 */
+	depth NUMBER DEFAULT 0  NOT NULL, /* 들여쓰기 */
+	step NUMBER DEFAULT 0  NOT NULL, /* 답글정렬 */
+	id VARCHAR2(50) NOT NULL /* 아이디 */
+);
+
+CREATE UNIQUE INDEX PK_SHAREBOARD
+	ON SHAREBOARD (
+		idx ASC
+	);
+
+ALTER TABLE SHAREBOARD
+	ADD
+		CONSTRAINT PK_SHAREBOARD
+		PRIMARY KEY (
+			idx
+		);
+
+/* 댓글 */
+CREATE TABLE REPLY (
+	no NUMBER NOT NULL, /* 댓글순서 */
+	reply_content VARCHAR2(1000) NOT NULL, /* 댓글내용 */
+	reply_date DATE DEFAULT SYSDATE NOT NULL, /* 댓글날짜 */
+	idx NUMBER NOT NULL, /* 게시판순서 */
+	id VARCHAR2(50) NOT NULL /* 아이디 */
+);
+
+CREATE UNIQUE INDEX PK_REPLY
+	ON REPLY (
+		no ASC
+	);
+
+ALTER TABLE REPLY
+	ADD
+		CONSTRAINT PK_REPLY
+		PRIMARY KEY (
+			no
+		);
+
+/* 노트 */
+CREATE TABLE NOTE (
+	note_num NUMBER NOT NULL, /* 노트번호 */
+	note_title VARCHAR2(100) NOT NULL, /* 노트제목 */
+	id VARCHAR2(50) NOT NULL, /* 아이디 */
+	note_content VARCHAR2(3000), /* 노트내용 */
+	note_date DATE NOT NULL, /* 노트날짜 */
+	book_no NUMBER NOT NULL /* 책번호 */
+);
+
+CREATE UNIQUE INDEX PK_NOTE
+	ON NOTE (
+		note_num ASC
+	);
+
+ALTER TABLE NOTE
+	ADD
+		CONSTRAINT PK_NOTE
+		PRIMARY KEY (
+			note_num
+		);
+
+/* 책 */
+CREATE TABLE BOOK (
+	book_no NUMBER NOT NULL, /* 책번호 */
+	book_title VARCHAR2(100) NOT NULL, /* 책제목 */
+	id VARCHAR2(50) /* 아이디 */
+);
+
+CREATE UNIQUE INDEX PK_BOOK
+	ON BOOK (
+		book_no ASC
+	);
+
+ALTER TABLE BOOK
+	ADD
+		CONSTRAINT PK_BOOK
+		PRIMARY KEY (
+			book_no
+		);
+
+
+CREATE SEQUENCE SHAREBOARD_IDX
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE SEQUENCE REPLY_NO
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+CREATE SEQUENCE BOOK_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE SEQUENCE EVENT_NO
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+CREATE SEQUENCE NOTE_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE;

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitcamp Group 3</title>
+  <meta charset="utf-8">
+  <!-- 모바일 반응형을 위한 viewport 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS 링크 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- CSS 세부설정 변경을 위한 external CSS 링크 -->
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Bootstrap JavaScript 파일 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- External JavaScript 파일: index.js -->
+  <script src="js/index.js"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <!-- 상위 스크린 -->
+  <div class="container jumbotron jumbotron-imgs">
+    <!-- 계절 테마 버튼 -->
+    <div class="btn-group">
+      <button type="button" class="btn btn-default btn-xs season" id="jumboSpring">SPRING</button>
+      <button type="button" class="btn btn-default btn-xs season" id="jumboSummer">SUMMER</button>
+      <button type="button" class="btn btn-default btn-xs season" id="jumboFall">FALL</button>
+      <button type="button" class="btn btn-default btn-xs season" id="jumboWinter">WINTER</button>
+    </div>
+    <div class="well well-sm well-text">
+      <h1>{ Bitcamp Group 3 }</h1>
+      <p>Make it work! Make it right! Make it fast!</p>
+    </div>
+  </div>
+
+  <!-- 메뉴 바  -->
+  <nav class="container navbar navbar-inverse navbar-default" data-spy="affix" data-offset-top="197">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="home.html" target="contents">{ Bitcamp Group 3 }</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">WEB <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="fileupload.html" target="contents">fileupload</a></li>
+              <li><a href="drag_drop.html" target="contents">Drag&Drop</a></li>
+              <li><a href="mousehover.html" target="contents">MouseHover</a></li>
+              <li><a href="GIFfile.html" target="contents">GIFfile</a></li>
+            </ul>
+          </li>
+          <li><a href="dragGIFupload.html" target="contents">Combination</a></li>
+          <li><a href="jqueryUI_Football/index.html" target="contents">jQueryUI</a></li>
+          <li><a href="chart.html" target="contents">Chart</a></li>
+          <li><a href="papagoHTML.html" target="contents">Translation</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="introduce.html" target="contents">Introduce</a></li>
+          <li><a href="about.html" target="contents">About</a></li>
+          <li><a href="boot_Theme_final/index.html" target="_blank">go to BS Template</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- 본문 내용 -->
+  <div class="container">
+    <!-- iframe 설정 (외부페이지 링크) -->
+    <iframe class="iframeContents" name="contents" src="home.html" onload="autoResize(this)" width="100%" scrolling="yes" frameborder="0"></iframe>
+  </div>
+    
+<!-- 하단바 -->
+    <div class="container footer">
+        ⓒ 2018 Bitcamp Group 3 <button type="button" class="btn btn-default btn-xs pull-right" id="footerComment" data-toggle="collapse" data-target="#collapseComment">Comment</button>
+        <!-- bootstrap collapse 기능 -->
+        <div class="collapse well well-sm" id="collapseComment">
+            <object width="100%" height="100%" data="comment.html"></object>
+        </div>
+    </div>
+</body>
+</html>

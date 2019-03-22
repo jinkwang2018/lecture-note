@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>사용자 정의 함수 : 내장함수</title>
+		<script>
+			//java : public void print(){}
+			//java : public String print(){return ""}
+			//java : public int print(int num){return 100+num}
+			
+			//javascript
+			//function 함수이름 (){} >> void (x) , return type (x) 
+			
+			function callConfirm(){ //사용자 정의 함수
+				if(window.confirm("작업내용")){ //내장함수 : confirm() : 두개의 버튼을 가지고 확인은 true, 취소는 false이다.
+					window.alert("삭제합니다.")
+				}else{
+					alert("취소합니다.") //내장함수 : alert()
+				}
+			}
+			
+			function showPopup(){ //window.open(URL, name, specs, replace) 순서대로써야함.
+								  //브라우저마다 쓸 수 있는 specs가 다르므로 잘 보고 써야한다.
+								  // , 구분자로 나눌 수 있다. 
+								  //https://www.w3schools.com/jsref/met_win_open.asp
+								  //브라우저별 specs 적용 여부를 구분할 수 있는 페이지
+								  //window.close() >> 자기 자신을 닫는 것이다.
+				window.open("Ex06_popup.html","zipcode" ,"width = 100" , "height = 200")
+				
+			}
+			function myFunction() {
+			    var myWindow = window.open("Ex06_popup.html", "MsgWindow", "width=200,height=100");
+			    myWindow.document.write("<p>This is 'MsgWindow'</p>");
+			}
+			//java : public String goUrlTime(string url){return ""};
+			function goUrlTime(url){ //함수의 parameter 타입을 갖지 않는다. 원하는 변수명만 기술하면 된다.
+				window.setTimeout("location.href = '"+url+"'",3000);
+			//location.href = url ,시간 >> 시간이 지나면 특정 주소로 이동
+			}
+			
+			function myfun(a,b){
+				return a + b;
+			}
+			var result = myfun(100,200);
+			console.log("myfun 함수 호출 : " + result);
+			
+			//익명 함수(함수의 주소를 객체에 할당) >> 한번 쓰고 버림
+			changeColor = function(){
+				window.document.bgColor = "silver";
+				window.document.fgColor = "gold";
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+		<h3>내장함수와 사용자 정의 함수 사용하기</h3>
+		<button onclick = "callConfirm()">함수호출</button>	
+		<br>
+		<input type = "button" value = "팝업창" onclick = "showPopup()">
+		<br>
+		<input type = "button" value = "팝업옵션" onclick = "myFunction()">
+		<br>
+		<input type = "button" value = "주소이동" onclick = "goUrlTime('http://www.naver.com')">
+		<br>
+		<input type = "button" value = "익명함수" onclick = "changeColor()">
+	</body>
+</html>

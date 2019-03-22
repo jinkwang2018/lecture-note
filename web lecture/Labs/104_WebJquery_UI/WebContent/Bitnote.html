@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BitNote</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link rel="stylesheet" href="/resources/demos/style.css">
+ 
+<style> 
+.flex-container {
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    text-align: center;
+}
+.flex-container > * {
+    padding: 15px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+}
+.article {
+    text-align: left;
+}
+header {background: black;color:white;}
+footer {background: #aaa;color:white;}
+.nav {background:#eee;}
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+.nav ul a {
+    text-decoration: none;
+}
+@media all and (min-width: 768px) {
+    .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
+    .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
+    footer {-webkit-order:3;order:3;}
+}
+ #zoom-button {
+      width: 55px;
+    }
+    #fontname-button,
+    #fontsize-button {
+      width: 45px;
+    }
+    #forecolor-button {
+      width: 50px;
+    }
+    #hilitecolor-button {
+      width: 70px;
+    }
+    #bold {
+      font-weight: bold;
+    }
+    #italic {
+      font-style: italic;
+    }
+    #underline {
+      text-decoration: underline;
+    }
+    .toolbar {
+      font-size: .75em;
+    }
+    #page {
+      width: 440px;
+      left: 50%;
+      position: relative;
+      margin-left: -226px;
+      height: 450px;
+      border: 1px solid #888;
+      box-shadow: 7px 7px 3px #ccc;
+      font-size: 11px;
+      font-family: "Lucida Grande";
+      zoom: 100%;
+      padding: 5px;
+      white-space: pre-line;
+      overflow: scroll;
+    }
+    .wrap {
+      width: 588px;
+    }
+</style>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+  <script>
+  $( function() {
+      
+      var id = 0
+    var page = $( "#page" );
+    var basicControls = [ "#print", "#bold", "#italic", "#undo", "#redo" ];
+    var valueControls = [ "#fontsize", "#forecolor", "#hilitecolor" ];
+    
+ 
+    $( "#print" ).button({
+      "icon": "ui-icon-print",
+      "showLabel": false
+    });
+    $( "#redo" ).button({
+      "icon": "ui-icon-arrowreturnthick-1-e",
+      "showLabel": false
+    });
+    $( "#undo" ).button({
+      "icon": "ui-icon-arrowreturnthick-1-w",
+      "showLabel": false
+    });
+    
+    $( basicControls.concat( valueControls ).join( ", " ) ).on( "click change selectmenuchange",
+      function() {
+        document.execCommand(
+          this.id,
+          false,
+          $( this ).val()
+        );
+      } );
+    $('#event_date').datepicker(
+            {
+            
+                dateFormat: "yy년mm월dd일"
+            }            
+        );
+    $('#dialog').dialog(
+            {
+               //$('#dialog').empty();
+               autoOpen: false,
+               show:{effect:"blind",duration: 0},
+               hide:{effect:"explode",duration: 0},
+               /*
+                submit : 팝업창에 값을 read 해서 부모창에 전달
+                reset  : 팝업창에 입력값을 초기화(빈문자열)
+                cancel : 팝업창 닫기 (초기화)    
+               
+               */
+              
+               buttons:{
+                               "저장":function(){
+                                   var eventname = $('#event_name').val();
+                                   var eventdate = $('#event_date').val();
+                                   var i=0;
+                                    //$('p').html('aaa'); <p>aaa</p>
+                                //$('<h3></h3>').html('aaa') > <h3>aaa</h3>
+                                //선택자 부분에 태그를 기술하면 <h3></h3> > createElement 같은 효과
+                                //$('<h3></h3>').html(eventname+":"+eventdate).appendTo('#output');
+                                   $('<h3></h3>').html("노트 -제목 : "+eventname+" 날짜 :"+eventdate+"<br><hr>").appendTo('#output');
+                                   $('#output > h3').each(function(index,element){
+                                               $(element).attr("id", i++);
+                                   });
+                                                                  
+                                   $('#dialog').dialog('close');
+                                   $('#output > h3').click(function(){
+                                       
+                                   /*     id = this.id
+                                       console.log(id)
+                                       $('pre').($('h2[name='+id+']')) */
+                                       $('#page').empty();
+                                       $('#memodialog').dialog('open');
+                                       
+                                   
+                                   });
+                                $('#event_name').val('');
+                                $('#event_date').val('');    
+                               },
+                               /* "reset":function(){
+                                  $('#event_name').val('');
+                                  $('#event_date').val('');
+                              }, */
+                               
+                               "취소":function(){
+                                   $('#event_name').val('');
+                                   $('#event_date').val('');
+                                   $('#dialog').dialog('close');
+                               }
+                   
+                          },
+               //resizable: false,
+               modal: true //팝업 창을 닫기 전까지는  opener(부모창) 작업 불가
+            }        
+        );
+    
+    
+    $('#memodialog').dialog({
+        autoOpen: false,
+        show:{effect:"blind",duration:0,html:'eee'},
+        hide:{effect:"explode", duration:0},
+        buttons:{
+            "저장":function(){
+                
+                var page_text=$('#page').text();
+ 
+                $('<h2 name='+id+'></h2>').html(page_text).appendTo('#output');
+            
+            /*     arr.push($('#page'));
+                console.log($('#page'));
+                console.log($('#page').text());
+                */
+                $('#memodialog').dialog('close');
+                 
+            },
+            "초기화":function(){
+                  $('#page').text('');
+            },
+            "취소":function(){
+                  $('#page').text('');
+                  $('#memodialog').dialog('close');
+              }
+            },
+        resizable: false,
+        width: '630px',
+        modal:true,    //팝업 창을 닫기 전까지는 나를 띄운 opener(부모창) 작업 불가,
+        
+    }); 
+    
+    
+    
+    $('#open_button').click(function(){
+        $('#dialog').dialog('open');
+    
+    });
+    
+    
+    
+  });
+  </script>
+</head>
+<body>
+ 
+<div class="flex-container">
+<header>
+  <h1>BitNote</h1>
+</header>
+ 
+ 
+ 
+<article class="article">
+ <h3 id="open_button">+노트생성</h3>
+    <hr>
+    <div id="output"></div>
+    <!-- POPUP DIV -->
+    <div id="dialog" title="노트생성">
+        <!-- //<h3>노트만들기</h3> -->
+        <label for="event_name">노트제목</label>
+        <input type="text" id="event_name"><br>
+        <label for="event_date">작성날짜</label>
+        <input type="text" id="event_date" readonly><br>
+    </div>
+    
+<div id="memodialog" title="노트">
+<div class="wrap">
+  <div class="toolbar">
+      <button id="print">Print</button>
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+      
+      <select id="fontsize">
+        <option selected disabled>Size</option>
+        <option value="1">8px</option>
+        <option value="2">9px</option>
+        <option value="3">10px</option>
+        <option value="4">11px</option>
+        <option value="5">12px</option>
+        <option value="6">14px</option>
+        <option value="7">18px</option>
+        <option value="8">24px</option>
+        <option value="9">30px</option>
+        <option value="10">36px</option>
+      </select>
+      <select id="hilitecolor" title="Background color">
+        <option selected disabled>Highlight</option>
+        <option value="white">None</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="grey">Grey</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+      </select>
+      <select id="forecolor" title="Color">
+        <option selected disabled>Color</option>
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="#ccc">Grey</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+      </select>
+      <button id="bold">B</button>
+      <button id="italic">I</button>
+ 
+  </div>
+  <pre id="page" contenteditable="true">
+  
+  </pre>
+</div>
+</div>
+ 
+<div id="output"></div>
+  
+</article>
+ 
+<footer>bitcamp104_team2</footer>
+</div>
+ 
+</body>
+</html>

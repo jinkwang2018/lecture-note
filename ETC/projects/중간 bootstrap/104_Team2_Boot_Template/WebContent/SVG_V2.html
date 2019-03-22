@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <link href="css/hanna.css" rel="stylesheet">
+<script type="text/javascript">
+
+$(function(){
+	$('#hoyong_img').mouseenter(function(){
+		
+		$('#hoyong').attr("visibility" ,"visible");
+	});
+	$('#minjae_img').mouseenter(function(){
+		
+		$('#minjae').attr("visibility" ,"visible");
+	});
+
+	$('#arim_img').mouseenter(function(){
+		
+		$('#arim').attr("visibility" ,"visible");
+	});
+	
+	$('#jinsu_img').mouseenter(function(){
+		
+		$('#jinsu').attr("visibility" ,"visible");
+	});
+	
+	$('#junseok_img').mouseenter(function(){
+		
+		$('#junseok').attr("visibility" ,"visible");
+	});
+	
+	$('#changhun_img').mouseenter(function(){
+		
+		$('#changhun').attr("visibility" ,"visible");
+	});
+	
+	$('#dohyuk_img').mouseenter(function(){
+		
+		$('#dohyuk').attr("visibility" ,"visible");
+	});
+});
+
+$(function(){
+	$('#hoyong_img').mouseleave(function(){
+		//console.log("dd");
+		$('#hoyong').attr("visibility" ,"hidden");
+	});
+	$('#minjae_img').mouseleave(function(){
+		
+		$('#minjae').attr("visibility" ,"hidden");
+	});
+	
+	
+	
+	$('#arim_img').mouseleave(function(){
+		//console.log("dd");
+		$('#arim').attr("visibility" ,"hidden");
+	});
+	
+	$('#jinsu_img').mouseleave(function(){
+		//console.log("dd");
+		$('#jinsu').attr("visibility" ,"hidden");
+	});
+	
+	$('#junseok_img').mouseleave(function(){
+		//console.log("dd");
+		$('#junseok').attr("visibility" ,"hidden");
+	});
+	
+	$('#changhun_img').mouseleave(function(){
+		//console.log("dd");
+		$('#changhun').attr("visibility" ,"hidden");
+	});
+	
+	$('#dohyuk_img').mouseleave(function(){
+		//console.log("dd");
+		$('#dohyuk').attr("visibility" ,"hidden");
+	});
+});
+
+$(function(){
+	
+	
+	$('#hoyong_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/hoyong.html" style="text-align:center;width:200px; height:200px"/>');
+     });
+	$('#minjae_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/minjae.html" style="text-align:center;width:200px; height:200px"/>');
+     });
+
+	$('#arim_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/arim.html" style="text-align:center;width:200px; height:200px"/>');
+     });
+
+	$('#jinsu_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/jinsu.html" style="text-align:center;width:200px; height:200px"/>');
+     });
+
+	$('#junseok_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/junseok.html" style="text-align:center;width:200px; height:200px"/>');
+     });
+	
+	$('#changhun_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/changhun.html"style="text-align:center;width:200px; height:200px"/>');
+     });
+	
+	$('#dohyuk_img').click(function() {
+        $('.content').html('<embed type="text/html" src="member/dohyuk.html" style="text-align:center;width:200px; height:200px"/>');
+     });
+	
+}); 
+	
+</script>
+
+<style type="text/css">
+
+/* 									시간남으면 고칠 것					
+svg{
+	visibility: hidden;
+
+}
+ */
+.flex-container {
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.flex-container > * {
+    padding: 15px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+}
+
+
+
+.teammate{
+	width: 100%;
+	height : 20%;
+	align : center;
+	
+}
+
+.content{
+	height : 20%;
+	padding : 2%;
+	align-self: center;
+	
+}
+
+.nav {background:#eee;
+     width: 10px;
+}
+
+ .box {
+   float: left;
+   background: #000000;
+	border: 1px solid #000000; 
+   overflow: hidden;
+   align-items: center;
+   padding: 5px;
+   
+} 
+
+.text {
+   text-align: center;
+   margin-top: 20%;
+   color: #fff;
+   font-size: 1.0em;
+   font-family: sans-serif;
+   text-transform: uppercase;
+}
+
+.animated {
+   animation-duration: 2.5s;
+   animation-fill-mode: both;
+   animation-iteration-count: infinite;
+}
+
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+               40%{transform: translateY(-30px);}
+               60%{transform: translateY(-15px);}}
+
+.bounce {animation-name: bounce;}
+
+@keyframes pulse { 0% {transform: scale(1);}
+               50%{transform: scale(1.1);}
+               100%{transform: scale(1);}}
+.pulse {animation-name: pulse;   animation-duration: 1s;}
+
+@keyframes shake { 0%, 100% {transform: translateX(0);}
+               10%, 30%, 50%, 70%, 90%{transform: translateX(-10px);}
+               20%, 40%, 60%, 80% {transform: translateX(10px);}}
+.shake {animation-name: shake;}
+
+@keyframes swing { 20% {transform: rotate(15deg);}
+               40% {transform: rotate(-10deg);}
+               60% {transform: rotate(5deg);}
+               80% {transform: rotate(-5deg);}
+               100%   {transform: rotate(0deg);}}
+.swing {transform-origin: top center; animation-name: swing;}
+
+@keyframes lightSpeedIn { 0% {transform: translateX(100%) skewX(-30deg); opacity: 0;}
+                    60% {transform: translateX(-20%) skewX(30deg); opacity: 1;}
+                    80% {transform: translateX(0%) skewX(-15deg); opacity: 1;}
+                    100% {transform: translateX(0%) skewX(0deg); opacity: 1;}
+}
+.lightSpeedIn {
+   animation-name: lightSpeedIn;
+   animation-timing-function: ease-out;
+}
+
+@keyframes rollIn {
+  0% {opacity: 0;transform: translateX(-100%) rotate(-120deg);}
+  100% {opacity: 1;transform: translateX(0px) rotate(0deg);}
+}
+.rollIn {
+  animation-name: rollIn;
+}
+
+@keyframes rotateIn {
+  0% {transform-origin: center center;transform: rotate(-200deg);opacity: 0;}
+  100% {transform-origin: center center; transform: rotate(0); opacity: 1;}
+}
+.rotateIn {
+  animation-name: rotateIn;
+}
+
+@media all and (min-width: 768px) {
+    .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
+   
+ 
+}
+#column2 {      /*이미지*/
+    float: left;
+    width: 14%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Clearfix (clear floats) */
+#row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.img-circle {
+  border-radius: 50%;
+}
+
+</style>
+</head>
+<body>
+   
+      
+<div class="flex-container">
+ <!--   
+   <article class="article"> -->
+    <div id="row">
+      
+	  <div id="column2">
+	       <img class="img-circle" id="hoyong_img" src="img/k-4.png"  style="width:100%" onmouseover="this.src='img/hy.jpg'" onmouseout="this.src='img/k-4.png'">					   
+	  </div>
+	  <div id="column2">
+      		<img class="img-circle" id="minjae_img" src="img/k-3.png"  style="width:100%" onmouseover="this.src='img/mj.jpg'" onmouseout="this.src='img/k-3.png'">					   
+	  </div>
+	  <div id="column2">
+	       <img class="img-circle" id="arim_img" src="img/k-1.png"  style="width:100%" onmouseover="this.src='img/lim.jpg'" onmouseout="this.src='img/k-1.png'">					   
+	  </div>
+	  <div id="column2">
+	       <img class="img-circle" id="jinsu_img" src="img/k-2.png"  style="width:100%" onmouseover="this.src='img/js.jpg'" onmouseout="this.src='img/k-2.png'">					   
+	  </div>
+	  <div id="column2">
+	       <img class="img-circle" id="junseok_img" src="img/k-5.png"  style="width:100%" onmouseover="this.src='img/junsuck.jpg'" onmouseout="this.src='img/k-5.png'">					   
+	  </div>
+	   <div id="column2">
+	       <img class="img-circle" id="changhun_img" src="img/k-6.png"  style="width:100%" onmouseover="this.src='img/ch.jpg'" onmouseout="this.src='img/k-6.png'">					   
+	  </div> 
+	  <div id="column2">
+	       <img class="img-circle" id="dohyuk_img" src="img/k-8.png"  style="width:100%" onmouseover="this.src='img/dh.jpg'" onmouseout="this.src='img/k-8.png'">					   
+	  </div>
+	   
+	   
+	    
+	</div>
+   	<div class="teammate">
+   		 <svg id="hoyong" style="margin: 2%" visibility="hidden" class="box" width="100px" height="100px" viewBox="0 0 160 150" >
+             <path id="path">
+             <animate attributeName="d" from="m0,100 h0" to="m0,100 h600"
+                     dur="3.0s" begin="0s" repeatCount="indefinite" /></path>
+               <text class="animated rollIn" font-size=80 font-family="Hanna" fill="white">
+               <textPath xlink:href="#path">호용</textPath></text>
+            </svg>
+         
+       <svg id="minjae" style="margin: 2%" visibility="hidden" class="box" width="100px" height="100px" viewBox="0 0 160 150">
+            <text  class="animated bounce" font-size=80 font-family="Hanna" fill="white" >
+            <textpath xlink:href="#path">민재</textpath></text>
+         </svg>
+         
+         <svg id="arim" style="margin: 2%" visibility="hidden"  class="box" width="100px" height="100px" viewBox="0 0 160 150">        
+            <text class="animated lightSpeedIn" font-size=80 font-family="Hanna" fill="white">
+            <textPath xlink:href="#path">아림</textPath></text>
+         </svg>
+         
+         <svg id="jinsu" style="margin: 2%" visibility="hidden" class="box" width="100px" height="100px" viewBox="0 0 160 150">
+            <text class="animated shake" font-size=80 font-family="Hanna" fill="white">
+            <textPath xlink:href="#path">진수</textPath></text>
+         </svg>
+         
+         <svg id="junseok" style="margin: 2%" visibility="hidden" class="box" width="100px" height="100px" viewBox="0 0 160 150">
+            <text class="animated swing" font-size=80 font-family="Hanna" fill="white">
+            <textPath xlink:href="#path">준석</textPath></text>
+         </svg>
+         
+         <svg id="changhun"style="margin: 2%" visibility="hidden" class="box" width="100px" height="100px" viewBox="0 0 160 150">
+            <text class="animated rotateIn" font-size=80 font-family="Hanna" fill="white">
+            <textPath xlink:href="#path">창훈</textPath></text>
+         </svg>
+         
+         <svg id="dohyuk" style="margin: 2%" visibility="hidden" class="box" width="100px" height="100px" viewBox="0 0 160 150">
+            <text class="animated pulse" font-size=80 font-family="Hanna" fill="white">
+            <textPath xlink:href="#path">도혁</textPath></text>
+         </svg>
+   	</div>
+   	<div class ="content"></div>
+  
+  
+<!-- 
+   	</article> -->
+ 
+</div>
+</body>
+</html>

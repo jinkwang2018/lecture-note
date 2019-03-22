@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Dialog - Modal form</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    
+    #zoom-button {
+      width: 55px;
+    }
+    #fontname-button,
+    #fontsize-button {
+      width: 45px;
+    }
+    #forecolor-button {
+      width: 50px;
+    }
+    #hilitecolor-button {
+      width: 70px;
+    }
+    #bold {
+      font-weight: bold;
+    }
+    #italic {
+      font-style: italic;
+    }
+    #underline {
+      text-decoration: underline;
+    }
+    .toolbar {
+      font-size: .75em;
+    }
+    #page {
+      width: 440px;
+      left: 50%;
+      position: relative;
+      margin-left: -226px;
+      height: 450px;
+      border: 1px solid #888;
+      box-shadow: 7px 7px 3px #ccc;
+      font-size: 11px;
+      font-family: "Lucida Grande";
+      zoom: 100%;
+      padding: 5px;
+      white-space: pre-line;
+      overflow: scroll;
+    }
+    .wrap {
+      width: 588px;
+    
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  var i =0;
+  var arr = new Array();
+
+  
+  
+  $( function() {
+     
+     
+     
+     var page = $( "#page" );
+
+   
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     $('#event_date').datepicker(
+            {
+               dateFormat: "yy년 mm월 dd일"
+            }
+      );
+     
+    var dialog, form,
+ 
+      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+      emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+      name = $( "#name" ),
+      email = $( "#email" ),
+      content = $( "#content" ),
+      date = $('#event_date'),
+      allFields = $( [] ).add( name ).add( email ).add( date ),
+      tips = $( ".validateTips" );
+ 
+    function addUser() {
+      var valid = true;
+      allFields.removeClass( "ui-state-error" );
+
+      if ( valid ) {
+        $( "#users tbody" ).append( "<tr>" +
+          "<td>" + name.val() + "</td>" +
+          "<td>" + email.val() + "</td>" +
+          "<td>" + content.html() + "</td>" +
+          "<td>" + date.val() + "</td>" +
+          "<td><button class=\"checkBtn\" value ="+i+">수정</button></td>" +
+          "</tr>" );
+        dialog.dialog( "close" );
+        content.empty();
+      }
+      return valid;
+    }
+    
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 800,
+      width: 550,
+      modal: true,
+      buttons: {
+        "Create an account": addUser,
+        Cancel: function() {
+          dialog.dialog( "close" );
+          
+        }
+       
+       
+      },
+      
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );
+       var basicControls = [ "#print", "#bold", "#italic", "#undo", "#redo" ];
+       var valueControls = [ "#fontsize", "#forecolor", "#hilitecolor", "#backcolor", "fontname" ];
+    
+       $( "#print" ).button({
+         "icon": "ui-icon-print",
+         "showLabel": false
+       });
+       $( "#redo" ).button({
+         "icon": "ui-icon-arrowreturnthick-1-e",
+         "showLabel": false
+       });
+       $( "#undo" ).button({
+         "icon": "ui-icon-arrowreturnthick-1-w",
+         "showLabel": false
+       });
+    
+       $( ".toolbar" ).controlgroup();
+       $( "#zoom" ).on( "selectmenuchange", function() {
+         page.css({ "zoom": $( this ).val() });
+       })
+       $( basicControls.concat(valueControls).join( ", " ) ).on( "click change selectmenuchange",
+         function() {
+           document.execCommand(
+             this.id,
+             false,
+             $( this ).val()
+           );
+         } );
+       $( "form" ).on( "submit", function( event ) {
+         event.preventDefault();
+       });
+
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addUser();
+      
+      
+      
+    });
+ 
+    $( "#create-user" ).button().on( "click", function() {
+      dialog.dialog(
+           {
+              autoOpen: true 
+           }
+      );
+    });
+    var td2 = null;
+    $(document).on("click", ".checkBtn" ,function() {
+       $( "#dialog" ).dialog( "open" );
+  
+      var tdArr = new Array();   // 배열 선언
+      var tr = $(this).parent().parent();
+      var td = tr.children();
+
+      
+      var no = td.eq(0).text();
+      var userid = td.eq(1).text();
+      var name = td.eq(2).html();
+      var email = td.eq(3).text();
+      td2 = td.eq(2);
+
+      console.log(td.eq(2));
+      
+      str +=   " * 클릭된 Row의 td값 = No. : <font color='red'>" + no + "</font>" +
+            ", 아이디 : <font color='red'>" + userid + "</font>" +
+            ", 이름 : <font color='red'>" + name + "</font>" +
+            ", 이메일 : <font color='red'>" + email + "</font>";
+      
+      
+
+    });
+
+        $( "#dialog" ).dialog(
+           {
+              autoOpen: false,
+              width: "700px",
+               buttons: {
+                   'modify': function() {
+                      console.log(td2.text());
+                      td2.empty();
+                      td2.append($("#page").html());
+                    $( "#dialog" ).dialog( "close" );
+                    $("#page").empty();
+                    }
+               }
+           }
+        );
+  });
+  </script>
+</head>
+<body>
+ 
+<div id="dialog-form" title="Create new user">
+  <p class="validateTips">All form fields are required.</p>
+ 
+  <form>
+    <fieldset>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
+      <label for="email">Title</label>
+      <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
+      <label for="content">Content</label>
+      <pre id="content" contenteditable="true" style="width:100%; height:300px;" ></pre>
+      <label for="event_date">일정날짜</label>
+     <input type="text" id="event_date" name ="event_date" readonly><br>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+ 
+ 
+<div id="users-contain" class="ui-widget">
+  <h1>Existing Users:</h1>
+  <table id="users" class="ui-widget ui-widget-content" style="width: 800px;">
+    <thead>
+      <tr class="ui-widget-header ">
+        <th>Name</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Date</th>
+        <th>Button</th>
+      </tr>
+    </thead>
+    <tbody>
+   
+    </tbody>
+  </table>
+</div>
+
+<button id="create-user">Create new content</button>
+<div class="col-lg-12" id="ex2_Result1" ></div> 
+<div class="col-lg-12" id="ex2_Result2" ></div> 
+ 
+ 
+<div id="dialog" title="Create new user">
+ <div class="wrap">
+  <div class="toolbar">
+      <button id="print">Print</button>
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+      <select id="zoom">
+        <option selected disabled>Zoom</option>
+        <option>50%</option>
+        <option>75%</option>
+        <option>90%</option>
+        <option>100%</option>
+        <option>125%</option>
+        <option>150%</option>
+        <option>200%</option>
+      </select>
+      <select id="fontname">
+        <option selected disabled>Font</option>
+        <option>Arial</option>
+        <option>Comic Sans MS</option>
+        <option>Courier New</option>
+        <option>Georgia</option>
+        <option>Impact</option>
+        <option>Lucida Grande</option>
+        <option>Times New Roman</option>
+        <option>Verdana</option>
+      </select>
+      <select id="fontsize">
+        <option selected disabled>Size</option>
+        <option value="1">8px</option>
+        <option value="2">9px</option>
+        <option value="3">10px</option>
+        <option value="4">11px</option>
+        <option value="5">12px</option>
+        <option value="6">14px</option>
+        <option value="7">18px</option>
+        <option value="8">24px</option>
+        <option value="9">30px</option>
+        <option value="10">36px</option>
+      </select>
+      <select id="hilitecolor" title="Background color">
+        <option selected disabled>Highlight</option>
+        <option value="white">None</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="grey">Grey</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+      </select>
+      <select id="forecolor" title="Color">
+        <option selected disabled>Color</option>
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="#ccc">Grey</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+      </select>
+      <button id="bold">B</button>
+      <button id="italic">I</button>
+      <button id="underline">U</button>
+ 
+  </div>
+  <pre id="page" contenteditable="true">
+  </pre>
+</div>
+ </div>
+</body>
+</html>

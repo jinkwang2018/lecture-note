@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<link rel="stylesheet" href="css/main.css">  
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script src="js/tooltip.js"></script>
+
+<script>
+  $( function() {
+    $( "#dialog" ).dialog({
+      width : 1280,
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "blind",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  
+  
+    $('[data-toggle="tooltip"]').tooltip();
+  
+  });
+</script>
+
+
+
+      
+      <style>
+      
+      
+      /* Contenedor del puzzle*/
+      #contenedorPuzzle {
+         margin: 20px auto;
+         width: 450px;
+         background: rgba(20,20,20,0.8);
+         box-shadow: 0px 0px 10px  2px #777;
+         color: #ccc;
+         padding: 20px;
+         border-radius: 10px;
+         overflow: hidden;
+      }
+      
+      
+      /* Puzzle */
+      #contenedorPiezas{
+         background: #e7931a;
+         width: 200px;
+         height: 200px;
+         float: left;
+         margin-left: 10px;
+         box-shadow: 0px 0px 10px  2px #d0eb6a;
+      }
+      
+      #puzzle {
+         background: #d0eb6a;
+         width: 200px;
+         height: 200px;
+         float: right;
+         margin-right: 10px;
+         box-shadow: 0px 0px 10px  2px #e7931a;
+      }
+      .contenedorPieza {
+         width: 100px;
+         height: 100px;
+         float: left;
+      }
+      
+      #contenedorPuzzle img {
+         float: left;
+         padding: 1px;
+         width: 100px;
+         height: 100px;
+      }
+         
+      </style>
+      
+      
+      <script>
+      
+      /**
+      * Función que se ejecuta al arrastrar el elemento. 
+      **/
+      function start(e) {
+         e.dataTransfer.effecAllowed = 'move'; // Define el efecto como mover (Es el por defecto)
+         e.dataTransfer.setData("Text", e.target.id); // Coje el elemento que se va a mover
+         e.target.style.opacity = '0.4'; 
+      }
+
+      /**
+      * Función que se ejecuta se termina de arrastrar el elemento. 
+      **/
+      function end(e){
+         e.target.style.opacity = ''; // Restaura la opacidad del elemento         
+         e.dataTransfer.clearData("Data");         
+      }
+
+      /**
+      * Función que se ejecuta cuando un elemento arrastrable entra en el elemento desde del que se llama. 
+      **/
+      function enter(e) {
+         return true;
+      }
+
+      /**
+      * Función que se ejecuta cuando un elemento arrastrable esta sobre el elemento desde del que se llama. 
+      * Devuelve false si el objeto se puede soltar en ese elemento y true en caso contrario.
+      **/
+      function over(e) {
+         if ((e.target.className == "contenedorPieza") || (e.target.id == "contenedorPiezas"))
+            return false;
+         else
+         return true;
+      }
+          
+      /**
+      * Función que se ejecuta cuando un elemento arrastrable se suelta sobre el elemento desde del que se llama. 
+      **/
+      function drop(e){
+         e.preventDefault(); // Evita que se ejecute la accion por defecto del elemento soltado.
+         var elementoArrastrado = e.dataTransfer.getData("Text");
+         e.target.appendChild(document.getElementById(elementoArrastrado)); // Coloca el elemento soltado sobre el elemento desde el que se llamo esta funcion
+         comprobarPuzzle();
+      }
+
+      function comprobarPuzzle(){
+         if((document.getElementById('pieza1').parentNode.id=='uno') &&
+            (document.getElementById('pieza2').parentNode.id=='dos') &&
+            (document.getElementById('pieza3').parentNode.id=='tres') &&
+            (document.getElementById('pieza4').parentNode.id=='cuatro'))
+         {
+            alert('성공!');
+         }
+      }
+
+   
+      </script>
+
+
+</head>
+<body>
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Main</a></li>
+        <li><a href="GeoLocation.html">GeoLocation</a></li>
+        <li class="active"><a href="Drag_Drop.html">Drag & Drop</a></li>
+        <li><a href="LocalStorage.html">LocalStorage</a></li>
+        <li><a href="SSE.html">SSE</a></li>
+        <li><a href="Web_Worker.html">Web Worker</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+		<li><a href="Member.html"><span class="glyphicon glyphicon glyphicon-user"></span> 4조 조원보기</a></li>
+        <li><a href="Login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+   
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="index.html">Main</a></p>
+      <br/>
+      <p><a href="GeoLocation.html" data-toggle="tooltip" title="위치를 알고싶어요">Geo Location</a></p>
+      <br/>
+      <p><a href="Drag_Drop.html" data-toggle="tooltip2" title="퍼즐을 맞춰볼까요?">Drag & Drop</a></p>
+      <br/>
+      <p><a href="LocalStorage.html" data-toggle="tooltip3" title="자동 저장이 됩니다.">LocalStorage</a></p>
+      <br/>
+      <p><a href="SSE.html" data-toggle="tooltip4" title="서버로부터 자동으로 무언가가 내려와요">SSE</a></p>
+      <br/>
+      <p><a href="Web_Worker.html" data-toggle="tooltip5" title="MyWay 나만의 길을 가는 일꾼">Web Worker</a></p>
+    </div> <!--왼쪽 싸이드 메뉴 디브-->
+   
+    <div class="col-sm-10 mainDiv">
+    	
+    	<div class="row">
+   			
+    	  <div class="col-sm-4"></div>
+           <div class="col-sm-3">
+    		<h1>Drag & Drop</h1>
+   		   </div>
+   		   
+          <div class="col-sm-1">
+          	<button type="button" class="btn btn-info" style="margin-top: 30px" id="opener">PT보기</button>
+          </div>
+   		
+   		  <div class="col-sm-2">
+   		  
+   		  </div>
+   		
+        </div>
+         
+       
+      <br>
+      <h2>이미지를 드래그 시켜 퍼즐을 완성시켜주세요</h2> 
+       <div class="container text-center">
+         <section id="contenedorPuzzle">
+            <div id="contenedorPiezas" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+               <img id="pieza3" src="images/Charmander3.JPG" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+               <img id="pieza2" src="images/Charmander2.JPG" ondragstart="start(event)" ondragend="end(event)">
+               <img id="pieza4" src="images/Charmander4.JPG" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+               <img id="pieza1" src="images/Charmander1.JPG" draggable="true" ondragstart="start(event)" ondragend="end(event)">
+               
+            </div>
+            <div id="puzzle">
+               <div class="contenedorPieza" id="uno" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+               <div class="contenedorPieza" id="dos" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+               <div class="contenedorPieza" id="tres" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+               <div class="contenedorPieza" id="cuatro" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+            </div>   
+         </section>
+         
+         
+      </div>
+   <br>
+   <br> 
+    </div>
+    
+    
+    
+  </div> <!--row 관련 div-->
+</div>   <!--센터부분 전체 디브-->
+
+<div id="dialog" title="Drag&Drop">
+  	
+  	
+  	               
+      <div class="w3-content w3-display-container" style="max-width:1920px">
+        <img class="mySlides" src="images/1_Drag.jpg" style="width:100%">
+        <img class="mySlides" src="images/2_Drag.jpg" style="width:100%">
+        <img class="mySlides" src="images/3_Drag.jpg" style="width:100%">
+        <div class="w3-center w3-section w3-large w3-text-white w3-display-bottomleft" style="width:100%">
+          <div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+          <div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        </div>
+      </div>         
+</div>
+  	
+
+   <script>/*슬라이드쇼 */
+      var slideIndex = 1;
+      showDivs(slideIndex);
+         
+      function plusDivs(n) {
+        showDivs(slideIndex += n);
+      }
+      
+      function currentDiv(n) {
+        showDivs(slideIndex = n);
+      }
+         
+      function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+         if (n > x.length) {slideIndex = 1}
+         if (n < 1) {slideIndex = x.length}
+         for (i = 0; i < x.length; i++) {
+              x[i].style.display = "none";
+         }
+          for (i = 0; i < dots.length; i++) {
+             dots[i].className = dots[i].className.replace(" w3-white", "");
+         }
+         x[slideIndex-1].style.display = "block";
+         dots[slideIndex-1].className += " w3-white";
+      }
+   </script>
+        
+
+
+
+
+</body>
+</html>
+ 

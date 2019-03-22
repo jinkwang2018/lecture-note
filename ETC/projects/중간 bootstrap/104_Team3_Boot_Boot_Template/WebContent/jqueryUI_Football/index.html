@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bitcamp Group 3 - Tottenham</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style type="text/css">
+  	body {
+  		text-align: center;
+  	}
+  	
+  	div {
+  		border-style: solid;
+  	}
+  	
+  	.stadium {
+		height: 700px;
+		background-image: url("images/soccerGround.png");
+		background-size: 100% 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	
+	#head {
+			width: 100%;
+			height: 200px;
+			background-image: url("images/tot.jpg");
+			background-color: #000033;
+			background-repeat: no-repeat;
+	}
+		
+	.center {
+		position: relative;
+	    top: 30%;
+	    width: 100%;
+	    text-align: center;
+	    font-style: italic;
+	    font-size: 3vw;
+	    color: white;
+	}
+	
+	.page {
+		height: 800px;
+	}
+	
+	.draggable { 
+		width: 100px;
+		height: 100px;
+		padding: 0.5em;
+		float: left;
+		margin:3px;
+ 		padding-bottom: 10px;
+	}
+	
+	.ui-tooltip {
+    	max-width: 350px;
+	}
+	
+	
+  </style>
+  <script type="text/javascript">
+		$(function() {
+			//탭
+			$('#tabs').tabs();
+			
+			//드래그
+			$(".draggable").draggable({ revert: "invalid" });
+			
+			
+			
+			//툴팁
+			$(document).tooltip({
+			     items: "img",
+			     content: function() {
+			       var element = $( this );
+			       console.log(element);
+			       if ( element.is( "img" ) ) {
+			           
+			         return element.attr( "alt" );
+			       }
+			     }
+			   });
+			
+			//포지션별 드롭
+			$('.col-sm-3.page.pa').droppable();
+			
+			$('.gkColor').droppable({
+		       	accept: '.gk',
+			});
+			
+			$('.dfColor').droppable({
+		       	accept: '.df',
+			});
+			
+			$('.mfColor').droppable({
+		       	accept: '.mf',
+			});
+			
+			$('.stColor').droppable({
+		       	accept: '.st',
+			});
+			
+			//포지션별 마우스호버
+			$(".gk").hover(function() {
+					$('.gkColor').css('background-color', 'gold');
+				},
+				function(){
+					$('.gkColor').css('background-color', 'transparent');
+				}
+			);
+			
+			$(".df").hover(function() {
+					$('.dfColor').css('background-color', 'yellowgreen');
+				},
+				function(){
+					$('.dfColor').css('background-color', 'transparent');
+				}
+			);
+			
+			$(".mf").hover(function() {
+					$('.mfColor').css('background-color', 'skyblue');
+				},
+				function(){
+					$('.mfColor').css('background-color', 'transparent');
+				}
+			);
+			
+			$(".st").hover(function() {
+					$('.stColor').css('background-color', 'tomato');
+				},
+				function(){
+					$('.stColor').css('background-color', 'transparent');
+				}
+			);
+			
+		}); // end
+  </script>
+  
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="head">
+					<h1 class="center">Welcome to Tottenham</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- 경기정보 -->
+			<div class="col-sm-3 page">
+				<object width="100%" height="100%" data="matchInfo.html"></object>
+			</div>
+			
+			<!-- 포메이션 -->
+			<div class="col-sm-6 page">
+				<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">4-4-2</a></li>
+					<li><a href="#tabs-2">5-2-3-1</a></li>
+					<li><a href="#tabs-3">4-3-3</a></li>
+				</ul>
+				<div id="tabs-1">
+					<div class="stadium">
+						<table style="width:100%; height: 100%">
+					    	<tr class="stColor"><td></td><td></td><td></td><td></td><td></td></tr>
+					    	<tr class="mfColor"><td></td><td></td><td></td><td></td><td></td></tr>
+					    	<tr class="mfColor"><td></td><td></td><td></td><td></td><td></td></tr>
+					    	<tr class="dfColor"><td></td><td></td><td></td><td></td><td></td></tr>
+					    	<tr class="gkColor"><td></td><td></td><td></td><td></td><td></td></tr>
+				    	</table>
+				    </div>
+				</div>
+				<div id="tabs-2">
+					<div class="stadium"></div>
+				</div>
+				<div id="tabs-3">
+					<div class="stadium"></div>
+				</div>
+			</div>
+			</div>
+			
+			<!-- 선수 리스트 -->
+			<div class="col-sm-3 page pa">
+				<div class="ui-widget-content draggable df" style="background-color: yellowgreen;">
+				    <img src="images/Ben Davies.PNG"  alt="데이비스/등번호:33번/포지션:DF/국적:영국" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable df" style="background-color:yellowgreen;">
+				    <img src="images/Danny Rose.PNG"  alt="로즈/등번호:3번/포지션:DF/국적:영국" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable df" style="background-color:yellowgreen;">
+				    <img src="images/Davinson Sanchez.PNG"  alt="산체스/등번호:6번/포지션:DF/국적:콜롬비아" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable df" style="background-color:yellowgreen;">
+				    <img src="images/Eric Dier.PNG"  alt="다이어/등번호:15번/포지션:DF/국적:영국" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable df" style="background-color:yellowgreen;">
+				    <img src="images/Jan Vertonghen.PNG"  alt="베르통언/등번호:5번/포지션:DF/국적:벨기에" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable mf" style="background-color: skyblue; ">
+				   <img src="images/Dele Alli.PNG"  alt="알리/등번호:20번/포지션:MF/국적:영국" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable mf" style="background-color: skyblue;">
+				    <img src="images/Heung-Min Son.PNG"  alt="손흥민/등번호:7번/포지션:MF/국적:한국" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable mf" style="background-color:skyblue;">
+				    <img src="images/Christian Eriksen.PNG"  alt="에릭센/등번호:15번/포지션:MF/국적:덴마크" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable mf" style="background-color:skyblue;">
+				    <img src="images/Erik Lamela.PNG"  alt="라멜라/등번호:15번/포지션:MF/국적:아르헨티나" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable mf" style="background-color:skyblue;">
+				    <img src="images/Mousa Dembele.PNG"  alt="뎀벨레/등번호:19번/포지션:MF/국적:벨기에" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable st" style="background-color:tomato;">
+				    <img src="images/Fernando Llorente.PNG"  alt="요렌테/등번호:19번/포지션:ST/국적:스페인" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable st" style="background-color:tomato;">
+				    <img src="images/Harry Kane.PNG"  alt="케인/등번호:10번/포지션:ST/국적:영국" width="100%" height="100%">
+				</div>
+				<div class="ui-widget-content draggable gk" style="background-color:gold;">
+				    <img src="images/Hugo Lloris.PNG"  alt="요리스/등번호:1번/포지션:GK/국적:프랑스" width="100%" height="100%">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

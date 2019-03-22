@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Bitcamp_java 104th Team No.2 Canvas</title>
+
+<script>
+//---------------------참고한 코드------------------------
+var pos = {
+    drawable: false, //마우스 클릭 상태인지 확인하기 위해 만든 변수
+    x: 0,
+    y: 0
+};
+var canvas, ctx;
+var color = "black";
+ 
+window.onload = function(){
+    canvas = document.getElementById("myCanvas");
+    ctx = canvas.getContext("2d");
+ 
+    canvas.addEventListener("mousedown", listener);
+    canvas.addEventListener("mousemove", listener);
+    canvas.addEventListener("mouseup", listener);
+    canvas.addEventListener("mouseout", listener);
+}
+/*
+마우스를 눌렀을때 down 이벤트 -> initDraw -> getPosition()으로 마우스 현위치를 가져와 moveTo()로 시작점을 지정한다.
+누른채로 이동하면 move 이벤트 -> draw -> getPosition()으로 마우스 현위치를 가져와 lineTo()까지 선을 그려준다.
+버튼을 떼는 순간 up 이벤트 -> finishDraw -> 그리기를 중지한다.
+*/
+function listener(event){
+    switch(event.type){
+        case "mousedown":
+            initDraw(event); //시작점 moveTo 지정
+            break;
+ 
+        case "mousemove":
+            if(pos.drawable)
+                draw(event); //이어질 지점 lineTo 지정
+            break;
+ 
+        case "mouseout":
+        case "mouseup":
+            finishDraw();
+            break;
+    }
+}
+function initDraw(event){
+    ctx.beginPath(); //그리기 시작 (beginPath () 메서드는 새로운 경로를 다시 설정합니다) 
+    pos.drawable = true;
+    var coors = getPosition(event); //현 마우스 위치를 가져옵니다
+    pos.X = coors.X;
+    pos.Y = coors.Y;
+    ctx.moveTo(pos.X, pos.Y); //시작점 지정
+}
+ 
+function draw(event){
+    var coors = getPosition(event);
+    ctx.lineTo(coors.X, coors.Y); //이어질 지점 지정
+    pos.X = coors.X;
+    pos.Y = coors.Y;
+    
+    ctx.strokeStyle = color; // strokeStyle 속성을 사용하여 색을 바꿉니다
+    ctx.stroke();// moveTo 에서 lineTo 까지 경로를 화면에 그립니다
+}
+ 
+function finishDraw(){
+    pos.drawable = false;
+    pos.X = 0;
+    pos.Y = 0;
+}
+ 
+function getPosition(event){ // 현 마우스 위치를 구합니다 (캔버스 내에 입력할 좌표값)
+    var x = event.pageX - canvas.offsetLeft; // 페이지 상의 위치 - 캔버스의 좌상단 모서리를 기준으로한 위치
+    var y = event.pageY - canvas.offsetTop;
+    return {X: x, Y: y};
+}
+
+function changeColor(btn){ //선택한 지정된 색을 color 에 담습니다
+   color = btn.style.backgroundColor;
+}
+
+function chooseColor(col){ //color 타입을 통해 선택한 색을 color 에 담습니다
+   color = col.value;
+}
+
+function allClear(){ //모두 삭제합니다
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function changeWidth(){ //selwidth 의 value 값에 따라 lineWidth 속성을 변경하여 굵기가 변경 됩니다
+   ctx.lineWidth = document.getElementById("selwidth").value;
+}
+//---------------------------------------------------
+
+</script>
+
+
+<style type="text/css">
+
+input[type=button]{
+   width: 60px; 
+   height: 30px; 
+   border: 1px solid black; 
+   float : left;
+}
+
+input[type=color]{
+   width: 54px; 
+   height: 26px; 
+   border: 1px solid black; 
+   float : left;
+}
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.flex-container > * {
+    padding: 15px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+}
+
+.article {
+    text-align: left;
+}
+
+header {background: black;color:white;}
+footer {background: #aaa;color:white;}
+.nav {background:#eee;
+     width: 10px;
+}
+
+@media all and (min-width: 768px) {
+    .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
+    .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
+    footer {-webkit-order:3;order:3;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="flex-container">
+   <header>
+     <h1>그림판</h1>
+   </header>
+   
+   
+   <nav class="nav">
+      <!-- 미리 지정해논 색상들 입니다, 클릭을 하면 background-color 값을 가져가 해당 색상으로 변경합니다 -->
+      <input type="button" style="background-color:#000000" onclick="changeColor(this)">
+      <input type="button" style="background-color:#7f7f7f" onclick="changeColor(this)">
+      <input type="button" style="background-color:#880015" onclick="changeColor(this)">
+      <input type="button" style="background-color:#ed1c24" onclick="changeColor(this)">
+      <input type="button" style="background-color:#ff7f27" onclick="changeColor(this)">
+      <input type="button" style="background-color:#fff200" onclick="changeColor(this)">
+      <input type="button" style="background-color:#22b14c" onclick="changeColor(this)">
+      <input type="button" style="background-color:#00a2e8" onclick="changeColor(this)">
+      <input type="button" style="background-color:#3f48cc" onclick="changeColor(this)">
+      <input type="button" style="background-color:#a349a4" onclick="changeColor(this)">
+      <input type="button" style="background-color:#ffffff" onclick="changeColor(this)">
+      <input type="button" style="background-color:#c3c3c3" onclick="changeColor(this)">
+      <input type="button" style="background-color:#b97a57" onclick="changeColor(this)">
+      <input type="button" style="background-color:#ffaec9" onclick="changeColor(this)">
+      <input type="button" style="background-color:#ffc90e" onclick="changeColor(this)">
+      <input type="button" style="background-color:#efe4b0" onclick="changeColor(this)">
+      <input type="button" style="background-color:#b5e61d" onclick="changeColor(this)">
+      <input type="button" style="background-color:#99d9ea" onclick="changeColor(this)">
+      <input type="button" style="background-color:#7092be" onclick="changeColor(this)">
+      <input type="button" style="background-color:#c8bfe7" onclick="changeColor(this)">
+      
+      <!-- color 타입을 통해 팔레트에서 원하는 색을 선택합니다, 색상을 고르면 value 값을 가져가 해당 색상으로 변경됩니다 -->
+      <input type="color" value="#ff0000" onchange="chooseColor(this)">
+      
+      <!-- 지우개 기능은, 흰바탕인 canvas 에 흰색선을 그리는것으로 단순하게 구현했습니다  -->
+      <input type="button" value="지우개" style="background-color:white; border: 2px solid black" onclick="changeColor(this)">
+      
+      <!-- 선의 굵기를 선택할 수 있습니다 -->
+      <select id="selwidth" style="width:50px; height:30px" onchange="changeWidth()">
+         <option value="1">얇게</option>
+         <option value="3">중간</option>
+         <option value="5">굵게</option>
+      </select>
+      
+      <p></p><br><br>
+      <input type="button" id="clear" value="새로 만들기" style="width:100px; height:30px" onclick="allClear()">
+      
+   </nav>
+   
+   <article class="article">
+   
+      <canvas id="myCanvas" width="700px" height="700px" style="border: 3px solid black; float: left">
+      canvas를 지원하는 브라우저가 아닙니다.
+      </canvas>
+            
+   </article>
+
+   <footer> BIT camp_Java 104_Team No.2 </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);.hidden{display:none !important}.icon{vertical-align:top}
+.icon .ico{display:inline-block;background-image:url("../../img/desktop/icon_gray.png");background-position:-25px -25px;background-repeat:no-repeat;width:16px;height:16px;margin-right:5px}
+.icon .ico.ico_topic,.icon .ico.add_topic,.icon .ico.add_topic_module_owner,.icon .ico.complete_topic{background-position:0 -1px}
+.icon .ico.ico_module_s,.icon .ico.add_module{background-position:0 -25px}.icon .ico.ico_course_s,.icon .ico.add_course{background-position:0 -50px}
+.icon .ico.ico_everystudy,.icon .icoadd_topic_everystudy_complete,.icon .ico.add_topic_everystudy_member,.icon .ico.join_everystudy_register{background-position:0 -75px}
+.icon .ico.ico_halloffame{background-position:0 -100px}.icon .ico.ico_marked{background-position:0 -127px}
+.icon .ico.ico_marking{background-position:0 -150px}.icon .ico.ico_comment{background-position:0 -175px}
+.icon .ico.ico_comment_del{background-position:0 -200px}.icon .ico.ico_close{background-position:0 -225px}
+.icon .ico.ico_modify{background-position:0 -250px}.icon .ico.ico_twitter{background-position:0 -275px}
+.icon .ico.ico_facebook{background-position:0 -300px}.icon .ico.ico_email{background-position:0 -325px}
+.icon .ico.ico_join{background-position:0 -350px}.icon .ico.ico_signin{background-position:0 -375px}
+.icon .ico.ico_signout{background-position:0 -400px}.icon .ico.ico_privite{background-position:0 -425px}
+.icon .ico.ico_public{background-position:0 -450px}.icon .ico.ico_on{background-position:0 -475px}
+.icon .ico.ico_reply{background-position:0 -500px}.icon .ico.ico_search{background-position:0 -525px}
+.icon .ico.ico_member{background-position:0 -550px}.icon .ico.ico_menu{background-position:0 -575px}
+.icon .ico.ico_notifier{background-position:0 -600px}.icon .ico.ico_twitter2{background-position:0 -625px}
+.icon .ico.ico_facebook2{background-position:0 -650px}.icon .ico.ico_more{background-position:0 -675px}
+.icon .ico.ico_topic_add{background-position:0 -700px}.icon .ico.ico_topic_modify{background-position:0 -725px}
+.icon .ico.ico_topic_delete{background-position:0 -750px}.icon .ico.ico_arrow_prev{background-position:0 -775px}
+.icon .ico.ico_arrow_next{background-position:0 -800px}.icon .ico.ico_course{background-position:0 -825px}
+.icon .ico.ico_module{background-position:0 -850px}.icon .ico.ico_reply_small{background-position:0 -875px}
+.icon .ico.ico_modify_small{background-position:0 -900px}.icon .ico.ico_delete_small{background-position:0 -925px}
+.icon .ico.ico_go{background-position:0 -950px}.icon .ico.ico_back{background-position:0 -975px}
+.icon .ico.ico_home{background-position:0 -1000px}.icon .ico.ico_right{background-position:0 -1025px}
+.icon .ico.ico_bottom{background-position:0 -1050px}.icon .ico.ico_left{background-position:0 -1075px}
+.icon .ico.ico_top{background-position:0 -1100px}.icon .ico.ico_right_small{background-position:0 -1125px}
+.icon .ico.ico_bottom_small{background-position:0 -1150px}.icon .ico.ico_left_small{background-position:0 -1175px}
+.icon .ico.ico_top_small{background-position:0 -1200px}.icon .ico.ico_setting{background-position:0 -1250px}
+.icon .ico.ico_help{background-position:0 -1225px}.icon .ico.ico_marked_blue{background-position:0 -1275px}
+.icon .ico.ico_marking_blue{background-position:0 -1300px}.icon .ico.ico_private{background-position:0 -1325px}
+.icon:hover{color:#000}.icon:hover span.ico{background-image:url("../../img/desktop/icon.png")}
+.icon.bg span.ico{background-image:url("../../img/desktop/icon.png")}.icon.bg:hover{color:inherit}
+.icon.bg:hover span.ico{background-image:url("../../img/desktop/icon.png")}div#author_balloon{border:1px solid #bbb;background-color:#fff;display:none;line-height:1.8em;position:absolute;top:0;left:0;width:334px;z-index:15;-moz-box-shadow:inset 0 0 5px rgba(0,0,0,0.3);-webkit-box-shadow:0 0 5px rgba(0,0,0,0.3);-o-box-shadow:inset 0 0 5px rgba(0,0,0,0.3);box-shadow:0 0 5px rgba(0,0,0,0.3)}
+div#author_balloon div.pin{background-image:url('../../img/desktop/pin_layer.png');background-repeat:no-repeat;background-position:left bottom;position:absolute;height:9px;top:-8px;left:48px;width:50px}
+div#author_balloon div.box{overflow:hidden;width:100px;height:70px;margin-left:15px;margin-top:15px}
+div#author_balloon div.box img.avatar{width:100px;height:70px;background-size:100% auto;background-position:center center}
+div#author_balloon div.header strong{display:block;position:absolute;left:130px;top:20px;color:#000;font-size:2em;font-weight:normal;line-height:1.3em;width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+div#author_balloon div.header a{position:absolute;left:130px;top:55px;color:#999}
+div#author_balloon div.body{padding:1px 15px 15px}div#author_balloon div.body ul#statistics{overflow:hidden}
+div#author_balloon div.body ul#statistics li{color:#fff;float:left;width:100px;height:70px;margin-right:1px;margin-bottom:1px}
+div#author_balloon div.body ul#statistics li span.text{display:block;padding:12px 10px 5px 10px;vertical-align:middle;font-size:11px}
+div#author_balloon div.body ul#statistics li span.text i{background-image:url("../../img/desktop/ico_profile.png");display:inline-block;width:16px;height:16px;margin-right:6px;margin-top:-2px;vertical-align:middle}
+div#author_balloon div.body ul#statistics li span.count{display:block;font-size:20px;font-weight:550;font-family:Tahoma,Arial,sans-serif;padding-left:10px}
+div#author_balloon div.body ul#statistics li.topic,div#author_balloon div.body ul#statistics li.module,div#author_balloon div.body ul#statistics li.course{background-color:#3c9}
+div#author_balloon div.body ul#statistics li.readit,div#author_balloon div.body ul#statistics li.comment,div#author_balloon div.body ul#statistics li.hof{background-color:#bbb}
+div#author_balloon div.body ul#statistics li.topic i{background-position:0 0}div#author_balloon div.body ul#statistics li.module i{background-position:0 -20px}
+div#author_balloon div.body ul#statistics li.course i{background-position:0 -40px}
+div#author_balloon div.body ul#statistics li.readit i{background-position:0 -60px}
+div#author_balloon div.body ul#statistics li.comment i{background-position:0 -80px}
+div#author_balloon div.body ul#statistics li.hof i{background-position:0 -100px}div.spinner{position:absolute !important;width:0 !important;left:auto !important;top:20px !important;right:21px !important}
+.layerbox{margin:0 auto;position:relative;width:400px;-moz-box-shadow:inset 0 0 5px rgba(0,0,0,0.3);-webkit-box-shadow:0 0 5px rgba(0,0,0,0.3);-o-box-shadow:inset 0 0 5px rgba(0,0,0,0.3);box-shadow:0 0 5px rgba(0,0,0,0.3)}
+.layerbox div.pin{background-image:url('../../img/desktop/pin_layer.png');background-repeat:no-repeat;position:absolute;height:25px;width:25px;z-index:1}
+.layerbox div.pin.pin_big_top{background-position:bottom left;top:-24px;left:100px}
+.layerbox div.pin.pin_big_left{background-position:bottom right;top:50px;left:-24px}
+.layerbox div.pin.pin_big_right{background-position:top left;top:50px;right:-24px}
+.layerbox div.pin.pin_big_bottom{background-position:top right;bottom:-24px;left:100px}
+.layerbox div.spinner{top:10px;left:auto;right:10px}.layerbox .table{background-color:#fff;border:1px solid #bbb;color:#666}
+.layerbox .table .head,.layerbox .table .header{border-bottom:1px solid #ddd;text-align:left;padding:15px}
+.layerbox .table .head strong,.layerbox .table .header strong{color:#000;font-size:1em}
+.layerbox .table div.body{padding:20px 0}.layerbox .table div.body div.feedback{border-bottom:1px solid #ddd;color:red;line-height:1.5em;padding-bottom:22px;padding-left:30px;margin-bottom:22px}
+.layerbox .table div.body input.text{font-size:14px;height:30px;line-height:30px;padding:0 5px;width:200px}
+.layerbox .table div.body div.btns{margin-top:20px}.layerbox .table div.body label{color:#999}
+.layerbox .table div.tail,.layerbox .table div.footer{font-size:14px;padding:0 20px 20px 20px;text-align:center}
+.layerbox .table div.tail a,.layerbox .table div.footer a{color:#666 !important;display:inline-block;font-size:14px;margin:0 3px}
+.btn{padding:10px 20px;cursor:pointer;display:inline-block;border:0;font-weight:bold}
+.btn.btn_submit,.btn.btn_save{padding:10px 40px !important;background-color:#3c9;border:1px solid #3c9;color:#fff}
+.btn.btn_submit:hover,.btn.btn_save:hover{border:1px solid #77b9cb;-moz-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-webkit-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-o-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);box-shadow:0 1px 1px 0 rgba(0,0,0,0.2)}
+.btn.btn_cancel{background-color:#ccc;border:1px solid #ccc;color:#fff}.btn.btn_cancel:hover{border:1px solid #bbb;-moz-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-webkit-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-o-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);box-shadow:0 1px 1px 0 rgba(0,0,0,0.2)}
+.btn.btn_delete,.btn.btn_etc{background-color:#999;border:1px solid #999;color:#fff}
+.btn.btn_delete:hover,.btn.btn_etc:hover{border:1px solid #888;-moz-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-webkit-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-o-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);box-shadow:0 1px 1px 0 rgba(0,0,0,0.2)}
+.btn.btn_disabled{background-color:#ddd;cursor:default;font-weight:normal;color:#bbb}
+.btn_small{background-color:#fff;color:#666;cursor:pointer;border:1px solid #d5d5d5;padding:5px 10px;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;font-size:.95em}
+.btn_small:hover,.btn_small.hover{border:1px solid #bbb;color:#333;-moz-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-webkit-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);-o-box-shadow:0 1px 1px 0 rgba(0,0,0,0.2);box-shadow:0 1px 1px 0 rgba(0,0,0,0.2)}
+.btn_small[disabled]{border:1px solid #ddd;padding:5px 10px;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;font-size:.9em;background-color:#eee;color:#ccc;cursor:default}
+.btn_small[disabled]:hover{border:1px solid #d5d5d5;color:#ccc !important;-moz-box-shadow:0 0 0 0 rgba(0,0,0,0);-webkit-box-shadow:0 0 0 0 rgba(0,0,0,0);-o-box-shadow:0 0 0 0 rgba(0,0,0,0);box-shadow:0 0 0 0 rgba(0,0,0,0)}
+.btn_close{background-image:url("../../img/desktop/close_x.png");background-position:center center;background-color:inherit;border:0;text-indent:-5000px;cursor:pointer;position:absolute;width:15px;height:15px;right:15px;overflow:hidden}
+.btn_close span{display:none}#attention{cursor:pointer;background-color:#fc3;padding:.5rem;font-size:1.5rem;color:#000;text-align:center;position:fixed;bottom:0;right:0;width:100%;z-index:100}
+#attention p{background-repeat:no-repeat;background-position:left center;padding:.5em}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/dark-hive/jquery-ui.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body{
+        font: 20px Montserrat, sans-serif;
+         line-height: 1.8;
+         
+       }
+       .topnav{
+        
+       }
+       
+  </style>
+  <script type="text/javascript">
+  $( function() {
+	  var idvalue = localStorage.getItem("id");  
+      $('#id').attr("value",idvalue);
+      $('.col-sm-12').prepend("localstorage에 저장된 값 : "+idvalue);
+  });
+            
+             
+  </script>
+ </head>
+ 
+ <body>
+ 	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="main.html">HTML_API</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+		  <li class="active"><a href="main.html">Home</a></li>
+		  <li><a href="Map.html">Geolocation</a></li>
+		  <li><a href="Ex07_Boot.html">Drag/Drop</a></li>
+		  <li><a href="form.html">Web Storage</a></li>
+		  <li><a href="homepage3.html">Web Workers</a></li>
+		  <li><a href="sse.html">SSE</a></li>
+    	</ul>
+	  </div>
+	</nav>
+    <div>
+   <div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar">
+           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">menu<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+        <li><a href="#">1</a></li>
+           <li><a href="#text-2">2</a></li>
+        <li><a href="#text-3">3</a></li>
+        <li><a href="#text-4">4</a></li>
+            </ul>
+           </li>
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">profile<span class="caret"></span></a>
+       <ul class="dropdown-menu">
+        <li><a href="#text-1">1</a></li>
+        <li><a href="#text-2">2</a></li>
+        <li><a href="#text-3">3</a></li>
+        <li><a href="#text-4">4</a></li>
+            </ul>
+       </li>
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">one<span class="caret"></span></a>
+       <ul class="dropdown-menu">
+           <li><a href="#text-1">1</a></li>
+        <li><a href="#text-2">2</a></li>
+        <li><a href="#text-3">3</a></li>
+        <li><a href="#text-4">4</a></li>
+            </ul>
+       </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">two<span class="caret"></span></a>
+         <ul class="dropdown-menu">
+        <li><a href="#text-1">1</a></li>
+        <li><a href="#text-2">2</a></li>
+        <li><a href="#text-3">3</a></li>
+        <li><a href="#text-4">4</a></li>
+            </ul>
+        </li>
+          </ul>
+       <ul class="nav navbar-nav navbar-right">
+              <li><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+          
+          <!--dialog-->
+           <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Login</h4>
+                </div>
+                	<form action="loginch.jsp" method="post">
+						<div class="modal-body">
+							
+								<div class="form-group">
+									<label for="id">ID:</label> <input type="text"
+										class="form-control" id="id" name="id" placeholder="Enter ID">
+								</div>
+								<div class="form-group">
+									<label for="pwd">Password:</label> <input type="password"
+										class="form-control" id="pwd" name="pwd"
+										placeholder="Enter password">
+								</div>
+								<div class="checkbox">
+									<label><input type="checkbox" name="chk">
+										Remember me</label>
+								</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default">Login</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+            </div>
+          </div>
+      </div> 
+      
+  
+      
+  </div>
+ 
+  <div>
+    <div class="col-sm-12" style="background-color:lavenderblush;"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+    
+  </div>
+  
+  <footer class="container-fluid bg-4 text-center">
+     <p></p> 
+  </footer>
+ </body>
+</html>

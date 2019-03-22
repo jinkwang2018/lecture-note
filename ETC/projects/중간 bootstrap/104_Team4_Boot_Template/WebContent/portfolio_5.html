@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+    .a_floatbox{
+    	margin-left: 10px;
+    }
+    .hr_css {
+    	margin: 0px;
+    }
+    #floatMenu {
+		position: absolute;
+		width: 150px;
+		right: 20px;
+		top: 150px;
+		border: 2px solid black;
+		background-color: whitegray;
+		color: #fff;
+	}
+    table {
+        border-collapse: collapse;
+        width: 80%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    
+    th {
+        background-color: rgb(7, 26, 14);
+        color: white;
+    }
+    </style>
+    
+    <script>
+    var data =[];
+    var city=[];
+    var PM10=[];
+    var PM25=[];
+    $(function(){
+    	$('#seoul_chart').load('project/HighChart.html');
+    	
+       	$.ajax({
+          url:"http://openapi.seoul.go.kr:8088/63714f795572616539336b4c767464/json/RealtimeCityAir/1/25/",
+          dataType:"json",
+          beforeSend:function(){
+              http://www.ajaxload.info/cache/E0/E0/E0/00/00/00/35-0.gif
+                 $('#container').append('<img src="https://m.popkey.co/fe4ba7/DYALX.gif"/>');
+             },
+          success:function(result){
+             data=result.RealtimeCityAir.row;          
+             $.each(data, function(index, obj) {
+                 $("#gu").append("<option>"+obj.MSRSTE_NM+"</option>");
+                 city.push(obj.MSRSTE_NM)
+                 PM10.push(obj.PM10);
+                 PM25.push(obj.PM25);
+             })
+                 
+             Highcharts.chart('container', {
+                 chart: { //차트 형식
+                     type: 'line'
+                 },
+                 title: { //차트 제목
+                     text: '실시간 서울 미세먼지 농도'
+                 },
+                 subtitle: {
+                     text: '서울시 공공데이터'
+                 },
+                 xAxis: { //x축 내용
+                    categories:city
+                 },
+                 yAxis: { //y축 내용
+                     title: {
+                         text: '미세먼지 농도'
+                     }
+                 },
+                 
+                 tooltip: { //말풍성 생성
+                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>', //key는 x축 
+                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y} ㎍/㎥</b></td></tr>',
+                     footerFormat: '</table>', //{point.y:f}442543,  {point.y}443 543
+                     shared: true, //true면 같은 X축의 데이터 값이 같이 보임  
+                     useHTML: true  //true면 위의 지정한 html 태그 사용
+               }, 
+                 
+                 plotOptions: { //해당 X축의 블록지정
+                     line: {
+                         dataLabels: {
+                             enabled: true
+                         },
+                         enableMouseTracking: false
+                     }
+                 },
+                 series: [{
+                     name: '미세먼지(단위: ㎍/㎥)',
+                     data:PM10
+                 }, {
+                     name: '초미세먼지(단위: ㎍/㎥)',
+                     data:PM25
+                 }]
+             });
+          }//success 함수 끝
+       });//ajax 함수 끝
+       $('#btn').click(function () {
+           $('#display').empty();
+           var table = "<table border='1'>";
+           table += "<tr><th>측정일시</th><th>권역명</th><th>측정소명</th><th>미세먼지</th><th>초미세먼지농도</th><th>대기환경등급</th></tr>"
+           $.each(data, function(index, obj) {
+               if(obj.MSRSTE_NM == $("select > option:selected").val()){
+                    table += "<tr>";
+                    table += "<td>" + obj.MSRDT + "</td>";
+                    table += "<td>" + obj.MSRRGN_NM + "</td>";
+                    table += "<td>" + obj.MSRSTE_NM + "</td>";
+                    table += "<td>" + obj.PM10 + "</td>";
+                    table += "<td>" + obj.PM25 + "</td>";
+                    table += "<td>" + obj.IDEX_NM + "</td>";
+                    table += "</tr>";
+               }   
+           });
+           table += "</table>";
+           $('#display').html(table);
+       });
+       
+       funcThisSize();
+		//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		var floatPosition = parseInt($("#floatMenu").css('top'));
+		//250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseI   nt( 값 );
+		
+		$(window).resize(funcThisSize);
+		
+		$(window).scroll(function() {
+			//현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			var newPosition = scrollTop + floatPosition + "px";
+	 
+			//애니메이션 없이 바로 따라감
+			//$("#floatMenu").css('top', newPosition);
+
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+	 
+		}).scroll();
+    });
+    
+    function funcThisSize(){
+    	if(window.innerWidth < 1500){
+    		$("#floatMenu").css("display", "none");
+    	}else{
+    		$("#floatMenu").css("display", "block");
+    	}
+    }
+	</script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio_1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_4.html">jQuery UI</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_5.html">AJAX Chart</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="404.html">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Portfolio Chart1 Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" style="margin-top: 80px;">Chart #1
+                    <small>실시간 서울 도심 미세먼지 농도</small>
+                </h1>
+            </div>
+        </div>
+    	<select id="gu"></select>
+    	<input type="button" value="검색하기" id="btn">
+    	<div id="display"></div>
+ 		
+ 		<div align="center" id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+
+        <hr>
+        
+        
+        <!-- Portfolio Chart2 Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" style="margin-top: 80px;">Chart #2
+                    <small>서울시 강남구 모범음식점 비율</small>
+                </h1>
+            </div>
+            <div id="seoul_chart">
+            	
+        	</div>
+        </div>
+		
+        
+       
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p style="text-align: center;">Introduce Our Team Website 2018</p>
+                    
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    
+    <!-- Side Floating Menu Box -->
+	<div id="floatMenu">
+		<hr class="hr_css">
+		<a class="a_floatbox" href="index.html"><b>Home</b></a>
+		
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		
+		<a class="a_floatbox" href="index.html#portfolio-us"><b>Portfolio</b></a>
+		<hr class="hr_css">
+		<a class="a_floatbox" href="portfolio_1.html"><small>HTML Canvas</small></a><br>
+		<a class="a_floatbox" href="portfolio_2.html"><small>HTML SVG</small></a><br>
+		<a class="a_floatbox" href="portfolio_3.html"><small>HTML Google Maps</small></a><br>
+		<a class="a_floatbox" href="portfolio_4.html"><small>jQuery UI</small></a><br>
+		<a class="a_floatbox" href="portfolio_5.html"><small>AJAX Chart</small></a><br>
+		<a class="a_floatbox" href="index.html">-</a>
+
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		<a class="a_floatbox" href="index.html#about-us"><b>About</b></a><br>
+		<a class="a_floatbox" href="index.html#contact-us"><b>Contact</b></a>
+		<hr class="hr_css">
+	</div>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

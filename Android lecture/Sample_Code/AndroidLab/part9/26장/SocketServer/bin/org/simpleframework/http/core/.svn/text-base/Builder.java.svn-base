@@ -1,0 +1,53 @@
+/*
+ * Builder.java February 2007
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+/**
+ * The <code>Builder</code> object is used to build and entity from
+ * its constituent parts. Each component of the entity is provided
+ * to the builder once they have been extracted from the connected
+ * pipeline. Once all parts have been acquired by the builder the
+ * entity is ready to used to process the request.
+ * 
+ * @author Niall Gallagher
+ */
+interface Builder extends Entity {
+   
+   /**
+    * Provides the <code>Body</code> object for the builder. This 
+    * is used by the entity to read the content of the HTTP request.
+    * Also, if the entity body is a multipart upload then each of
+    * the individual parts of the body is available to read from. 
+    * 
+    * @param body this is the entity body provided by the request
+    */ 
+   public void setBody(Body body);
+   
+   /**
+    * Provides the <code>Header</code> object for the builder. This
+    * is used by the entity to determine the request URI and method
+    * type. The header also provides start in the form of cookies
+    * which can be used to track the client.
+    * 
+    * @param header this is the header provided by the request
+    */
+   public void setHeader(Header header);
+}

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>움짤만들기</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!--  안녕하세요-->
+	<style>
+	.stylediv {
+	    float: left;
+	    width: 300px;
+	    height: 170px;
+	    margin: 10px;
+	    padding: 10px;
+	    border: 1px solid black;
+	}
+	
+	#size{
+		margin-left: 10px;
+		width: 290px;
+	}
+	
+	#list{
+			float:left;
+			width: 200px;		
+			height: 300px;
+			overflow: scroll;
+			border: 2px solid black;
+		
+	}
+		
+		
+	#play{
+		float:left;
+		width: 500px;		
+		height: 300px;
+		border: 2px solid black;
+	}
+		
+	video{
+		width: 90%;
+		margin: 10px;
+	}
+	</style>
+	
+	<script type="text/javascript">
+	
+/* 스크린샷 움짤 */
+	window.onload = function() {
+		var i = 1;
+		var j = 1;
+		document.getElementById("btn").onclick = function(){ //스크린샷 버튼 클릭
+		   	var canvars = document.createElement("canvas"); //캔버스생성
+		   	canvars.setAttribute("id", "myCanvas"+j); //id명 생성
+		   	j++;
+		   	
+		   	var vid = document.getElementById($("#screendiv > video").attr('id')); //vid 가져오기
+		   	canvars.getContext("2d").drawImage(vid, 10,10,295,160); //스크린샷~~
+		   	
+		   	var btn = document.createElement("button"); //input 생성
+		   	
+		   	btn.setAttribute("type", "button"); //type은 버튼
+		   	btn.setAttribute("onclick", "del("+i+")"); //type은 버튼
+		   	btn.setAttribute("id", "size");
+		   	btn.setAttribute("class", "btn btn-primary"); //클래스 css설정
+		   	
+		   	var span = document.createElement("span"); //span 생성
+		   	span.setAttribute("class", "glyphicon glyphicon-trash"); //span속성
+		   	
+		   	var childdiv = document.createElement("div"); //div 생성 (childdiv)
+		   	childdiv.setAttribute("id", "childdiv"+i); //id = childdiv+i
+		   	childdiv.setAttribute("style", "float: left;"); //float로 띄우기
+		   	childdiv.setAttribute("class", "btn-group-vertical"); //부트스트렙
+		   	
+		   	i++; //생성 될 때마다 id번호 ++
+		   	
+		   	var parentdiv = document.getElementById("parentdiv"); //parentdiv 가져오기
+		   	
+		   	btn.appendChild(span); //버튼의 자식 
+		   	
+		   	childdiv.appendChild(canvars); //childdiv의 자식 캔퍼스 생성
+		   	childdiv.appendChild(btn); //캔퍼스와 형제 버튼 생성
+		   	
+		   	parentdiv.appendChild(childdiv); //parentdiv 자식 appendChild넣기
+	    }
+		
+		/*
+		setInterval() -> 여러번
+		setTimeout() -> 한번
+		기본 javascript 자원과 jquery 혼용
+		*/
+		var canarr = []; //배열생성
+		var myVar;
+		document.getElementById("btnmove").onclick = function(){ //버튼클릭
+			
+			clearInterval(myVar); //setInterval 스탑
+			
+            /*
+			for(k = 0; k<=canarr.length; k++){ // 움짤만들기 눌렀을 때 배열 값을 pop() 시키고 다시 생성
+				canarr.pop();	// pop()해준다.
+			}
+            */
+			canarr = []; //초기화 간단한 방법
+			
+			var number = 0; //배열 인덱스
+			for(k = 1; k <= j; k++){ //배열 push
+				if(document.getElementById("myCanvas"+k) != null){ //만약 스크린샷을 찍고 삭제한게 있을 수 있기 때문
+					canarr.push(document.getElementById("myCanvas"+k)); //스크린샷 찍은 것들을 배열에 push
+				}
+			}
+			
+			if(canarr.length == 0){ //스크린샷 찍은 것이 없다면
+				alert("스크린샷이 없습니다.");
+			}else{
+				myVar = setInterval(function() { //사진 바뀌는 곳
+					var canvas = document.getElementById("canmove"); //캔버스
+					canvas.getContext("2d").drawImage(canarr[number], 10, 10); //캔버스에 이미지를 그리다
+					number++;
+					if(number >= canarr.length){
+						number = 0; //계속 돌아갈 수 있게
+					}
+				}, $("#speed > option:selected").val());
+			}
+		}
+		
+		document.getElementById("btnremove").onclick = function(){ //전체삭제
+			$("#parentdiv > ").remove("div");  // parentdiv 자식 div들을 다 지운다
+		}
+	}
+	
+	function del(number){ //삭제
+		var childdiv = document.getElementById("childdiv"+number); //자식div
+		var parentdiv = document.getElementById("parentdiv"); //부모div
+		
+		parentdiv.removeChild(childdiv); //부모div의 자식 자식div를 삭제한다
+	}
+/* 드래그앤 드랍 */
+	function allowDrop(ev) {
+	    ev.preventDefault();
+	}
+	
+	function drag(ev) {
+	    ev.dataTransfer.setData("text", ev.target.id);
+	}
+	
+	function drop(ev) {
+		if( $("#screendiv > video").is('video') == false){ //스크린div 안에 video 가 없을때만 넣을 수 있다.
+		    ev.preventDefault();
+		    var data = ev.dataTransfer.getData("text");
+		    ev.target.appendChild(document.getElementById(data));
+		} 
+	}
+	
+	function playVideo(ev){
+		document.getElementById("screendiv").appendChild(ev.target);
+		ev.target.setAttribute("controls", "controls");
+	}
+	
+	
+	function stopVid(ev){
+		$("#screendiv > video").appendTo('#list').removeAttr("controls"); //스크린div 안에 video 를 list에 복사한다. 컨트롤속성 제거
+	}
+	
+/* 업로드 */
+	var files_selected;	
+		
+	var index =0;
+	$(document).ready(function () {
+		$("#input_img").on("change",selectFile);
+		
+/* url로 업로드 하기 */
+		$('#addurl').click(function(){
+	 		//console.log("url"+$('#vidurl').val()); url잘 찍히는지 확인
+	 		
+	 		var vid = document.createElement("video");
+	 		vid.setAttribute("id", "vid" + index);
+	 		/* vid.setAttribute("width", "300");
+		 	vid.setAttribute("draggable", "true");
+		 	vid.setAttribute("ondragstart", "drag(event)"); */
+		 	$(vid).attr({
+				 		"id":"vid" + index,
+				 		"width": "300",
+				 		"draggable": "true",
+				 		"ondragstart": "drag(event)",
+				 		"src":$('#vidurl').val()
+		 				});
+	 		index++;
+		 	
+		 	$('#list').append(vid);
+	 	});
+	});
+	
+/* 파일로 업로드 하기 */
+	function selectFile(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);	
+		
+	 	filesArr.forEach(function(f) {
+			files_selected= f;
+			var reader = new FileReader();
+			
+		reader.onload = function(e){
+		 	var div = document.getElementById("list"); //list div
+		 	var vid = document.createElement("video"); //업로드했을 시 video 생성
+		 	$(vid).attr({
+				 		"id":"vid" + index,
+				 		"width": "300",
+				 		"draggable": "true",
+				 		"ondragstart": "drag(event)",
+				 		"src": e.target.result
+		 				});
+		 	index ++;
+			$('#list').append(vid);
+		}
+		reader.readAsDataURL(f);
+			
+		reader.readAsDataURL(f);
+		});
+	}
+ 
+</script>
+</head>
+<body>
+
+<input type= "text" id = "vidurl" value= "http://tomtom2k5.free.fr/mkv/720p/star.wars.episode.ii.attack.of.the.clones.2002.720p.hdtv.x264.internal.sample-hv.mkv">
+<input type = "button" id ="addurl" class="btn btn-primary" value="URL영상 추가">
+
+<form id = frm>
+	<div>
+		<h2> 이미지 업로드 </h2>
+		<input type ="file" id ="input_img" draggable="true">
+		
+	</div>
+
+	<div id = "list" class="well">
+		
+	</div>
+	
+	<div class="stylediv well" id="screendiv" ondrop="drop(event)" ondragend="playVideo(event)" ondragleave="stopVid(event)" ondragover="allowDrop(event)" >
+	</div>
+	
+	<div class="btn-group-vertical">
+		<button type="button" id="btn" class="btn btn-primary"><span class="glyphicon glyphicon-camera"></span>&nbsp;&nbsp;스크린샷&nbsp;&nbsp;</button>
+		<button type="button" id="btnmove" class="btn btn-primary"><span class="glyphicon glyphicon-facetime-video"></span> 움짤플레이</button>
+		<select id="speed" class="form-control">
+			<option value="50">초고속</option>
+			<option value="200" selected="selected">고속</option>
+			<option value="800">저속</option>
+			<option value="2000">거북이</option>
+		</select>
+	</div>
+		
+	<div id="movediv" style="float:right;">
+		<canvas id="canmove"></canvas>
+	</div>
+	<hr style="clear: both;">
+	<p>캡처 된 사진 <button type="button" id="btnremove" class="btn btn=parimary"><span class="glyphicon glyphicon-trash"></span>전체지우기</button></p>
+	<div id="parentdiv"></div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+	<link rel="stylesheet" href="css/main.css">  
+	<script src="js/tooltip.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+
+<script>
+$( function() {
+    $( "#dialog" ).dialog({
+      width : 1280,
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "blind",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  
+  
+    $('[data-toggle="tooltip"]').tooltip();
+  
+  });
+
+
+
+var w;
+var w2;
+var w3;
+var rank = 0;
+
+     
+     //worker1 생성
+	function startWorker() {
+		if(typeof(Worker) !== "undefined") {
+			if(typeof(w) == "undefined") {
+				w = new Worker("workers_demo4.js");
+			}
+			w.onmessage = function(event) {
+	           	$('#pg1').css('width',event.data +'%');
+                if(event.data>=100){
+                	rank += 1;
+                    if(rank==1){
+                    	$('#res1').append('<h2>1등 : [1번말]</h2>');
+                    }else if(rank==2){
+                    	$('#res2').append('<h3>2등 : [1번말]</h3>');
+                    }else if(rank==3){
+                    	$('#res3').append('<h4>3등 : [1번말]</h4>');
+                    	rank=0;
+                    }
+                    w.terminate();
+                    w = undefined;
+                }
+           	};
+         }else{
+              document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+         }
+     }
+	
+      //worker2 생성
+      function startWorker2() {
+          if(typeof(Worker) !== "undefined") {
+              if(typeof(w2) == "undefined") {
+                  w2 = new Worker("workers_demo5.js");
+              }
+              w2.onmessage = function(event) {
+  	           	$('#pg2').css('width',event.data +'%');
+                  if(event.data>=100){
+                	  rank +=1;
+                      if(rank==1){
+                      	$('#res1').append('<h2>1등 : [2번말]</h2>');
+                      }else if(rank==2){
+                      	$('#res2').append('<h3>2등 : [2번말]</h3>');
+                      }else if(rank==3){
+                      	$('#res3').append('<h4>3등 : [2번말]</h4>');
+                      	rank=0;
+                      }
+                      w2.terminate();
+                      w2 = undefined;
+                  }
+              };
+          } else {
+              document.getElementById("result2").innerHTML = "Sorry, your browser does not support Web Workers...";
+          }
+      }
+      
+      //worker3 생성
+      function startWorker3() {
+          if(typeof(Worker) !== "undefined") {
+              if(typeof(w3) == "undefined") {
+                  w3 = new Worker("workers_demo6.js");
+              }
+              w3.onmessage = function(event) {
+  	           	$('#pg3').css('width',event.data +'%');
+                  if(event.data>=100){
+                	  rank +=1;
+                      if(rank ==1){
+                      	$('#res1').append('<h2>1등 : [3번말]</h2>')
+                      }else if(rank ==2){
+                      	$('#res2').append('<h3>2등 : [3번말]</h3>');
+                      }else if(rank ==3){
+                      	$('#res3').append('<h4>3등 : [3번말]</h4>');
+                      	rank =0;
+                      }
+                      w3.terminate();
+                      w3 = undefined;
+                  }
+              };
+          } else {
+              document.getElementById("result3").innerHTML = "Sorry, your browser does not support Web Workers...";
+          }
+      }
+
+</script>
+</head>
+<body>
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Main</a></li>
+        <li><a href="GeoLocation.html">GeoLocation</a></li>
+        <li><a href="Drag_Drop.html">Drag & Drop</a></li>
+        <li><a href="LocalStorage.html">LocalStorage</a></li>
+        <li><a href="SSE.html">SSE</a></li>
+        <li class="active"><a href="Web_Worker.html">Web Worker</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li><a href="Member.html"><span class="glyphicon glyphicon glyphicon-user"></span> 4조 조원보기</a></li>
+        <li><a href="Login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="index.html">Main</a></p>
+      <br/>
+      <p><a href="GeoLocation.html" data-toggle="tooltip" title="위치를 알고싶어요">Geo Location</a></p>
+      <br/>
+      <p><a href="Drag_Drop.html" data-toggle="tooltip2" title="퍼즐을 맞춰볼까요?">Drag & Drop</a></p>
+      <br/>
+      <p><a href="LocalStorage.html" data-toggle="tooltip3" title="자동 저장이 됩니다.">LocalStorage</a></p>
+      <br/>
+      <p><a href="SSE.html" data-toggle="tooltip4" title="서버로부터 자동으로 무언가가 내려와요">SSE</a></p>
+      <br/>
+      <p><a href="Web_Worker.html" data-toggle="tooltip5" title="MyWay 나만의 길을 가는 일꾼">Web Worker</a></p>
+    </div> <!--왼쪽 싸이드 메뉴 디브-->
+
+<div class="col-sm-10 mainDiv">
+
+<div class="container">
+	
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-3">
+		<h1>Web_Worker</h1>
+		</div>
+		<div class="col-sm-2">
+		<button type="button" class="btn btn-info" style="position: absolute; margin-top: 10px" id="opener" id="opener">PT보기</button>
+		</div>
+		<div class="col-sm-1"></div>
+		<div class="col-sm-1"></div>
+	</div>
+	
+	<hr/>
+	<h3>경마게임</h3>
+	<hr>
+	[1번 말 ]<output id="result"></output>
+	  <div class="progress">
+    <div id="pg1" class="progress-bar progress-bar-success" role="progressbar" style="width:0%">
+      [1번 말 ]
+    </div>
+      </div>
+	<br>
+	[2번 말 ]<output id="result2"></output>
+	  <div class="progress">
+    <div id="pg2" class="progress-bar progress-bar-info" role="progressbar" style="width:0%">
+      [2번 말 ]
+    </div>
+  </div>
+	<br>
+    [3번 말 ]<output id="result3"></output>
+      <div class="progress">
+    <div id="pg3" class="progress-bar progress-bar-warning" role="progressbar" style="width:0%">
+      [3번 말 ]
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+    <!--  -------------------------------- -->
+	<div class="container">
+    	<div class="row">
+		    <div class="col-sm-3"></div>
+		    <button type="button" class="btn btn-info" onclick="startWorker()">1번말 시작!</button>
+		    <button type="button" class="btn btn-info" onclick="startWorker2()">2번말 시작!</button>
+		    <button type="button" class="btn btn-info" onclick="startWorker3()">3번말 시작!</button>
+		    
+    	</div>
+    </div>
+    
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-5" id='res1'></div>
+    <div class="col-sm-5" id='res2'></div>
+    <div class="col-sm-2" id='res3'></div>
+    </div>
+</div>
+</div><!--센터부분 전체 디브-->
+
+
+
+
+<div id="dialog" title="WebWorker">
+  	
+  	
+  	               
+      <div class="w3-content w3-display-container" style="max-width:1920px">
+        <img class="mySlides" src="images/01.jpg" style="width:100%">
+        <img class="mySlides" src="images/02.jpg" style="width:100%">
+        <img class="mySlides" src="images/03.jpg" style="width:100%">
+        <img class="mySlides" src="images/04.jpg" style="width:100%">
+        <img class="mySlides" src="images/05.jpg" style="width:100%">
+        <img class="mySlides" src="images/06.jpg" style="width:100%">
+        <img class="mySlides" src="images/07.jpg" style="width:100%">
+        <div class="w3-center w3-section w3-large w3-text-white w3-display-bottomleft" style="width:100%">
+          <div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+          <div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        </div>
+      </div>         
+</div>
+  	
+
+
+
+   <script>/*슬라이드쇼 */
+      var slideIndex = 1;
+      showDivs(slideIndex);
+         
+      function plusDivs(n) {
+        showDivs(slideIndex += n);
+      }
+      
+      function currentDiv(n) {
+        showDivs(slideIndex = n);
+      }
+         
+      function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+         if (n > x.length) {slideIndex = 1}
+         if (n < 1) {slideIndex = x.length}
+         for (i = 0; i < x.length; i++) {
+              x[i].style.display = "none";
+         }
+          for (i = 0; i < dots.length; i++) {
+             dots[i].className = dots[i].className.replace(" w3-white", "");
+         }
+         x[slideIndex-1].style.display = "block";
+         dots[slideIndex-1].className += " w3-white";
+      }
+   </script>
+
+</body>
+</html>

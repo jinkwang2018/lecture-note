@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	/* 
+		아래 JSON 객체에서 m이라는 속성 image 파일을 출력하세요
+		https://www.flickr.com/services/api/
+		http://api.flickr.com/services/feeds/photos_public.gne?tags=raccoon&tagmode=any&format=json&jsoncallback=?
+    */
+   var data = {
+				"title": "Recent Uploads tagged raccoon",
+				"link": "http:\/\/www.flickr.com\/photos\/tags\/raccoon\/",
+				"description": "",
+				"modified": "2018-03-14T01:00:45Z",
+				"generator": "http:\/\/www.flickr.com",
+				"items": [ //배열 안의 media 객체의 m을 뽑아내면 된다. http:\/\/farm5.staticflickr.com\/4782\/40797274301_b4fe4a9e46_m.jpg 
+							//img 태그를 동적으로 생성해서 img 태그의  src = http:\/\/farm5.staticflickr.com\/4782\/40797274301_b4fe4a9e46_m.jpg
+							//body append하는 형태이다.
+						   {
+								"title": "Raccoon June 2017",
+								"link": "http:\/\/www.flickr.com\/photos\/11799527@N08\/40797274301\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4782\/40797274301_b4fe4a9e46_m.jpg"},
+								"date_taken": "2017-06-04T12:05:13-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/11799527@N08\/\">coomare<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/11799527@N08\/40797274301\/\" title=\"Raccoon June 2017\"><img src=\"http:\/\/farm5.staticflickr.com\/4782\/40797274301_b4fe4a9e46_m.jpg\" width=\"240\" height=\"232\" alt=\"Raccoon June 2017\" \/><\/a><\/p> <p>Procyon lotor<br \/> Memorial Lake State Park <br \/> Lebanon Co PA <br \/> 20170604-IMG_8142-2.jpg<\/p>",
+								"published": "2018-03-14T01:00:45Z",
+								"author": "nobody@flickr.com (\"coomare\")",
+								"author_id": "11799527@N08",
+								"tags": "lebanoncounty memoriallakestatepark pastatepark pennsylvania animal raccoon"
+						   }
+						   ,
+						   {
+								"title": "Raccoon June 2017",
+								"link": "http:\/\/www.flickr.com\/photos\/11799527@N08\/40087668354\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4795\/40087668354_182755da94_m.jpg"},
+								"date_taken": "2017-06-04T12:02:03-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/11799527@N08\/\">coomare<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/11799527@N08\/40087668354\/\" title=\"Raccoon June 2017\"><img src=\"http:\/\/farm5.staticflickr.com\/4795\/40087668354_182755da94_m.jpg\" width=\"240\" height=\"163\" alt=\"Raccoon June 2017\" \/><\/a><\/p> <p>Procyon lotor<br \/> Memorial Lake State Park <br \/> Lebanon Co PA <br \/> 20170604-IMG_8103-2.jpg<\/p>",
+								"published": "2018-03-14T01:00:39Z",
+								"author": "nobody@flickr.com (\"coomare\")",
+								"author_id": "11799527@N08",
+								"tags": "lebanoncounty memoriallakestatepark pastatepark pennsylvania animal raccoon"
+						   },
+						   {
+								"title": "raccoon co-pilot",
+								"link": "http:\/\/www.flickr.com\/photos\/yutakaseki\/38981852460\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4786\/38981852460_32628cd80e_m.jpg"},
+								"date_taken": "2018-03-10T13:43:15-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/yutakaseki\/\">Yutaka Seki<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/yutakaseki\/38981852460\/\" title=\"raccoon co-pilot\"><img src=\"http:\/\/farm5.staticflickr.com\/4786\/38981852460_32628cd80e_m.jpg\" width=\"240\" height=\"149\" alt=\"raccoon co-pilot\" \/><\/a><\/p> <p>Pentax K1000 SE, Tamron Adaptall-2 90mm f\/2.5, Fujicolor C200, Unicolor<\/p>",
+								"published": "2018-03-13T18:26:39Z",
+								"author": "nobody@flickr.com (\"Yutaka Seki\")",
+								"author_id": "116451027@N08",
+								"tags": "pentaxk1000 fujicolorc200 homedeveloped unicolorpresskit film analogue tamronsp90mmf25 toyota tercel mirror plush tail raccoon"
+						   },
+						   {
+								"title": "021018095725asmweb",
+								"link": "http:\/\/www.flickr.com\/photos\/ecwillet\/40784405731\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4791\/40784405731_27cc6a3782_m.jpg"},
+								"date_taken": "2018-02-06T10:14:09-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/ecwillet\/\">ecwillet<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/ecwillet\/40784405731\/\" title=\"021018095725asmweb\"><img src=\"http:\/\/farm5.staticflickr.com\/4791\/40784405731_27cc6a3782_m.jpg\" width=\"240\" height=\"185\" alt=\"021018095725asmweb\" \/><\/a><\/p> ",
+								"published": "2018-03-13T10:16:05Z",
+								"author": "nobody@flickr.com (\"ecwillet\")",
+								"author_id": "98365237@N08",
+								"tags": "raccoon nikon nikond500 nikon200500f56 ecwillet ericwillet"
+						   },
+						   {
+								"title": "Hello, Little Buddy",
+								"link": "http:\/\/www.flickr.com\/photos\/arait\/40737743512\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4773\/40737743512_b87af4b07b_m.jpg"},
+								"date_taken": "2018-03-10T19:30:32-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/arait\/\">Tiara Rae Photography<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/arait\/40737743512\/\" title=\"Hello, Little Buddy\"><img src=\"http:\/\/farm5.staticflickr.com\/4773\/40737743512_b87af4b07b_m.jpg\" width=\"240\" height=\"165\" alt=\"Hello, Little Buddy\" \/><\/a><\/p> ",
+								"published": "2018-03-13T03:24:33Z",
+								"author": "nobody@flickr.com (\"Tiara Rae Photography\")",
+								"author_id": "40451611@N07",
+								"tags": "raccoon trash panda animal wildlife tree cottonwood omaha nebraska walnut grove park nature"
+						   },
+						   {
+								"title": "SAMSUNG CAMERA PICTURES",
+								"link": "http:\/\/www.flickr.com\/photos\/93043371@N06\/40724000402\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4794\/40724000402_a1a3d52f83_m.jpg"},
+								"date_taken": "2018-03-11T18:40:17-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/93043371@N06\/\">DOMI NO<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/93043371@N06\/40724000402\/\" title=\"SAMSUNG CAMERA PICTURES\"><img src=\"http:\/\/farm5.staticflickr.com\/4794\/40724000402_a1a3d52f83_m.jpg\" width=\"240\" height=\"198\" alt=\"SAMSUNG CAMERA PICTURES\" \/><\/a><\/p> <p>RACCOON DOLL NINA<\/p>",
+								"published": "2018-03-12T12:15:54Z",
+								"author": "nobody@flickr.com (\"DOMI NO\")",
+								"author_id": "93043371@N06",
+								"tags": "raccoon doll bjd ninafashion nina"
+						   },
+						   {
+								"title": "RACCOONDOLL4",
+								"link": "http:\/\/www.flickr.com\/photos\/93043371@N06\/38955799400\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4780\/38955799400_60e7423402_m.jpg"},
+								"date_taken": "2018-03-11T18:42:02-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/93043371@N06\/\">DOMI NO<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/93043371@N06\/38955799400\/\" title=\"RACCOONDOLL4\"><img src=\"http:\/\/farm5.staticflickr.com\/4780\/38955799400_60e7423402_m.jpg\" width=\"240\" height=\"240\" alt=\"RACCOONDOLL4\" \/><\/a><\/p> <p>RACCOON DOLL NINA<\/p>",
+								"published": "2018-03-12T12:15:55Z",
+								"author": "nobody@flickr.com (\"DOMI NO\")",
+								"author_id": "93043371@N06",
+								"tags": "raccoon dollnina fashion doll bjd"
+						   },
+						   {
+								"title": "False colored crafty raccoon",
+								"link": "http:\/\/www.flickr.com\/photos\/moggafogga\/25880841987\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4781\/25880841987_11a8f5185e_m.jpg"},
+								"date_taken": "2018-03-11T13:01:15-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/moggafogga\/\">moggafogga<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/moggafogga\/25880841987\/\" title=\"False colored crafty raccoon\"><img src=\"http:\/\/farm5.staticflickr.com\/4781\/25880841987_11a8f5185e_m.jpg\" width=\"240\" height=\"159\" alt=\"False colored crafty raccoon\" \/><\/a><\/p> <p>The raccoon became an integral part of the German fauna, but this one is an animal in a local <br \/> wildlife park.<br \/> <br \/> <b>filter:<\/b> Heliopan RG645<\/p>",
+								"published": "2018-03-11T18:53:18Z",
+								"author": "nobody@flickr.com (\"moggafogga\")",
+								"author_id": "101677306@N03",
+								"tags": "infrared heliopan infrarot filter falsecolor raccoon animal"
+						   },
+						   {
+								"title": "raccoon near Lime Springs IA 854A4245",
+								"link": "http:\/\/www.flickr.com\/photos\/122545282@N04\/26866723178\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4786\/26866723178_dab814c26f_m.jpg"},
+								"date_taken": "2018-03-10T16:13:55-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/122545282@N04\/\">lreis_naturalist<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/122545282@N04\/26866723178\/\" title=\"raccoon near Lime Springs IA 854A4245\"><img src=\"http:\/\/farm5.staticflickr.com\/4786\/26866723178_dab814c26f_m.jpg\" width=\"240\" height=\"155\" alt=\"raccoon near Lime Springs IA 854A4245\" \/><\/a><\/p> <p>This raccoon was not real happy when I cornered it out in a CRP field. In fact, it charged me about two seconds after I snapped this shot. Luckily, the snow was deep and my legs were longer than his as I beat a hasty retreat.<\/p>",
+								"published": "2018-03-11T02:55:47Z",
+								"author": "nobody@flickr.com (\"lreis_naturalist\")",
+								"author_id": "122545282@N04",
+								"tags": "raccoon snow lime springs howard county iowa larry reis"
+						   },
+						   {
+								"title": "Little Clam Digger!",
+								"link": "http:\/\/www.flickr.com\/photos\/sjmeagles\/38926954040\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4780\/38926954040_e4158725f0_m.jpg"},
+								"date_taken": "2018-03-10T01:59:31-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/sjmeagles\/\">Skip McCracken<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/sjmeagles\/38926954040\/\" title=\"Little Clam Digger!\"><img src=\"http:\/\/farm5.staticflickr.com\/4780\/38926954040_e4158725f0_m.jpg\" width=\"200\" height=\"240\" alt=\"Little Clam Digger!\" \/><\/a><\/p> ",
+								"published": "2018-03-11T01:43:11Z",
+								"author": "nobody@flickr.com (\"Skip McCracken\")",
+								"author_id": "146409145@N06",
+								"tags": "raccoon nikond500 animal wildlife nature water nikkor fur"
+						   },
+						   {
+								"title": "Fat Cat",
+								"link": "http:\/\/www.flickr.com\/photos\/blazer8696\/39840387995\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4775\/39840387995_cb098af7c5_m.jpg"},
+								"date_taken": "2018-03-05T20:54:49-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/blazer8696\/\">blazer8696<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/blazer8696\/39840387995\/\" title=\"Fat Cat\"><img src=\"http:\/\/farm5.staticflickr.com\/4775\/39840387995_cb098af7c5_m.jpg\" width=\"240\" height=\"135\" alt=\"Fat Cat\" \/><\/a><\/p> <p>Fat cat with a funny tail.<\/p>",
+								"published": "2018-03-10T23:08:58Z",
+								"author": "nobody@flickr.com (\"blazer8696\")",
+								"author_id": "18331229@N03",
+								"tags": "2018 american brookfield ct connecticut ecw north northamerican obtusehill procyon procyonlotor stickcorner t2018 usa unitedstates common coon lotor raccoon"
+						   },
+						   {
+								"title": "Nighttime Bandit",
+								"link": "http:\/\/www.flickr.com\/photos\/137583729@N06\/40024129504\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4798\/40024129504_5e547564d6_m.jpg"},
+								"date_taken": "2018-03-09T20:53:49-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/137583729@N06\/\">SPults<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/137583729@N06\/40024129504\/\" title=\"Nighttime Bandit\"><img src=\"http:\/\/farm5.staticflickr.com\/4798\/40024129504_5e547564d6_m.jpg\" width=\"160\" height=\"240\" alt=\"Nighttime Bandit\" \/><\/a><\/p> ",
+								"published": "2018-03-10T21:46:23Z",
+								"author": "nobody@flickr.com (\"SPults\")",
+								"author_id": "137583729@N06",
+								"tags": "animals wildlife nature night raccoon"
+						   },
+						   {
+								"title": "Rocket Raccoon avengers infinity war",
+								"link": "http:\/\/www.flickr.com\/photos\/readslegocustoms\/25855617817\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4781\/25855617817_954f8b03d1_m.jpg"},
+								"date_taken": "2018-03-10T13:44:07-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/readslegocustoms\/\">The Customiser<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/readslegocustoms\/25855617817\/\" title=\"Rocket Raccoon avengers infinity war\"><img src=\"http:\/\/farm5.staticflickr.com\/4781\/25855617817_954f8b03d1_m.jpg\" width=\"240\" height=\"164\" alt=\"Rocket Raccoon avengers infinity war\" \/><\/a><\/p> <p>my custom lego avengers infinity war rocket raccoon!!<br \/> i took inspiration from wavy films' rocket raccoon and tried to sculpt and paint my own one using a microfigure!!<br \/> <br \/> <br \/> let me know what you think in the comments<\/p>",
+								"published": "2018-03-10T13:58:21Z",
+								"author": "nobody@flickr.com (\"The Customiser\")",
+								"author_id": "146407740@N02",
+								"tags": "lego custom hand painted avengers infinity war minifigure rocket raccoon guardians galaxy"
+						   },
+						   {
+								"title": "Raccoon",
+								"link": "http:\/\/www.flickr.com\/photos\/good-fisherman\/40015425884\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4794\/40015425884_2e767ba452_m.jpg"},
+								"date_taken": "2017-05-21T14:37:33-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/good-fisherman\/\">good.fisherman<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/good-fisherman\/40015425884\/\" title=\"Raccoon\"><img src=\"http:\/\/farm5.staticflickr.com\/4794\/40015425884_2e767ba452_m.jpg\" width=\"240\" height=\"160\" alt=\"Raccoon\" \/><\/a><\/p> ",
+								"published": "2018-03-10T12:17:54Z",
+								"author": "nobody@flickr.com (\"good.fisherman\")",
+								"author_id": "145255673@N04",
+								"tags": "zoo ani animals wildlife raccoon"
+						   },
+						   {
+								"title": "American Ten Thousand Islands Raccoons in the Mangrove swamp",
+								"link": "http:\/\/www.flickr.com\/photos\/kitmasterbloke\/40711096301\/",
+								"media": {"m":"http:\/\/farm5.staticflickr.com\/4783\/40711096301_e97a967536_m.jpg"},
+								"date_taken": "2018-03-09T16:42:43-08:00",
+								"description": " <p><a href=\"http:\/\/www.flickr.com\/people\/kitmasterbloke\/\">kitmasterbloke<\/a> posted a photo:<\/p> <p><a href=\"http:\/\/www.flickr.com\/photos\/kitmasterbloke\/40711096301\/\" title=\"American Ten Thousand Islands Raccoons in the Mangrove swamp\"><img src=\"http:\/\/farm5.staticflickr.com\/4783\/40711096301_e97a967536_m.jpg\" width=\"240\" height=\"164\" alt=\"American Ten Thousand Islands Raccoons in the Mangrove swamp\" \/><\/a><\/p> <p>Slightly unexpected, this family of Raccoons live amidst the dense Mangrove swamps of the Florida Everglades. The eat shellfish, fish and other animals that get deposited in the mangrove roots as the tide recedes. But, being mammals, they must drink fresh water, which they get every morning from dew on the leaves of the tallest Mangroves..The Ten Thousand Islands Raccoon is a recognised sub-species of the North American Raccoon.<\/p>",
+								"published": "2018-03-09T16:47:10Z",
+								"author": "nobody@flickr.com (\"kitmasterbloke\")",
+								"author_id": "58415659@N00",
+								"tags": "raccoon mangrove everglades swamp animal mammal usa outdoor nature wildlife"
+						   }
+		      			 ]
+				}
+   		
+		window.onload = function(){
+			var arr = [];
+			for(var index in (data.items)){
+				arr.push((data.items)[index].media.m);
+				}	
+			
+			/*
+			for(var index in arr){
+				var img = document.createElement("img");
+				img.setAttribute("src",arr[index]);
+				document.body.appendChild(img);
+			}*/
+			
+		
+		var img = document.getElementById("imgs");	
+		//이전 구현
+		var prvele = document.getElementById("prv");
+		prvele.onclick = function(){
+		if(index == 0){
+				img.src = arr[arr.length-1];
+				index = arr.length-1;
+			}else{
+				img.src = arr[index-1];
+				index = index-1;
+			}
+		}	
+		
+		//다음 구현
+		var nextele = document.getElementById("next");
+		nextele.onclick = function(){ 
+			if(index == arr.length-1){
+				img.src = arr[0];
+				index = 0;
+			}else{
+				img.src = arr[index+1];
+				index = index+1;
+			}
+		}	
+		/*
+		for(var key in value){
+			value += value[key];
+		};
+		*/
+	};
+		
+	</script>
+</head>
+<body>
+	<h3>DOM 슬라이드</h3>
+		<img src = "http:\/\/farm5.staticflickr.com\/4782\/40797274301_b4fe4a9e46_m.jpg" id = "imgs" width = "200" height = "200" alt = "이미지">
+		<hr>
+		<a href = "#" id = "prv">이전</a> || <a href = "#" id = "next">다음</a>
+</body>
+</html>

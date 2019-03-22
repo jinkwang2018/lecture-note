@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery UI Accordion - Default functionality</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #336688; }
+  #selectable .ui-selected { background: #336699; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 0.8em; height: 18px; }
+ </style>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+	$(function() {
+		$("#accordion").accordion();
+	});
+
+	$(function() {
+		$("#tabs").tabs();
+	});
+	
+	$(function() {
+		$("#selectable").selectable();
+	});
+</script>
+</head>
+<body>
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">경기일정</a></li>
+			<li><a href="#tabs-2">구단순위</a></li>
+			<li><a href="#tabs-3">선수순위</a></li>
+		</ul>
+		<div id="tabs-1">
+			<div id="accordion">
+				<h3>2018-03-17 (토)</h3>
+				<div>
+					<p>21:15</p>
+					<p>토트넘 : 스완지</p>
+					<p>잉글랜드 FA컵</p>
+				</div>
+
+				<h3>2018-03-12 (월)</h3>
+				<div>
+					<p>01:00</p>
+					<p>토트넘 : 본머스</p>
+					<p>프리미어리그</p>
+				</div>
+
+				<h3>2018-03-08 (목)</h3>
+				<div>
+					<p>04:45</p>
+					<p>토트넘 : 유벤투스</p>
+					<p>UEFA 챔피언스리그</p>
+				</div>
+
+				<h3>2018-03-04 (일)</h3>
+				<div>
+					<p>04:45</p>
+					<p>토트넘 : 허더즈필드 타운</p>
+					<p>프리미어 리그</p>
+				</div>
+
+				<h3>2018-03-01 (목)</h3>
+				<div>
+					<p>04:45</p>
+					<p>토트넘 : 로치데일</p>
+					<p>잉글랜드 FA컵</p>
+				</div>
+			</div>
+		</div>
+		<div id="tabs-2">
+			<ol id="selectable">
+			  <li class="ui-widget-content">1<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F84%2F59%2F06%2F146_2845906_team_image_url_1467618027703.jpg">맨시티</li>
+			  <li class="ui-widget-content">2<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F33%2F04%2F146_100303304_team_image_url_1435202334744.jpg"> 맨유</li>
+			  <li class="ui-widget-content">3<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F33%2F06%2F146_100303306_team_image_url_1435203455036.jpg"> 리버풀</li>
+			  <li class="ui-widget-content">4<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F33%2F05%2F146_100303305_team_image_url_1435202894494.jpg"> 토트넘</li>
+			  <li class="ui-widget-content">5<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F32%2F93%2F146_100303293_team_image_url_1435195031845.jpg"> 첼시</li>
+			  <li class="ui-widget-content">6<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F33%2F02%2F146_100303302_team_image_url_1435201937372.jpg"> 아스널</li>
+			  <li class="ui-widget-content">7<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F84%2F15%2F146_100308415_team_image_url_1435300363674.jpg"> 번리</li>
+			  <li class="ui-widget-content">8<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F33%2F25%2F146_100303325_team_image_url_1435215466289.jpg"> 레스터</li>
+			  <li class="ui-widget-content">9<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F30%2F33%2F14%2F146_100303314_team_image_url_1435212319290.jpg"> 에버턴</li>
+			  <li class="ui-widget-content">10<img src="https://search.pstatic.net/common?type=o&size=28x21&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F146%2F32%2F92%2F28%2F146_100329228_team_image_url_1435634480355.jpg"> 본머스</li>
+			</ol>
+		</div>
+		<div id="tabs-3">
+			<ol id="selectable">
+			  <li class="ui-widget-content">1 해리 케인/득점 24</li>
+			  <li class="ui-widget-content">2 손흥민/득점 12</li>
+			  <li class="ui-widget-content">3 크리스티안 에릭센/득점 7</li>
+			</ol>
+		</div>
+	</div>
+
+</body>
+</html>

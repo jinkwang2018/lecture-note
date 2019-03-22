@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>선택자</title>
+	<style type = "text/css">
+	/*
+	1.기본 선택자 (기존에 존재하는 태그 CSS)
+		p{color : red}
+	2.다중 (grouping)선택자
+		p,h1,h2,h3 {color : blue}
+	3.사용자 정의 CSS
+		.mystyle{color : gold} : 범용적인 것
+	  적용) <p class = "mystyle"></p>
+	  	#newstyle{color : pink}: 하나만 쓰는 것 , 식별자로 사용한다.
+	  적용) <p id = "newstyle"></p>
+	4.결합 형태
+	  	p.one{color : red}
+	  	p.two{color : blue}
+	  적용) <p class = "one"></p>
+	  	  <p class = "two"></p>  
+	5.자손 , 후손 선택자
+		div p{color = "green" ; font-family:"궁서체","명조체","광수체"}  
+		div 안의 모든 p에게 적용 시킨다.
+		<div>
+			<p>A</p>
+			<p>
+				B
+				<p>C</p>
+			</p>
+		</div>
+		A,B,C 가 다 바뀐다.
+	6.자식 
+		.parent > p {border = 1px double blue;
+					 padding : 10px;
+					 font-size : 15px;}
+		한개만 적용 시킨다.
+		<div>
+			<p>A</p>
+			<p>
+				B
+				<p>C</p>
+			</p>
+		</div>
+		A,B만 바뀐다.
+	7.속성 선택자(Attribute) > color , font , size ,......
+		CSS 작업 가능
+		input[type = text]{color : red}
+		input[type = button]{font-size : 10px}
+		
+	*/
+	input[type = text]{
+		width:150px;
+		display:block; /*none이면 화면에 보이지 않는다.*/
+		background-color : tomato;
+		}
+	input[type = button]{
+		width:100px;
+		background-color : transparent;
+	}
+	div p{color : lime; font-family:"궁서체","명조체","광수체"}
+	.parent > p {border : 1px double blue;
+				 padding : 10px;
+				 font-size : 15px;
+			}
+	</style>
+</head>
+<body>
+	<p>나는 스타일이 적용 될까요?</p>
+	<div>
+		DIV 태그
+	</div>
+	<h3>하위 (자손)선택자</h3>
+	<div>
+		<p>선택자</p>
+		<p>선택자2</p>
+		<div>
+			<p>선택자3</p>
+		</div>
+	</div>
+	<h3>자식 선택자</h3>
+	<div class = "parent">
+		<p>나는 문단 태그 입니다.</p>
+		<div>
+			<p>나는 p태그 입니다.</p>
+		</div>
+		<p>나는 문단 태그 입니다.</p>
+	</div>
+	<hr>
+	<input type = "text" value="CSS적용 text">
+	<br>
+	<input type = "password" value="CSS적용 ">
+	<br>
+	<input type = "button" value ="CSS버튼">
+</body>
+</html>

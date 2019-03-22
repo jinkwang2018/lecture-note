@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Input Tag</title>
+	</head>
+	<body>
+		<!-- 
+			id = "userid" >> 식별자로 사용된다.(UI 작업에서) CSS,JavaScript에서 유효성,UI변경 작업시에 사용된다.
+			name = "userid" >> name 속성이 없으면 서버 (동기)에서 데이터를 받을 수 없다.
+							  >> login.jsp?userid=fdaffda
+		 -->
+		<form action = "">
+			<fieldset>
+				<legend>Text : Password</legend>
+				Text : <input type="text" id ="userid" name = "userid" maxlength = "10"><br>
+				Password : <input type ="password" name = "pwd" maxlength = "5"><br>
+				<hr>
+				Text2 : <input type = "text" name = "data" maxlength = "10" size = "70px" value = "초기값"><br>
+				<hr>
+				readonly(읽기전용, 서버 데이터 전송 가능)
+				<input type = "text" name = "data2" value = "hong" readonly>
+				<br>
+				disabled(비활성화, 서버 데이터 전송 불가)
+				<input type = "text" name = "data3" value = "kim" disabled>
+			</fieldset>
+			<fieldset>
+				<legend>체크박스(다중선택)</legend>
+				요리 :<input type = "checkbox" name = "havit" value = "A" checked = "checked">
+				라이딩 :<input type = "checkbox" name = "havit1" value = "B" checked>
+				코딩 :<input type = "checkbox" name = "havit2" value = "C">
+				<!-- jsp에서 자세하게
+					서버 : ? havit=A & havit1=B & havit2=C
+					String str = request.getParameter("havit");
+					str  변수에는 A라는 값이 들어 있는 것이다.
+					String str1 = request.getParameter("havit1");
+					str1  변수에는 B라는 값이 들어 있는 것이다.
+					String str2 = request.getParameter("havit2");
+					str2  변수에는 C라는 값이 들어 있는 것이다.
+				 	
+				 	만약 세가지의 name이 똑같다면
+				 	서버 : ?havit=A & havit=B & havit=C
+				 	String[] strarr = request.getParameter("sports")
+				 	strarr[0] = "A"
+				 	strarr[1] = "B"
+				 	strarr[2] = "C"
+				 -->
+			</fieldset>
+			<fieldset>
+				<legend>Select 태그(단일 선택 : 년도 , 월, 일)</legend>
+				<select name = "year">
+					<option value ="2018">2018년</option>
+					<option value ="2017" selected="selected">2017년</option>
+					<option value ="2016">2016년</option>
+				</select>
+				<!-- 
+					서버 : ?year = 2017&...
+				 -->
+			</fieldset>
+			<fieldset>
+				 	<legend>Select 태그(다중 선택 : Checkbox처럼)</legend>
+				 당신이 좋아하는 과목은 ? :
+				<select name = "items" multiple>
+					<option value ="01">JAVA</option>
+					<option value ="02" selected="selected">ORACLE</option>
+					<option value ="03">HTML</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>라디오 버튼 (단일 선택 : 남,여) : name이 같게 해야한다.</legend>
+				남 :<input type ="radio" name = "gender" value = "1">
+				여 :<input type ="radio" name = "gender" value = "2" checked>
+			</fieldset>
+			<fieldset>
+				<legend>기타 등등</legend>
+				화면에 출력이 안되게 (소스는 가지고 있고 화면에만 보이지 않는 것),별로 중요하지 않은 데이터
+				<input type = "hidden" value = "1000" name = "hdata">
+				<br>
+				<br>
+				파일 선택 (자동으로 태그를 만들어준다.) 선택 까지만 된다.
+				<input type = "file" name = "uploadimage">
+				<br>
+				<br>
+				게시판 글쓰기 (여러줄)(rows : 세로길이, cols : 가로길이)
+				<textarea rows="10" cols="100" name = "content">입력데이터</textarea>
+				<br>
+				<br>
+				각종버튼들
+				<input type = "button" value = "나 눌러봐 " onclick = "alert('졸립다')">
+				<br>
+				<br>
+				이미지 버튼 (내부적으로 submit(전송기능)을 가진다.)
+				<input type = "image" src = "images/1.png">
+				<br>
+				<br>
+				<input type = "submit" value ="전송">
+				<input type = "reset" value ="초기화">
+			</fieldset>
+			
+			
+		</form>
+			
+			
+	</body>
+</html>

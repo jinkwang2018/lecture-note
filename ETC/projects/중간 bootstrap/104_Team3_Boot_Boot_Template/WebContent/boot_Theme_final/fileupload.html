@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- HEAD SECTION -->
+
+	
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Bootstrap Mutipager Template - Maxop</title>
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--GRIDGALLERY STYLE by www.codrops.com -->
+    <link href="assets/GridGallery/css/component.css" rel="stylesheet" />
+    <!--CUSTOM STYLE -->
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+      
+    <style type="text/css">
+    #postingarea{
+    	background-color: #f2f2f2;
+    	border-radius: 7px;
+    	
+    }
+    
+    .delete {
+    	float: right;
+   		background-color: transparent;
+   		margin-bottom: 3px;
+   	
+    
+    }
+    
+	.footer-widget ul:not(.sh_adswidget_ul):not(.no-bullet) li a {
+	    border-bottom: 1px solid rgba(255,255,255,0.25);
+
+	   
+	}
+	.footer-widget a, .footer-widget a:visited {
+	    color: #ffffff;
+	  
+	
+	}
+	.footer-widget ul {
+	   list-style:none;
+	}
+	
+	.footer-widget ul:not(.sh-tabs):not(.no-bullet) li a {
+	    padding-bottom: 15px;
+	    margin-bottom: 15px;
+	    display: block;
+	 
+	}
+	.logo{
+		width:  60px;
+		height: 60px;
+	}
+	#col_id{
+		text-align: center;
+	}
+    
+    
+    </style>
+    
+    
+    	<script type="text/javascript">
+	
+	////////////////////   파일 업로드     //////////////////////////
+		$(document).ready(function(){
+			
+		var files_selected;
+		
+
+		$("#input_img").on("change",selectFile);
+		var index = 0;
+		var src = ""; 
+			function selectFile(e){
+				
+				
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);	
+				
+			 	filesArr.forEach(function(f) {
+					files_selected= f;
+					var reader = new FileReader();
+					
+					reader.onload = function(e){
+						src= e.target.result;
+				 		
+				 	
+						
+				 	
+				}
+					
+				reader.readAsDataURL(f);
+				});
+			
+			}
+	/////////////////////이미지 포스팅 //////////////////////////////		
+			$("#postimg").click(function(){		
+				var img = document.createElement("img");
+		 		$(img).attr('src',src); // 이미지 소스 입력하기
+		 		
+				var li= document.createElement("li");
+				$(li).attr("id","img"+ index);
+				index ++;
+				var figure = document.createElement("figure");
+				var figcaption = document.createElement("figcaption");
+				var p = document.createElement("p");
+				var span = document.createElement("span");
+				var btn = document.createElement("button");
+				p.innerHTML = $('#Textarea1').val(); //입력값 넣어주기
+				
+				$(span).attr("class", 'glyphicon glyphicon-remove');
+				$(btn).attr({
+								"class": "delete btn btn-sm",
+								"id" : "del"
+							});
+			
+			
+			
+				if(src ==""){ // 이미지 강제로 받기
+					alert('사진을 업로드 해 주세요 ');
+					
+				}else if (p.innerHTML==""){
+					alert('메시지를 입력해 주세요 '); // 메시지 강제로 받기 
+				} else{
+					
+					// append 게시물 생성하기 
+					
+					$(btn).append(span);
+					$(figcaption).append(p);
+					$(figcaption).append(btn);
+					$(figure).append(img);
+					$(figure).append(figcaption);
+					$(li).append(figure);
+				
+					//$('#slide').append(li);
+					$('#timeline').append(li);
+				
+					$('#Textarea1').attr("required","required" );
+					$('#Textarea1').val("");
+					src = ""; // 입력값 초기화 시키기 
+					
+				}
+		
+				
+				
+			});	/// 업로드 끝
+			
+
+
+
+			
+			
+		});
+		
+	(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://bitcamp-group3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+
+
+	</script>
+    
+  
+</head>
+<!--END HEAD SECTION -->
+<body>
+    <!-- NAV SECTION -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">♥진원이의 삼조에요 잇힝~♥</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="index.html">HOME</a></li>
+					<li><a href="fileupload.html">fileupload</a></li>
+					<li><a href="drag_drop.html">Drag&Drop</a></li>
+					<li><a href="mousehover.html">MouseHover</a></li>
+					<li><a href="GIFfile.html">GIFfile</a></li>
+					<li><a href="dragGIFupload.html">Combination</a></li>
+					<li><a href="introduce.html">Introduce</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--END NAV SECTION -->
+    <!-- GALLARY SECTION -->
+	<div class="section">
+		<div class="container">
+
+
+			<div class="row main-low-margin">
+				<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+					<h1>파일 업로드</h1>
+					<h5>이미지 파일을 업로드 할 수 있습니다.<br>
+						 이미지와 함께 텍스트를 입력하면 타임라인에 게시물이 포스팅됩니다.</h5>
+					
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	
+	<div class="space-bottom"></div>
+	
+	<div class="container text-center" >
+
+
+		<!-- 업로드 & 타임라인 row -->
+
+		
+			<div class="row">
+				<div>
+					<div class="col-md-12 col-sm-12">
+						<div class="form-group">
+							<input type="file" id="input_img" class="form-control"
+								required="required" draggable="true">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="form-group">
+						<textarea name="message" id="Textarea1" required="required"
+							class="form-control" rows="7" placeholder="Message"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary" id="postimg">Submit
+							Request</button>
+					</div>
+				</div>
+			</div>
+		
+	</div>
+
+
+<fieldset  class="container text-center">
+	<legend><h3><b>Time Line</b></h3></legend>
+
+	<div id ="postingarea">
+        <div class="row main-low-margin text-center">
+            <div id="grid-gallery" class="grid-gallery">
+                <section class="grid-wrap">
+                    <ul class="grid" id="timeline">
+                        <li class="grid-sizer"></li>
+                       
+                       
+                        <!-- for Masonry column width -->
+                    </ul>  
+                </section>
+                <!-- // grid-wrap -->
+              <!--   <section class="slideshow">
+                    <ul id ="slide">
+                        
+                       
+                    </ul>
+                    <nav>
+                        <span class="icon nav-prev"></span>
+                        <span class="icon nav-next"></span>
+                        <span class="icon nav-close"></span>
+                    </nav>
+                    <div class="info-keys icon">Navigate with arrow keys</div>
+                </section> -->
+                <!-- // slideshow -->
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+
+    <div class="space-bottom"></div>
+    <!--END GALLARY SECTION -->
+    <!--FOOTER SECTION -->
+
+     <div id="footer">
+        <div class="row">
+        
+	       	<div class="col-md-2">
+	       	
+				      <div id="linkcat-122" class="footer-widget widget_links">
+				      				
+							 <ul class="xoxo blogroll">
+								<h3><b>Links</b></h3>
+								<li><a href="index.html">HOME</a></li>
+								<li><a href="fileupload.html">fileupload</a></li>
+								<li><a href="drag_drop.html">Drag&Drop</a></li>
+								<li><a href="mousehover.html">MouseHover</a></li>
+								<li><a href="GIFfile.html">GIFfile</a></li>
+								<li><a href="dragGIFupload.html">Combination</a></li>
+								<li><a href="introduce.html">Introduce</a></li>
+							</ul>
+						</div>
+	           </div>
+	        
+	        
+	        	<div class="col-md-3" id ="col_id">
+	             	<h3><b>About</b></h3>
+	                   
+				    <div class="tools tools-development">
+				      <h4>{ DEVELOPMENT TOOLS }</h4>
+				      <br>
+				      <img class="logo" alt="html5" src="images/html5.png" >
+				      <img class="logo" src="images/css3.png">
+				      <img class="logo" src="images/js.png">
+				      <img class="logo" src="images/bootstrap3.png">
+				      <img class="logo" src="images/jquery.gif">
+				      <br>
+				    </div>
+				    
+				    <div class="tools tools-collaboration">
+				      <h4>{ COLLABORATION TOOLS }</h4>
+				      <br>
+				      <img class="logo" src="images/trello.png">
+				      <img class="logo" src="images/slack.png">
+				      <img class="logo" src="images/sourcetree.png">
+				      <img class="logo" src="images/github1.png">
+				      <br>
+				    </div>
+	               
+	            </div>
+	        
+	        
+	          <div class="col-md-6">
+	                   <h4><b>Need Help ? Write Us.</b> </h4>
+	                   <div id="disqus_thread"></div>
+	          </div>
+         
+      </div>
+
+
+</div>
+    <!--END FOOTER SECTION -->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY LIBRARY -->
+    <script src="assets/js/jquery.js"></script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- GRIDGALLERY SCRIPT SCRIPT-->
+    <script src="assets/GridGallery/js/modernizr.custom.js"></script>
+    <script src="assets/GridGallery/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/GridGallery/js/masonry.pkgd.min.js"></script>
+    <script src="assets/GridGallery/js/classie.js"></script>
+    <script src="assets/GridGallery/js/cbpGridGallery.js"></script>
+    <!-- CUSTOM SCRIPT-->
+    <script>
+        new CBPGridGallery(document.getElementById('grid-gallery'));
+    </script>
+</body>
+<script type="text/javascript">
+	$(document).on( 'click','#del', function(e){
+		console.log("delete");
+		$(e.target).parentsUntil("ul").remove();
+	})
+	
+
+	
+</script>
+</html>

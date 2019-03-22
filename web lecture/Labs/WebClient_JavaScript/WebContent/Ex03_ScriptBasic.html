@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOM 모델을 사용하는 javascript</title>
+	<script type="text/javascript">
+		function print(){
+			var element = document.getElementById("demo")
+			console.log(element);
+			element.innerHTML = "HELLO WORLD";
+		}
+	</script>
+</head>
+<body>
+	<button onclick = "print()">클릭하세요</button>
+	<p id="demo"> 나 문단 태그야 </p>
+</body>
+</html>

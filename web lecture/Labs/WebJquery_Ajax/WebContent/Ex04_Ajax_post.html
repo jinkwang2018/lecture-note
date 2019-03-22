@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#btn').click(function(){
+					/*
+					var name = $('#name').val();
+					var pwd = $('#pwd').val();
+					var param = 'name ='+name+"&pwd = "+pwd;
+					
+					$.post("Ex04_Server.jsp",param,function(data){
+						$('#message').html(data);
+					*/
+					//parameter는 Json형태로 주는 것이 편하다.
+					$.post("Ex04_Server.jsp",{"name":$('#name').val(),"pwd":$('#pwd').val()}
+						,function(data){
+						$('#message').html(data);
+					});
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+		이름:<input type = "text" id = "name"><br>
+		비밀번호 : <input type = "text" id = "pwd"><br>
+		<input type = "button" id="btn" value="비동기 전송"><br>
+		<hr>
+		<div id="message"></div>
+	</body>
+</html>

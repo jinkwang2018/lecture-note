@@ -1,0 +1,358 @@
+현재 프로젝트는  Model1 방식을 기본으로 합니다
+[JSP] 가 [클라이언트 요청]을 받고 [흐름]을 제어 합니다
+
+단) DTO , DAO 는 사용합니다  
+   Model1 이기때문에 servelt 은 사용하지 않습니다 
+
+ex) <form action="login.jsp"
+
+
+
+Model2 기반의 MVC
+->[servlet] [클라이언트 요청]을 받고 [흐름]을 제어 합니다
+
+ex) <form action="/servlet" 
+
+----------------------------------------------------------------
+게시판 설계 (처리하는 방법)
+
+게시판 종류
+1. 일반게시판 (답글(x))
+2. 답변(답글) 게시판(계층형 게시판) (답글(0))
+
+3.일반게시판 , 답변형 게시판  사용할 수있는 것은 : 댓글 게시판 ( 옵션 ) : 비동기 
+
+
+게시판 (일반게시판 , 계층형 게시판)
+1. 회원전용 게시판
+2. 비회원전용 게시판
+
+일반게시판 : 회원전용(로그인한 사용자 (권한처리 : session 사용 ))
+일반게시판 : 비회원전용(비번처리 : 글수정 , 삭제  권한 처리) > 글쓴이 입력 , 비번 처리
+
+계층형게시판 : 회원전용(로그인한 사용자 (권한처리))
+계층형게시판 : 비회원전용(비번처리 : 글수정 , 삭제 권한 처리)
+---------------------------------------------------------------
+게시판 테이블 구조 (설계)
+(비인증형 일반 게시판)
+create table board(
+ 	 idx number constraint pk_board_idx primary key,
+	 --글번호(오라클:sequence 객체) - Ms-sql,mysql(테이블 종속적인 자동증가)
+	 writer varchar2(30) not null, 
+	 --글쓴이(필수 입력 사항 : 회원전용>로그인한 ID값 또는 별칭, 비회원전용 : 입력 )
+	 pwd varchar2(30) not null,
+	 --회원전용(x) , 비회원 (0)
+	 subject varchar2(50) not null --글제목
+	 content varchar2(2000) not null --글내용
+	 writedate DATE default SYSDATE -- (기본값 설정: 서버날짜 insert)
+	 readnum number default 0 --글조회수 증가(업무 로직 규칙 ...)
+	 filename varchar2(50) -- 파일명 또는 파일경로 (note.txt)
+	 filesize number,  --파일 크기(byte) 옵션
+	 homepage varchar2(20) --옵션
+	 email varchar2(20) -- 필수 입력아닌 것은 null 허용
+ )
+
+
+
+--위 테이블은 비인증형 게시판의 기본적인 구조
+계층형 게시판
+create table multiboard(
+ idx number constraint pk_board_idx primary key,
+ --글번호(오라클:sequence 객체) - Ms-sql,mysql(테이블 종속적인 자동증가)
+ writer varchar2(30) not null, 
+ --글쓴이(필수 입력 사항 : 회원전용>로그인한 ID값 또는 별칭, 비회원전용 : 입력 )
+ pwd varchar2(30) not null,
+ --회원전용(x) , 비회원 (0)
+ subject varchar2(50) not null --글제목
+ content varchar2(2000) not null --글내용
+ writedate DATE default SYSDATE -- (기본값 설정: 서버날짜 insert)
+ readnum number default 0 --글조회수 증가(업무 로직 규칙 ...)
+ filename varchar2(50) -- 파일명 또는 파일경로 (note.txt)
+ filesize number,  --파일 크기(byte) 옵션
+ homepage varchar2(20) --옵션
+ email varchar2(20) -- 필수 입력아닌 것은 null 허용
+ 
+ 추가적인 컬럼 (계층형 게시판)
+ refer number default 0, (참조글 or 글의 그룹번호)
+ depth number default 0, (글의 깊이, 들여쓰기) 화면처리
+ step  number default 0, (글의 정렬 순서 , 답글 정렬)
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--DB table
+idx ,  ref   ,  depth  ,  step  ,  title 
+1       1         0        0        원본글
+2       2         0        0        원본글2
+3       1         1        1        원본글(idx : 1) 답글-1
+4       2         1        1        원본글2(idx : 2) 답글-2
+5       1         2        2        답글-1 (idx: 3) 답글-1-1 
+6       1         3        3 (+1) 4 답글-1-1(idx:5)   
+7       1         3        3        답글-1 (idx: 5) 답글-1-1  답글 
+------------------------------------------------
+order by ref desc , step asc  
+화면에 출력
+2    2   0
+>4   2   1
+1    1   0
+>3   1   1
+>>5  1   2
+>>>7 1   3
+>>>6 1   4
+
+----------------------------------------
+원본글
+
+idx ,   ref  , depth , step
+1        1       0      0
+
+답글
+
+2       1       +1      +1 (+1) 2
+
+3       1        1       1
+------------------------------------------------------
+일반  게시판 
+select * from board order by idx desc  (최신글이 위에)
+
+계층형 게시판
+select * from multiboard order by ref desc , step asc 
+------------------------------------------------------
+--순번 처리 (oracle)
+CREATE SEQUENCE jspboard_idx
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+--댓글(꼬리말) 을 위한 테이블 생성
+--누구의 덧글인지를 판단 ....
+CREATE TABLE reply(
+  no NUMBER PRIMARY KEY ,
+  writer VARCHAR2(30),
+  userid VARCHAR2(30),
+  pwd VARCHAR2(30),
+  content VARCHAR2(100),
+  writedate DATE DEFAULT SYSDATE ,
+  idx_fk  REFERENCES jspboard(idx)
+);
+
+--일반게시판 (jspboard)
+idx
+1
+   덧글                               idx_fk
+   1 , 홍길동 , 하하하 ,   1
+select * from reply where idx_fk=현재 내가 읽은 글번호; 
+
+--1번글에 대한 상세보기
+select * from reply where idx_fk=1 order by no asc;
+
+
+create sequence reply_no;
+
+SELECT * FROM board  ORDER BY idx DESC ;
+SELECT * FROM mutiboard ORDER BY refer DESC , step ASC
+------------------------------------------------------------
+----------------------------------------------------------
+
+
+게시판 연습(Model1 방식) > 요청을 jsp 처리  > Model(가지고 간다) >DAO ,DTO
+<form action="ok.jsp"> 
+
+Model2 기반 MVC
+<form action="/servlet">  >요청을 servlet 처리
+
+순수한 jsp 처리 한다면 (글쓰기 버튼을 클릭하면 .. 이후  처리 
+<a href='board_write.jsp'>글쓰기</a>
+
+board_write.jsp: 글쓰기(UI -> Form -> Submit() +유효성 )
+board_writeOk.jsp : 글쓰기 처리(입력값 받기 -> DB(연결 -> 
+                    명령(insert .....) - > 처리() -> 목록이동(list))
+
+board_list.jsp : 게시물 보여주기(DB연결 -> 명령(select ....  order by ..) 
+                 -> 처리(동적구성:table))
+--글번호 , 글제목 , 글쓴날짜 , 조회수  -> 글의 내용(x)
+--<a href='상세.jsp?boardid=<%= rs.getInt("boardid")%>'><%= rs.getString("title") %></a>
+--리스트 -> 상세페이지(링크 : 상세.jsp?boardnum=1) =>글제목에서 상세 (***글번호 가지고 다니기***)
+board_content.jsp : 상세페이지 1건 데이터  (고정된UI -> 이전페이지(글번호)
+                    DB연결 -> 명령(select ... where boardid=request.getp...() -> 
+                         처리(데이터를 UI 연동 <input type... value=<%=rs.getString(1)%>))
+            ->목록 , 수정 , 삭제 (링크 구성) 
+            ->수정 : 링크(?boardnum=10) -> board_edit.jsp 
+            ->삭제 : 링크(?boardnum=10) -> board_delete.jsp
+            
+--삭제하기 (회원전용 , 비회원전용 )
+--회원전용 : board_delete.jsp 삭제대한 질의 처리되면 .. board_list.jsp
+-- 삭제 , 수정 버튼 처리 :    1.  글쓴이 와  로그인한 사용자가 동일하다면 ..... (삭제 , 활성)
+--                     2.  일단 수정 ,삭제  버튼 클릭시 처리하는 방법 
+--비회원전용 : 
+-- 삭제 페이지 (비번 입력 화면 ) 
+                            -> board_delete.jsp(UI : 비번입력) 
+--                          -> board_deleteok.jsp(글번호 와 비번 ,,,)
+--                          -> boardnum =10 ,,,, pwd=1234  
+--                          -> delete from board where boardnum =10 and pwd=1234
+--                          -> select pwd board where boardnum=10 
+--                          -> pwd == 현재입력된pwd 비교
+--                          -> ok -> delete from board where boardnum=10
+--                          -> 일치하지(x) 경고창 ,,,, 목록 , 상세 이동
+
+--board_edit.jsp                    
+--비회원전용 : 
+--**주의 사항 : 비번입력 가져가기 *****************
+--1.글번호 가지고 오기 (request .....)
+--2.edit (UI) 화면 <  , write (UI)   동일
+--3.DB연결 -> 명령(select *  from  .... where boardnum=request.getpar...(10)
+--        -> 처리결과 -> 화면 출력(UI)
+--        -> UI 입력받게 .... 보여만 줄거냐 
+--        - <td><%= rs.getString("title") %></td>               
+--        --<input type="text" name="title" value="<%= rs.get... %>" 
+--        수정범위 (제목 , 글내용 , 글쓴이(x) , 글쓴날짜(x)
+--수정 할 것 입력 -> 수정하기 -> board_editok.jsp
+--1.수정할 값 가지고 오기 (request ,,,, 글번호)
+--2.UI 구성 (x) -> 이동처리
+--3.DB연결 -> update board set title="" , content="" where boardnum=10 
+--성공 여부에 따라서 이동처리 ..... 경고....
+
+--추가 필요 (검색 페이지 )......
+--추가 필요 (목록 페이지 페이지 처리 )   이전 1 ,2 ,3 ,4 5 다음                    
+--connection pool 사용 ,,,, (자유옵션)
+--DTO 자유사항 ... 
+--DAO 자유사항 ...
+1 ,2 ,3 , 4 , 5 다음 
+이전 6 ,7 ,8 , 9 , 10 다음
+이전 11 ,12
+
+---------------------------------------------------------
+--1. 요구사항 정의 (Client 요구사항)
+-- -문장단위로 정리 (Modeling > 개념적설계 > 논리적설계 > 물리적설계 ...
+--2. DB설계 (물리적 테이블완성)
+--3. 전체 아키텍쳐 (방법론)
+     --Model1 => JSP => DTO(java) , DAO(java) , SERVICE(java) 
+     --Model2 (MVC)  => Model(DTO,DAO) , view(JSP,HTML) , Controller(Servlet)
+     --Spring FrameWork => DI .....
+
+-- Model1 
+   --DTO > jspboard Table mapping class board{ }
+   --    > reply Table mapping class reply{ }
+  
+   --DAO > (CRUD) 작업이 일어나는 클래스 (함수로 이루어진 클래스)
+   --    > class boardDAO{ CRUD 관련 메서드  }  
+   --    > Table 하나당 method 4개 5개
+           --select *  from emp;
+           --select *  from emp where empno=1234;
+           --update ....
+           --delete ....
+           --insert ....
+    --SERVICE 
+    --   > boardService 
+           
+    --boardWriteOk.jsp (서비스 Call ) -> 서스비 클래스 글입력해 
+    --주세요 하는 함수 호출
+    --Service 에서 필요한 DAO 객체를 만들고 DAO 함수 호출 그 결과를 받아서
+    --JSP 주는 것까지
+    
+    --JSP  <----> SERVICE <-----> DAO  <-----> DB
+    
+
+    --연결(pool 사용여부) > 자카르타 pool , Tomcat pool
+    --설정 : Tomcat.pool > META_INF > context.xml(db연결)
+    --      > context 객체 lookup(java:comp/env/정한 이름)
+     
+    --필수 lib > DB 드라이버 , JSTL 관련 lib ,     
+
+
+    --WebContent 폴더구조정의
+      --board > 게시판 관련 페이지
+               --board_list.jsp
+               
+      --image > 그림파일
+      --include > 공통페이지
+      --style > 폴더 (css)
+
+   --CSS > css페이지
+      --Script > js 페이지
+
+      --common > util....
+      
+   --샘플 (DB연결코드)
+   --    (include 된 디자인 페이지 )
+      
+      ---------------------------
+      --UI 적용여부
+
+------------------------------------------------------
+
+Model1 방식
+ -> Jsp 요청 받고 처리
+ --> Model(Dao , Dto)
+ --> Service(중계 역활)
+ 
+JSP ---> Service ---> Dao   
+
+현재 DB설계 완료된 상태
+
+1. Table 생성
+2. Package 구조 설정
+   dao
+   dto
+   service
+   utils
+   
+   
+
+
+
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

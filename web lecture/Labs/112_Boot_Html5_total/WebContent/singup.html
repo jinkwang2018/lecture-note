@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>4조 부트스트랩</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+body {
+	background-color: #E4C97E;
+}
+</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand">Kosta 106th 4조</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="boot.html">Home</a></li>
+					<li><a href="study.html">Study</a></li>
+					<li><a href="Codes.html">Codes</a></li>
+					<li><a href="ab.html">예제1(Canvas Video)</a></li>
+					<li><a href="game.html">예제2(Game)</a></li>
+					<li><a href="jo.html">조원소개</a></li>
+					<li><a href="bootpage.html">About Bootstrap</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="singup.html"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="login.html"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="well">
+		<div class="contentwrap">
+			<article class="container">
+				<div class="page-header">
+					<h1>
+						회원가입 <small>일반회원가입</small>
+					</h1>
+				</div>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="inputEmail" class="col-sm-2 control-label">이메일</label>
+						<div class="col-sm-6">
+							<input type="email" class="form-control" id="inputEmail"
+								placeholder="이메일">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">비밀번호</label>
+						<div class="col-sm-6">
+							<input type="password" class="form-control" id="inputPassword"
+								placeholder="비밀번호">
+							<p class="help-block">숫자, 특수문자 포함 8자 이상</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPasswordCheck" class="col-sm-2 control-label">비밀번호
+							확인</label>
+						<div class="col-sm-6">
+							<input type="password" class="form-control"
+								id="inputPasswordCheck" placeholder="비밀번호 확인">
+							<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputName" class="col-sm-2 control-label">이름</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="inputName"
+								placeholder="이름">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputNumber" class="col-sm-2 control-label">휴대폰번호</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputNumber"
+								placeholder="휴대폰번호">
+							<p class="help-block">- 없이 적어주세요.</p>
+						</div>
+						<!-- <div class="col-sm-2">
+							<a class="btn btn-default" href="#" role="button">인증번호 전송</a>
+						</div> -->
+						<div class="container">
+
+							<!-- Trigger the modal with a button -->
+							<button type="button" class="btn btn-info btn-lg"
+								data-toggle="modal" data-target="#myModal">인증번호 전송</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p>히히히히히히히</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="form-group">
+						<label for="inputNumberCheck" class="col-sm-2 control-label">인증번호
+							확인</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="inputNumberCheck"
+								placeholder="이름">
+							<p class="help-block">전송된 인증번호를 입력해주세요.</p>
+
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-default" href="#" role="button">인증번호 재전송</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputAgree" class="col-sm-2 control-label">약관
+							동의</label>
+						<div class="col-sm-6 checkbox">
+							<!-- <label> <input id="agree" type="checkbox"> <a
+								href="/agreement"> 이용약관</a>에 동의합니다.
+							</label> -->
+							<div class="container">
+								<input id="agree" type="checkbox"><a href="#" data-toggle="tooltip" title="키키키키키키킼이크흐히히히">이용약관</a>에
+								동의합니다.
+							</div>
+
+							<script>
+								$(document).ready(function() {
+									$('[data-toggle="tooltip"]').tooltip();
+								});
+							</script>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputName" class="col-sm-2 control-label"></label>
+						<div class="col-sm-6">
+							<button type="submit" class="btn btn">
+								<a href=singup_con.html>회원가입</a>
+							</button>
+						</div>
+					</div>
+				</form>
+
+			</article>
+
+		</div>
+	</div>
+</body>
+</html>

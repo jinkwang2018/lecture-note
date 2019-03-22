@@ -1,0 +1,108 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);.hidden{display:none !important}#left_nav{color:#999;position:absolute;left:10px;top:0;font-size:12px;padding-left:5px;z-index:1000}
+#left_nav #to_home{padding-right:.5em;font-size:1.1em;margin-top:.9em}#left_nav #to_home a{color:#ccc;text-indent:inherit;width:inherit;height:20px;line-height:20px;font-family:verdana !important}
+#left_nav #to_home a span{color:#2ecc71}#left_nav>li{float:left;margin-right:1.5em;margin-top:1.3em}
+#left_nav>li>a{line-height:14px;height:14px;background-repeat:no-repeat;background-position:center center;display:block;overflow:hidden;text-indent:100em;width:16px}
+#left_nav>li#btn_create_module a.title{background-image:url("../../img/desktop/icon_module.png")}
+#left_nav>li#btn_create_module a.title:hover{background-image:url("../../img/desktop/icon_module_hover.png")}
+#left_nav>li#btn_create_module.selected a.title{background-image:url("../../img/desktop/icon_module_hover.png")}
+#left_nav>li#btn_create_module form#new_module_layer{left:0;width:470px}#left_nav>li#btn_create_module form#new_module_layer div.pin{right:auto;left:140px}
+#left_nav>li#btn_create_module form#new_module_layer div.body{padding-top:15px}#left_nav>li#btn_create_module form#new_module_layer div.body dl{overflow:hidden;margin-bottom:9px}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl dt{float:left;text-align:right;padding-top:7px;width:85px}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl dt label{padding-right:22px}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl dd{float:left;margin-top:0 !important}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl dd input.text{width:350px}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl dd textarea{font-size:12px;height:15em;width:356px}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl.new_license dt{padding-top:1px !important}
+#left_nav>li#btn_create_module form#new_module_layer div.body dl.new_license dd input.chk{margin-right:3px}
+#left_nav>li#course_allview a.title{background-image:url("../../img/desktop/icon_allview.png")}
+#left_nav>li#course_allview a.title:hover{background-image:url("../../img/desktop/icon_allview_hover.png")}
+#left_nav>li#course_allview.selected a.title{background-image:url("../../img/desktop/icon_allview_hover.png")}
+#left_nav>li#notify_count>a.title{background-image:url("../../img/desktop/icon_notify0.png");color:#444;font-size:10px;float:left;font-family:tahoma,sans-serif;padding:0 3px;text-align:center;text-indent:0;overflow:hidden;min-width:11px;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
+#left_nav>li#notify_count>a.title span.label{display:none}#left_nav>li#notify_count>a.title:hover{background-image:url("../../img/desktop/icon_notify0_hover.png");color:#444}
+#left_nav>li#notify_count.has_new>a{background-image:url("../../img/desktop/icon_notify.png");color:#fff !important}
+#left_nav>li#notify_count.has_new>a:hover{background-image:url("../../img/desktop/icon_notify_hover.png");color:#fff !important}
+#left_nav>li#notify_count.has_new.selected a.title{background-image:url("../../img/desktop/icon_notify_hover.png");color:#444;position:relative;z-index:101}
+#left_nav>li#notify_count.selected a.title{background-image:url("../../img/desktop/icon_notify0_hover.png");color:#444;position:relative;z-index:101}
+#left_nav>li#notify_count div#notifier_layer{display:none;left:0;top:40px;width:280px;text-align:left}
+#left_nav>li#notify_count div#notifier_layer div.pin{left:178px}#left_nav>li#notify_count div#notifier_layer div.spinner{position:absolute !important;top:50% !important;left:50% !important}
+#left_nav>li#notify_count div#notifier_layer div.head .selected{font-weight:bold}
+#left_nav>li#notify_count div#notifier_layer div.head .notify_cate{padding:5px}#left_nav>li#notify_count div#notifier_layer div.body{max-height:500px;overflow-y:scroll;padding:0}
+#left_nav>li#notify_count div#notifier_layer div.body li{background-color:#ffd;border-bottom:1px solid #eee;padding:7px 10px;line-height:1em;position:relative}
+#left_nav>li#notify_count div#notifier_layer div.body li:last-child{border-bottom:0}
+#left_nav>li#notify_count div#notifier_layer div.body li img.user_pict{height:40px;width:40px;background-color:#eee;position:absolute;top:8px;left:10px}
+#left_nav>li#notify_count div#notifier_layer div.body li p{color:#666;height:auto;font-size:11px;line-height:1.3em;padding-left:50px}
+#left_nav>li#notify_count div#notifier_layer div.body li p .username{color:#333;font-weight:bold}
+#left_nav>li#notify_count div#notifier_layer div.body li p a{display:inline;padding:0}
+#left_nav>li#notify_count div#notifier_layer div.body li p a.module{color:#333;font-weight:bold}
+#left_nav>li#notify_count div#notifier_layer div.body li p a.course{color:#333;font-weight:bold}
+#left_nav>li#notify_count div#notifier_layer div.body li p a.topic{color:#333;font-weight:bold}
+#left_nav>li#notify_count div#notifier_layer div.body li time{display:block;font-size:11px;line-height:1.4em;margin:5px 0 0 50px;padding-left:20px;background-image:url("../../img/desktop/icon_ot_gray.png");background-position:0 0;background-repeat:no-repeat;color:#bbb}
+#left_nav>li#notify_count div#notifier_layer div.body li.add_comment_module_owner time,#left_nav>li#notify_count div#notifier_layer div.body li.add_comment_course_owner time,#left_nav>li#notify_count div#notifier_layer div.body li.add_comment_parent time{background-position:0 -140px}
+#left_nav>li#notify_count div#notifier_layer div.body li.mark_topic_marked time{background-position:0 -100px}
+#left_nav>li#notify_count div#notifier_layer div.body li.complete_topic time,#left_nav>li#notify_count div#notifier_layer div.body li.add_topic time,#left_nav>li#notify_count div#notifier_layer div.body li.add_topic_everystudy_member time,#left_nav>li#notify_count div#notifier_layer div.body li.add_topic_module_owner time{background-position:0 0}
+#left_nav>li#notify_count div#notifier_layer div.body li.add_topic_everystudy_complet time,#left_nav>li#notify_count div#notifier_layer div.body li.complete_everystudy time{background-position:0 -80px}
+#left_nav>li#notify_count div#notifier_layer div.body li.join_everystudy_register time{background-position:0 -60px}
+#left_nav>li#notify_count div#notifier_layer div.body li.read{background-color:#fff}
+#left_nav>li#notify_count div#notifier_layer div.body li.read p{color:#666}#left_nav>li#notify_count div#notifier_layer div.body li.read p a.username{color:#333}
+#left_nav>li#notify_count div#notifier_layer div.body li.read p a.module{color:#333}
+#left_nav>li#notify_count div#notifier_layer div.body li.read p a.course{color:#333}
+#left_nav>li#notify_count div#notifier_layer div.body li.read p a.topic{color:#333}
+#left_nav>li#notify_count div#notifier_layer div.body li.has_new{background-color:#ffd}
+#left_nav>li#notify_count div#notifier_layer div.body li.empty{background-color:#fff;height:212px}
+#left_nav>li#notify_count div#notifier_layer div.body li.empty p{padding:100px 0;text-align:center}
+#left_nav>li#notify_count div#notifier_layer div.body a.more_notifier{background-color:#eee;border-bottom:1px solid #ccc;border-top:1px solid #ccc;display:none;text-align:center;padding:10px}
+#right_nav{position:absolute;right:14px;top:0;z-index:1000;height:35px;line-height:12px}
+#right_nav>ul>li{display:block;float:right;position:relative;height:35px;line-height:35px}
+#right_nav>ul>li#activity>span{border-left:1px solid #5f7b97;border-right:1px solid #5f7b97}
+#right_nav>ul>li>span.title{color:#ccc;cursor:pointer;font-size:12px;padding:0 10px;position:relative;vertical-align:middle;z-index:101}
+#right_nav>ul>li>span.title:hover{color:#fff}#right_nav>ul>li>a.title{color:#ccc;cursor:pointer;display:block;font-size:12px;height:35px;line-height:35px;padding-left:10px;padding-right:10px}
+#right_nav>ul>li a{color:#d4d4d4}#right_nav>ul>li.selected>a.title{color:#fff}#right_nav>ul>li.selected>span.title{color:#fff}
+#right_nav>ul>li.selected div.submenu{display:block}.submenu{display:none;position:absolute !important;top:40px;right:-7px;-moz-box-shadow:inset 0 0 5px rgba(0,0,0,0.3);-webkit-box-shadow:0 0 5px rgba(0,0,0,0.3);-o-box-shadow:inset 0 0 5px rgba(0,0,0,0.3);box-shadow:0 0 5px rgba(0,0,0,0.3)}
+.submenu div.tail button.btn_submit{margin-left:66px}.submenu table,.submenu .table{background-color:#fff;position:relative;text-align:left;border:1px solid #ccc}
+.submenu table .head,.submenu .table .head{line-height:15px}.submenu table div.empty,.submenu .table div.empty{line-height:1.5em;padding-top:50px;padding-bottom:50px;text-align:center}
+.submenu table div.empty p,.submenu .table div.empty p{color:#000}.submenu table div.empty p strong:before,.submenu .table div.empty p strong:before{content:"'"}
+.submenu table div.empty p strong:after,.submenu .table div.empty p strong:after{content:"'"}
+.submenu table div.empty a,.submenu .table div.empty a{color:#999}form#login_submenu{margin:0}
+form#login_submenu .table div.header button.btn_close{top:12px;right:12px;text-indent:100px}
+form#login_submenu .table div.body p input[type=checkbox]{margin-right:5px}form#login_submenu.alone{position:fixed !important;right:auto}
+form#login_submenu.alone div.body,form#login_submenu.alone div.footer{text-align:center}
+li#login form#login_submenu{display:none;top:35px;right:-7px;line-height:1em;height:auto}
+li#login form#login_submenu div.header{display:none}li#login form#login_submenu div.body dt,li#login form#login_submenu div.body dd,li#login form#login_submenu div.body p,li#login form#login_submenu div.body div.btns{text-align:center}
+li#login form#login_submenu div.body dt{display:block;padding:10px 0 0 20px;float:left;width:70px;text-align:left}
+li#login form#login_submenu div.body input.text{width:240px;margin-right:20px}li#login form#login_submenu div.footer{text-align:center}
+div#activity_submenu,div#my_content_submenu{width:530px}div#activity_submenu div.pin,div#my_content_submenu div.pin{left:480px}
+div#activity_submenu table,div#my_content_submenu table{width:100%;height:100%}div#activity_submenu table thead th,div#my_content_submenu table thead th{width:50%;text-align:left;border-bottom:1px solid #ddd}
+div#activity_submenu table thead th:first-child,div#my_content_submenu table thead th:first-child{border-right:1px solid #ccc}
+div#activity_submenu table thead th span.inner,div#my_content_submenu table thead th span.inner{display:inline-block;font-size:14px;padding-left:15px;color:#000}
+div#activity_submenu table thead th .controls,div#my_content_submenu table thead th .controls{float:right;line-height:39px;padding-right:6px;margin-top:-1px}
+div#activity_submenu table thead th .controls a,div#my_content_submenu table thead th .controls a{font-size:.95em;margin:0 0 0 1px;padding:4px 6px;font-weight:normal}
+div#activity_submenu table thead th .controls a.setting,div#my_content_submenu table thead th .controls a.setting{background-color:#eee;color:#666 !important}
+div#activity_submenu table thead th .controls a.add,div#my_content_submenu table thead th .controls a.add{background-color:#eee;color:#666 !important}
+div#activity_submenu table thead th .controls a:hover,div#my_content_submenu table thead th .controls a:hover{background-color:#2ecc71;color:#fff !important}
+div#activity_submenu table thead th .subtitle,div#my_content_submenu table thead th .subtitle{color:#666;font-size:11px;float:right;padding:0 12px 0 0;font-weight:normal}
+div#activity_submenu table tbody td,div#my_content_submenu table tbody td{vertical-align:top;width:50%}
+div#activity_submenu table tbody td div#p_everystudy_nest,div#my_content_submenu table tbody td div#p_everystudy_nest,div#activity_submenu table tbody td div#p_marking_nest,div#my_content_submenu table tbody td div#p_marking_nest,div#activity_submenu table tbody td div#p_module_nest,div#my_content_submenu table tbody td div#p_module_nest{max-height:420px;overflow-y:auto;overflow-x:hidden;-moz-box-shadow:inset 0 0 8px #fff;-webkit-box-shadow:inset 0 0 8px #fff;box-shadow:inner 0 0 8px #fff}
+div#activity_submenu table tbody td div#p_everystudy_nest .divider,div#my_content_submenu table tbody td div#p_everystudy_nest .divider,div#activity_submenu table tbody td div#p_marking_nest .divider,div#my_content_submenu table tbody td div#p_marking_nest .divider,div#activity_submenu table tbody td div#p_module_nest .divider,div#my_content_submenu table tbody td div#p_module_nest .divider{color:#000;padding-left:1em;font-weight:bold;background-color:#f8f8f8}
+div#activity_submenu table tbody td div#p_everystudy_nest menu,div#my_content_submenu table tbody td div#p_everystudy_nest menu,div#activity_submenu table tbody td div#p_marking_nest menu,div#my_content_submenu table tbody td div#p_marking_nest menu,div#activity_submenu table tbody td div#p_module_nest menu,div#my_content_submenu table tbody td div#p_module_nest menu{list-style-type:none;padding-bottom:2em;border-bottom:1px solid #ccc}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li,div#my_content_submenu table tbody td div#p_everystudy_nest menu li,div#activity_submenu table tbody td div#p_marking_nest menu li,div#my_content_submenu table tbody td div#p_marking_nest menu li,div#activity_submenu table tbody td div#p_module_nest menu li,div#my_content_submenu table tbody td div#p_module_nest menu li{list-style-type:none;padding-left:1em;line-height:2em}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li a,div#my_content_submenu table tbody td div#p_everystudy_nest menu li a,div#activity_submenu table tbody td div#p_marking_nest menu li a,div#my_content_submenu table tbody td div#p_marking_nest menu li a,div#activity_submenu table tbody td div#p_module_nest menu li a,div#my_content_submenu table tbody td div#p_module_nest menu li a{color:#777;display:block;background-image:url("../../img/desktop/list_bullet_01.gif");background-repeat:no-repeat;background-position:left 8px;padding-left:1em;width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li:hover,div#my_content_submenu table tbody td div#p_everystudy_nest menu li:hover,div#activity_submenu table tbody td div#p_marking_nest menu li:hover,div#my_content_submenu table tbody td div#p_marking_nest menu li:hover,div#activity_submenu table tbody td div#p_module_nest menu li:hover,div#my_content_submenu table tbody td div#p_module_nest menu li:hover{background-color:#f8f8f8}
+div#activity_submenu table tbody td div#p_course_nest,div#my_content_submenu table tbody td div#p_course_nest{max-height:420px;overflow-y:auto;overflow-x:hidden;-moz-box-shadow:inset 0 0 8px #fff;-webkit-box-shadow:inset 0 0 8px #fff;box-shadow:inner 0 0 8px #fff}
+div#activity_submenu table tbody td div#p_course_nest ul,div#my_content_submenu table tbody td div#p_course_nest ul{width:250px}
+div#activity_submenu table tbody td div#p_course_nest ul li,div#my_content_submenu table tbody td div#p_course_nest ul li{border-bottom:1px solid #eee;border-right:0;vertical-align:middle;padding:0 15px}
+div#activity_submenu table tbody td div#p_course_nest ul li a,div#my_content_submenu table tbody td div#p_course_nest ul li a{color:#000;cursor:pointer;font-size:14px;display:block;height:42px;line-height:42px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+div#activity_submenu table tbody td div#p_course_nest ul li:hover,div#my_content_submenu table tbody td div#p_course_nest ul li:hover{background-color:#f8f8f8}
+div#activity_submenu table tbody td div#p_everystudy_nest menu,div#my_content_submenu table tbody td div#p_everystudy_nest menu{padding-top:12px;padding-bottom:0;padding-right:8px}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li,div#my_content_submenu table tbody td div#p_everystudy_nest menu li{height:auto;line-height:1.2em;margin-bottom:18px;padding-left:0}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li a,div#my_content_submenu table tbody td div#p_everystudy_nest menu li a{background-image:none;color:#000;display:block;font-size:14px;margin-right:auto;width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li div.archieved,div#my_content_submenu table tbody td div#p_everystudy_nest menu li div.archieved{margin-top:7px;margin-left:12px}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li div.archieved span.graph,div#my_content_submenu table tbody td div#p_everystudy_nest menu li div.archieved span.graph{background-color:#eee;display:block;overflow:hidden;width:198px}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li div.archieved span.graph span.bar,div#my_content_submenu table tbody td div#p_everystudy_nest menu li div.archieved span.graph span.bar{background-color:#77c2d0;display:block;height:8px;margin-right:auto}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li div.archieved span.percentage,div#my_content_submenu table tbody td div#p_everystudy_nest menu li div.archieved span.percentage{color:#666;float:right;font-size:10px;font-family:arial,sans-serif;line-height:8px}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li div.almost span.bar,div#my_content_submenu table tbody td div#p_everystudy_nest menu li div.almost span.bar{background-color:#e98060 !important}
+div#activity_submenu table tbody td div#p_everystudy_nest menu li div.almost span.percentage,div#my_content_submenu table tbody td div#p_everystudy_nest menu li div.almost span.percentage{color:red}
+div#activity_submenu table tbody td:first-child,div#my_content_submenu table tbody td:first-child{border-right:.1em solid #ddd}
+div#activity_submenu table tbody td div#p_marking_nest menu li,div#my_content_submenu table tbody td div#p_marking_nest menu li{background-image:url("../../img/desktop/list_dash_02.png") !important}
+div#settings_submenu{right:0;width:85px}div#settings_submenu div.pin{left:30px}div#settings_submenu div.table menu{list-style-type:none;padding:8px 0}
+div#settings_submenu div.table menu li{list-style-type:none}div#settings_submenu div.table menu li a{color:#000 !important;display:block;font-size:12px;height:2em;line-height:2em;padding-left:10px;padding-right:10px;vertical-align:middle;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+div#settings_submenu div.table menu li:hover{background-color:#eee !important}

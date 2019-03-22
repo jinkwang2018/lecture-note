@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Bootstrap Mutipager Template - Maxop</title>
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--CUSTOM STYLE -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+
+<style>
+	#div1, #div2 {
+	    float: left;
+	    width: 100px;
+	    height: 100px;
+	    margin: 10px;
+	    padding: 10px;
+	    border: 1px solid black;
+	    
+	}
+	#frm_container{
+		text-align: center;
+		margin: 60px;
+	
+	}
+	#vid{
+		
+		width: 250px;
+		height: 250px;
+	
+	
+	}
+	
+	#videodiv{
+		width: 270px;
+		height: 280px;
+		display: inline-block;
+		text-align:center;
+		background-repeat: no-repeat;
+		background-image: URL(https://png.pngtree.com/element_origin_min_pic/16/10/14/1458007f9b07627.jpg);
+	}
+	.footer-widget ul:not(.sh_adswidget_ul):not(.no-bullet) li a {
+	    border-bottom: 1px solid rgba(255,255,255,0.25);
+
+	   
+	}
+	.footer-widget a, .footer-widget a:visited {
+	    color: #ffffff;
+	  
+	
+	}
+	.footer-widget ul {
+	   list-style:none;
+	}
+	
+	.footer-widget ul:not(.sh-tabs):not(.no-bullet) li a {
+	    padding-bottom: 15px;
+	    margin-bottom: 15px;
+	    display: block;
+	 
+	}
+	.logo{
+		width:  60px;
+		height: 60px;
+	}
+	#col_id{
+		text-align: center;
+	}
+</style>
+<script>
+	function allowDrop(ev) {
+	    ev.preventDefault();
+	}
+	function drag(ev) {
+		console.log(ev.target.id);
+	    ev.dataTransfer.setData("text", ev.target.id);
+	}
+	function drop(ev) {
+	    ev.preventDefault();
+		console.log(ev.target.id);
+	    var data = ev.dataTransfer.getData("text");
+	    ev.target.appendChild(document.getElementById(data));
+	}
+	function playVideo(ev){
+		//console.log(frm.image.value);
+		console.log("if 밖 " + ev.target.value);
+		console.log(document.getElementById("vid"));
+			document.getElementById("vid").src = ev.target.value;
+			console.log(document.getElementById("vid").src);
+	
+			document.getElementById("vid").play();
+	}
+	function stopVid(ev){
+		document.getElementById("vid").src = "";
+	}
+	
+	/*
+	var disqus_config = function () {
+	this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+	*/
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://bitcamp-group3.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', + new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+</script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">♥진원이의 삼조에요 잇힝~♥</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                   <li><a href="index.html">HOME</a></li>
+					<li><a href="fileupload.html">fileupload</a></li>
+					<li><a href="drag_drop.html">Drag&Drop</a></li>
+					<li><a href="mousehover.html">MouseHover</a></li>
+					<li><a href="GIFfile.html">GIFfile</a></li>
+					<li><a href="dragGIFupload.html">Combination</a></li>
+					<li><a href="introduce.html">Introduce</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+  <!--END NAV SECTION -->
+    <!-- SERVICES SECTION -->
+    <div class="section">
+       <div class="container">
+	           <div class="row main-low-margin">
+	                <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+	            		<h1>Drag and Drop</h1>
+	                    <h5>        
+	                	stop사각형 과 start 사각형 사이에서  이미지를  객체를 클릭하면서  
+	  					다른 위치나 다른 가상 객체로 드래그하는 행위입니다.
+	
+	                    </h5>
+	                </div>
+	            </div>
+        </div>
+    </div>
+
+ 
+
+
+<div class="container">
+        <div class="row main-low-margin text-center">
+			<form id = frm>
+				<div id=frm_container>	
+						<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">stop
+							<input type = "image" src = "images//image1.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31"  value ="http://www.ithinknext.com/mydata/board/files/F201308021823010.mp4"> 	
+						</div>
+								
+						<div id="div2" ondrop="drop(event)" ondragend="playVideo(event)" ondragleave="stopVid(event)" ondragover="allowDrop(event)" >start</div>
+					</div>	
+			
+			</form>
+ 				<div id="videodiv">
+					<video id = "vid" src= ""  type="video/mp4" ></video>
+				</div>	
+			
+       </div>
+
+</div>
+
+
+
+
+  <div class="space-bottom"></div>
+ 
+  
+   
+    <!--END SERVICES SECTION -->
+    <!--FOOTER SECTION -->
+    <div id="footer">
+        <div class="row">
+        
+	       	<div class="col-md-2">
+	       	
+				      <div id="linkcat-122" class="footer-widget widget_links">
+				      				
+							 <ul class="xoxo blogroll">
+								<h3><b>Links</b></h3>
+								<li><a href="index.html">HOME</a></li>
+								<li><a href="fileupload.html">fileupload</a></li>
+								<li><a href="drag_drop.html">Drag&Drop</a></li>
+								<li><a href="mousehover.html">MouseHover</a></li>
+								<li><a href="GIFfile.html">GIFfile</a></li>
+								<li><a href="dragGIFupload.html">Combination</a></li>
+								<li><a href="introduce.html">Introduce</a></li>
+									
+							</ul>
+						</div>
+	           </div>
+	        
+	        
+	        	<div class="col-md-3" id ="col_id">
+	             	<h3><b>About</b></h3>
+	                   
+				    <div class="tools tools-development">
+				      <h4>{ DEVELOPMENT TOOLS }</h4>
+				      <br>
+				      <img class="logo" alt="html5" src="images/html5.png" >
+				      <img class="logo" src="images/css3.png">
+				      <img class="logo" src="images/js.png">
+				      <img class="logo" src="images/bootstrap3.png">
+				      <img class="logo" src="images/jquery.gif">
+				      <br>
+				    </div>
+				    
+				    <div class="tools tools-collaboration">
+				      <h4>{ COLLABORATION TOOLS }</h4>
+				      <br>
+				      <img class="logo" src="images/trello.png">
+				      <img class="logo" src="images/slack.png">
+				      <img class="logo" src="images/sourcetree.png">
+				      <img class="logo" src="images/github1.png">
+				      <br>
+				    </div>
+	               
+	            </div>
+	        
+	        
+	          <div class="col-md-6">
+	                   <h4><b>Need Help ? Write Us.</b> </h4>
+	                   <div id="disqus_thread"></div>
+	          </div>
+         
+      </div>
+
+
+</div>
+
+    <!--END FOOTER SECTION -->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY LIBRARY -->
+    <script src="assets/js/jquery.js"> </script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+/*
+ * ProducerException.java February 2007
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+import java.io.IOException;
+
+/**
+ * The <code>ProducerException</code> object is used to represent an
+ * exception that is thrown when there is a problem producing the
+ * response body. This can be used to wrap <code>IOException</code>
+ * objects that are thrown from the underlying transport.
+ * 
+ * @author Niall Gallagher
+ */
+class ProducerException extends IOException {
+   
+   /**
+    * Constructor for the <code>ProducerException</code> object. This
+    * is used to represent an exception that is thrown when producing
+    * the response body. The producer exception is an I/O exception
+    * and thus exceptions can propagate out of stream methods.
+    * 
+    * @param message this is the message describing the exception
+    */
+   public ProducerException(String message) {
+      super(message);
+   }
+   
+   /**
+    * Constructor for the <code>ProducerException</code> object. This
+    * is used to represent an exception that is thrown when producing
+    * the response body. The producer exception is an I/O exception
+    * and thus exceptions can propagate out of stream methods.
+    * 
+    * @param message this is the message describing the exception
+    * @param cause this is the cause of the producer exception
+    */
+   public ProducerException(String message, Throwable cause) {
+      super(message);
+      initCause(cause);
+   }
+}

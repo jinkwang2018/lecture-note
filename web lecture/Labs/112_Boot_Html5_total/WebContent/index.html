@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>5 조</title>
+
+<link rel="stylesheet" href="style.css" />
+
+<!-- Bootstrap core CSS -->
+<link href="http://getbootstrap.com/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link href="http://getbootstrap.com/examples/carousel/carousel.css"
+	rel="stylesheet" />
+<script
+	src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+<script src="sidebar.js"></script>
+<script src="sidebar.css"></script>
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script
+	src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Custom styles for this template -->
+<link
+	href="https://http://getbootstrap.com/examples/carousel/carousel.css"
+	rel="stylesheet">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="" />
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<script type='text/javascript'
+	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script type='text/javascript'
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+<script type='text/javascript'
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+<script
+	src="http://pupunzi.com/mb.components/mb.YTPlayer/demo/inc/jquery.mb.YTPlayer.js"></script>
+<script type="text/javascript"
+	src="tagcloud.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						
+						$(".player").mb_YTPlayer();
+
+						$('[data-toggle="tooltip"]').tooltip();
+
+						/* 	$("#first").load("introSeok.html");
+							$("#second").load("introSon.html");
+							$("#third").load("introHyeon.html"); */
+						/* activate sidebar */
+						$('#sidebar').affix({
+							offset : {
+								top : 435
+							}
+						});
+
+						var theDaysBox = $("#numdays");
+						var theHoursBox = $("#numhours");
+						var theMinsBox = $("#nummins");
+						var theSecsBox = $("#numsecs");
+
+						var refreshId = setInterval(
+								function() {
+									var currentSeconds = theSecsBox.text();
+									var currentMins = theMinsBox.text();
+									var currentHours = theHoursBox.text();
+									var currentDays = theDaysBox.text();
+
+									if (currentSeconds == 0 && currentMins == 0
+											&& currentHours == 0
+											&& currentDays == 0) {
+										// if everything rusn out our timer is done!!
+										// do some exciting code in here when your countdown timer finishes
+
+									} else if (currentSeconds == 0
+											&& currentMins == 0
+											&& currentHours == 0) {
+										// if the seconds and minutes and hours run out we subtract 1 day
+										theDaysBox.html(currentDays - 1);
+										theHoursBox.html("23");
+										theMinsBox.html("59");
+										theSecsBox.html("59");
+									} else if (currentSeconds == 0
+											&& currentMins == 0) {
+										// if the seconds and minutes run out we need to subtract 1 hour
+										theHoursBox.html(currentHours - 1);
+										theMinsBox.html("59");
+										theSecsBox.html("59");
+									} else if (currentSeconds == 0) {
+										// if the seconds run out we need to subtract 1 minute
+										theMinsBox.html(currentMins - 1);
+										theSecsBox.html("59");
+									} else {
+										theSecsBox.html(currentSeconds - 1);
+									}
+								}, 1000);
+
+						/* activate scrollspy menu */
+						/* 		var $body = $(document.body);
+						 var navHeight = $('#video').outerHeight(true) + 10;
+
+						 $body.scrollspy({
+						 target : '#leftCol',
+						 offset : navHeight
+						 }); */
+						$('a[href*=#]:not([href=#])')
+								.click(
+										function() {
+											if (location.pathname.replace(
+													/^\//, '') == this.pathname
+													.replace(/^\//, '')
+													&& location.hostname == this.hostname) {
+												var target = $(this.hash);
+												target = target.length ? target
+														: $('[name='
+																+ this.hash
+																		.slice(1)
+																+ ']');
+												if (target.length) {
+													$('html,body')
+															.animate(
+																	{
+																		scrollTop : target
+																				.offset().top - 50
+																	}, 1000);
+													return false;
+												}
+											}
+										});
+						//================================================
+
+						
+						//================================================
+						$('#tagcloud').tagoSphere();
+
+					});
+</script>
+</head>
+
+<!-- NAVBAR
+================================================== -->
+
+<body>
+
+	<div class="navbar-wrapper">
+		<div class="container">
+			<nav class="navbar navbar-inverse navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar"
+							aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">@@@ 2 조 @@@</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+
+	</div>
+	<div class="container">
+		<section id="video" class="content-section video-section">
+			<div class="pattern-overlay">
+				<a id="bgndVideo" class="player"
+					data-property="{videoURL:'https://www.youtube.com/watch?v=Xes3H24umI0',containment:'.video-section', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-12">
+										<div id="wrapping">
+											<div id="clock-ticker" class="clearfix">
+												<div class="block">
+													<span class="flip-top" id="numdays">8</span> <span
+														class="flip-btm"></span>
+													<footer class="label">Days</footer>
+												</div>
+
+												<div class="block">
+													<span class="flip-top" id="numhours">14</span> <span
+														class="flip-btm"></span>
+													<footer class="label">Hours</footer>
+												</div>
+
+												<div class="block">
+													<span class="flip-top" id="nummins">34</span> <span
+														class="flip-btm"></span>
+													<footer class="label">Mins</footer>
+												</div>
+
+												<div class="block">
+													<span class="flip-top" id="numsecs">9</span> <span
+														class="flip-btm"></span>
+													<footer class="label">Secs</footer>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<hr class="featurette-divider">
+		<div class="col-md-3" id="leftCol">
+			<ul class="nav nav-stacked" id="sidebar">
+				<li><a href="#who">일번줄 소개</a></li>
+				<li><a href="#contact">두번째 줄 소개</a></li>
+				<li><a href="#games">Zombie</a></li>
+				<li><a href="#racing">Racing</a></li>
+				<li><a href="#star">Star</a></li>
+				<li><a href="#myCarousel">회전게임</a></li>
+			</ul>
+		</div>
+		<div class="col-md-9">
+			<!-- /.carousel -->
+
+
+			<!-- Marketing messaging and featurettes
+    ================================================== -->
+			<!-- Wrap the rest of the page in another container to center all the content. -->
+
+			<!-- Three columns of text below the carousel -->
+			<div id="who" class="row">
+				<div class="col-lg-4">
+					<img class="img-circle" src="img/heo.PNG" data-toggle="tooltip"
+						data-placement="bottom" title="허창무/2X살/경기도 하남/O형"
+						alt="Generic placeholder image" width="140" height="140"> </img>
+					<h2>허창무</h2>
+				</div>
+				<div class="col-lg-4">
+					<img class="img-circle" src="img/hyeon.PNG"
+						alt="Generic placeholder image" width="140" height="140"
+						data-toggle="tooltip" data-placement="bottom"
+						title="전현준/2X살/경기도 성남/A형">
+					<h2>전현준</h2>
+
+				</div>
+				<div class="col-lg-4">
+					<img class="img-circle" src="img/yoo.PNG"
+						alt="Generic placeholder image" width="140" height="140"
+						data-toggle="tooltip" data-placement="bottom"
+						title="우승호/2X살/인천/O형">
+					<h2>우승호</h2>
+
+				</div>
+				<!-- /.col-lg-4 -->
+			</div>
+			<hr class="featurette-divider">
+
+			<div id="contact" class="row featurette">
+
+				<div class="col-lg-4">
+					<img class="img-circle" src="img/shin.PNG"
+						alt="Generic placeholder image" width="140" height="140"
+						data-toggle="tooltip" data-placement="bottom"
+						title="박신홍/2X살/서울 방배/B형">
+					<h2>박신홍</h2>
+				</div>
+				<div class="col-lg-4">
+					<img class="img-circle" src="img/son.PNG"
+						alt="Generic placeholder image" width="140" height="140"
+						data-toggle="tooltip" data-placement="bottom"
+						title="손인호/3X살/동탄/B형">
+					<h2>손인호</h2>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<img class="img-circle" src="img/yeon.PNG"
+						alt="Generic placeholder image" width="140" height="140"
+						data-toggle="tooltip" data-placement="bottom"
+						title="연제석 /2X살 /경기도 수원 /O형">
+					<h2>연제석</h2>
+				</div>
+			</div>
+			<hr class="featurette-divider">
+			<div id="games">
+				<h1>좀비 게임</h1>
+				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+					width="700" height="500" id="flash-content">
+					<param name="movie"
+						value="http://file.norara.com/game/GameFile/02619.swf">
+					<param name="quality" value="high">
+					<!--[if !IE]>-->
+					<object type="application/x-shockwave-flash"
+						data="http://file.norara.com/game/GameFile/02619.swf" width="700"
+						height="500" style="visibility: visible;">
+						<param name="quality" value="high">
+						<param name="wmode" value="Direct">
+						<!--<![endif]-->
+						<div class="getflashplayer">
+							<h2>Sorry, you have no flash player installed.</h2>
+							<h2>Please install flash player to see the content.</h2>
+							<a href="http://www.adobe.com/go/getflashplayer"> <img
+								src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+								alt="Get Adobe Flash player">
+							</a>
+						</div>
+						<!--[if !IE]>-->
+					</object>
+					<!--<![endif]-->
+				</object>
+			</div>
+			<div id="racing">
+				<h1>Racing</h1>
+				<object type="application/x-shockwave-flash"
+					data="http://file.norara.com/game/GameFile/driftbattle.swf"
+					width="640" height="480" style="visibility: visible;">
+					<param name="quality" value="high">
+					<param name="wmode" value="Direct">
+					<!--<![endif]-->
+					<div class="getflashplayer">
+						<h2>Sorry, you have no flash player installed.</h2>
+						<h2>Please install flash player to see the content.</h2>
+						<a href="http://www.adobe.com/go/getflashplayer"> <img
+							src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+							alt="Get Adobe Flash player">
+						</a>
+					</div>
+					<!--[if !IE]>-->
+				</object>
+			</div>
+			<div id="star">
+				<h1>Star</h1>
+				<table align="center" border="0" cellspacing="0" cellpadding="0"
+					bgcolor="#000000" width="628">
+					<!--ddn 2015-04-17 게임상단-->
+					<tbody>
+						<tr>
+							<td bgcolor="000000" align="center"><iframe
+									src="http://ad.xc.nis.nitmus.com/xc/h/FADw3mEC" width="728"
+									height="90" frameborder="0" scrolling="no" topmargin="0"
+									leftmargin="0" marginwidth="0" marginheight="0"></iframe></td>
+						</tr>
+						<!--ddn 2015-04-17 게임상단-->
+						<!--tr><td bgcolor="000000" align="center"><div id="CmAdView1"></div></td></tr-->
+						<tr>
+							<td align="center" valign="bottom">
+								<!-- 플래시 위 복합광고 시작 --> <script type="text/javascript">
+									var showBoolean = false;
+									function showGame() {
+										var div1 = document
+												.getElementById('div_preloader');
+										var div2 = document
+												.getElementById('div_flashgame');
+										if (div1) {
+											div1.style.display = 'none';
+										}
+										if (div2 && showBoolean == false) {
+											div1.style.display = 'none';
+											div1.innerHTML = '';
+											showBoolean = true;
+										}
+									}
+									function removeAdSwf() {
+										showGame();
+									}
+									function noAdsReturned() {
+										showGame();
+									}
+								</script>
+
+								<div style="width: 900px; height: 643px; overflow: hidden;">
+
+									<div id="div_preloader" style="z-index: 1; display: none;"></div>
+
+									<div id="div_flashgame"
+										style="width: 900px; height: 643px; z-index: 2;">
+										<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+											width="900" height="643" id="flash-content">
+											<param name="movie"
+												value="http://file.norara.com/game/GameFile/350461_scfa5_final.swf">
+											<param name="quality" value="high">
+											<!--[if !IE]>-->
+											<object type="application/x-shockwave-flash"
+												data="http://file.norara.com/game/GameFile/350461_scfa5_final.swf"
+												width="900" height="643">
+												<param name="quality" value="high">
+												<param name="wmode" value="Direct">
+												<!--<![endif]-->
+												<div class="getflashplayer">
+													<h2>Sorry, you have no flash player installed.</h2>
+													<h2>Please install flash player to see the content.</h2>
+													<a href="http://www.adobe.com/go/getflashplayer"> <img
+														src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+														alt="Get Adobe Flash player">
+													</a>
+												</div>
+												<!--[if !IE]>-->
+											</object>
+											<!--<![endif]-->
+										</object>
+
+									</div>
+								</div>
+							</td>
+						</tr>
+
+						<!--ddn 2015-04-17 게임하단-->
+						<tr>
+							<td bgcolor="000000" align="center"><iframe
+									src="http://ad.xc.nis.nitmus.com/xc/h/FADAhETk" width="728"
+									height="90" frameborder="0" scrolling="no" topmargin="0"
+									leftmargin="0" marginwidth="0" marginheight="0"></iframe></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+			<div id="myCarousel" class="carousel slide" data-ride="carousel"
+				class="active">
+				<h1>게임스</h1>
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				</ol>
+
+				<div class="carousel-inner" role="listbox">
+					<div id="first" class="item active">
+						<div style="width: 900px; height: 643px; overflow: hidden;">
+
+							<div id="div_preloader" style="z-index: 1; display: none;"></div>
+
+							<div id="div_flashgame"
+								style="width: 900px; height: 643px; z-index: 2;">
+								<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+									width="900" height="643" id="flash-content">
+									<param name="movie"
+										value="http://file.norara.com/game/GameFile/350461_scfa5_final.swf">
+									<param name="quality" value="high">
+									<!--[if !IE]>-->
+									<object type="application/x-shockwave-flash"
+										data="http://file.norara.com/game/GameFile/350461_scfa5_final.swf"
+										width="900" height="643">
+										<param name="quality" value="high">
+										<param name="wmode" value="Direct">
+										<!--<![endif]-->
+										<div class="getflashplayer">
+											<h2>Sorry, you have no flash player installed.</h2>
+											<h2>Please install flash player to see the content.</h2>
+											<a href="http://www.adobe.com/go/getflashplayer"> <img
+												src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+												alt="Get Adobe Flash player">
+											</a>
+										</div>
+										<!--[if !IE]>-->
+									</object>
+									<!--<![endif]-->
+								</object>
+
+							</div>
+						</div>
+					</div>
+					<div id="second" class="item">
+						<object type="application/x-shockwave-flash"
+							data="http://file.norara.com/game/GameFile/driftbattle.swf"
+							width="640" height="480" style="visibility: visible;">
+							<param name="quality" value="high">
+							<param name="wmode" value="Direct">
+							<!--<![endif]-->
+							<div class="getflashplayer">
+								<h2>Sorry, you have no flash player installed.</h2>
+								<h2>Please install flash player to see the content.</h2>
+								<a href="http://www.adobe.com/go/getflashplayer"> <img
+									src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+									alt="Get Adobe Flash player">
+								</a>
+							</div>
+							<!--[if !IE]>-->
+						</object>
+					</div>
+					<div id="third" class="item">
+						<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+							width="700" height="500" id="flash-content">
+							<param name="movie"
+								value="http://file.norara.com/game/GameFile/02619.swf">
+							<param name="quality" value="high">
+							<!--[if !IE]>-->
+							<object type="application/x-shockwave-flash"
+								data="http://file.norara.com/game/GameFile/02619.swf"
+								width="700" height="500" style="visibility: visible;">
+								<param name="quality" value="high">
+								<param name="wmode" value="Direct">
+								<!--<![endif]-->
+								<div class="getflashplayer">
+									<h2>Sorry, you have no flash player installed.</h2>
+									<h2>Please install flash player to see the content.</h2>
+									<a href="http://www.adobe.com/go/getflashplayer"> <img
+										src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+										alt="Get Adobe Flash player">
+									</a>
+								</div>
+								<!--[if !IE]>-->
+							</object>
+							<!--<![endif]-->
+						</object>
+					</div>
+				</div>
+
+				<div class="left carousel-control" href="#myCarousel" role="button"
+					data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</div>
+				<div class="right carousel-control" href="#myCarousel" role="button"
+					data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</div>
+			</div>
+			<div id="tagcloud">
+				<ul>
+					<li><a href="#">dazzlingly</a></li>
+					<li><a href="#">appetite</a></li>
+					<li><a href="#">delineate</a></li>
+					<li><a href="#">polytomous</a></li>
+					<li><a href="#">parheliacal</a></li>
+					<li><a href="#">loweringness</a></li>
+					<li><a href="#">dragontail</a></li>
+					<li><a href="#">ultimity</a></li>
+					<li><a href="#">Orleanist</a></li>
+					<li><a href="#">cephalogenesis</a></li>
+					<li><a href="#">willyer</a></li>
+					<li><a href="#">unhustling</a></li>
+					<li><a href="#">polydactylism</a></li>
+					<li><a href="#">scriever</a></li>
+					<li><a href="#">spantoon</a></li>
+					<li><a href="#">Goclenian</a></li>
+					<li><a href="#">outdoor</a></li>
+					<li><a href="#">unbeknownst</a></li>
+					<li><a href="#">convictiveness</a></li>
+					<li><a href="#">scrotitis</a></li>
+					<li><a href="#">Tabriz</a></li>
+					<li><a href="#">bigener</a></li>
+					<li><a href="#">chiefly</a></li>
+					<li><a href="#">bearess</a></li>
+					<li><a href="#">untrussed</a></li>
+					<li><a href="#">clericality</a></li>
+					<li><a href="#">lagen</a></li>
+					<li><a href="#">Gervas</a></li>
+					<li><a href="#">rerebrace</a></li>
+					<li><a href="#">mott</a></li>
+					<li><a href="#">vertimeter</a></li>
+					<li><a href="#">tormentous</a></li>
+					<li><a href="#">jagua</a></li>
+					<li><a href="#">stromatology</a></li>
+					<li><a href="#">nonstatic</a></li>
+					<li><a href="#">rangey</a></li>
+					<li><a href="#">overzealous</a></li>
+					<li><a href="#">manufacturess</a></li>
+					<li><a href="#">affrighter</a></li>
+					<li><a href="#">Zirbanit</a></li>
+					<li><a href="#">paradigmatic</a></li>
+					<li><a href="#">unexpressive</a></li>
+					<li><a href="#">Gelidiaceae</a></li>
+					<li><a href="#">noodledom</a></li>
+					<li><a href="#">deoxygenation</a></li>
+					<li><a href="#">endoneurial</a></li>
+					<li><a href="#">convenee</a></li>
+					<li><a href="#">leapable</a></li>
+					<li><a href="#">maxilliform</a></li>
+					<li><a href="#">filching</a></li>
+					<li><a href="#">unavoidably</a></li>
+					<li><a href="#">szlachta</a></li>
+					<li><a href="#">azotoluene</a></li>
+					<li><a href="#">inchoate</a></li>
+					<li><a href="#">strikeless</a></li>
+					<li><a href="#">gadding</a></li>
+				</ul>
+			</div>
+
+		</div>
+		<hr class="featurette-divider">
+		<!-- FOOTER -->
+		<footer>
+			<p class="pull-right">
+				<a href="#">Back to top</a>
+			</p>
+			<p>
+				&copy; 2015 KOSTA. &middot; <a href="#">Privacy</a> &middot; <a
+					href="#">Terms</a>
+			</p>
+		</footer>
+
+
+	</div>
+
+</body>
+</html>

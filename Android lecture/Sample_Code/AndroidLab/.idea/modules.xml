@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidLab.iml" filepath="$PROJECT_DIR$/AndroidLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part10-27/part10-27.iml" filepath="$PROJECT_DIR$/part10-27/part10-27.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part10-28/part10-28.iml" filepath="$PROJECT_DIR$/part10-28/part10-28.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part10-29/part10-29.iml" filepath="$PROJECT_DIR$/part10-29/part10-29.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part10-30/part10-30.iml" filepath="$PROJECT_DIR$/part10-30/part10-30.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part10-mission/part10-mission.iml" filepath="$PROJECT_DIR$/part10-mission/part10-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part11-32/part11-32.iml" filepath="$PROJECT_DIR$/part11-32/part11-32.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part11-33/part11-33.iml" filepath="$PROJECT_DIR$/part11-33/part11-33.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part11-34/part11-34.iml" filepath="$PROJECT_DIR$/part11-34/part11-34.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part2-3/part2-3.iml" filepath="$PROJECT_DIR$/part2-3/part2-3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part2-4/part2-4.iml" filepath="$PROJECT_DIR$/part2-4/part2-4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part2-5/part2-5.iml" filepath="$PROJECT_DIR$/part2-5/part2-5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part2-6/part2-6.iml" filepath="$PROJECT_DIR$/part2-6/part2-6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part2-7/part2-7.iml" filepath="$PROJECT_DIR$/part2-7/part2-7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part2-mission/part2-mission.iml" filepath="$PROJECT_DIR$/part2-mission/part2-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part3-8/part3-8.iml" filepath="$PROJECT_DIR$/part3-8/part3-8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part3-9/part3-9.iml" filepath="$PROJECT_DIR$/part3-9/part3-9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part3-mission/part3-mission.iml" filepath="$PROJECT_DIR$/part3-mission/part3-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part4-10/part4-10.iml" filepath="$PROJECT_DIR$/part4-10/part4-10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part4-11/part4-11.iml" filepath="$PROJECT_DIR$/part4-11/part4-11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part4-12/part4-12.iml" filepath="$PROJECT_DIR$/part4-12/part4-12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part4-13/part4-13.iml" filepath="$PROJECT_DIR$/part4-13/part4-13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part4-mission/part4-mission.iml" filepath="$PROJECT_DIR$/part4-mission/part4-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part5-14/part5-14.iml" filepath="$PROJECT_DIR$/part5-14/part5-14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part5-15/part5-15.iml" filepath="$PROJECT_DIR$/part5-15/part5-15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part5-16/part5-16.iml" filepath="$PROJECT_DIR$/part5-16/part5-16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part5-mission/part5-mission.iml" filepath="$PROJECT_DIR$/part5-mission/part5-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part6-17/part6-17.iml" filepath="$PROJECT_DIR$/part6-17/part6-17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part6-18/part6-18.iml" filepath="$PROJECT_DIR$/part6-18/part6-18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part6-mission/part6-mission.iml" filepath="$PROJECT_DIR$/part6-mission/part6-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part7-19/part7-19.iml" filepath="$PROJECT_DIR$/part7-19/part7-19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part7-20/part7-20.iml" filepath="$PROJECT_DIR$/part7-20/part7-20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part7-20-aidl/part7-20-aidl.iml" filepath="$PROJECT_DIR$/part7-20-aidl/part7-20-aidl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part7-21/part7-21.iml" filepath="$PROJECT_DIR$/part7-21/part7-21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part7-21-provider/part7-21-provider.iml" filepath="$PROJECT_DIR$/part7-21-provider/part7-21-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part7-mission/part7-mission.iml" filepath="$PROJECT_DIR$/part7-mission/part7-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part8-22/part8-22.iml" filepath="$PROJECT_DIR$/part8-22/part8-22.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part8-23/part8-23.iml" filepath="$PROJECT_DIR$/part8-23/part8-23.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part8-mission/part8-mission.iml" filepath="$PROJECT_DIR$/part8-mission/part8-mission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part9-24/part9-24.iml" filepath="$PROJECT_DIR$/part9-24/part9-24.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part9-25/part9-25.iml" filepath="$PROJECT_DIR$/part9-25/part9-25.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part9-26/part9-26.iml" filepath="$PROJECT_DIR$/part9-26/part9-26.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part9-mission/part9-mission.iml" filepath="$PROJECT_DIR$/part9-mission/part9-mission.iml" />
+    </modules>
+  </component>
+</project>

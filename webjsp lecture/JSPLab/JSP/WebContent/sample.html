@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+ <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src= "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+
+<script>
+    // custom validation 정의
+    $.validator.addMethod(
+        'mobilephone', function (value, element) {
+            return (value.substring(0, 1) == 0) ? true : false;
+        }, '휴대전화 번호는 0 으로 시작하여야 합니다.'
+    );
+
+    $('#validationForm').validate({
+        onfocusout: false,
+        rules: {
+            name: {
+                required: true,
+                minlength: 2
+            }, pass: {
+                required: true,
+                rangelength: [5, 12]
+            }, confirm_pass: {
+                required: true,
+                rangelength: [5, 12],
+                equalTo: '#pass'
+            }, email: {
+                required: true,
+                email: true
+            }, birthdate: {
+                required: true,
+                number: true,
+                range: [1900, 2013]
+            }, tel: {
+                required: function (element) {
+                    return $('#telagree').is(':checked');
+                },
+                minlength: 10,
+                mobilephone: true
+            }, homepage: {
+                url: true
+            }
+        }, messages: {
+            name: {
+                required: "이름을 입력하세요.",
+                minlength: $.validator.format("이름은 최소 {0} 글자 이상 입력하세요.")
+            }, pass: {
+                required: "패스워드를 입력하세요.",
+                rangelength: $.validator.format("패스워드 최소 {0}글자 이상 {1}글자 이하로 입력하세요.")
+            }, confirm_pass: {
+                required: "패스워드 확인 입력하세요.",
+                rangelength: $.validator.format("패스워드 확인은 최소 {0}글자 이상 {1}글자 이하로 입력하세요."),
+                equalTo: "패스워드 항목과 일치하지 않습니다."
+            }, email: {
+                required: "이메일을 입력하세요",
+                email: "올바른 이메일 주소가 아닙니다."
+            }, birthdate: {
+                required: "출생 년도를 입력하세요.",
+                number: "출생년도는 숫자로 입력하셔야합니다.",
+                range: $.validator.format("출생년도는 {0}년에서 {1}년 사이의 값을 입력하세요.")
+            }, tel: {
+                required: "전화번호를 입력하세요.",
+                minlength: $.validator.format("전화번호는 최소 {0} 글자 이상 입력하세요.")
+            }, homepage: {
+                url: "올바른 홈페이지 URL이 아닙니다."
+            }
+        }, errorPlacement: function (error, element) {
+            // $(element).removeClass('error');
+            // do nothing;
+        }, invalidHandler: function (form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                alert(validator.errorList[0].message);
+                validator.errorList[0].element.focus();
+            }
+        }, submitHandler: function (form) {
+            $.ajax({
+                type: "POST",
+                url: "/sample/ajax/ajaxJson.do",
+                data: $(form).serialize(),
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                success: function (data) {
+                    if (data.code == '0') {
+                        alert('code:' + data.code + '\n' + 'msg:' + data.msg);
+                    }
+                }, error: function (jqXHR, textStatus, errorThrown) {
+                    alert(failMsg + ' ' + textStatus.msg);
+                }
+            });
+        }
+    });
+</script>
+</head>
+<body>
+<h1>jQuery form validation plugin sample</h1>
+<form id="validationForm" name="validationForm">
+    이름 <input type="text" name="name"><br>
+    비밀번호 <input type="text" name="pass" id="pass"><br>
+    비밀번호확인 <input type="text" name="confirm_pass"><br>
+    이메일 <input type="text" name="email"><br>
+    출생년도 <input type="text" name="birthdate"><br>
+    전화번호 입력 <input type="checkbox" name="telagree" id="telagree" onclick="$(this).next().toggle();">
+    <input type="text" name="tel" style="display: none;"><br>
+    홈페이지 <input type="text" name="homepage"><br>
+    <button type="button" onclick="$(this.form).submit()">SUBMIT</button>
+</form>
+</body>
+</html>

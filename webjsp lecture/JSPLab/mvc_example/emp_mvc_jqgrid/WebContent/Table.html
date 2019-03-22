@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+ 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+  </head>
+  <body>
+    <script type="text/javascript">
+    $(function(){
+        $('#dataList').DataTable({
+                 "paging": true ,
+                 "lengthChange": true,
+                 "searching": true,
+                 "ordering": true,
+                 "info": false,
+                 "autoWidth": false,
+                 "oLanguage": {
+                     "sSearch": "<span>검색</span> _INPUT_", //search
+                     "sLengthMenu" : "<span>짜잔</span> _MENU_",
+                   },
+                   "oPaginate": {
+                       "sFirst":    "처음",
+                       "sLast":     "마지막",
+                       "sNext":     "다음",
+                       "sPrevious": "이전"
+                   }
+ 
+               });
+             });
+      </script>
+ 
+    <table id="dataList">
+      <thead>
+      <tr>
+        <td>1</td>
+        <td>하이</td>
+        <td>재하</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2</td>
+        <td>하이</td>
+        <td>재하</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>빠이</td>
+        <td>재하</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>하이</td>
+        <td>재하</td>
+      </tr>
+    </tbody>
+    </table>
+  </body>
+</html>
+
+

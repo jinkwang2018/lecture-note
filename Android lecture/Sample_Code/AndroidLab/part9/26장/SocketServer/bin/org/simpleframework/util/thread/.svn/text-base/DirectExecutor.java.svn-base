@@ -1,0 +1,45 @@
+/*
+ * DirectExecutor.java February 2007
+ *
+ * Copyright (C) 2007, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.util.thread;
+
+import java.util.concurrent.Executor;
+
+/**
+ * The <code>DirectExecutor</code> object is used for synchronous
+ * execution of tasks. This simple acts as an adapter for running
+ * a <code>Runnable</code> implementation and can be used wherever
+ * the executor interface is required.
+ * 
+ * @author Niall Gallagher
+ */
+public class DirectExecutor implements Executor {
+   
+   /**
+    * This will execute the provided <code>Runnable</code> within
+    * the current thread. This implementation will simple invoke
+    * the run method of the task and wait for it to complete.
+    * 
+    * @param task this is the task that is to be executed
+    */
+   public void execute(Runnable task) {
+      task.run();
+   }
+}

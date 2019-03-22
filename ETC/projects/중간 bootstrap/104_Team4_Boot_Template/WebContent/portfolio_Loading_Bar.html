@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+	<style type="text/css">
+	/* body {
+		background: #000;
+	} */
+	
+	canvas {
+		background: #181818;
+		box-shadow: 0 0 0 1px #282828;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	</style>
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio-1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio-2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio-3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="index.html">-</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="404.html">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">CANVAS
+                    <small>로딩바</small>
+                </h1>
+            </div>
+        </div>
+		<script type="text/javascript">
+			var canvas = document.createElement( 'canvas' ),
+			ctx = canvas.getContext( '2d' ),
+			width = 400,
+			height = 100,
+			loaded = 0,
+			loaderSpeed = 0.6,
+			loaderWidth = 310,
+			loaderHeight = 16,
+			loaderX = width / 2 - loaderWidth / 2,
+			loaderY = height / 2 - loaderHeight / 2,
+			particles = [],
+			particleLift = 180,
+			particleRate = 4,
+			hueStart = 0,
+			hueEnd = 120,
+			hue = 0,
+			gravity = 0.12,
+			dpr = window.devicePixelRatio;
+			
+			document.body.appendChild( canvas );
+			canvas.width = width;
+			canvas.height = height;
+			canvas.style.width = ( width / dpr ) + 'px';
+			canvas.style.height = ( height / dpr ) + 'px';
+			ctx.globalCompositeOperation = 'lighter';
+						
+			function rand( rMi, rMa ) {
+			return ~~((Math.random()*(rMa-rMi+1))+rMi);
+			}
+			
+			function updateLoader() {
+			if( loaded < 100 ) {
+				loaded += loaderSpeed;
+			} else {
+				loaded = 0;
+			}
+			}
+			
+			function renderLoader() {
+			ctx.fillStyle = '#000';
+			ctx.fillRect( loaderX, loaderY, loaderWidth, loaderHeight );
+			
+			hue = hueStart + ( loaded / 100 ) * ( hueEnd - hueStart );
+			
+			var newWidth = ( loaded / 100 ) * loaderWidth;
+			ctx.fillStyle = 'hsla(' + hue + ', 100%, 40%, 1)';
+			ctx.fillRect( loaderX, loaderY, newWidth, loaderHeight );
+			
+			ctx.fillStyle = '#444';
+			ctx.fillRect( loaderX, loaderY, newWidth, loaderHeight / 2 );
+			}
+			
+			function Particle() {					
+			this.x = loaderX + ( ( loaded / 100 ) * loaderWidth ) - rand( 0, 1 );
+			this.y = height / 2 + rand( 0, loaderHeight ) - loaderHeight / 2;
+			this.vx = ( rand( 0, 4 ) - 2 ) / 100;
+			this.vy = ( rand( 0, particleLift ) - particleLift * 2 ) / 100;
+			this.width = rand( 1, 4 ) / 2;
+			this.height = rand( 1, 4 ) / 2;
+			this.hue = hue;
+			}
+			
+			Particle.prototype.update = function( i ) {
+			this.vx += ( rand( 0, 6 ) - 3 ) / 100; 
+			this.vy += gravity;
+			this.x += this.vx;
+			this.y += this.vy;
+			
+			if( this.y > height ) {
+				particles.splice( i, 1 );
+			}					
+			};
+			
+			Particle.prototype.render = function() {
+			ctx.fillStyle = 'hsla(' + this.hue + ', 100%, ' + rand( 50, 70 ) + '%, ' + rand( 20, 100 ) / 100 + ')';
+			ctx.fillRect( this.x, this.y, this.width, this.height );
+			};
+			
+			function createParticles() {
+			var i = particleRate;
+			while( i-- ) {
+				this.particles.push( new Particle() );
+			}
+			}
+			
+			function updateParticles() {					
+			var i = particles.length;						
+			while( i-- ) {
+				var p = particles[ i ];
+				p.update( i );											
+			};					
+			}
+			
+			function renderParticles() {
+			var i = particles.length;						
+			while( i-- ) {
+				var p = particles[ i ];
+				p.render();											
+			}			
+			}
+			
+			function clearCanvas() {
+			ctx.clearRect( 0, 0, width, height );					
+			}
+			
+			
+			function loop() {
+			requestAnimationFrame( loop );
+			clearCanvas();
+			createParticles();
+			updateLoader();
+			updateParticles();
+			renderLoader();
+			renderParticles();
+			}
+			
+			loop();
+			</script>
+
+
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Portfolio Item - Start Bootstrap Template</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js'></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+	
+	<style>
+    .a_floatbox{
+    	margin-left: 10px;
+    }
+    .hr_css {
+    	margin: 0px;
+    }
+    #floatMenu {
+		position: absolute;
+		width: 150px;
+		right: 20px;
+		top: 150px;
+		border: 2px solid black;
+		background-color: whitegray;
+		color: #fff;
+	}
+    </style>
+    
+    <script>
+    function funcThisSize(){
+    	if(window.innerWidth < 1500){
+    		$("#floatMenu").css("display", "none");
+    	}else{
+    		$("#floatMenu").css("display", "block");
+    	}
+    }
+    
+	$(document).ready(function() {
+		funcThisSize();
+		//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		var floatPosition = parseInt($("#floatMenu").css('top'));
+		//250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+	 	
+		$(window).resize(funcThisSize);
+		
+		$("#svg_schedule").load("project/svg_schedule.html");
+		
+		$(window).scroll(function() {
+			//현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			var newPosition = scrollTop + floatPosition + "px";
+	 
+			//애니메이션 없이 바로 따라감
+			//$("#floatMenu").css('top', newPosition);
+
+			$("#floatMenu").stop().animate({
+				"top" : newPosition
+			}, 500);
+	 
+		}).scroll();
+	 
+	});
+	</script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Team 4OUR</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio_1.html">HTML Canvas</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_2.html">HTML SVG</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_3.html">HTML Google Maps</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_4.html">jQuery UI</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_5.html">AJAX Chart</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="#">404</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+	
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">CANVAS
+                    <small>HTML5에 그림을 구현하는 함수</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-9">
+                <h3>Canvas Description</h3>
+                <p>&nbsp;HTML 5의 Canvas는 그래픽을 그리는데 사용한다. 하지만 이 자체에는 스스로 그리는 기능은 없고 그래픽들을 담아주는 역할을 한다. 
+                	그렇기 때문에 그래픽을 그리기 위해서는 사실상 스크립트 언어를 사용해야한다.</p>
+                <h3>구현한 프로젝트</h3>
+                <ul>
+                    <li>Canavas 함수 설명</li>
+                    <li>그림판</li>
+                    <li>로딩바</li>
+                    <li>불꽃놀이</li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_API.html">
+                    <img class="img-responsive portfolio-item" src="http://static1.squarespace.com/static/58d9355ef5e231abb45e225a/t/58d9a8811b10e3174ee2c63b/1521482727658/" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_drawing.html">
+                    <img class="img-responsive portfolio-item" src="https://www.software.kr/thumbnail/1/gq4WeovPh1psKvtOVg3EfagJHgd9GcDC3M7Lg9Oap6eAMHoy8LHYwMkR1hFgIAzd.do" alt="">
+                </a>
+            </div>
+
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_Loading_Bar.html">
+                    <img class="img-responsive portfolio-item" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SZsu7JDqliztt1ct9/videoblocks-loading-bar-modern-concept-sign-progress-screen-download-idea-animation-design-load-alpha-channel-4k_swkumfvxw_thumbnail-full01.png" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="portfolio_Firework.html">
+                    <img class="img-responsive portfolio-item" src="https://cbmpress.com/toronto/wp-content/uploads/sites/3/2017/07/0701_1.png" alt="">
+                </a>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p style="text-align: center;">Introduce Our Team Website 2018</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    
+    <!-- Side Floating Menu Box -->
+	<div id="floatMenu">
+		<hr class="hr_css">
+		<a class="a_floatbox" href="index.html"><b>Home</b></a>
+		
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		
+		<a class="a_floatbox" href="index.html#portfolio-us"><b>Portfolio</b></a>
+		<hr class="hr_css">
+		<a class="a_floatbox" href="portfolio_1.html"><small>HTML Canvas</small></a><br>
+		<a class="a_floatbox" href="portfolio_2.html"><small>HTML SVG</small></a><br>
+		<a class="a_floatbox" href="portfolio_3.html"><small>HTML Google Maps</small></a><br>
+		<a class="a_floatbox" href="portfolio_4.html"><small>jQuery UI</small></a><br>
+		<a class="a_floatbox" href="portfolio_5.html"><small>AJAX Chart</small></a><br>
+		<a class="a_floatbox" href="index.html">-</a>
+			
+		
+
+		<hr class="hr_css"><hr class="hr_css"><hr class="hr_css"><hr class="hr_css">
+		
+		<a class="a_floatbox" href="index.html#about-us"><b>About</b></a><br>
+		<a class="a_floatbox" href="index.html#contact-us"><b>Contact</b></a>
+		<hr class="hr_css">
+	</div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

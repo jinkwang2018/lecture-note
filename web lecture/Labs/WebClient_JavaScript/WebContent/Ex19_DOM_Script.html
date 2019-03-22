@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			//onload 이벤트는 body안의 태그의 요소가 모두 브라우저에 loading되고 나서 자동으로 발생한다.
+			//<body onload = call()></body>
+			//window.onload = call() 코드 방식도 적용 가능하다.
+			
+			//DOM 처리를 위한 [함수 학습하기]
+			//https://www.w3schools.com/js/js_htmldom_document.asp
+			window.onload = function(){//함수 이름이 없다 (익명함수 : 일회성) : 재활용 안한다. 
+				//page요소가 loading된 후에 함수를 자동 실행하겠다.
+				//body 안쪽을 제어할 수 있다.
+				//alert("gogo");
+				var out = "";
+				out += "<ul>";
+					out += "<li>javascript</li>";
+					out += "<li>jquery</li>";
+					out += "<li>oracle</li>";
+				out += "</ul>";
+				document.body.innerHTML = out;
+				
+				var header = document.createElement("h1");
+				//<h1></h1>
+				var textnode = document.createTextNode("hello");
+				
+				header.appendChild(textnode); // header 자식으로 textnode를 만들어준다.
+				//<h1>hello</h1>
+				document.body.appendChild(header);
+				//<body><h1>hello</h1></body>
+				
+				//img 태그를 생성하고 image src 속성을 만들고 body append
+				var img = document.createElement("img");
+				//<img>
+				img.setAttribute("src", "images/tomcat.png"); //<img src="images/1.png">
+				//<img src = "images/tomcat.png">
+				img.setAttribute("width",'100');
+				img.setAttribute("height",'100');
+				//<img src = "images/tomcat.png" width = "100px" height = "100px">
+				document.body.appendChild(img);
+				
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+		HELLO WORLD
+	</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/dark-hive/jquery-ui.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  		<script src= "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+		
+		<style type="text/css">
+		body {
+			font: 20px Montserrat, sans-serif;
+			line-height: 1.8;
+		}
+		
+		#iframe {
+			border: 0;
+		}
+		
+		#hide {
+			float: right;
+		}
+		
+		#video {
+			width: 80%;
+		}
+		
+		#container {
+			background-color: lavenderblush;
+			width: 100%;
+			height: 70%;
+		}
+		tr{
+			border:0;
+		}
+		
+		</style>
+		<script type="text/javascript">
+		//validation
+			$(function() {
+				$.validator.addMethod("regx",
+						function(value, element, regexpr) {
+							return regexpr.test(value);
+
+						}
+
+				);
+
+				$('#signForm')
+						.validate(
+								{
+									rules : {
+										userId : {
+											required : true,
+											rangelength : [ 3, 16 ],
+											regx : /^[a-z|0-9]+$/
+										},
+										userName : {
+											required : true,
+											regx : /^[ㄱ-ㅎ|가-힣]+$/
+										},
+										userPass : {
+											required : true,
+											rangelength : [ 6, 18 ],
+											regx : /^[a-z|0-9]+$/
+										},
+										userPassCheck : {
+											required : true,
+											rangelength : [ 6, 18 ],
+											equalTo : '#userPass',
+											
+										},
+										userEmail : {
+											required : true,
+											email : true
+										},
+										userPhone : {
+											required : true,
+											rangelength : [ 10, 14 ],
+											regx : /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
+										}
+									},
+									messages : {
+										userId : {
+											required : "아이디를 입력해주세요.",
+											rangelength : $.validator
+													.format("아이디의 글자수는 {0}~{1}자까지 입니다."),
+											regx : "아이디는 영문자와 숫자만 가능합니다.!!!"
+										},
+										userName : {
+											required : "이름을 입력해주세요.",
+											regx : "이름은 한글만 가능합니다."
+										},
+										userPass : {
+											required : "비밀번호를 입력해주세요.",
+											rangelength : $.validator
+													.format("비밀번호의 글자수는 {0}~{1}자까지 입니다."),
+											regx : "비밀번호는 영문자와 숫자만 가능합니다.!!!"
+										},
+										userPassCheck : {
+											required : "입력한 비밀번호와 다릅니다.",
+											rangelength : $.validator
+													.format("비밀번호의 글자수는 {0}~{1}자까지 입니다."),
+											equalTo : "비밀번호가 같지 않습니다.",
+										},
+										userEmail : {
+											required : "email을 입력해주세요 !!",
+											email : "email 형식이 아닙니다."
+										},
+										userPhone : {
+											required : "번호를 입력해주세요",
+											number : "숫자만 입력하세요",
+											regx : " 000-0000-0000형식입니다.",
+											rangelength : $.validator
+													.format("핸드폰번호의 글자수는 {0}~{1}까지 입니다.")
+										}
+									}
+								});
+
+			});
+		 
+		</script>
+	</head>
+	
+	<body>
+	
+		<div class="col-sm-12">
+			<div class="container-fluid" id="myNavbar">
+				<ul class="nav navbar-nav navbar">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">menu<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">1</a></li>
+							<li><a href="#text-2">2</a></li>
+							<li><a href="#text-3">3</a></li>
+							<li><a href="#text-4">4</a></li>
+						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">profile<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#text-1">1</a></li>
+							<li><a href="#text-2">2</a></li>
+							<li><a href="#text-3">3</a></li>
+							<li><a href="#text-4">4</a></li>
+						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">one<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="homepage3.html">1</a></li>
+	
+							<li><a href="#text-2">2</a></li>
+							<li><a href="#text-3">3</a></li>
+							<li><a href="#text-4">4</a></li>
+						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">two<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#text-1">1</a></li>
+							<li><a href="#text-2">2</a></li>
+							<li><a href="#text-3">3</a></li>
+							<li><a href="#text-4">4</a></li>
+						</ul></li>
+				</ul>
+	
+				<ul class="nav navbar-nav navbar-right">
+					<li><a data-toggle="modal" data-target="#myModal1"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a data-toggle="modal" data-target="#myModal"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+				<!-- 회원가입 -->
+				<div id="myModal1" class="modal fade" role="dialog" >
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Sign Up</h4>
+							</div>
+							<form action="joinok.jsp" id="signForm" name="signForm" method="post" >
+								<div class="form-group">
+									<label for="userId">&nbsp;ID :</label> 
+									<input type="text" class="form-control" id="userId" placeholder="Enter id" name="userId">
+								</div>
+								<div class="form-group">
+									<label for="userName">&nbsp;NAME :</label> 
+									<input type="text" class="form-control" id="userName" placeholder="Enter name" name="userName">
+								</div>
+								<div class="form-group">
+									<label for="userPass">&nbsp;Password :</label> 
+									<input type="password" class="form-control" id="userPass" placeholder="Enter password" name="userPass">
+								</div>
+								<div class="form-group">
+									<label for="userPassCheck">&nbsp;check password :</label> 
+									<input type="password" class="form-control" id="userPassCheck" placeholder="Enter check password" name="userPassCheck">
+								</div>
+								<div class="form-group">
+									<label for="gender">&nbsp;gender :</label> 
+									<table>
+									<tr>
+									<td>male&nbsp;<input type="radio"class="form-control" id="gender" name="gender"value="남" ></td>
+									<td>female&nbsp;<input type="radio" class="form-control" id="gender1" name="gender" value="여"></td>
+									</tr>
+									</table>
+								</div> 
+								<div class="form-group">
+									<label for="userEmail">&nbsp;Email :</label> 
+									<input type="text" class="form-control" id="userEmail" placeholder="Enter Email" name="userEmail">
+								</div>
+								<div class="form-group">
+									<label for="userPhone">&nbsp;Phone number :</label> 
+									<input type="text" class="form-control" id="userPhone" placeholder="Enter check password" name="userPhone">
+								</div>
+						
+	
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-default">Sign Up</button>
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+	
+	
+				<!--로그인-->
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Login</h4>
+							</div>
+							<form>
+							<div class="modal-body">
+									<div class="form-group">
+										<label for="id">ID:</label> <input type="email"
+											class="form-control" id="id" placeholder="Enter ID">
+									</div>
+									<div class="form-group">
+										<label for="pwd">Password:</label> <input type="password"
+											class="form-control" id="pwd" placeholder="Enter password">
+									</div>
+									<div class="checkbox">
+										<label><input type="checkbox"> Remember me</label>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-default">Login</button>
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+		<div class="col-sm-12" id="container">
+			<iframe id="iframe" width='700' height='500' allow='encrypted-media'
+				allowfullscreen></iframe>
+		</div>
+	
+	
+		<footer class="container-fluid bg-4 text-center">
+			<p></p>
+		</footer>
+	
+	</body>
+</html>

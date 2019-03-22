@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	/*  
+	  Low-level Interface 비동기 함수(jquery.ajax())
+	  (개발자가 원하는 모든 형태의 비동기 코드 구현 : 상세 구현)
+	
+	  jquery.ajax(url,[,settings])
+	   url , settings > json 객체 내용 구현
+	   dataType : (서버가 응답하는 데이터 타입 )
+	   (xml , json , script , html , text)
+	   1. responseText  > json , script , html , text
+	   2. responseXml   > xml
+	   
+	*/
+		$(function(){
+			$('#message').click(function() {
+				jQuery.ajax({
+					url:"Ex02_menu.html",
+					dataType:"html", //서버가 client 응답 형식 : html
+					success:function(responsedata){
+						//서버가 응답한 코드 (200~299) 라면
+						//responsedata 를 통해서 응답한 데이터 받겠다
+						//가공 작업
+						$('#menudiv').html(responsedata);
+						
+						//[KEY POINT]
+						//가지고 온 데이터에서 (li 태그 내용만 붙이고 싶어요)
+						//this  > Jquery 함수 적용
+						//$(this).함수 사용가능
+						//$(responsedata) Jquery 함수 사용
+						//console.log(responsedata)
+
+						//jQuery 의 filter 메소드가 찾는 대상은 오직 [현재 찾는 노드]이고 
+						//jQuery 의 find 메소드가 찾는 대상은 [자식 노드]입니다. 	
+						
+						//자식요소 검색
+						//$(this).children(‘.foo’); 
+						//$(this).find(‘.foo’);
+						console.log($(responsedata).filter('ul>li'));
+						$('#menudiv').html($(responsedata).filter('p'));	
+						//$('#menudiv').html($(responsedata).find('p'));  //<div><p></p></div>						
+					}
+				});
+				
+			});
+		});
+	</script>
+	<style type="text/css">
+		#menudiv{
+			width: 300px;
+			height:300px;
+			margin: 3px;
+			float: left;
+			background-color: gold; 
+		}
+	</style>
+</head>
+<body>
+	<div id="menudiv">
+		<a href="#" id="menu1"></a>
+	
+	</div>
+	<span id="message">클릭하세요</span>
+</body>
+</html>
+
+
+

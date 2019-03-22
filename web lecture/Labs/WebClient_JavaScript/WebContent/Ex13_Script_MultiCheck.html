@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			var checkflag = "false";
+			function checkForm(){
+				var list = document.myform.list;
+				//list 변수가 Array인가
+				//console.log(list);
+				console.log(list.length);
+				if(checkflag == "false"){
+					for(var index in list){
+						list[index].checked = true;
+						//input 태그에 checked라는 속성을 추가 했다.
+					}
+					checkflag = "true";
+					return "[선택해제하기]"
+				}else{
+					for(var index in list){
+						list[index].checked = false;
+			
+					}
+					checkflag = "false";
+					return "[전체선택]"
+				}
+			}
+			////////////////////////////////////////////////////////////////////
+			var checkflag2 = "false"; //페이지내에서 모두 사용가능한 전역변수
+			function checkForm2(list){
+				if(checkflag2 == "false"){
+					for(var index in list){
+						list[index].checked = true;
+						//input 태그 >> checked 속성 추가
+					}
+					checkflag2 = "true";
+					
+					return "[선택해제하기]"
+				}else{
+					for(var index in list){
+						list[index].checked = false;
+					}
+					checkflag2 = "false";
+					
+					return "[전체선택]"
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<form action = "" name = "myform">
+			<input type = "checkbox" name = "list" value = "java">JAVA<br>
+			<input type = "checkbox" name = "list" value = "oracle">ORACLE<br>
+			<input type = "checkbox" name = "list" value = "html">HTML<br>
+			<input type = "checkbox" name = "list" value = "css">CSS<br>
+			<input type = "checkbox" name = "list" value = "jquery">JQUERY<br>
+			<input type  = "button" value = "[전체선택]" onclick = "this.value = checkForm()">
+			<br>
+			<input type  = "button" value = "[전체선택]" onclick = "this.value = checkForm2(this.form.list)">
+		</form>
+		
+	</body>
+</html>

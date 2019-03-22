@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitcamp_java 104th Team No.2 Google Map</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+   #map {
+      height: 500px;
+      width: 100%;
+      float: left;
+   }
+   .container{
+      margin-top: 3%;   
+      width:300px;
+      float: left;
+      margin-bottom: 20px;
+      
+   }
+   .container2{
+      height: 500px;
+      width:60%;
+      float: left;
+      margin-left: 4%;
+      margin-right: 4%;
+      margin-bottom: 20px;
+      
+   }
+   footer {
+   margin-top:50px;
+   padding-top:14px;
+   height:50px;
+   background: #aaa;
+   color: white;
+   clear: left;
+}
+  </style>
+  <script>
+   function initMap() { /*구글맵 실행 함수*/
+    
+   }
+   var placeSearch, autocomplete;
+   function initAutocomplete() {
+      var uluru = {
+            lat : 37.4994553,
+            lng : 127.02924710000002
+         };
+      
+      var map = new google.maps.Map(document.getElementById('map'), { /*구글맵 <div id="map">에 생성*/
+         zoom : 6, /*맵 확대 값 초기화*/
+         center : uluru
+      /*설정한 위도 경도로 위치 설정*/
+
+      });
+      
+      var lat = 0;
+      var lng=0;
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete((document
+            .getElementById('autocomplete')), {
+         types : [ 'geocode' ]
+      });
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      autocomplete.addListener('place_changed', fillInAddress);
+      
+
+   }
+   function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      $('.container > h2').empty();
+      $('.container > h2').append("GoogleMap");
+      $('#img').attr("src", "images/1.jpg");
+      
+      var place = autocomplete.getPlace();
+      lat = place.geometry.location.lat();
+      lng = place.geometry.location.lng();
+      
+      //document.getElementById("lat").value = lat;
+      //document.getElementById("lng").value = lng;
+      
+      var image = new google.maps.MarkerImage(new google.maps.Size(10, 10));
+      
+      var uluru = { /*맵 초기 경도 위도 값 설정*/
+            lat :  lat,
+            lng :  lng
+         };
+         var map = new google.maps.Map(document.getElementById('map'), { /*구글맵 <div id="map">에 생성*/
+            zoom : 15, /*맵 확대 값 초기화*/
+            center : uluru
+         /*설정한 위도 경도로 위치 설정*/
+
+         });
+         var marker = new google.maps.Marker({/*마커 생성*/
+            position : uluru, /*마커 위치 지정*/
+            map : map, /*구글맵*/
+            icon : image, /*마커 이미지 */
+            //title : '강남점' /*마커 title*/
+         });
+   }
+   
+   window.onload = function() {
+
+      var gangbtn = document.getElementById("gang"); /*비트캠프 강남점으로 이동하는 버튼 */
+      var sinbtn = document.getElementById("sin");
+      var jongbtn = document.getElementById("jong");
+      var mybtn = document.getElementById("my");
+
+      var image = new google.maps.MarkerImage(new google.maps.Size(10, 10)); /*마크 이미지 생성 및 크기 설정*/
+
+      gangbtn.onclick = function() { /*강남 선택 시*/
+         $('.container > h2').empty();
+         $('.container > h2').append("비트캠프 강남점");
+         $('#img').attr("src", "images/jang.JPG");
+         //document.getElementsByTagName("img").setAttribute("src", "images/jong.JPG");
+         
+         var uluru = {
+            lat : 37.4994553,
+            lng : 127.02924710000002
+         };
+         var map = new google.maps.Map(document.getElementById('map'), {
+            zoom : 17,
+            center : uluru
+         });
+         var marker = new google.maps.Marker({/*마커 생성*/
+            position : uluru, /*마커 위치 지정*/
+            map : map, /*구글맵*/
+            icon : image, /*마커 이미지 */
+            title : '강남점' /*마커 title*/
+         });
+         var content = "비트캠프_강남점<br/><br/>Tel: 010-1234-1241";
+         var infowindow = new google.maps.InfoWindow({
+            content : content
+         });
+         google.maps.event.addListener(marker, "click", function() {
+            infowindow.open(map, marker);
+         });
+         /*마커 클릭 시 생성되는 말풍선 실행함수*/
+      }
+      sinbtn.onclick = function() { /*비트캠프 신촌점 선택 시*/
+         $('.container > h2').empty();
+         $('.container > h2').append("비트캠프 신촌점");
+         $('#img').attr("src", "images/sin.JPG");
+         var uluru = {
+            lat : 37.5524589,
+            lng : 126.93782620000002
+         };
+         var map = new google.maps.Map(document.getElementById('map'), {
+            zoom : 17,
+            center : uluru
+         });
+         var marker = new google.maps.Marker({
+            position : uluru,
+            map : map,
+            icon : image,
+            title : '신촌점'
+         });
+         var content = "비트캠프_신촌점<br/><br/>Tel: 010-1235-5123";
+         var infowindow = new google.maps.InfoWindow({
+            content : content
+         });
+         google.maps.event.addListener(marker, "click", function() {
+            infowindow.open(map, marker);
+         });
+      }
+      jongbtn.onclick = function() { /*비트캠프 종로점 선택 시*/
+         $('.container > h2').empty();
+         $('.container > h2').append("비트캠프 종로점");
+         $('#img').attr("src", "images/jong.JPG");
+         var uluru = {
+            lat : 37.5706042,
+            lng : 126.98529189999999
+         };
+         var map = new google.maps.Map(document.getElementById('map'), {
+            zoom : 17,
+            center : uluru
+         });
+         var marker = new google.maps.Marker({
+            position : uluru,
+            map : map,
+            icon : image,
+            title : '종로점'
+         });
+         var content = "비트캠프_종로점<br/><br/>Tel: 010-8567-1234";
+         var infowindow = new google.maps.InfoWindow({
+            content : content
+         });
+         google.maps.event.addListener(marker, "click", function() {
+            infowindow.open(map, marker);
+         });
+      }
+      mybtn.onclick = function() { /*내 위치 클릭 시*/
+         $('.container > h2').empty();
+         $('.container > h2').append("현 위치");
+         $('#img').attr("src", "images/my.JPG");
+         if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+               /*네비게이터객체의 지오로케이션으로 현위치 위도 경도 추적*/
+               var uluru = {
+                  lat : position.coords.latitude, /*현위치 위도 경도 설정*/
+                  lng : position.coords.longitude
+               };
+               var map = new google.maps.Map(document
+                     .getElementById('map'), {
+                  zoom : 17,
+                  center : uluru
+               });
+               var marker = new google.maps.Marker({
+                  position : uluru,
+                  map : map,
+                  icon : image,
+                  title : '현위치'
+               });
+               var content = "현재 나의 위치<br/><br/>GPS기준";
+               var infowindow = new google.maps.InfoWindow({
+                  content : content
+               });
+               google.maps.event.addListener(marker, "click", function() {
+                  infowindow.open(map, marker);
+               });
+            }, function() { //지오로케이션 서비스가 실패했을 경우
+               handleLocationError(true, infoWindow, map.getCenter());
+            });
+         } else {
+            //브라우져가 지오로케이션을 지원하지 않는 경우
+            handleLocationError(false, infoWindow, map.getCenter());
+         }
+      }
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) { /*지오로케이션 에러 메세지 설정 함수*/
+         infoWindow.setPosition(pos);
+         infoWindow
+               .setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.'
+                     : 'Error: Your browser doesn\'t support geolocation.');
+      }
+   }
+</script>
+  
+</head>
+<body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEyaAYR4nEZaiSyQkXungKKn1bfI2iZX8&libraries=places&callback=initAutocomplete">
+</script>
+ 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">GoogleMap</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#" id="my">MY_LOC</a></li>
+      <li><a href="#" id="gang">비트캠프_강남점</a></li>
+      <li><a href="#" id="sin">비트캠프_신촌점</a></li>
+      <li><a href="#" id="jong">비트캠프_종로점</a></li>
+      
+    </ul>
+    <form class="navbar-form navbar-left" action="#">
+      <div class="input-group">
+      
+        <div id="locationField" class="form-group">
+         <input id="autocomplete" placeholder="Enter your address" type="text" class="form-control" name="search" style="width: 300px">
+      </div>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<div class="container2">
+   <div id="map" ></div>
+</div>
+
+<div id="info">
+   
+</div>
+
+<center><div class="container">
+  <h2>GoogleMap</h2>
+  <p>검색하고자 하는 장소를 입력하고 클릭하면 입력한 장소가 나와요!!</p>            
+  <img id="img" src="images/1.jpg" class="img-circle"  width="304" height="236"> 
+</div></center>
+
+<footer><center>BIT camp_Java 104_Team No.2</center></footer>
+</body>
+</html>

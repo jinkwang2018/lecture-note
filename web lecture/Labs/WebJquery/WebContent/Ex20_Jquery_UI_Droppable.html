@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+		 <style>
+			  #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+			  #droppable { position : absolute; left: 250px; top:300px; width: 350px; height: 400px; border : 1px solid red;}
+		 </style>
+		<script type="text/javascript">
+		$( function() {
+		    $( "#draggable" ).draggable(
+		    	{
+		    		opacity:0.35
+		    	}		
+		    );
+		    $( "#droppable" ).droppable({
+		      drop: function( event, ui ) {
+		        $( this )
+		          .addClass( "ui-state-highlight" )
+		          .find( "p" )
+		            .html( "Dropped!" );
+		      }
+		    });
+		    $('#droppable').droppable(
+			    	{
+			    		accept:'#draggable',
+			    		drop:function(){
+			    			$(this).text('끌어다 놓기 성공');
+			    		}
+			    	}
+			    );
+		  });
+		</script>
+	</head>
+	
+	<body>
+		<img src = "images/tomcat.png" id = "draggable">
+		<div id="droppable" class="ui-widget-header">
+		 	 <p>Drop here</p>
+		</div>
+	</body>
+</html>

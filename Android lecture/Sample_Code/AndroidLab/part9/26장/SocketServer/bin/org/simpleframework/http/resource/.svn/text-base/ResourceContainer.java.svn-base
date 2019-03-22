@@ -1,0 +1,73 @@
+/*
+ * ResourceProcessor.java February 2001
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+  
+package org.simpleframework.http.resource;
+
+import org.simpleframework.http.Response;
+import org.simpleframework.http.Request;
+import org.simpleframework.http.core.Container;
+
+/**
+ * The <code>ResourceContainer</code> is an implementation of the
+ * <code>Container</code> interface for handling an arbitrary set
+ * of resources. This container will accept any HTTP transaction
+ * and delegate the processing of that transation to a resource.
+ * This resolves the resource to use using an implementation of 
+ * the <code>ResourceEngine</code> interface. 
+ * <p>
+ * This provides a very simple means to manage individual targets
+ * using separate resource implementations. It also provides an
+ * ideal location to introduce path mapping functionality.
+ *
+ * @author Niall Gallagher
+ */
+public class ResourceContainer implements Container {   
+
+   /**
+    * The engine that resolves the resources to be used.
+    */
+   private final ResourceEngine engine;
+
+   /**
+    * Constructor for the <code>ResourceContainer</code> object.
+    * This requires a resource engine which it uses to map the
+    * request targets to a given implementation or instance. 
+    * This is essentially a router to the <code>Resource</code>
+    * objects that have been mapped to a given request path.
+    *
+    * @param engine the engine used to resolve resources
+    */
+   public ResourceContainer(ResourceEngine engine){
+      this.engine = engine;
+   }
+
+   /**
+    * This method is where most of the work is done to retrieve 
+    * the <code>Resource</code> and process the HTTP request. This
+    * will basically use the <code>resolve</code> method of the
+    * issued <code>ResourceEngine</code> to acquire resources.
+    *
+    * @param req the <code>Request</code> to be processed
+    * @param resp the <code>Response</code> to be processed
+    */
+   public void handle(Request req, Response resp){
+      engine.resolve(req.getAddress()).handle(req,resp);
+   }
+}

@@ -1,0 +1,132 @@
+package I_Love_Coffee;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Recipe {
+	private HashMap<String, ArrayList<String>> Menu_List = new HashMap<String, ArrayList<String>>();;
+
+	Recipe() {
+		ArrayList<String> AmericanoRecipe = new ArrayList<String>();
+		ArrayList<String> IceAmericanoRecipe = new ArrayList<String>();
+		ArrayList<String> LatteRecipe = new ArrayList<String>();
+		ArrayList<String> IceLatteRecipe = new ArrayList<String>();
+		ArrayList<String> CappuccinoRecipe = new ArrayList<String>();
+		ArrayList<String> CaramelLatteRrecipe = new ArrayList<String>();
+		ArrayList<String> IceCaramelLatteRecipe = new ArrayList<String>();
+		ArrayList<String> VanillaLatteRecipe = new ArrayList<String>();
+		ArrayList<String> IceVanillaLatteRecipe = new ArrayList<String>();
+		ArrayList<String> CafeMochaRecipe = new ArrayList<String>();
+		ArrayList<String> IceCafeMochaRecipe = new ArrayList<String>();
+		ArrayList<String> HotChocoRecipe = new ArrayList<String>();
+		ArrayList<String> IceChocoRecipe = new ArrayList<String>();
+		ArrayList<String> CaramelfrapRecipe = new ArrayList<String>();
+		ArrayList<String> VanillafrapRecipe = new ArrayList<String>();
+		ArrayList<String> MochafrapRecipe = new ArrayList<String>();
+		ArrayList<String> GreenteafrapRecipe = new ArrayList<String>();
+		ArrayList<String> ChocofrapRecipe = new ArrayList<String>();
+		ArrayList<String> SweetPotatoLatteRecipe = new ArrayList<String>();
+		ArrayList<String> GreenteaRecipe = new ArrayList<String>();
+		AmericanoRecipe.add("에스프레소샷");
+		AmericanoRecipe.add("물");
+		IceAmericanoRecipe.add("얼음");
+		IceAmericanoRecipe.add("물");
+		IceAmericanoRecipe.add("에스프레소샷");
+		LatteRecipe.add("에스프레소샷");
+		LatteRecipe.add("우유");
+		IceLatteRecipe.add("얼음");
+		IceLatteRecipe.add("우유");
+		IceLatteRecipe.add("에스프레소샷");
+		CappuccinoRecipe.add("에스프레소샷");
+		CappuccinoRecipe.add("우유");
+		CappuccinoRecipe.add("시나몬가루");
+		CaramelLatteRrecipe.add("카라멜시럽");
+		CaramelLatteRrecipe.add("에스프레소샷");
+		CaramelLatteRrecipe.add("우유");
+		IceCaramelLatteRecipe.add("카라멜시럽");
+		IceCaramelLatteRecipe.add("에스프레소샷");
+		IceCaramelLatteRecipe.add("우유");
+		IceCaramelLatteRecipe.add("얼음");
+		VanillaLatteRecipe.add("바닐라시럽");
+		VanillaLatteRecipe.add("에스프레소샷");
+		VanillaLatteRecipe.add("우유");
+		IceVanillaLatteRecipe.add("바닐라시럽");
+		IceVanillaLatteRecipe.add("에스프레소샷");
+		IceVanillaLatteRecipe.add("우유");
+		IceVanillaLatteRecipe.add("얼음");
+		CafeMochaRecipe.add("초코시럽");
+		CafeMochaRecipe.add("에스프레소샷");
+		CafeMochaRecipe.add("우유");
+		CafeMochaRecipe.add("생크림");
+		IceCafeMochaRecipe.add("초코시럽");
+		IceCafeMochaRecipe.add("에스프레소샷");
+		IceCafeMochaRecipe.add("우유");
+		IceCafeMochaRecipe.add("얼음");
+		IceCafeMochaRecipe.add("생크림");
+		HotChocoRecipe.add("초코시럽");
+		HotChocoRecipe.add("우유");
+		HotChocoRecipe.add("생크림");
+		IceChocoRecipe.add("초코시럽");
+		IceChocoRecipe.add("우유");
+		IceChocoRecipe.add("얼음");
+		IceChocoRecipe.add("생크림");
+		CaramelfrapRecipe.add("카라멜시럽");
+		CaramelfrapRecipe.add("에스프레소샷");
+		CaramelfrapRecipe.add("우유");
+		CaramelfrapRecipe.add("얼음");
+		CaramelfrapRecipe.add("블랜더");
+		CaramelfrapRecipe.add("생크림");
+		VanillafrapRecipe.add("바닐라시럽");
+		VanillafrapRecipe.add("에스프레소샷");
+		VanillafrapRecipe.add("우유");
+		VanillafrapRecipe.add("얼음");
+		VanillafrapRecipe.add("블랜더");
+		VanillafrapRecipe.add("생크림");
+		MochafrapRecipe.add("초코시럽");
+		MochafrapRecipe.add("에스프레소샷");
+		MochafrapRecipe.add("우유");
+		MochafrapRecipe.add("얼음");
+		MochafrapRecipe.add("블랜더");
+		MochafrapRecipe.add("생크림");
+		GreenteafrapRecipe.add("녹차파우더");
+		GreenteafrapRecipe.add("우유");
+		GreenteafrapRecipe.add("얼음");
+		GreenteafrapRecipe.add("블랜더");
+		GreenteafrapRecipe.add("생크림");
+		ChocofrapRecipe.add("초코시럽");
+		ChocofrapRecipe.add("우유");
+		ChocofrapRecipe.add("얼음");
+		ChocofrapRecipe.add("블랜더");
+		ChocofrapRecipe.add("생크림");
+		SweetPotatoLatteRecipe.add("고구마라떼파우더");
+		SweetPotatoLatteRecipe.add("우유");
+		GreenteaRecipe.add("녹차파우더");
+		GreenteaRecipe.add("물");
+
+		Menu_List.put("아메리카노", AmericanoRecipe);
+		Menu_List.put("아이스아메리카노", IceAmericanoRecipe);
+		Menu_List.put("라떼", LatteRecipe);
+		Menu_List.put("아이스라떼", IceLatteRecipe);
+		Menu_List.put("카푸치노", CappuccinoRecipe);
+		Menu_List.put("녹차", GreenteaRecipe);
+		Menu_List.put("고구마라떼", SweetPotatoLatteRecipe);
+		Menu_List.put("카라멜라떼", CaramelLatteRrecipe);
+		Menu_List.put("아이스카라멜라떼", IceCaramelLatteRecipe);
+		Menu_List.put("바닐라라떼", VanillaLatteRecipe);
+		Menu_List.put("아이스바닐라라떼", IceVanillaLatteRecipe);
+		Menu_List.put("카페모카", CafeMochaRecipe);
+		Menu_List.put("아이스카페모카", IceCafeMochaRecipe);
+		Menu_List.put("핫초코", HotChocoRecipe);
+		Menu_List.put("아이스초코", IceChocoRecipe);
+		Menu_List.put("카라멜프라푸치노", CaramelfrapRecipe);
+		Menu_List.put("바닐라프라푸치노", VanillafrapRecipe);
+		Menu_List.put("모카프라푸치노", MochafrapRecipe);
+		Menu_List.put("그린티프라푸치노", GreenteafrapRecipe);
+		Menu_List.put("초코프라푸치노", ChocofrapRecipe);
+	}
+
+	public HashMap<String, ArrayList<String>> getMenu_List() {
+		return Menu_List;
+	}
+
+}

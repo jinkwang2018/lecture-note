@@ -1,0 +1,66 @@
+/*
+ * Consumer.java February 2007
+ *
+ * Copyright (C) 2001, Niall Gallagher <niallg@users.sf.net>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General 
+ * Public License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA  02111-1307  USA
+ */
+
+package org.simpleframework.http.core;
+
+import java.io.IOException;
+
+import org.simpleframework.transport.Cursor;
+
+/**
+ * The <code>Consumer</code> object is used to consume and process 
+ * bytes from a cursor. This is used to consume bytes from a pipeline
+ * and process the content in order to produce a valid HTTP message.
+ * Using a consumer allows the server to gather and process the data
+ * from the stream bit by bit without blocking.
+ * <p>
+ * A consumer has completed its task when it has either exhausted its
+ * stream, or when it has consume a terminal token. For instance a 
+ * consumer for a HTTP header will have two <code>CRLF</code> bytes
+ * tokens to identify the end of the header, once this has been read
+ * any excess bytes are reset on the cursor and it has finished.
+ *
+ * @author Niall Gallagher
+ *
+ * @see org.simpleframework.transport.Cursor
+ */ 
+interface Consumer {
+
+   /**
+    * This method is used to consume bytes from the provided cursor.
+    * Consuming of bytes from the cursor should be done in such a
+    * way that it does not block. So typically only the number of
+    * ready bytes in the <code>Cursor</code> object should be read.
+    * If there are no ready bytes then this method should return.
+    *
+    * @param cursor used to consume the bytes from the HTTP pipeline
+    */ 
+   public void consume(Cursor cursor) throws IOException;
+   
+   /**
+    * This is used to determine whether the consumer has finished 
+    * reading. The consumer is considered finished if it has read a
+    * terminal token or if it has exhausted the stream and can not
+    * read any more. Once finished the consumed bytes can be parsed.
+    *
+    * @return true if the consumer has finished reading its content
+    */ 
+   public boolean isFinished();
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>javascript 유효성 검증</title>
+		<script type="text/javascript">
+			//유효성 검증
+			//입력 -> 입력한 데이터 서버 전송 -> 서버에서 검증  -> 실패하면 다시 클라이언트한테 보낸다. 
+			//서버의 부담을 줄이고 서버에서 검증할 필요가 없는 데이터는 
+			//클라이언트의 브라우져에서 처리하고 -> 검증 완료 되면 서버로 전송
+			
+			//javascript언어를 통해서 검증
+			
+			//1. txtuserid 태그의 정보(객체)를 가지고 와서 검증(입력체크)
+			function send(){
+				//정규표현식 : 중간 프로젝트 의무사항 (유효성 검증)
+				//document.forms[0].elements[0]
+				//form name 속성도 없고,  input 태그에 name속성이 없는 경우
+				var userid = document.loginform.txtuserid;
+				//userid에 : <input type = "text" name = "txtuserid">가 담겨있다.
+				console.log(userid);
+				var userpwd = document.loginform.txtpwd;
+				console.log(userpwd);
+				
+				if(userid.value == "" || !(userid.value.length >= 3 && userid.value.length <= 10)){
+					alert("다시 입력하세요");
+					//document.loginform.txtuserid.focus();
+					userid.focus();
+					userid.select();
+				}else{
+					if(userpwd.value =="" || !(userpwd.value.length >=4 && userpwd.value.length <=12)){
+						alert("비밀번호를 다시 입력하세요")
+					}else{alert("검증완료")
+						//서버로 전송하는 코드
+						document.loginform.action = "Ex09_login.jsp";
+						document.loginform.submit(); //서버전송
+					}
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<form method = "get" name = "loginform">
+			ID:<input type = "text" name = "txtuserid"><br>
+			PWD:<input type = "password" name = "txtpwd"><br>
+			<input type = "button" value = "전송" onclick = "send()">
+			<!-- 
+				input type = "submit"
+				input type = "image"
+				목적지 주소로 전송
+				
+				input type = "button"
+				>>전송을 하기 위해서는 event 제어가 필요하다.
+			 -->
+		</form>
+	</body>
+</html>

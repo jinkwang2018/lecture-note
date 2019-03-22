@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Chart</title>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/chart.jquery.tablesorter.min.js"></script>
+	<script src="js/chart.js"></script>
+  	<link rel="stylesheet" href="styles/chart.css">
+</head>
+<body>
+<div>
+	<button id="btn" >검색하기</button>
+    <select id="line" >
+    	<option>전체보기</option>
+	    <option>한식</option>
+        <option>경양식</option>
+        <option>중국식</option>
+        <option>분식</option>
+        <option>일식</option>
+    </select>
+    <button id="btn1" >차트보기</button>
+	<select id="chart">
+        <option>spline</option>
+        <option>piechart</option>
+        <option>Wordcloud</option>
+    </select>
+</div>
+	<hr>
+	<div id="display"></div>
+	<div id="container"></div>
+</body>
+</html>

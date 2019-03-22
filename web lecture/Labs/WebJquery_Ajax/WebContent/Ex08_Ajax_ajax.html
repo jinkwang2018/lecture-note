@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		/*
+			$.getJSON함수 말고 
+			$.ajax()함수 사용해서 json 파일을 read하고 table 출력
+			
+		*/
+		$(function(){
+		
+			$('#button').click(function(){
+				$.ajax({url:"Ex07_Ajax_board.json"
+					,type:"POST"
+					,dataType:"json"
+					,success:function(data){
+					var table = "<table border = '1'>"
+					$.each(data, function(index, obj) {
+						//console.log(index + "/" + obj.id +"/"+obj.name);
+						table += "<tr>"
+						table += "<td>" + index + "</td>"
+						table += "<td>" + obj.id + "</td>" // 배열에서 객체 들어갈 때 .을 사용하자
+						table += "<td>" + obj.name + "</td>"
+						table += "<td>" + obj.title + "</td>"
+						table += "<td>" + obj.content + "</td>"
+						if(obj.id){
+							table += "<td>" + obj["name"] + "</td>"
+						}else{
+							table += "<td>" + "EMPTY" + "</td>"
+						}
+						table += "</tr>"
+					});
+					table+="</table>"
+					$('#div').append(table);
+				}});
+			});
+		});
+		
+	
+		
+		</script>
+	</head>
+	
+	<body>
+		<input type = "button" id = "button" value = "가져오기">
+		<div id ="div"></div>
+
+	</body>
+</html>

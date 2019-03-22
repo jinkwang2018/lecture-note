@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Simsimi</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+        //심심이 API기능 출처: http://developer.simsimi.com/api
+		$(function() {
+			var simsimiUrl = "http://sandbox.api.simsimi.com/request.p?key=854c1e97-909e-47b1-857e-5280d21f5a5b&lc=ko&ft=1.0";
+            $('#submit').click(function() {
+                $.ajax({
+                    method: 'GET',
+                    url: simsimiUrl,
+                    data: { "text": $('#question').val(), "result": 100, "response": "Who are you?!", "id": 13185569, "msg": "OK." },
+                    success: function(data) {
+                            $.each(data, function(key, value) {
+                                if(key == "response") {
+                                    console.log(value);
+                                    $('#answer').html(value);
+                                }
+                            });
+                    }
+                }); // end - ajax
+            }); // end - '#sumbit' click
+			
+		}); //end jquery
+		
+	</script>
+</head>
+<body>
+    <input type="text" id="question" name="question">
+    <button id="submit" name="submit">입력</button>
+    <hr>
+    <p id="answer"></p>
+</body>
+</html>

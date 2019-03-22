@@ -1,0 +1,7 @@
+"jdbc:oracle:thin:@192.168.0.28:1521:XE"
+
+@ip 林家 : 192.168.0.28
+@port 锅龋 : 8090
+@DB id : YG_TIME
+@DB pwd : 1004
+@立加 林家 : http://192.168.0.28:8090/YG-TIME/

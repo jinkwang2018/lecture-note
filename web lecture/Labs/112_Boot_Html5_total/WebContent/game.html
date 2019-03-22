@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>4조 부트스트랩</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+   href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+   src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+body {
+   background-color: #E4C97E;
+}
+</style>
+</head>
+
+<body>
+   <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+               data-target="#myNavbar">
+               <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                  class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Kosta 106th 4조</a>
+         </div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+               <li><a href="boot.html">Home</a></li>
+
+               <li><a href="study.html">Study</a></li>
+               <li><a href="Codes.html">Codes</a></li>
+               <li><a href="ab.html">예제1(Canvas Video)</a></li>
+               <li class="active"><a href="game.html">예제2(Game)</a></li>
+               <li><a href="jo.html">조원소개</a></li>
+               <li><a href="bootpage.html">About Bootstrap</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="singup.html"><span
+                     class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+               <li><a href="login.html"><span
+                     class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+      <script type="text/javascript">
+         //canvas사용하기 위한 객체
+         var   canvas;   
+         var ctx;
+         //user 정보
+         var user=new Image();
+         var userX, userY, userW, userH;
+         //enemy 정보
+         var  enemy=new Array();   
+         var NUM      =60;
+         var HP;
+         var enemyColor = [ "yellow", "lightgreen", "gray", "blue", "orange" ];
+         //시간정보
+         var preTime;      //전 시간 
+         var leadTime;      //이전시간과 현재시간까지의 소요시간
+         //게임의 상태(switch)
+         var STATE_WAIT      = 0;
+         var STATE_RUN      = 1;
+         var STATE_GAMEOVER   = 2;
+         var state         = STATE_WAIT;   //처음상태 세팅
+         //입력받은 키!!
+         var keyPressDown = [];
+         
+         
+         window.onkeydown = function(e) {
+            keyPressDown[e.keyCode] = true;
+            }
+           
+            window.onkeyup = function(e) {
+               keyPressDown[e.keyCode] = false;
+            }
+         
+         window.onload=function(){
+            canvas   = document.getElementById('gameCanvas')
+            ctx      =canvas.getContext('2d');
+            user.src = "http://www.gsarchives.net/custom/zozma/sprites/animated/koj.gif";
+            userW =14;
+            userH =16;
+            setInterval(GameState, 30);
+         }
+         
+         function GameState(){
+            switch(state){
+               case STATE_WAIT: 
+                  Draw_stateWait();
+                  if(keyPressDown[13]){
+                     GameSetting();
+                     state=STATE_RUN;
+                  }
+                  break;
+               case STATE_RUN:
+                  GameMove();
+                  break;
+               case STATE_GAMEOVER:
+                  Draw_State_GameOver();
+                  if(keyPressDown[13]){
+                     GameSetting();
+                     state=STATE_RUN;
+                  }
+                  break;
+            }
+         }
+         
+         //첫화면
+         function Draw_stateWait(){
+            ctx.font = "50px Arial";
+            ctx.textAlign = "center";
+            ctx.save();
+            // Create gradient
+            var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop("0", "magenta");
+            gradient.addColorStop("0.5", "blue");
+            gradient.addColorStop("1.0", "red");
+
+            // Fill with gradient
+            ctx.strokeStyle = gradient;
+            ctx.strokeText("Press <Enter>     ",canvas.width/2, 200);
+            ctx.restore();
+            ctx.strokeText("     for GameStart",canvas.width/2,250);
+            ctx.font = "20px 맑은고딕";
+            ctx.fillStyle = "red";
+            ctx.fillText("방향키로 움직이세용~", canvas.width/2, 300); 
+         }
+         //게임중
+         function Draw_stateRun(){
+             ctx.clearRect(0, 0, canvas.width, canvas.height);
+             ctx.font = "15px 맑은고딕";
+             ctx.fillStyle = "white";
+             ctx.fillText(HP, 20, 20);
+             //enemy 그리기
+             for (var i = 0;i < NUM; i++) {
+                     ctx.beginPath();
+                     ctx.arc(enemy[i].x, enemy[i].y,3,0,2*Math.PI);
+                     ctx.fillStyle=enemyColor[enemy[i].color];
+                     ctx.fill();
+                }
+             ctx.save();
+             //user 그리기
+             /*translate로 시작점을 옮겼기 때문에 그만큼 역주행해야 가운데에 위치*/
+                 ctx.translate(userX, userY);
+                 ctx.translate(-userX, -userY);
+                 ctx.drawImage(user,userX-userW/2, userY-userH/2);
+                 ctx.restore();
+                 
+                
+         }
+         //게임오버
+         function Draw_State_GameOver(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = "50px Arial";
+            ctx.textAlign = "center";
+            ctx.save();
+            // Create gradient
+            var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop("0", "magenta");
+            gradient.addColorStop("0.5", "blue");
+            gradient.addColorStop("1.0", "red");
+
+            // Fill with gradient
+            ctx.strokeStyle = gradient;
+            ctx.strokeText("GAME OVER",canvas.width/2, 200);
+            ctx.restore();
+            ctx.font = "20px 맑은고딕";
+            ctx.fillStyle = "red";
+            ctx.fillText("다시시작은 엔터~", canvas.width/2, 300); 
+         }
+         
+         //게임세팅
+         function GameSetting(){
+            //user
+            userX = canvas.width/2;
+            userY = canvas.height/2;
+            HP     = 20;
+            
+            //enemy
+            enemy.length = 0;
+            for (var i = 0;i < NUM; i++) {
+               enemy.push({
+                        x:Math.random() * canvas.width,
+                        y: (i < NUM/2 ? 20 : canvas.height-20),
+                          vx:Math.random() * 200 - 100,      //이동할 거리 x축 난수 발생
+                        vy:Math.random() * 200 - 100,      //이동할 거리 y축 난수 발생
+                        color:Math.floor(Math.random() * 5) //컬러값 소수 버리고 받기
+                   });
+               }
+            
+            //시간설정
+            preTime = getTime();
+         }
+         
+         function GameMove(){
+            // 경과 시간 구함
+                leadTime = getTime() - preTime;
+                preTime = getTime();
+                
+            //user
+            if (keyPressDown[38])userY -= 3;
+                if (keyPressDown[40])userY += 3;
+                if (keyPressDown[37])userX -= 3;
+                if (keyPressDown[39])userX += 3;
+                //화면탈출금지
+                if (userX > canvas.width)userX=canvas.width-userW;
+                if (userX < 0) userX=0;
+                if (userY > canvas.height) userY=canvas.height-userH;
+                if (userY < 0) userY=0;
+                
+                //enemy
+               for (var i = 0;i < NUM; i++) {
+                  //경과시간만큼 이동거리 계산
+                    var mx = enemy[i].vx * leadTime / 1000;
+                    var my = enemy[i].vy * leadTime / 1000;
+                    //이동
+                    enemy[i].x += mx;
+                    enemy[i].y += my;
+                    //화면밖으로 탈출 금지
+                    if (enemy[i].x > canvas.width) enemy[i].x=0;
+                    if (enemy[i].x < 0) enemy[i].x=canvas.width;
+                    if (enemy[i].y > canvas.height) enemy[i].y=0;
+                    if (enemy[i].y < 0) enemy[i].y=canvas.height;
+                    
+                  //충돌체크
+                    /* var cx = enemy[i].x;
+                    var cy = enemy[i].y;
+
+                    if ((cx >= userX-userW/2) && (cx <= userX+userW/2)
+                            && (cy >= userY-userH/2) && (cy <= userH+userH/2)) {
+                        state = STATE_GAMEOVER;
+                        console.log("충돌");
+                        console.log("U " + userX + " " + userY) 
+                        console.log("E " + Math.floor(cx) + " " + Math.floor(cy)) ;
+                        break; 
+                    } */
+   
+               }   
+                
+              //충돌체크
+              for (var i = 0;i < NUM; i++) {
+                  //충돌체크
+                    var cx = enemy[i].x;
+                    var cy = enemy[i].y;
+
+                    if ((cx >= userX-userW/2) && (cx <= userX+userW/2)
+                           && (cy >= userY-userH/2) && (cy <= userY+userH/2)) {
+
+                       console.log("HP : " + HP);
+                       if(HP<=0){
+                            state = STATE_GAMEOVER;
+                            break; 
+                       }
+                       HP--;
+                    }
+               }
+                
+               Draw_stateRun();
+                
+         }
+         
+         // 현재 시간 구함
+            function getTime() {
+                 var date = new Date();
+                 var time = date.getTime();
+                 delete date;
+                 return time;
+            }
+      </script>
+   </head>
+   <body>
+      <!-- 화면 -->
+      <div style='text-align:center'>
+      <canvas id="gameCanvas" width="500" height="500"style="border:1px solid red; background:black;"></canvas>
+      </div>
+   </body>
+</html>
+
+
+
+<!--비행기 http://www.gsarchives.net/gameboy/1942/sprites/non-animated/GBC_1942_Enemy_BigPlaneGreen.gif -->
+<!-- 사람움직임 http://www.gsarchives.net/custom/zozma/sprites/animated/koj.gif -->

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff30">
+
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/poster"
+        android:text="제목"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/pubDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제작년도"
+        android:textSize="16dp"
+        android:layout_below="@+id/subject"
+        android:layout_toRightOf="@+id/poster"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/director"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="감독"
+        android:textSize="16dp"
+        android:layout_below="@+id/pubDate"
+        android:layout_toRightOf="@+id/poster"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/actors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="출연배우"
+        android:textSize="16dp"
+        android:layout_below="@+id/director"
+        android:layout_toRightOf="@+id/poster"
+        android:layout_marginLeft="10dp"/>
+
+    <RatingBar
+        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/userRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actors"
+        android:layout_toRightOf="@+id/poster"
+        android:layout_marginLeft="10dp"/>
+
+
+</RelativeLayout>
